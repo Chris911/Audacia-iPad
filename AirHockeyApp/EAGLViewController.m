@@ -29,7 +29,6 @@ enum {
 @interface EAGLViewController ()
 {
     BOOL leftViewIsHidden;
-    UIView *leftSideView;
 }
 @property (nonatomic, retain) EAGLContext *context;
 @property (nonatomic, assign) CADisplayLink *displayLink;
@@ -108,9 +107,7 @@ enum {
     [rotationGesture setDelegate:self];
     [self.view addGestureRecognizer:rotationGesture];
     [rotationGesture release];
-    
-    leftSideView = [self LeftSideView];
-    
+        
     leftViewIsHidden = NO;
 }
 
@@ -223,7 +220,8 @@ enum {
 {
 //    if(leftViewIsHidden) {
 //        [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationCurveEaseIn animations:{
-//            
+//
+//
 //        } completion:nil];
 //    }
     

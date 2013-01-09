@@ -12,7 +12,6 @@
 		96378D7F1472C71100F543EA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7E1472C71100F543EA /* CoreGraphics.framework */; };
 		96378D851472C71200F543EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96378D831472C71200F543EA /* InfoPlist.strings */; };
 		96378D871472C71200F543EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D861472C71200F543EA /* main.m */; };
-		96378D8B1472C71200F543EA /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D8A1472C71200F543EA /* AppDemoAppDelegate.m */; };
 		96378D8E1472C71200F543EA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D8C1472C71200F543EA /* MainWindow.xib */; };
 		96378D971472C7CC00F543EA /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D961472C7CC00F543EA /* MenuViewController.m */; };
 		96378D9A1472C80A00F543EA /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D991472C80A00F543EA /* MenuViewController.xib */; };
@@ -28,6 +27,7 @@
 		969DDF8B1472E05400ED5DC8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */; };
 		969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
 		969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */; };
+		A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,8 +39,6 @@
 		96378D841472C71200F543EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		96378D861472C71200F543EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		96378D881472C71200F543EA /* AirHockeyApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirHockeyApp-Prefix.pch"; sourceTree = "<group>"; };
-		96378D891472C71200F543EA /* AppDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDemoAppDelegate.h; sourceTree = "<group>"; };
-		96378D8A1472C71200F543EA /* AppDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDemoAppDelegate.m; sourceTree = "<group>"; };
 		96378D8D1472C71200F543EA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		96378D951472C7CC00F543EA /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		96378D961472C7CC00F543EA /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
@@ -64,6 +62,8 @@
 		969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLViewController.h; sourceTree = "<group>"; };
 		969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EAGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
+		A8C459FB169DD985000B9586 /* AppDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDemoAppDelegate.h; sourceTree = "<group>"; };
+		A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDemoAppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +114,8 @@
 		96378D801472C71100F543EA /* AirHockeyApp */ = {
 			isa = PBXGroup;
 			children = (
-				96378D891472C71200F543EA /* AppDemoAppDelegate.h */,
-				96378D8A1472C71200F543EA /* AppDemoAppDelegate.m */,
+				A8C459FB169DD985000B9586 /* AppDemoAppDelegate.h */,
+				A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */,
 				968DACC11472ED46007D15A3 /* Utilitaires */,
 				969DDEDC1472CF6000ED5DC8 /* Vues */,
 				96378D981472C7F200F543EA /* Interface Builder */,
@@ -123,8 +123,7 @@
 				96378D811472C71200F543EA /* Supporting Files */,
 				968DACBA1472EAFF007D15A3 /* Modèles 3D */,
 			);
-			name = AirHockeyApp;
-			path = AppDemo;
+			path = AirHockeyApp;
 			sourceTree = "<group>";
 		};
 		96378D811472C71200F543EA /* Supporting Files */ = {
@@ -210,7 +209,7 @@
 			dependencies = (
 			);
 			name = AirHockeyApp;
-			productName = AppDemo;
+			productName = AirHockeyApp;
 			productReference = 96378D761472C71100F543EA /* AirHockeyApp.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -262,7 +261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				96378D871472C71200F543EA /* main.m in Sources */,
-				96378D8B1472C71200F543EA /* AppDemoAppDelegate.m in Sources */,
 				96378D971472C7CC00F543EA /* MenuViewController.m in Sources */,
 				969DDEE01472CF8C00ED5DC8 /* EAGLView.m in Sources */,
 				969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */,
@@ -270,6 +268,7 @@
 				968DACCD1472EDA4007D15A3 /* OpenGLWaveFrontGroup.m in Sources */,
 				968DACCE1472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m in Sources */,
 				968DACCF1472EDA4007D15A3 /* OpenGLWaveFrontObject.m in Sources */,
+				A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,10 +342,11 @@
 		96378D921472C71200F543EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AppDemo/AirHockeyApp-Prefix.pch";
+				GCC_PREFIX_HEADER = "AirHockeyApp/AirHockeyApp-Prefix.pch";
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "AppDemo/AirHockeyApp-Info.plist";
+				INFOPLIST_FILE = "AirHockeyApp/AirHockeyApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = AirHockeyApp;
 				WRAPPER_EXTENSION = app;
@@ -356,10 +356,11 @@
 		96378D931472C71200F543EA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AppDemo/AirHockeyApp-Prefix.pch";
+				GCC_PREFIX_HEADER = "AirHockeyApp/AirHockeyApp-Prefix.pch";
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "AppDemo/AirHockeyApp-Info.plist";
+				INFOPLIST_FILE = "AirHockeyApp/AirHockeyApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = AirHockeyApp;
 				WRAPPER_EXTENSION = app;

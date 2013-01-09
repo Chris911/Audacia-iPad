@@ -1,0 +1,393 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		96378D7B1472C71100F543EA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7A1472C71100F543EA /* UIKit.framework */; };
+		96378D7D1472C71100F543EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7C1472C71100F543EA /* Foundation.framework */; };
+		96378D7F1472C71100F543EA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7E1472C71100F543EA /* CoreGraphics.framework */; };
+		96378D851472C71200F543EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96378D831472C71200F543EA /* InfoPlist.strings */; };
+		96378D871472C71200F543EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D861472C71200F543EA /* main.m */; };
+		96378D8B1472C71200F543EA /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D8A1472C71200F543EA /* AppDemoAppDelegate.m */; };
+		96378D8E1472C71200F543EA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D8C1472C71200F543EA /* MainWindow.xib */; };
+		96378D971472C7CC00F543EA /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D961472C7CC00F543EA /* MenuViewController.m */; };
+		96378D9A1472C80A00F543EA /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D991472C80A00F543EA /* MenuViewController.xib */; };
+		968DACBE1472EB55007D15A3 /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 968DACBB1472EB55007D15A3 /* cube.mtl */; };
+		968DACBF1472EB55007D15A3 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 968DACBC1472EB55007D15A3 /* cube.obj */; };
+		968DACC01472EB55007D15A3 /* poly.png in Resources */ = {isa = PBXBuildFile; fileRef = 968DACBD1472EB55007D15A3 /* poly.png */; };
+		968DACCC1472EDA4007D15A3 /* OpenGLTexture3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */; };
+		968DACCD1472EDA4007D15A3 /* OpenGLWaveFrontGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC71472EDA4007D15A3 /* OpenGLWaveFrontGroup.m */; };
+		968DACCE1472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC91472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m */; };
+		968DACCF1472EDA4007D15A3 /* OpenGLWaveFrontObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACCB1472EDA4007D15A3 /* OpenGLWaveFrontObject.m */; };
+		969DDEE01472CF8C00ED5DC8 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDEDF1472CF8C00ED5DC8 /* EAGLView.m */; };
+		969DDF891472E03500ED5DC8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF881472E03500ED5DC8 /* OpenGLES.framework */; };
+		969DDF8B1472E05400ED5DC8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */; };
+		969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
+		969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		96378D761472C71100F543EA /* AirHockeyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		96378D7A1472C71100F543EA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		96378D7C1472C71100F543EA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		96378D7E1472C71100F543EA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		96378D821472C71200F543EA /* AirHockeyApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AirHockeyApp-Info.plist"; sourceTree = "<group>"; };
+		96378D841472C71200F543EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		96378D861472C71200F543EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		96378D881472C71200F543EA /* AirHockeyApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirHockeyApp-Prefix.pch"; sourceTree = "<group>"; };
+		96378D891472C71200F543EA /* AppDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDemoAppDelegate.h; sourceTree = "<group>"; };
+		96378D8A1472C71200F543EA /* AppDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDemoAppDelegate.m; sourceTree = "<group>"; };
+		96378D8D1472C71200F543EA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		96378D951472C7CC00F543EA /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		96378D961472C7CC00F543EA /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		96378D991472C80A00F543EA /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		968DACBB1472EB55007D15A3 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.mtl; sourceTree = "<group>"; };
+		968DACBC1472EB55007D15A3 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
+		968DACBD1472EB55007D15A3 /* poly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poly.png; sourceTree = "<group>"; };
+		968DACC31472EDA4007D15A3 /* OpenGLTexture3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLTexture3D.h; sourceTree = "<group>"; };
+		968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLTexture3D.m; sourceTree = "<group>"; };
+		968DACC51472EDA4007D15A3 /* OpenGLWaveFrontCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLWaveFrontCommon.h; sourceTree = "<group>"; };
+		968DACC61472EDA4007D15A3 /* OpenGLWaveFrontGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLWaveFrontGroup.h; sourceTree = "<group>"; };
+		968DACC71472EDA4007D15A3 /* OpenGLWaveFrontGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLWaveFrontGroup.m; sourceTree = "<group>"; };
+		968DACC81472EDA4007D15A3 /* OpenGLWaveFrontMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLWaveFrontMaterial.h; sourceTree = "<group>"; };
+		968DACC91472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLWaveFrontMaterial.m; sourceTree = "<group>"; };
+		968DACCA1472EDA4007D15A3 /* OpenGLWaveFrontObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = OpenGLWaveFrontObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		968DACCB1472EDA4007D15A3 /* OpenGLWaveFrontObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OpenGLWaveFrontObject.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		969DDEDE1472CF8C00ED5DC8 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		969DDEDF1472CF8C00ED5DC8 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		969DDF881472E03500ED5DC8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLViewController.h; sourceTree = "<group>"; };
+		969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EAGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		96378D731472C71100F543EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				969DDF8B1472E05400ED5DC8 /* QuartzCore.framework in Frameworks */,
+				969DDF891472E03500ED5DC8 /* OpenGLES.framework in Frameworks */,
+				96378D7B1472C71100F543EA /* UIKit.framework in Frameworks */,
+				96378D7D1472C71100F543EA /* Foundation.framework in Frameworks */,
+				96378D7F1472C71100F543EA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		96378D6B1472C71100F543EA = {
+			isa = PBXGroup;
+			children = (
+				96378D801472C71100F543EA /* AirHockeyApp */,
+				96378D791472C71100F543EA /* Frameworks */,
+				96378D771472C71100F543EA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		96378D771472C71100F543EA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				96378D761472C71100F543EA /* AirHockeyApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		96378D791472C71100F543EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */,
+				969DDF881472E03500ED5DC8 /* OpenGLES.framework */,
+				96378D7A1472C71100F543EA /* UIKit.framework */,
+				96378D7C1472C71100F543EA /* Foundation.framework */,
+				96378D7E1472C71100F543EA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		96378D801472C71100F543EA /* AirHockeyApp */ = {
+			isa = PBXGroup;
+			children = (
+				96378D891472C71200F543EA /* AppDemoAppDelegate.h */,
+				96378D8A1472C71200F543EA /* AppDemoAppDelegate.m */,
+				968DACC11472ED46007D15A3 /* Utilitaires */,
+				969DDEDC1472CF6000ED5DC8 /* Vues */,
+				96378D981472C7F200F543EA /* Interface Builder */,
+				96378D941472C78200F543EA /* Controleurs */,
+				96378D811472C71200F543EA /* Supporting Files */,
+				968DACBA1472EAFF007D15A3 /* Modèles 3D */,
+			);
+			name = AirHockeyApp;
+			path = AppDemo;
+			sourceTree = "<group>";
+		};
+		96378D811472C71200F543EA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				96378D821472C71200F543EA /* AirHockeyApp-Info.plist */,
+				96378D831472C71200F543EA /* InfoPlist.strings */,
+				96378D861472C71200F543EA /* main.m */,
+				96378D881472C71200F543EA /* AirHockeyApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		96378D941472C78200F543EA /* Controleurs */ = {
+			isa = PBXGroup;
+			children = (
+				96378D951472C7CC00F543EA /* MenuViewController.h */,
+				96378D961472C7CC00F543EA /* MenuViewController.m */,
+				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
+				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
+			);
+			name = Controleurs;
+			sourceTree = "<group>";
+		};
+		96378D981472C7F200F543EA /* Interface Builder */ = {
+			isa = PBXGroup;
+			children = (
+				96378D8C1472C71200F543EA /* MainWindow.xib */,
+				96378D991472C80A00F543EA /* MenuViewController.xib */,
+				969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */,
+			);
+			name = "Interface Builder";
+			sourceTree = "<group>";
+		};
+		968DACBA1472EAFF007D15A3 /* Modèles 3D */ = {
+			isa = PBXGroup;
+			children = (
+				968DACBB1472EB55007D15A3 /* cube.mtl */,
+				968DACBC1472EB55007D15A3 /* cube.obj */,
+				968DACBD1472EB55007D15A3 /* poly.png */,
+			);
+			name = "Modèles 3D";
+			sourceTree = "<group>";
+		};
+		968DACC11472ED46007D15A3 /* Utilitaires */ = {
+			isa = PBXGroup;
+			children = (
+				968DACC31472EDA4007D15A3 /* OpenGLTexture3D.h */,
+				968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */,
+				968DACC51472EDA4007D15A3 /* OpenGLWaveFrontCommon.h */,
+				968DACC61472EDA4007D15A3 /* OpenGLWaveFrontGroup.h */,
+				968DACC71472EDA4007D15A3 /* OpenGLWaveFrontGroup.m */,
+				968DACC81472EDA4007D15A3 /* OpenGLWaveFrontMaterial.h */,
+				968DACC91472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m */,
+				968DACCA1472EDA4007D15A3 /* OpenGLWaveFrontObject.h */,
+				968DACCB1472EDA4007D15A3 /* OpenGLWaveFrontObject.m */,
+			);
+			name = Utilitaires;
+			sourceTree = "<group>";
+		};
+		969DDEDC1472CF6000ED5DC8 /* Vues */ = {
+			isa = PBXGroup;
+			children = (
+				969DDEDE1472CF8C00ED5DC8 /* EAGLView.h */,
+				969DDEDF1472CF8C00ED5DC8 /* EAGLView.m */,
+			);
+			name = Vues;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		96378D751472C71100F543EA /* AirHockeyApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96378D911472C71200F543EA /* Build configuration list for PBXNativeTarget "AirHockeyApp" */;
+			buildPhases = (
+				96378D721472C71100F543EA /* Sources */,
+				96378D731472C71100F543EA /* Frameworks */,
+				96378D741472C71100F543EA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirHockeyApp;
+			productName = AppDemo;
+			productReference = 96378D761472C71100F543EA /* AirHockeyApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		96378D6D1472C71100F543EA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+			};
+			buildConfigurationList = 96378D701472C71100F543EA /* Build configuration list for PBXProject "AirHockeyApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 96378D6B1472C71100F543EA;
+			productRefGroup = 96378D771472C71100F543EA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				96378D751472C71100F543EA /* AirHockeyApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		96378D741472C71100F543EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96378D851472C71200F543EA /* InfoPlist.strings in Resources */,
+				96378D8E1472C71200F543EA /* MainWindow.xib in Resources */,
+				96378D9A1472C80A00F543EA /* MenuViewController.xib in Resources */,
+				969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */,
+				968DACBE1472EB55007D15A3 /* cube.mtl in Resources */,
+				968DACBF1472EB55007D15A3 /* cube.obj in Resources */,
+				968DACC01472EB55007D15A3 /* poly.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		96378D721472C71100F543EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96378D871472C71200F543EA /* main.m in Sources */,
+				96378D8B1472C71200F543EA /* AppDemoAppDelegate.m in Sources */,
+				96378D971472C7CC00F543EA /* MenuViewController.m in Sources */,
+				969DDEE01472CF8C00ED5DC8 /* EAGLView.m in Sources */,
+				969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */,
+				968DACCC1472EDA4007D15A3 /* OpenGLTexture3D.m in Sources */,
+				968DACCD1472EDA4007D15A3 /* OpenGLWaveFrontGroup.m in Sources */,
+				968DACCE1472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m in Sources */,
+				968DACCF1472EDA4007D15A3 /* OpenGLWaveFrontObject.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		96378D831472C71200F543EA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96378D841472C71200F543EA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		96378D8C1472C71200F543EA /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96378D8D1472C71200F543EA /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		96378D8F1472C71200F543EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		96378D901472C71200F543EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		96378D921472C71200F543EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AppDemo/AirHockeyApp-Prefix.pch";
+				GCC_VERSION = "";
+				INFOPLIST_FILE = "AppDemo/AirHockeyApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = AirHockeyApp;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		96378D931472C71200F543EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AppDemo/AirHockeyApp-Prefix.pch";
+				GCC_VERSION = "";
+				INFOPLIST_FILE = "AppDemo/AirHockeyApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = AirHockeyApp;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		96378D701472C71100F543EA /* Build configuration list for PBXProject "AirHockeyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96378D8F1472C71200F543EA /* Debug */,
+				96378D901472C71200F543EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96378D911472C71200F543EA /* Build configuration list for PBXNativeTarget "AirHockeyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96378D921472C71200F543EA /* Debug */,
+				96378D931472C71200F543EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 96378D6D1472C71100F543EA /* Project object */;
+}

@@ -30,7 +30,8 @@ extern float const HAUTEUR_FENETRE;
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
 @property (nonatomic, retain) OpenGLWaveFrontObject *cube;
-@property (retain, nonatomic) IBOutlet UIView *LeftSideView;
+@property (retain, nonatomic) IBOutlet UIView *LeftSlideView;
+@property (retain, nonatomic) IBOutlet UIView *CameraView;
 
 - (void)startAnimation;
 - (void)stopAnimation;
@@ -38,6 +39,7 @@ extern float const HAUTEUR_FENETRE;
 - (void)rotationDetectee:(UIGestureRecognizer *)gestureRecognizer;
 
 - (IBAction)OpenLeftSideView:(id)sender;
+- (IBAction)OpenCameraView:(id)sender;
 
 
 @end

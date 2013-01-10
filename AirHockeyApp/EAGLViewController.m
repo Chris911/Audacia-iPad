@@ -9,8 +9,8 @@
 #import "EAGLView.h"
 
 
-float const LARGEUR_FENETRE = 150;
-float const HAUTEUR_FENETRE = 200;
+float const LARGEUR_FENETRE = 200;
+float const HAUTEUR_FENETRE = 150;
 
 // Uniform index.
 enum {
@@ -29,6 +29,7 @@ enum {
 @interface EAGLViewController ()
 {
     BOOL leftViewIsHidden;
+    BOOL cameraViewIsHidden;
 }
 @property (nonatomic, retain) EAGLContext *context;
 @property (nonatomic, assign) CADisplayLink *displayLink;
@@ -56,7 +57,6 @@ enum {
     [(EAGLView *)self.view setContext:context];
     [(EAGLView *)self.view setFramebuffer];
     
-    
     animating = FALSE;
     animationFrameInterval = 1;
     self.displayLink = nil;
@@ -75,7 +75,8 @@ enum {
     
     [context release];
     
-    [_LeftSideView release];
+    [_LeftSlideView release];
+    [_CameraView release];
     [super dealloc];
 }
 
@@ -92,6 +93,7 @@ enum {
     [self startAnimation];
     
     [super viewWillAppear:animated];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -108,13 +110,19 @@ enum {
     [self.view addGestureRecognizer:rotationGesture];
     [rotationGesture release];
         
-    leftViewIsHidden = NO;
+    leftViewIsHidden = YES;
+    cameraViewIsHidden = YES;
+    
+    self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.bounds.size.width,self.LeftSlideView.center.y);
+    self.CameraView.center = CGPointMake(-self.CameraView.frame.size.width,
+                                         768 + self.CameraView.frame.size.height);
 }
 
 
 - (void)viewDidUnload
 {
-    [self setLeftSideView:nil];
+    [self setLeftSlideView:nil];
+    [self setCameraView:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -216,17 +224,55 @@ enum {
     }
 }
 
+#pragma mark - Button methods
+
 - (IBAction)OpenLeftSideView:(id)sender
 {
-//    if(leftViewIsHidden) {
-//        [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationCurveEaseIn animations:{
-//
-//
-//        } completion:nil];
-//    }
-    
+    if(leftViewIsHidden){
+        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseIn
+                         animations:^{
+                             self.LeftSlideView.center = CGPointMake(self.LeftSlideView.frame.size.width/2,
+                                                                     self.LeftSlideView.center.y);
+                         }
+                         completion:nil];
+        leftViewIsHidden = NO;
+    }
+    else{
+        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseIn
+                         animations:^{
+                             self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.frame.size.width,
+                                                                      self.LeftSlideView.center.y);
+                             
+                         }
+                         completion:nil];
+        leftViewIsHidden = YES;
+    }
 }
 
+- (IBAction)OpenCameraView:(id)sender {
+    
+    if(cameraViewIsHidden){
+        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseIn
+                         animations:^{
+                             self.CameraView.center = CGPointMake(self.CameraView.frame.size.width/2,
+                                                                  768 - self.CameraView.frame.size.height/2);
+                         }
+                         completion:nil];
+        cameraViewIsHidden = NO;
+    }
+    else{
+        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseIn
+                         animations:^{
+                             self.CameraView.center = CGPointMake(-self.CameraView.frame.size.width,
+                                                                  768 + self.CameraView.frame.size.height);
+                             
+                         }
+                         completion:nil];
+        cameraViewIsHidden = YES;
+    }
+}
+
+#pragma mark - Core GL Methods
 
 -(void)setupView
 {		
@@ -241,7 +287,7 @@ enum {
 	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity(); 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); 	
+	glClearColor(0.1f, 0.3f, 0.6f, 1.0f);
 		
 	glGetError(); // Clear error codes
 	
@@ -260,7 +306,6 @@ enum {
     
 	static GLfloat rotation = 0.0;
 
-    
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity(); 
 	glColor4f(1.0, 1.0, 1.0, 1.0);

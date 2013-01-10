@@ -4,6 +4,7 @@
 //
 
 #import "MenuViewController.h"
+#import "EAGLViewController.h"
 #import "AppDemoAppDelegate.h"
 
 @implementation MenuViewController
@@ -48,7 +49,11 @@
 }
 
 - (IBAction)afficherVueAnimee
-{
+{    
+//    EAGLViewController* controller = [[[EAGLViewController alloc]init]autorelease];
+//    controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;    
+//    [self presentModalViewController:controller animated:YES];
+    
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     [delegate afficherVueAnimee];
 }

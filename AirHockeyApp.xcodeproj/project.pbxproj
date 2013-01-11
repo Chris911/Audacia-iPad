@@ -27,6 +27,7 @@
 		969DDF8B1472E05400ED5DC8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */; };
 		969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
 		969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */; };
+		A8BD086A169F871E00B7A95D /* SideBar.png in Resources */ = {isa = PBXBuildFile; fileRef = A8BD0869169F871E00B7A95D /* SideBar.png */; };
 		A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */; };
 		A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8BA169E025E008B29EF /* CameraImage1.png */; };
 		A8C5A8C2169E39A5008B29EF /* CameraButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8C1169E39A5008B29EF /* CameraButton1.png */; };
@@ -64,6 +65,7 @@
 		969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLViewController.h; sourceTree = "<group>"; };
 		969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EAGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
+		A8BD0869169F871E00B7A95D /* SideBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar.png; path = Assets/UI/Images/SideBar.png; sourceTree = "<group>"; };
 		A8C459FB169DD985000B9586 /* AppDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDemoAppDelegate.h; sourceTree = "<group>"; };
 		A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDemoAppDelegate.m; sourceTree = "<group>"; };
 		A8C5A8BA169E025E008B29EF /* CameraImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CameraImage1.png; path = Assets/UI/Images/CameraImage1.png; sourceTree = "<group>"; };
@@ -147,8 +149,8 @@
 			children = (
 				96378D951472C7CC00F543EA /* MenuViewController.h */,
 				96378D961472C7CC00F543EA /* MenuViewController.m */,
-				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
+				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
 			);
 			name = Controleurs;
 			sourceTree = "<group>";
@@ -209,6 +211,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A8BD0869169F871E00B7A95D /* SideBar.png */,
 				A8C5A8C1169E39A5008B29EF /* CameraButton1.png */,
 				A8C5A8BA169E025E008B29EF /* CameraImage1.png */,
 			);
@@ -274,6 +277,7 @@
 				968DACC01472EB55007D15A3 /* poly.png in Resources */,
 				A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */,
 				A8C5A8C2169E39A5008B29EF /* CameraButton1.png in Resources */,
+				A8BD086A169F871E00B7A95D /* SideBar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,6 +30,7 @@ enum {
 {
     BOOL leftViewIsHidden;
     BOOL cameraViewIsHidden;
+    BOOL leftViewIsSelected;
 }
 @property (nonatomic, retain) EAGLContext *context;
 @property (nonatomic, assign) CADisplayLink *displayLink;
@@ -41,6 +42,8 @@ enum {
 @synthesize context;
 @synthesize displayLink;
 @synthesize cube;
+
+#pragma mark - Lifecycle methods
 
 - (void)awakeFromNib
 {
@@ -109,9 +112,23 @@ enum {
     [rotationGesture setDelegate:self];
     [self.view addGestureRecognizer:rotationGesture];
     [rotationGesture release];
+    
+    // Add swipeGestures
+    UISwipeGestureRecognizer *oneFingerSwipeLeft = [[[UISwipeGestureRecognizer alloc]
+                                                     initWithTarget:self
+                                                     action:@selector(oneFingerSwipeLeft:)] autorelease];
+    [oneFingerSwipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [[self LeftSlideView] addGestureRecognizer:oneFingerSwipeLeft];
+    
+    UISwipeGestureRecognizer *oneFingerSwipeRight = [[[UISwipeGestureRecognizer alloc]
+                                                      initWithTarget:self
+                                                      action:@selector(oneFingerSwipeRight:)] autorelease];
+    [oneFingerSwipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [[self view] addGestureRecognizer:oneFingerSwipeRight];
         
-    leftViewIsHidden = YES;
-    cameraViewIsHidden = YES;
+    leftViewIsHidden    = YES;
+    cameraViewIsHidden  = YES;
+    leftViewIsSelected  = NO;
     
     self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.bounds.size.width,self.LeftSlideView.center.y);
     self.CameraView.center = CGPointMake(-self.CameraView.frame.size.width,
@@ -135,6 +152,8 @@ enum {
         [EAGLContext setCurrentContext:nil];
 	self.context = nil;	
 }
+
+#pragma mark - GL Animation methods
 
 - (NSInteger)animationFrameInterval
 {
@@ -179,6 +198,8 @@ enum {
     }
 }
 
+#pragma mark - Touch methods
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"Position de tous les doigts venant de commencer à toucher l'écran");            
@@ -193,6 +214,7 @@ enum {
         NSLog(@"x: %f y: %f", positionCourante.x, positionCourante.y);        
     }
     NSLog(@"\n\n");
+    
 }
 
 
@@ -202,17 +224,22 @@ enum {
     {
         UITouch *touch = [[event allTouches] anyObject];
         CGPoint positionCourante = [touch locationInView:self.view];
-        CGPoint positionPrecedente = [touch previousLocationInView:self.view];
-        cube.currentPosition = Vertex3DMake(cube.currentPosition.x + (((positionCourante.x - positionPrecedente.x) / self.view.bounds.size.width) * LARGEUR_FENETRE), 
-                                            cube.currentPosition.y - (((positionCourante.y - positionPrecedente.y) / self.view.bounds.size.height) * HAUTEUR_FENETRE), 
-                                            cube.currentPosition.z);
+        //CGPoint positionPrecedente = [touch previousLocationInView:self.view];
+//        cube.currentPosition = Vertex3DMake(cube.currentPosition.x + (((positionCourante.x - positionPrecedente.x) / self.view.bounds.size.width) * LARGEUR_FENETRE), 
+//                                            cube.currentPosition.y - (((positionCourante.y - positionPrecedente.y) / self.view.bounds.size.height) * HAUTEUR_FENETRE), 
+//                                            cube.currentPosition.z);
+        if(leftViewIsSelected && self.LeftSlideView.center.x < self.LeftSlideView.bounds.size.width)
+        {
+            self.LeftSlideView.center = CGPointMake(positionCourante.x, self.LeftSlideView.center.y);
+        }
+
     }
 
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+    leftViewIsSelected = NO;
 }
 
 -(void)rotationDetectee:(UIGestureRecognizer *)gestureRecognizer 
@@ -226,50 +253,21 @@ enum {
 
 #pragma mark - Button methods
 
-- (IBAction)OpenLeftSideView:(id)sender
+- (IBAction)OpenCameraView:(id)sender
 {
-    if(leftViewIsHidden){
-        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseIn
-                         animations:^{
-                             self.LeftSlideView.center = CGPointMake(self.LeftSlideView.frame.size.width/2,
-                                                                     self.LeftSlideView.center.y);
-                         }
-                         completion:nil];
-        leftViewIsHidden = NO;
-    }
-    else{
-        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseIn
-                         animations:^{
-                             self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.frame.size.width,
-                                                                      self.LeftSlideView.center.y);
-                             
-                         }
-                         completion:nil];
-        leftViewIsHidden = YES;
-    }
-}
-
-- (IBAction)OpenCameraView:(id)sender {
-    
     if(cameraViewIsHidden){
-        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseIn
-                         animations:^{
-                             self.CameraView.center = CGPointMake(self.CameraView.frame.size.width/2,
-                                                                  768 - self.CameraView.frame.size.height/2);
-                         }
-                         completion:nil];
+        [self slideOutAnimationView:self.CameraView :YES];
         cameraViewIsHidden = NO;
     }
     else{
-        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseIn
-                         animations:^{
-                             self.CameraView.center = CGPointMake(-self.CameraView.frame.size.width,
-                                                                  768 + self.CameraView.frame.size.height);
-                             
-                         }
-                         completion:nil];
+        [self slideInAnimationView:self.CameraView :YES];
         cameraViewIsHidden = YES;
     }
+}
+
+- (IBAction)TouchButtonInViewTEST:(id)sender
+{
+    NSLog(@"TOUCHED BEFORE");
 }
 
 #pragma mark - Core GL Methods
@@ -287,7 +285,7 @@ enum {
 	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity(); 
-	glClearColor(0.1f, 0.3f, 0.6f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		
 	glGetError(); // Clear error codes
 	
@@ -326,6 +324,71 @@ enum {
 	lastDrawTime = [NSDate timeIntervalSinceReferenceDate];
     
     [(EAGLView *)self.view presentFramebuffer];
+}
+
+#pragma mark - UI Animations
+
+-(void)slideOutAnimationView:(UIView*)view: (BOOL)isViewAtBottom
+{
+    if(isViewAtBottom){ // bottom left view
+        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(view.frame.size.width/2, 768 - view.frame.size.height/2);
+                         }
+        completion:nil];
+    }
+    else{ // top left view
+        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(view.frame.size.width/2, view.center.y);
+                         }
+                         completion:nil];
+    }
+}
+
+-(void)slideInAnimationView:(UIView*)view: (BOOL)isViewAtBottom
+{
+    if(isViewAtBottom){ // bottom left view
+        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(-view.frame.size.width/2, 768 + view.frame.size.height);
+                             
+                         }
+        completion:nil];
+    }
+    else{ // top left view
+        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                animations:^{
+                    view.center = CGPointMake(-view.frame.size.width, view.center.y);
+                }
+        completion:nil];
+    }
+}
+
+- (void)oneFingerSwipeLeft:(UITapGestureRecognizer *)recognizer {
+
+    CGPoint beginningPoint = [recognizer locationInView:[self view]];
+    if(beginningPoint.x < 300){
+        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.frame.size.width, self.LeftSlideView.center.y);
+                         }
+                         completion:nil];
+    }
+
+}
+
+- (void)oneFingerSwipeRight:(UITapGestureRecognizer *)recognizer {
+    
+    CGPoint beginningPoint = [recognizer locationInView:[self view]];
+    if(beginningPoint.x < 50){
+        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             self.LeftSlideView.center = CGPointMake(self.LeftSlideView.frame.size.width/2, self.LeftSlideView.center.y);
+                         }
+        completion:nil];
+    }
+
 }
 
 @end

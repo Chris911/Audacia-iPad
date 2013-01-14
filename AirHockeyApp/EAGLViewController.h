@@ -32,6 +32,7 @@ extern float const HAUTEUR_FENETRE;
 @property (nonatomic, retain) OpenGLWaveFrontObject *cube;
 @property (retain, nonatomic) IBOutlet UIView *LeftSlideView;
 @property (retain, nonatomic) IBOutlet UIView *CameraView;
+@property (retain, nonatomic) IBOutlet UIView *ParametersView;
 
 - (void)startAnimation;
 - (void)stopAnimation;

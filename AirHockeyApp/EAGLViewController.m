@@ -394,6 +394,9 @@ enum {
                              self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.frame.size.width, self.LeftSlideView.center.y);
                          }
                          completion:nil];
+        
+        //Also close parameters view bar if opened
+        [self slideOutAnimationView:self.ParametersView];
     }
 
 }

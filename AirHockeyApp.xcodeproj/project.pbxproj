@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
+		048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3516A4AFB9006A7082 /* RenderingTree.m */; };
+		048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3916A4BD8F006A7082 /* Scene.m */; };
+		04C1AA9816A49525004F724F /* SimpleVertex.vsh in Sources */ = {isa = PBXBuildFile; fileRef = 04C1AA9716A49525004F724F /* SimpleVertex.vsh */; };
+		04C1AA9C16A4958C004F724F /* SimpleFragment.fsh in Sources */ = {isa = PBXBuildFile; fileRef = 04C1AA9B16A4958C004F724F /* SimpleFragment.fsh */; };
 		96378D7B1472C71100F543EA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7A1472C71100F543EA /* UIKit.framework */; };
 		96378D7D1472C71100F543EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7C1472C71100F543EA /* Foundation.framework */; };
 		96378D7F1472C71100F543EA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7E1472C71100F543EA /* CoreGraphics.framework */; };
@@ -35,6 +40,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		048C9D3216A4A8D9006A7082 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		048C9D3416A4AFB9006A7082 /* RenderingTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingTree.h; sourceTree = "<group>"; };
+		048C9D3516A4AFB9006A7082 /* RenderingTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderingTree.m; sourceTree = "<group>"; };
+		048C9D3816A4BD8F006A7082 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		048C9D3916A4BD8F006A7082 /* Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
+		04C1AA9716A49525004F724F /* SimpleVertex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SimpleVertex.vsh; sourceTree = "<group>"; };
+		04C1AA9B16A4958C004F724F /* SimpleFragment.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SimpleFragment.fsh; path = ../SimpleFragment.fsh; sourceTree = "<group>"; };
 		96378D761472C71100F543EA /* AirHockeyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96378D7A1472C71100F543EA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		96378D7C1472C71100F543EA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -90,6 +103,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		048C9D2F16A4A873006A7082 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				048C9D3116A4A8D9006A7082 /* Node.h */,
+				048C9D3216A4A8D9006A7082 /* Node.m */,
+				048C9D3416A4AFB9006A7082 /* RenderingTree.h */,
+				048C9D3516A4AFB9006A7082 /* RenderingTree.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		048C9D3716A4BCB7006A7082 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				048C9D3816A4BD8F006A7082 /* Scene.h */,
+				048C9D3916A4BD8F006A7082 /* Scene.m */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+		04C1AA9316A49479004F724F /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				04C1AA9B16A4958C004F724F /* SimpleFragment.fsh */,
+				04C1AA9716A49525004F724F /* SimpleVertex.vsh */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
 		96378D6B1472C71100F543EA = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +165,9 @@
 		96378D801472C71100F543EA /* AirHockeyApp */ = {
 			isa = PBXGroup;
 			children = (
+				048C9D3716A4BCB7006A7082 /* Scene */,
+				048C9D2F16A4A873006A7082 /* Objects */,
+				04C1AA9316A49479004F724F /* Shaders */,
 				A8C459FB169DD985000B9586 /* AppDemoAppDelegate.h */,
 				A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */,
 				968DACC11472ED46007D15A3 /* Utilitaires */,
@@ -301,6 +346,11 @@
 				968DACCE1472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m in Sources */,
 				968DACCF1472EDA4007D15A3 /* OpenGLWaveFrontObject.m in Sources */,
 				A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */,
+				04C1AA9816A49525004F724F /* SimpleVertex.vsh in Sources */,
+				04C1AA9C16A4958C004F724F /* SimpleFragment.fsh in Sources */,
+				048C9D3316A4A8D9006A7082 /* Node.m in Sources */,
+				048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */,
+				048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

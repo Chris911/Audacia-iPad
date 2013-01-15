@@ -7,10 +7,26 @@
 //
 
 #import "RenderingTree.h"
+#import "NodeCube.h"
 
 @implementation RenderingTree
 
 @synthesize tree;
+
+- (id) init
+{
+    if((self = [super init])) {
+        tree = [[NSMutableArray alloc]init];
+        [self loadBaseObjects];
+    }
+    return self;
+}
+
+- (void)loadBaseObjects
+{
+    NodeCube* cube = [[[NodeCube alloc]init]autorelease];
+    [self addNodeToTree:cube];
+}
 
 - (void) render
 {
@@ -24,6 +40,7 @@
 // Return YES if success
 - (BOOL) addNodeToTree:(Node*) node
 {
+    [tree addObject:node];
     return YES;
 }
 

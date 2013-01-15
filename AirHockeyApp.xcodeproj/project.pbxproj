@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044D7F9A16A5B4D500AE8E11 /* NodeTriangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 044D7F9916A5B4D500AE8E11 /* NodeTriangle.m */; };
+		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
+		044D7FA016A5BBF900AE8E11 /* NodeCube.m in Sources */ = {isa = PBXBuildFile; fileRef = 044D7F9F16A5BBF900AE8E11 /* NodeCube.m */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
 		048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3516A4AFB9006A7082 /* RenderingTree.m */; };
 		048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3916A4BD8F006A7082 /* Scene.m */; };
@@ -40,6 +43,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		044D7F9816A5B4D500AE8E11 /* NodeTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTriangle.h; sourceTree = "<group>"; };
+		044D7F9916A5B4D500AE8E11 /* NodeTriangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTriangle.m; sourceTree = "<group>"; };
+		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		044D7F9E16A5BBF900AE8E11 /* NodeCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeCube.h; sourceTree = "<group>"; };
+		044D7F9F16A5BBF900AE8E11 /* NodeCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeCube.m; sourceTree = "<group>"; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		048C9D3216A4A8D9006A7082 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		048C9D3416A4AFB9006A7082 /* RenderingTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingTree.h; sourceTree = "<group>"; };
@@ -93,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */,
 				969DDF8B1472E05400ED5DC8 /* QuartzCore.framework in Frameworks */,
 				969DDF891472E03500ED5DC8 /* OpenGLES.framework in Frameworks */,
 				96378D7B1472C71100F543EA /* UIKit.framework in Frameworks */,
@@ -111,6 +120,10 @@
 				048C9D3216A4A8D9006A7082 /* Node.m */,
 				048C9D3416A4AFB9006A7082 /* RenderingTree.h */,
 				048C9D3516A4AFB9006A7082 /* RenderingTree.m */,
+				044D7F9816A5B4D500AE8E11 /* NodeTriangle.h */,
+				044D7F9916A5B4D500AE8E11 /* NodeTriangle.m */,
+				044D7F9E16A5BBF900AE8E11 /* NodeCube.h */,
+				044D7F9F16A5BBF900AE8E11 /* NodeCube.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -152,6 +165,7 @@
 		96378D791472C71100F543EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				044D7F9C16A5B71E00AE8E11 /* GLKit.framework */,
 				969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */,
 				969DDF881472E03500ED5DC8 /* OpenGLES.framework */,
 				96378D7A1472C71100F543EA /* UIKit.framework */,
@@ -353,6 +367,8 @@
 				048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */,
 				048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */,
 				A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */,
+				044D7F9A16A5B4D500AE8E11 /* NodeTriangle.m in Sources */,
+				044D7FA016A5BBF900AE8E11 /* NodeCube.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

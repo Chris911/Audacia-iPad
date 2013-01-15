@@ -43,7 +43,6 @@ enum {
 @synthesize animating;
 @synthesize context;
 @synthesize displayLink;
-@synthesize cube;
 
 #pragma mark - Lifecycle methods
 
@@ -65,6 +64,9 @@ enum {
     animating = FALSE;
     animationFrameInterval = 1;
     self.displayLink = nil;
+ 
+    //Initialize Scene
+    [Scene getInstance];
 }
 
 - (void)dealloc
@@ -97,7 +99,6 @@ enum {
 {
     [self startAnimation];
     [super viewWillAppear:animated];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -228,9 +229,9 @@ enum {
         UITouch *touch = [[event allTouches] anyObject];
         CGPoint positionCourante = [touch locationInView:self.view];
         CGPoint positionPrecedente = [touch previousLocationInView:self.view];
-        cube.currentPosition = Vertex3DMake(cube.currentPosition.x + (((positionCourante.x - positionPrecedente.x) / self.view.bounds.size.width) * LARGEUR_FENETRE),
-                                            cube.currentPosition.y - (((positionCourante.y - positionPrecedente.y) / self.view.bounds.size.height) * HAUTEUR_FENETRE),
-                                            cube.currentPosition.z);
+//        cube.currentPosition = Vertex3DMake(cube.currentPosition.x + (((positionCourante.x - positionPrecedente.x) / self.view.bounds.size.width) * LARGEUR_FENETRE),
+//                                            cube.currentPosition.y - (((positionCourante.y - positionPrecedente.y) / self.view.bounds.size.height) * HAUTEUR_FENETRE),
+//                                            cube.currentPosition.z);
     }
 }
 
@@ -289,13 +290,6 @@ enum {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		
 	glGetError(); // Clear error codes
-	
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"cube" ofType:@"obj"];
-	OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];
-	Vertex3D position = Vertex3DMake(0.0, 0.0, -50.0);
-	theObject.currentPosition = position;
-	self.cube = theObject;
-	[theObject release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -316,7 +310,7 @@ enum {
 	glLoadIdentity(); 
 	glColor4f(1.0, 1.0, 1.0, 1.0);
     
-    [cube drawSelf];
+    [[Scene getInstance].renderingTree render];
     
 	static NSTimeInterval lastDrawTime;
 	if (lastDrawTime)
@@ -327,7 +321,7 @@ enum {
 		rot.x = rotation;
 		rot.y = rotation;
 		rot.z = rotation;
-		cube.currentRotation = rot;
+//		cube.currentRotation = rot;
 	}
 	lastDrawTime = [NSDate timeIntervalSinceReferenceDate];
     

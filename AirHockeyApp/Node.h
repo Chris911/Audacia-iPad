@@ -8,6 +8,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EAGLView.h"
 #import "OpenGLWaveFrontCommon.h"
 
 @interface Node : NSObject

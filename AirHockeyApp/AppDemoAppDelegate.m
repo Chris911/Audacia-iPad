@@ -15,9 +15,19 @@
 
 
 - (void) afficherVueAnimee
-{    
+{
     self.window.rootViewController = self.eaglViewController;
 }
+
+- (void) afficherMenu
+{
+    //self.window.rootViewController = self.menuViewController;
+    
+    [UIView transitionWithView:self.window duration:0.3 options:(UIViewAnimationOptionTransitionCrossDissolve) animations:^{
+        self.window.rootViewController = self.menuViewController;
+    } completion:nil];
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

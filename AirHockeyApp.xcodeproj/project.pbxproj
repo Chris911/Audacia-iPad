@@ -33,6 +33,8 @@
 		969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
 		969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */; };
 		A812858116A0A53900C8EF6D /* ParametersImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A812858016A0A53900C8EF6D /* ParametersImage1.png */; };
+		A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A83AA9EC16A4D924003388F3 /* BetaViewController.m */; };
+		A83AA9EF16A4D925003388F3 /* BetaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A83AA9ED16A4D925003388F3 /* BetaViewController.xib */; };
 		A8BD086A169F871E00B7A95D /* SideBar.png in Resources */ = {isa = PBXBuildFile; fileRef = A8BD0869169F871E00B7A95D /* SideBar.png */; };
 		A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */; };
 		A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8BA169E025E008B29EF /* CameraImage1.png */; };
@@ -80,6 +82,9 @@
 		969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EAGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
 		A812858016A0A53900C8EF6D /* ParametersImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ParametersImage1.png; path = Assets/UI/Images/ParametersImage1.png; sourceTree = "<group>"; };
+		A83AA9EB16A4D924003388F3 /* BetaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetaViewController.h; sourceTree = "<group>"; };
+		A83AA9EC16A4D924003388F3 /* BetaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetaViewController.m; sourceTree = "<group>"; };
+		A83AA9ED16A4D925003388F3 /* BetaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BetaViewController.xib; sourceTree = "<group>"; };
 		A8BD0869169F871E00B7A95D /* SideBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar.png; path = Assets/UI/Images/SideBar.png; sourceTree = "<group>"; };
 		A8C459FB169DD985000B9586 /* AppDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDemoAppDelegate.h; sourceTree = "<group>"; };
 		A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDemoAppDelegate.m; sourceTree = "<group>"; };
@@ -195,9 +200,11 @@
 			isa = PBXGroup;
 			children = (
 				96378D951472C7CC00F543EA /* MenuViewController.h */,
+				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
+				A83AA9EB16A4D924003388F3 /* BetaViewController.h */,
 				96378D961472C7CC00F543EA /* MenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
-				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
+				A83AA9EC16A4D924003388F3 /* BetaViewController.m */,
 			);
 			name = Controleurs;
 			sourceTree = "<group>";
@@ -206,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				96378D8C1472C71200F543EA /* MainWindow.xib */,
+				A83AA9ED16A4D925003388F3 /* BetaViewController.xib */,
 				96378D991472C80A00F543EA /* MenuViewController.xib */,
 				969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */,
 			);
@@ -327,6 +335,7 @@
 				A8C5A8C2169E39A5008B29EF /* CameraButton1.png in Resources */,
 				A8BD086A169F871E00B7A95D /* SideBar.png in Resources */,
 				A812858116A0A53900C8EF6D /* ParametersImage1.png in Resources */,
+				A83AA9EF16A4D925003388F3 /* BetaViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +360,7 @@
 				048C9D3316A4A8D9006A7082 /* Node.m in Sources */,
 				048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */,
 				048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */,
+				A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

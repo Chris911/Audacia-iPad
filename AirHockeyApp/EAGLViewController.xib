@@ -318,7 +318,6 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{670, 111}</string>
 								<reference key="NSSuperview" ref="868566068"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<float key="IBUIAlpha">0.5</float>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>

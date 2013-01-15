@@ -6,6 +6,7 @@
 #import "MenuViewController.h"
 #import "EAGLViewController.h"
 #import "AppDemoAppDelegate.h"
+#import "BetaViewController.h"
 
 @implementation MenuViewController
 
@@ -50,4 +51,14 @@
     [delegate afficherVueAnimee];
 }
 
+- (IBAction)testCaseButtonPressed:(id)sender
+{
+    BetaViewController* beta_vc = [[[BetaViewController alloc]init]autorelease];
+    beta_vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentModalViewController:beta_vc animated:YES];
+}
+
+- (void)dealloc {
+    [super dealloc];
+}
 @end

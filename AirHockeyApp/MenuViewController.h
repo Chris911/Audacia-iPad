@@ -7,6 +7,7 @@
 
 @interface MenuViewController : UIViewController
 
--(IBAction) afficherVueAnimee;
+- (IBAction) afficherVueAnimee;
+- (IBAction)testCaseButtonPressed:(id)sender;
 
 @end

@@ -32,4 +32,10 @@
 {
     [model drawSelf];
 }
+
+- (void) setRotation:(Rotation3D)rot
+{
+    self.model.currentRotation = rot;
+}
+
 @end

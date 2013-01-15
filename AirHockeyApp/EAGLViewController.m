@@ -224,15 +224,17 @@ enum {
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    /*
     if ([[event allTouches] count] == 1)
     {
         UITouch *touch = [[event allTouches] anyObject];
         CGPoint positionCourante = [touch locationInView:self.view];
         CGPoint positionPrecedente = [touch previousLocationInView:self.view];
-//        cube.currentPosition = Vertex3DMake(cube.currentPosition.x + (((positionCourante.x - positionPrecedente.x) / self.view.bounds.size.width) * LARGEUR_FENETRE),
-//                                            cube.currentPosition.y - (((positionCourante.y - positionPrecedente.y) / self.view.bounds.size.height) * HAUTEUR_FENETRE),
-//                                            cube.currentPosition.z);
+        cube.currentPosition = Vertex3DMake(cube.currentPosition.x + (((positionCourante.x - positionPrecedente.x) / self.view.bounds.size.width) * LARGEUR_FENETRE),
+                                            cube.currentPosition.y - (((positionCourante.y - positionPrecedente.y) / self.view.bounds.size.height) * HAUTEUR_FENETRE),
+                                            cube.currentPosition.z);
     }
+     */
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -321,7 +323,7 @@ enum {
 		rot.x = rotation;
 		rot.y = rotation;
 		rot.z = rotation;
-//		cube.currentRotation = rot;
+		[[Scene getInstance].renderingTree rotateSelectedNodes:rot];
 	}
 	lastDrawTime = [NSDate timeIntervalSinceReferenceDate];
     

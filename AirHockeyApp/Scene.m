@@ -23,8 +23,10 @@ static Scene *scene = NULL;
     if(!initialized)
     {
         initialized = YES;
-        scene = [[[Scene alloc]init]autorelease];
-        scene.renderingTree = [[[RenderingTree alloc]init]autorelease];
+        scene = [[Scene alloc]init];
+        RenderingTree* tempTree = [[RenderingTree alloc]init];
+        scene.renderingTree = tempTree;
+        [tempTree release];
     }
 }
 
@@ -32,6 +34,14 @@ static Scene *scene = NULL;
 {
     [self initialize];
     return (scene);
+}
+
+- (void)dealloc
+{
+    self.renderingTree = nil;
+    [renderingTree release];
+    [scene release];
+    [super dealloc];
 }
 
 @end

@@ -65,14 +65,25 @@
 }
 
 // Transforms on selected nodes
-- (void) rotateSelectedNodes:(float) deltaAngle
+- (void) rotateSelectedNodes:(Rotation3D)rotation
 {
+    for(Node* node in self.tree)
+    {
+        // FIXME: Change to isSelected
+        if(YES) {
+            [node setRotation:rotation];
+        }
+    }
 }
+
 - (void) scaleSelectedNodes:(float) deltaScale
 {
+    
 }
+
 - (void) translateSelectedNodes:(CGPoint*) deltaPoint
 {
+    
 }
 
 @end

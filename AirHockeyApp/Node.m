@@ -32,16 +32,26 @@
     return self;
 }
 
+// This method is only used for primitive objects.
+// Wavefront objects overload the render method instead.
 - (void) render
 {
-    if(self.isWaveFrontObject) {
-        NSLog(@"Rendering wavefront object: %@", self.type);
-        
-    }
-    else {
-        glLoadIdentity();
-        
-    }
+    
+}
+
+- (void) setRotation:(Rotation3D)rotation
+{
+    
+}
+
+- (void) setPosition:(Vector3D)position
+{
+    
+}
+
+- (void) setScaling :(float)scaleFactor
+{
+    
 }
 
 - (NSString*) generateHash

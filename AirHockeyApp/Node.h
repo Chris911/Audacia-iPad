@@ -29,4 +29,8 @@
 //Render tree
 - (void) render;
 
+- (void) setRotation:(Rotation3D)rotation;
+- (void) setPosition:(Vector3D)  position;
+- (void) setScaling :(float)     scaleFactor;
+
 @end

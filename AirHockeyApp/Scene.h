@@ -7,10 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RenderingTree.h"
 
 @interface Scene : NSObject
-
-@property (nonatomic,retain) RenderingTree* renderingTree;
 
 @end

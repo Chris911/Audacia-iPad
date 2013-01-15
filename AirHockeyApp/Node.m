@@ -24,13 +24,24 @@
 {
     if((self = [super init])) {
         self.hash = [self generateHash];
-        
+        self.isSelectable = YES;
+        self.isSelected = NO;
+        self.isVisible = YES;
+        self.isWaveFrontObject = NO;
     }
     return self;
 }
 
 - (void) render
 {
+    if(self.isWaveFrontObject) {
+        NSLog(@"Rendering wavefront object: %@", self.type);
+        
+    }
+    else {
+        glLoadIdentity();
+        
+    }
 }
 
 - (NSString*) generateHash

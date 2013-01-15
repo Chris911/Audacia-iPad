@@ -12,7 +12,9 @@
 
 @implementation Scene
 
-static RenderingTree *renderingTree;
+@synthesize renderingTree;
+
+static Scene *scene = NULL;
 
 // Singleton of a rendering tree
 + (void)initialize
@@ -21,8 +23,15 @@ static RenderingTree *renderingTree;
     if(!initialized)
     {
         initialized = YES;
-        renderingTree = [[[RenderingTree alloc]init]autorelease];
+        scene = [[[Scene alloc]init]autorelease];
+        scene.renderingTree = [[[RenderingTree alloc]init]autorelease];
     }
+}
+
++ (Scene *)getInstance
+{
+    [self initialize];
+    return (scene);
 }
 
 @end

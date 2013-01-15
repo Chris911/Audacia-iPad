@@ -12,6 +12,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 #import "OpenGLWaveFrontObject.h"
+#import "Scene.h"
 
 extern float const LARGEUR_FENETRE;
 extern float const HAUTEUR_FENETRE;
@@ -24,12 +25,10 @@ extern float const HAUTEUR_FENETRE;
     NSInteger animationFrameInterval;
     CADisplayLink *displayLink;
     
-    OpenGLWaveFrontObject *cube;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
-@property (nonatomic, retain) OpenGLWaveFrontObject *cube;
 @property (retain, nonatomic) IBOutlet UIView *LeftSlideView;
 @property (retain, nonatomic) IBOutlet UIView *CameraView;
 @property (retain, nonatomic) IBOutlet UIView *ParametersView;

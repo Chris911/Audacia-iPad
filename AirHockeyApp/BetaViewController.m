@@ -10,6 +10,11 @@
 #import "AppDemoAppDelegate.h"
 #import "MenuViewController.h"
 
+#import "XMLUtil.h"
+#import "Scene.h"
+#import "AFNetworking.h"
+#import "AFGDataXMLRequestOperation.h"
+
 @interface BetaViewController ()
 
 @end
@@ -28,7 +33,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    //[XMLUtil savePartyWithFileName:[Scene getInstance].renderingTree :@"test"];
+    //RenderingTree* newTestTree = [XMLUtil loadRenderingTreeFromFileName:@"test"];
+    
+    AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://legalindexes.indoff.com/sitemap.xml"]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument) {
+        NSLog(@"XMLDocument: %@", XMLDocument);
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, GDataXMLDocument *XMLDocument) {
+        NSLog(@"Failure!");
+    }];
+    // Just start the operation on a background thread
+    [operation start];
 }
 
 - (void)didReceiveMemoryWarning

@@ -19,8 +19,6 @@
 
 @synthesize context;
 
-static GLuint buildProgram;
-
 // You must implement this method
 + (Class)layerClass
 {

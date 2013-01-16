@@ -39,31 +39,6 @@ enum {
 @end
 
 
-/* TEST */
-/* TEST */
-struct Vertex {
-    float Position[2];
-    float Color[4];
-} vertexsize;
-
-// Define the positions and colors(R,G,B,A) of two triangles.
-const struct Vertex Vertices[] = {
-    {{-0.5, 0}, {1, 0, 0, 1}},
-    {{0, 0.5},  {0, 1, 0, 1}},
-    {{0.5, 0},  {1, 1, 0, 1}},
-    {{0, -0.5}, {1, 0, 1, 1}},
-    
-};
-
-//Define the order of vertices
-//0,1,2 forms first triangle
-//2,3,0 form second triangle.
-const GLubyte Indices[] = {
-    0, 1, 2,
-    2, 3, 0
-};
-/* TEST */
-/* TEST */
 
 @implementation EAGLViewController
 
@@ -236,7 +211,7 @@ const GLubyte Indices[] = {
     NSLog(@"Position de tous les doigts venant de commencer à toucher l'écran");            
     for(UITouch* touch in touches) {
         CGPoint positionCourante = [touch locationInView:self.view];
-        NSLog(@"x: %f y: %f", positionCourante.x, positionCourante.y);        
+        NSLog(@"x: %f y: %f", positionCourante.x, positionCourante.y);
     }        
     NSLog(@"Position de tous les doigts sur l'écran");            
     NSSet *allTouches = [event allTouches];
@@ -251,17 +226,18 @@ const GLubyte Indices[] = {
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    /*
     if ([[event allTouches] count] == 1)
     {
         UITouch *touch = [[event allTouches] anyObject];
         CGPoint positionCourante = [touch locationInView:self.view];
-        CGPoint positionPrecedente = [touch previousLocationInView:self.view];
-        cube.currentPosition = Vertex3DMake(cube.currentPosition.x + (((positionCourante.x - positionPrecedente.x) / self.view.bounds.size.width) * LARGEUR_FENETRE),
-                                            cube.currentPosition.y - (((positionCourante.y - positionPrecedente.y) / self.view.bounds.size.height) * HAUTEUR_FENETRE),
-                                            cube.currentPosition.z);
+        //CGPoint positionPrecedente = [touch previousLocationInView:self.view];
+//        cube.currentPosition = Vertex3DMake(cube.currentPosition.x + (((positionCourante.x - positionPrecedente.x) / self.view.bounds.size.width) * LARGEUR_FENETRE),
+//                                            cube.currentPosition.y - (((positionCourante.y - positionPrecedente.y) / self.view.bounds.size.height) * HAUTEUR_FENETRE),
+//                                            cube.currentPosition.z);
+        
+        x = positionCourante.x;
+
     }
-     */
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -311,21 +287,12 @@ const GLubyte Indices[] = {
 	CGRect rect = self.view.bounds; 
     
     glOrthof(-(LARGEUR_FENETRE / 2), (LARGEUR_FENETRE / 2), -(HAUTEUR_FENETRE / 2), (HAUTEUR_FENETRE / 2), 0, 100);
-    
+
 	glViewport(0, 0, rect.size.width, rect.size.height);  
 	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity(); 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		
-    //Build our shaders and program
-    NSString* shaderSourceFifle = @"BasicShader";
-    ShaderUtils* shaderUtils = [[[ShaderUtils alloc]init]autorelease];
-    program = [shaderUtils buildProgram:shaderSourceFifle];
-    glUseProgram(program);
-    
-    shaderPositionSlot = glGetAttribLocation(program, "Position");
-    shaderColorSlot    = glGetAttribLocation(program, "SourceColor");
     
 	glGetError(); // Clear error codes
 }
@@ -337,9 +304,10 @@ const GLubyte Indices[] = {
             || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
-
+float x;
 - (void)drawFrame
 {
+
     [(EAGLView *)self.view setFramebuffer];
     
 	static GLfloat rotation = 0.0;
@@ -347,11 +315,17 @@ const GLubyte Indices[] = {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity(); 
 	glColor4f(1.0, 1.0, 1.0, 1.0);
+        
+//    glMatrixMode(GL_PROJECTION);
+//    gluPerspective( 70, 1024/768, 0.1, 2000);
+//    gluLookAt(0, -20, -300,
+//              x, 0, 0,
+//              0, 1, 0);
+//    
+//    glMatrixMode(GL_MODELVIEW);
     
-    //[[Scene getInstance].renderingTree render];
-    
-    [self drawTriangles];
-    
+    [[Scene getInstance].renderingTree render];
+        
 	static NSTimeInterval lastDrawTime;
 	if (lastDrawTime)
 	{
@@ -367,33 +341,6 @@ const GLubyte Indices[] = {
     
     [(EAGLView *)self.view presentFramebuffer];
 }
-
-#pragma mark - Draw Triangle Test
-
-- (void) drawTriangles
-{
-    glPushMatrix();
-    glEnableVertexAttribArray(shaderPositionSlot);
-    glEnableVertexAttribArray(shaderColorSlot);
-    
-    
-    //Lets give these functions pointer to head of vertex array.
-    GLsizei stride = sizeof(vertexsize);
-    const GLvoid* pCoords = &Vertices[0].Position[0];
-    const GLvoid* pColors = &Vertices[0].Color[0];
-    
-    glVertexAttribPointer(shaderPositionSlot, 2, GL_FLOAT, GL_FALSE, stride, pCoords);
-    glVertexAttribPointer(shaderColorSlot, 4, GL_FLOAT, GL_FALSE, stride, pColors);
-    
-    //Draw the 2 triangles of the square.
-    const GLvoid* bodyIndices = &Indices[0];
-    glDrawElements(GL_TRIANGLES,2* 3, GL_UNSIGNED_BYTE, bodyIndices);
-    
-    glDisableVertexAttribArray(shaderPositionSlot);
-    glDisableVertexAttribArray(shaderColorSlot);
-    glPopMatrix();
-}
-
 
 #pragma mark - Nodes methods
 

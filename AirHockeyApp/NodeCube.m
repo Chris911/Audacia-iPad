@@ -20,7 +20,7 @@
                 
         NSString *path = [[NSBundle mainBundle] pathForResource:@"cube" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];
-        Vertex3D position = Vertex3DMake(0.0, 0.0, -50.0);
+        Vertex3D position = Vertex3DMake(0.0, 0.0, -30.0);
         theObject.currentPosition = position;
         self.model = theObject;
         [theObject release];

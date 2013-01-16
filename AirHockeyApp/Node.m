@@ -34,8 +34,8 @@ const float DEFAULT_ANGLE_VALUE = 0.0f;
         self.angle              = DEFAULT_ANGLE_VALUE;
         
         self.isSelectable       = YES;
-        self.isSelected         = NO;
         self.isVisible          = YES;
+        self.isSelected         = NO;
         self.isWaveFrontObject  = NO;
     }
     return self;

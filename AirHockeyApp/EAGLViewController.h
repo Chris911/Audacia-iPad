@@ -25,6 +25,8 @@ extern float const HAUTEUR_FENETRE;
     NSInteger animationFrameInterval;
     CADisplayLink *displayLink;
     
+    // Position and color in shader
+    GLuint shaderPositionSlot, shaderColorSlot;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;

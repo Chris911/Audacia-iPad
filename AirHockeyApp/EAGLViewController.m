@@ -38,6 +38,33 @@ enum {
 @property (nonatomic, assign) CADisplayLink *displayLink;
 @end
 
+
+/* TEST */
+/* TEST */
+struct Vertex {
+    float Position[2];
+    float Color[4];
+} vertexsize;
+
+// Define the positions and colors(R,G,B,A) of two triangles.
+const struct Vertex Vertices[] = {
+    {{-0.5, 0}, {1, 0, 0, 1}},
+    {{0, 0.5},  {0, 1, 0, 1}},
+    {{0.5, 0},  {1, 1, 0, 1}},
+    {{0, -0.5}, {1, 0, 1, 1}},
+    
+};
+
+//Define the order of vertices
+//0,1,2 forms first triangle
+//2,3,0 form second triangle.
+const GLubyte Indices[] = {
+    0, 1, 2,
+    2, 3, 0
+};
+/* TEST */
+/* TEST */
+
 @implementation EAGLViewController
 
 @synthesize animating;
@@ -49,7 +76,7 @@ enum {
 - (void)awakeFromNib
 {
     EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
-    
+
     if (!aContext)
         NSLog(@"Failed to create ES context");
     else if (![EAGLContext setCurrentContext:aContext])
@@ -291,6 +318,15 @@ enum {
 	glLoadIdentity(); 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		
+    //Build our shaders and program
+    NSString* shaderSourceFifle = @"BasicShader";
+    ShaderUtils* shaderUtils = [[[ShaderUtils alloc]init]autorelease];
+    program = [shaderUtils buildProgram:shaderSourceFifle];
+    glUseProgram(program);
+    
+    shaderPositionSlot = glGetAttribLocation(program, "Position");
+    shaderColorSlot    = glGetAttribLocation(program, "SourceColor");
+    
 	glGetError(); // Clear error codes
 }
 
@@ -312,7 +348,9 @@ enum {
 	glLoadIdentity(); 
 	glColor4f(1.0, 1.0, 1.0, 1.0);
     
-    [[Scene getInstance].renderingTree render];
+    //[[Scene getInstance].renderingTree render];
+    
+    [self drawTriangles];
     
 	static NSTimeInterval lastDrawTime;
 	if (lastDrawTime)
@@ -329,6 +367,33 @@ enum {
     
     [(EAGLView *)self.view presentFramebuffer];
 }
+
+#pragma mark - Draw Triangle Test
+
+- (void) drawTriangles
+{
+    glPushMatrix();
+    glEnableVertexAttribArray(shaderPositionSlot);
+    glEnableVertexAttribArray(shaderColorSlot);
+    
+    
+    //Lets give these functions pointer to head of vertex array.
+    GLsizei stride = sizeof(vertexsize);
+    const GLvoid* pCoords = &Vertices[0].Position[0];
+    const GLvoid* pColors = &Vertices[0].Color[0];
+    
+    glVertexAttribPointer(shaderPositionSlot, 2, GL_FLOAT, GL_FALSE, stride, pCoords);
+    glVertexAttribPointer(shaderColorSlot, 4, GL_FLOAT, GL_FALSE, stride, pColors);
+    
+    //Draw the 2 triangles of the square.
+    const GLvoid* bodyIndices = &Indices[0];
+    glDrawElements(GL_TRIANGLES,2* 3, GL_UNSIGNED_BYTE, bodyIndices);
+    
+    glDisableVertexAttribArray(shaderPositionSlot);
+    glDisableVertexAttribArray(shaderColorSlot);
+    glPopMatrix();
+}
+
 
 #pragma mark - Nodes methods
 

@@ -13,6 +13,8 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
+#import "ShaderUtils.h"
+
 @class EAGLContext;
 
 // This class wraps the CAEAGLLayer from CoreAnimation into a convenient UIView subclass.
@@ -31,5 +33,6 @@
 
 - (void)setFramebuffer;
 - (BOOL)presentFramebuffer;
+
 
 @end

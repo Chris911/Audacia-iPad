@@ -19,6 +19,8 @@
 
 @synthesize context;
 
+static GLuint buildProgram;
+
 // You must implement this method
 + (Class)layerClass
 {
@@ -88,7 +90,6 @@
         glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_DEPTH_COMPONENT16_OES, largeur, hauteur);
         glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, depthRenderbuffer);
         
-        
         if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
             NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
     }
@@ -145,5 +146,6 @@
     // The framebuffer will be re-created at the beginning of the next setFramebuffer method call.
     [self deleteFramebuffer];
 }
+
 
 @end

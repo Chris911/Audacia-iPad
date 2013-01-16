@@ -20,14 +20,23 @@
 @synthesize isSelected;
 @synthesize isVisible;
 
+
+// Constants definition
+const float DEFAULT_SCALE_VALUE = 1.0f;
+const float DEFAULT_ANGLE_VALUE = 0.0f;
+
 - (id) init
 {
     if((self = [super init])) {
         self.hash = [self generateHash];
-        self.isSelectable = YES;
-        self.isSelected = NO;
-        self.isVisible = YES;
-        self.isWaveFrontObject = NO;
+        
+        self.scaleFactor        = DEFAULT_SCALE_VALUE;
+        self.angle              = DEFAULT_ANGLE_VALUE;
+        
+        self.isSelectable       = YES;
+        self.isSelected         = NO;
+        self.isVisible          = YES;
+        self.isWaveFrontObject  = NO;
     }
     return self;
 }

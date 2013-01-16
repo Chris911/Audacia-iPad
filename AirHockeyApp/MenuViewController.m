@@ -7,6 +7,7 @@
 #import "EAGLViewController.h"
 #import "AppDemoAppDelegate.h"
 #import "BetaViewController.h"
+#import "Scene.h"
 
 @implementation MenuViewController
 
@@ -27,12 +28,6 @@
 }
 
 #pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];

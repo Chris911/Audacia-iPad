@@ -14,8 +14,8 @@
 @property (nonatomic, retain) NSMutableArray* tree;
 
 // Add node to rendering tree
-// Return YES if success
 - (BOOL) addNodeToTree:(Node*) node;
+- (void) addNodeToTreeWithInitialPosition:(Node*) node:(Vector3D)pos;
 
 // Select node using its position
 - (BOOL) selectNodeByPosition:(Vector3D) position;
@@ -34,5 +34,8 @@
 
 // Rendering functions
 - (void) render;
+
+// RenderingTree util functions
+- (int) getNumberOfNodes;
 
 @end

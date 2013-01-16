@@ -15,6 +15,9 @@
 
 #import "ShaderUtils.h"
 
+#import "GluLookAt.h"
+#import "GluPerspective.h"
+
 @class EAGLContext;
 
 // This class wraps the CAEAGLLayer from CoreAnimation into a convenient UIView subclass.

@@ -58,6 +58,9 @@
 		A8CC906116A6FD2D00CFD27D /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC905816A6FD2D00CFD27D /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A8CC906316A6FD8E00CFD27D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC906216A6FD8E00CFD27D /* SystemConfiguration.framework */; };
 		A8CC906516A6FD9D00CFD27D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC906416A6FD9D00CFD27D /* MobileCoreServices.framework */; };
+		A8EBDE3916A70CF8002B2DD6 /* GluLookAt.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */; };
+		A8EBDE7616A711C1002B2DD6 /* GluPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7516A711C1002B2DD6 /* GluPerspective.m */; };
+		A8EBDE7A16A729CA002B2DD6 /* NodeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7916A729CA002B2DD6 /* NodeTable.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +147,12 @@
 		A8CC905816A6FD2D00CFD27D /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		A8CC906216A6FD8E00CFD27D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A8CC906416A6FD9D00CFD27D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		A8EBDE3716A70CF8002B2DD6 /* GluLookAt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluLookAt.h; sourceTree = "<group>"; };
+		A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GluLookAt.m; sourceTree = "<group>"; };
+		A8EBDE7416A711C1002B2DD6 /* GluPerspective.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluPerspective.h; sourceTree = "<group>"; };
+		A8EBDE7516A711C1002B2DD6 /* GluPerspective.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GluPerspective.m; sourceTree = "<group>"; };
+		A8EBDE7816A729CA002B2DD6 /* NodeTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTable.h; sourceTree = "<group>"; };
+		A8EBDE7916A729CA002B2DD6 /* NodeTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTable.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,9 +160,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8CC902416A6E88600CFD27D /* libxml2.dylib in Frameworks */,
 				A8CC906516A6FD9D00CFD27D /* MobileCoreServices.framework in Frameworks */,
 				A8CC906316A6FD8E00CFD27D /* SystemConfiguration.framework in Frameworks */,
-				A8CC902416A6E88600CFD27D /* libxml2.dylib in Frameworks */,
 				044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */,
 				969DDF8B1472E05400ED5DC8 /* QuartzCore.framework in Frameworks */,
 				969DDF891472E03500ED5DC8 /* OpenGLES.framework in Frameworks */,
@@ -169,14 +178,9 @@
 		048C9D2F16A4A873006A7082 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				048C9D3116A4A8D9006A7082 /* Node.h */,
-				048C9D3216A4A8D9006A7082 /* Node.m */,
 				048C9D3416A4AFB9006A7082 /* RenderingTree.h */,
 				048C9D3516A4AFB9006A7082 /* RenderingTree.m */,
-				044D7F9816A5B4D500AE8E11 /* NodeTriangle.h */,
-				044D7F9916A5B4D500AE8E11 /* NodeTriangle.m */,
-				044D7F9E16A5BBF900AE8E11 /* NodeCube.h */,
-				044D7F9F16A5BBF900AE8E11 /* NodeCube.m */,
+				A8EBDE7716A729AB002B2DD6 /* Nodes */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -312,6 +316,10 @@
 				968DACC91472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m */,
 				968DACCA1472EDA4007D15A3 /* OpenGLWaveFrontObject.h */,
 				968DACCB1472EDA4007D15A3 /* OpenGLWaveFrontObject.m */,
+				A8EBDE3716A70CF8002B2DD6 /* GluLookAt.h */,
+				A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */,
+				A8EBDE7416A711C1002B2DD6 /* GluPerspective.h */,
+				A8EBDE7516A711C1002B2DD6 /* GluPerspective.m */,
 			);
 			name = Utilitaires;
 			sourceTree = "<group>";
@@ -383,6 +391,21 @@
 			name = AFNetworking;
 			path = libs/AFNetworking;
 			sourceTree = SOURCE_ROOT;
+		};
+		A8EBDE7716A729AB002B2DD6 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				048C9D3116A4A8D9006A7082 /* Node.h */,
+				048C9D3216A4A8D9006A7082 /* Node.m */,
+				044D7F9816A5B4D500AE8E11 /* NodeTriangle.h */,
+				044D7F9916A5B4D500AE8E11 /* NodeTriangle.m */,
+				044D7F9E16A5BBF900AE8E11 /* NodeCube.h */,
+				044D7F9F16A5BBF900AE8E11 /* NodeCube.m */,
+				A8EBDE7816A729CA002B2DD6 /* NodeTable.h */,
+				A8EBDE7916A729CA002B2DD6 /* NodeTable.m */,
+			);
+			name = Nodes;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -486,6 +509,9 @@
 				A8CC906016A6FD2D00CFD27D /* AFXMLRequestOperation.m in Sources */,
 				A8CC906116A6FD2D00CFD27D /* UIImageView+AFNetworking.m in Sources */,
 				A8CB5C4B16A7028700EC4479 /* AFGDataXMLRequestOperation.m in Sources */,
+				A8EBDE3916A70CF8002B2DD6 /* GluLookAt.m in Sources */,
+				A8EBDE7616A711C1002B2DD6 /* GluPerspective.m in Sources */,
+				A8EBDE7A16A729CA002B2DD6 /* NodeTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

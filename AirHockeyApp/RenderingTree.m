@@ -8,6 +8,7 @@
 
 #import "RenderingTree.h"
 #import "NodeCube.h"
+#import "NodeTable.h"
 
 @implementation RenderingTree
 
@@ -32,6 +33,14 @@
         NSLog(@"Node of type: %@ added to tree",cube.type);
     } else {
         NSLog(@"Failed to add Node of type: %@ to tree",cube.type);
+    }
+    
+    NodeTable* table = [[[NodeTable alloc]init]autorelease];
+    
+    if([self addNodeToTree:table]){
+        NSLog(@"Node of type: %@ added to tree",table.type);
+    } else {
+        NSLog(@"Failed to add Node of type: %@ to tree",table.type);
     }
 }
 

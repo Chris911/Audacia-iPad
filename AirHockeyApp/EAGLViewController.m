@@ -7,6 +7,7 @@
 
 #import "EAGLViewController.h"
 #import "EAGLView.h"
+#import "NodeTable.h"
 
 // Global constants
 float const LARGEUR_FENETRE = 200;
@@ -38,8 +39,6 @@ enum {
 @property (nonatomic, assign) CADisplayLink *displayLink;
 @end
 
-
-
 @implementation EAGLViewController
 
 @synthesize animating;
@@ -69,6 +68,10 @@ enum {
  
     //Initialize Scene
     [Scene getInstance];
+    
+    // LOUCHE : add table to tree
+    NodeTable* table = [[[NodeTable alloc]init]autorelease];
+    [[Scene getInstance].renderingTree addNodeToTree:table];
 }
 
 - (void)dealloc
@@ -211,7 +214,11 @@ enum {
     NSLog(@"Position de tous les doigts venant de commencer à toucher l'écran");            
     for(UITouch* touch in touches) {
         CGPoint positionCourante = [touch locationInView:self.view];
-        NSLog(@"x: %f y: %f", positionCourante.x, positionCourante.y);
+        NSLog(@"x: %f y: %f", [self convertFromScreenToWorld:positionCourante].x, [self convertFromScreenToWorld:positionCourante].y);
+        
+        Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x, [self convertFromScreenToWorld:positionCourante].y, 0);
+        [[Scene getInstance].renderingTree selectNodeByPosition:pos];
+        
     }        
     NSLog(@"Position de tous les doigts sur l'écran");            
     NSSet *allTouches = [event allTouches];
@@ -223,7 +230,6 @@ enum {
     
 }
 
-
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if ([[event allTouches] count] == 1)
@@ -231,17 +237,18 @@ enum {
         UITouch *touch = [[event allTouches] anyObject];
         CGPoint positionCourante = [touch locationInView:self.view];
         //CGPoint positionPrecedente = [touch previousLocationInView:self.view];
-//        cube.currentPosition = Vertex3DMake(cube.currentPosition.x + (((positionCourante.x - positionPrecedente.x) / self.view.bounds.size.width) * LARGEUR_FENETRE),
-//                                            cube.currentPosition.y - (((positionCourante.y - positionPrecedente.y) / self.view.bounds.size.height) * HAUTEUR_FENETRE),
-//                                            cube.currentPosition.z);
         
-        x = positionCourante.x;
-
+        // Try to translate a selected object if any
+        [[Scene getInstance].renderingTree translateSelectedNodes:
+            CGPointMake([self convertFromScreenToWorld:positionCourante].x,
+                        [self convertFromScreenToWorld:positionCourante].y)];
+    
     }
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
 }
 
 -(void)rotationDetectee:(UIGestureRecognizer *)gestureRecognizer
@@ -304,7 +311,6 @@ enum {
             || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
-float x;
 - (void)drawFrame
 {
 
@@ -324,6 +330,7 @@ float x;
 //    
 //    glMatrixMode(GL_MODELVIEW);
     
+    // Renders the whole rendring tree
     [[Scene getInstance].renderingTree render];
         
 	static NSTimeInterval lastDrawTime;
@@ -342,17 +349,9 @@ float x;
     [(EAGLView *)self.view presentFramebuffer];
 }
 
-#pragma mark - Nodes methods
-
--(BOOL)checkIfAnyNodeSelected
-{
-    if(anyNodeSelected)
-        return YES;
-    return NO;
-}
-
 #pragma mark - UI Animations
 
+//Animation when user swipes a side view out (from left to right)
 -(void)slideOutAnimationView:(UIView*)view
 {
     if(view.tag == CAMERAVIEW_TAG){ // bottom left view
@@ -372,6 +371,7 @@ float x;
     }
 }
 
+//Animation when user swipes a side view in (from right to left)
 -(void)slideInAnimationView:(UIView*)view
 {
     if(view.tag == CAMERAVIEW_TAG){
@@ -424,6 +424,13 @@ float x;
         completion:nil];
     }
 
+}
+
+// Takes a screen coordinate point and convert it to predefined world coords
+-(CGPoint)convertFromScreenToWorld:(CGPoint)pos
+{
+    pos = CGPointMake(pos.x * (LARGEUR_FENETRE/1024) - LARGEUR_FENETRE/2, -(pos.y * (HAUTEUR_FENETRE/768) - HAUTEUR_FENETRE/2));
+    return pos;
 }
 
 @end

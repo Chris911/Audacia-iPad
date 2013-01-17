@@ -27,21 +27,16 @@
 // whatever the context might be (ex : the table)
 - (void)loadBaseObjects
 {
-    NodeCube* cube = [[[NodeCube alloc]init]autorelease];
+//    NodeCube* cube = [[[NodeCube alloc]init]autorelease];
+//    
+//    if([self addNodeToTree:cube]){
+//        NSLog(@"Node of type: %@ added to tree",cube.type);
+//    } else {
+//        NSLog(@"Failed to add Node of type: %@ to tree",cube.type);
+//    }
     
-    if([self addNodeToTree:cube]){
-        NSLog(@"Node of type: %@ added to tree",cube.type);
-    } else {
-        NSLog(@"Failed to add Node of type: %@ to tree",cube.type);
-    }
-    
-    NodeTable* table = [[[NodeTable alloc]init]autorelease];
-    
-    if([self addNodeToTree:table]){
-        NSLog(@"Node of type: %@ added to tree",table.type);
-    } else {
-        NSLog(@"Failed to add Node of type: %@ to tree",table.type);
-    }
+    //NodeTable* table = [[[NodeTable alloc]init]autorelease];
+    //[self addNodeToTree:table];
 }
 
 // Render all of the tree objects
@@ -54,7 +49,7 @@
 }
 
 // Add node to rendering tree
-- (BOOL) addNodeToTree:(Node*) node
+- (void) addNodeToTree:(Node*) node
 {
     if(node != nil){
         int countBeforeAdding = [tree count];
@@ -62,11 +57,11 @@
 
         // count of nodes before is lower than actual count
         if(countBeforeAdding < [tree count]){
-            return YES;
+            NSLog(@"node added");
+        } else {
+            NSLog(@"error adding node");
         }
-        return NO;
     }
-    return NO;
 }
 
 // Defines position when adding the node.  Mainly used
@@ -78,9 +73,28 @@
 }
 
 // Select node using its position
-- (BOOL) selectNodeByPosition:(Vector3D) position
+// Temporary since it only works in a 2D Plane
+- (void) selectNodeByPosition:(Vector3D) position
 {
-    return YES;
+    // The bigger the value, the easiest it is to select an object
+    int offset = 8;
+    
+    // New selection pass, make sure
+    // no other nodes are still selected
+    [self deselectAllNodes];
+    
+    for(Node* node in self.tree)
+    {
+        // bounding box check, not optimal
+        if(node.isSelectable
+           && (node.position.x <= position.x + offset
+           && node.position.x >= position.x - offset
+           && node.position.y <= position.y + offset
+           && node.position.y >= position.y - offset)) {
+            node.isSelected = YES;
+            NSLog(@"Selected Type:%@",node.type);
+        }
+    }
 }
 
 // Remove selected nodes
@@ -122,9 +136,14 @@
     
 }
 
-- (void) translateSelectedNodes:(CGPoint*) deltaPoint
+- (void) translateSelectedNodes:(CGPoint) deltaPoint
 {
-    
+    for(Node* node in self.tree)
+    {
+        if(node.isSelected) {
+            node.position = Vector3DMake(deltaPoint.x, deltaPoint.y, 0);
+        }
+    }
 }
 
 - (int) getNumberOfNodes

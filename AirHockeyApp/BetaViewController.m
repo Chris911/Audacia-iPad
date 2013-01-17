@@ -13,6 +13,7 @@
 #import "XMLUtil.h"
 #import "Scene.h"
 #import "AFNetworking.h"
+#import "Reachability.h"
 #import "AFGDataXMLRequestOperation.h"
 
 @interface BetaViewController ()
@@ -34,6 +35,8 @@
 {
     [super viewDidLoad];
     
+    if([self isNetworkAvailable]){
+    
     //[XMLUtil savePartyWithFileName:[Scene getInstance].renderingTree :@"test"];
     //RenderingTree* newTestTree = [XMLUtil loadRenderingTreeFromFileName:@"test"];
     
@@ -45,6 +48,7 @@
     }];
     // Just start the operation on a background thread
     [operation start];
+    } 
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,4 +74,19 @@
 {
     [self dismissModalViewControllerAnimated:YES];
 }
+
+- (BOOL)isNetworkAvailable
+{
+    BOOL available = NO;
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        NSLog(@"NOT Connected to internet");
+    } else {
+        available = YES;
+        NSLog(@"Connected to internet");
+    }
+    return available;
+}
+
 @end

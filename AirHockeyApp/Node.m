@@ -53,10 +53,11 @@ const float DEFAULT_ANGLE_VALUE = 0.0f;
     
 }
 
-- (void) setPosition:(Vector3D)position
-{
-    
-}
+// Destroyed setPosition method as it was
+// redifining the synthetized method of the
+// same name and would thus enter en infinite
+// loop when assigning NodeTableEdge.position
+// - Sam (Obviously)
 
 - (void) setScaling :(float)scaleFactor
 {

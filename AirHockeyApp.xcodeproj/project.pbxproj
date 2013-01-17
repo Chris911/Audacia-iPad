@@ -10,7 +10,6 @@
 		043044EE16A65529001C2EA5 /* ShaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 043044ED16A65529001C2EA5 /* ShaderUtils.m */; };
 		043044F116A6599C001C2EA5 /* BasicShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 043044F016A6599C001C2EA5 /* BasicShader.vsh */; };
 		043044F316A659DA001C2EA5 /* BasicShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 043044F216A659DA001C2EA5 /* BasicShader.fsh */; };
-		044D7F9A16A5B4D500AE8E11 /* NodeTriangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 044D7F9916A5B4D500AE8E11 /* NodeTriangle.m */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
 		044D7FA016A5BBF900AE8E11 /* NodeCube.m in Sources */ = {isa = PBXBuildFile; fileRef = 044D7F9F16A5BBF900AE8E11 /* NodeCube.m */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
@@ -61,6 +60,8 @@
 		A8EBDE3916A70CF8002B2DD6 /* GluLookAt.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */; };
 		A8EBDE7616A711C1002B2DD6 /* GluPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7516A711C1002B2DD6 /* GluPerspective.m */; };
 		A8EBDE7A16A729CA002B2DD6 /* NodeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7916A729CA002B2DD6 /* NodeTable.m */; };
+		A8EBDE8D16A8849D002B2DD6 /* NodeTableEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE8C16A8849D002B2DD6 /* NodeTableEdge.m */; };
+		A8EBDE9616A890D1002B2DD6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE9516A890D1002B2DD6 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,8 +69,6 @@
 		043044ED16A65529001C2EA5 /* ShaderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderUtils.m; sourceTree = "<group>"; };
 		043044F016A6599C001C2EA5 /* BasicShader.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = BasicShader.vsh; sourceTree = "<group>"; };
 		043044F216A659DA001C2EA5 /* BasicShader.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = BasicShader.fsh; sourceTree = "<group>"; };
-		044D7F9816A5B4D500AE8E11 /* NodeTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTriangle.h; sourceTree = "<group>"; };
-		044D7F9916A5B4D500AE8E11 /* NodeTriangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTriangle.m; sourceTree = "<group>"; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		044D7F9E16A5BBF900AE8E11 /* NodeCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeCube.h; sourceTree = "<group>"; };
 		044D7F9F16A5BBF900AE8E11 /* NodeCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeCube.m; sourceTree = "<group>"; };
@@ -153,6 +152,10 @@
 		A8EBDE7516A711C1002B2DD6 /* GluPerspective.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GluPerspective.m; sourceTree = "<group>"; };
 		A8EBDE7816A729CA002B2DD6 /* NodeTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTable.h; sourceTree = "<group>"; };
 		A8EBDE7916A729CA002B2DD6 /* NodeTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTable.m; sourceTree = "<group>"; };
+		A8EBDE8B16A8849D002B2DD6 /* NodeTableEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTableEdge.h; sourceTree = "<group>"; };
+		A8EBDE8C16A8849D002B2DD6 /* NodeTableEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTableEdge.m; sourceTree = "<group>"; };
+		A8EBDE9416A890D1002B2DD6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A8EBDE9516A890D1002B2DD6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +358,7 @@
 		A8CC901E16A6E7B800CFD27D /* XMLUtil */ = {
 			isa = PBXGroup;
 			children = (
+				A8EBDE9316A890D1002B2DD6 /* Reachability */,
 				A8CC902016A6E84100CFD27D /* GDataXMLNode.h */,
 				A8CC902116A6E84100CFD27D /* GDataXMLNode.m */,
 				A8CC902516A6E95D00CFD27D /* XMLUtil.h */,
@@ -397,15 +401,25 @@
 			children = (
 				048C9D3116A4A8D9006A7082 /* Node.h */,
 				048C9D3216A4A8D9006A7082 /* Node.m */,
-				044D7F9816A5B4D500AE8E11 /* NodeTriangle.h */,
-				044D7F9916A5B4D500AE8E11 /* NodeTriangle.m */,
 				044D7F9E16A5BBF900AE8E11 /* NodeCube.h */,
 				044D7F9F16A5BBF900AE8E11 /* NodeCube.m */,
 				A8EBDE7816A729CA002B2DD6 /* NodeTable.h */,
 				A8EBDE7916A729CA002B2DD6 /* NodeTable.m */,
+				A8EBDE8B16A8849D002B2DD6 /* NodeTableEdge.h */,
+				A8EBDE8C16A8849D002B2DD6 /* NodeTableEdge.m */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
+		};
+		A8EBDE9316A890D1002B2DD6 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				A8EBDE9416A890D1002B2DD6 /* Reachability.h */,
+				A8EBDE9516A890D1002B2DD6 /* Reachability.m */,
+			);
+			name = Reachability;
+			path = libs/Reachability;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -494,7 +508,6 @@
 				048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */,
 				048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */,
 				A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */,
-				044D7F9A16A5B4D500AE8E11 /* NodeTriangle.m in Sources */,
 				044D7FA016A5BBF900AE8E11 /* NodeCube.m in Sources */,
 				043044EE16A65529001C2EA5 /* ShaderUtils.m in Sources */,
 				A8CC902216A6E84100CFD27D /* GDataXMLNode.m in Sources */,
@@ -512,6 +525,8 @@
 				A8EBDE3916A70CF8002B2DD6 /* GluLookAt.m in Sources */,
 				A8EBDE7616A711C1002B2DD6 /* GluPerspective.m in Sources */,
 				A8EBDE7A16A729CA002B2DD6 /* NodeTable.m in Sources */,
+				A8EBDE8D16A8849D002B2DD6 /* NodeTableEdge.m in Sources */,
+				A8EBDE9616A890D1002B2DD6 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,7 +600,7 @@
 		96378D921472C71200F543EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirHockeyApp/AirHockeyApp-Prefix.pch";
 				GCC_VERSION = "";
@@ -601,7 +616,7 @@
 		96378D931472C71200F543EA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirHockeyApp/AirHockeyApp-Prefix.pch";
 				GCC_VERSION = "";

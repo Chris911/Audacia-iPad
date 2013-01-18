@@ -30,7 +30,7 @@
 // Transforms on selected nodes
 - (void) rotateSelectedNodes:(Rotation3D) deltaAngle;
 - (void) scaleSelectedNodes:(float) deltaScale;
-- (void) translateSelectedNodes:(CGPoint) deltaPoint;
+- (BOOL) translateSelectedNodes:(CGPoint) deltaPoint;
 
 // Rendering functions
 - (void) render;

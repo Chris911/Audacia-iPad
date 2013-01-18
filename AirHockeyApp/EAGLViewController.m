@@ -13,6 +13,9 @@
 float const LARGEUR_FENETRE = 200;
 float const HAUTEUR_FENETRE = 150;
 
+float const LARGEUR_ECRAN = 1024;
+float const HAUTEUR_ECRAN = 768;
+
 int const CAMERAVIEW_TAG      = 100;
 int const PARAMETERSVIEW_TAG  = 200;
 
@@ -34,6 +37,11 @@ enum {
 {
     BOOL cameraViewIsHidden;
     BOOL anyNodeSelected;
+    
+    BOOL isCameraTranslateActive;
+    
+    float camPosX, camPosY, camPosZ;
+    float zoomFactor, distanceZ;
 }
 @property (nonatomic, retain) EAGLContext *context;
 @property (nonatomic, assign) CADisplayLink *displayLink;
@@ -65,13 +73,14 @@ enum {
     animating = FALSE;
     animationFrameInterval = 1;
     self.displayLink = nil;
+    
+    isCameraTranslateActive = NO;
  
     //Initialize Scene
     [Scene getInstance];
     
-    // LOUCHE : add table to tree
-    NodeTable* table = [[[NodeTable alloc]init]autorelease];
-    [[Scene getInstance].renderingTree addNodeToTree:table];
+    // If we want to load the Default Map
+    [Scene loadDefaultElements];
 }
 
 - (void)dealloc
@@ -115,33 +124,9 @@ enum {
 
 - (void)viewDidLoad
 {
-    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationDetectee:)];
-    [rotationGesture setDelegate:self];
-    [self.view addGestureRecognizer:rotationGesture];
-    [rotationGesture release];
-    
-    // Add swipeGestures
-    UISwipeGestureRecognizer *oneFingerSwipeLeft = [[[UISwipeGestureRecognizer alloc]
-                                                     initWithTarget:self
-                                                     action:@selector(oneFingerSwipeLeft:)] autorelease];
-    [oneFingerSwipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [[self LeftSlideView] addGestureRecognizer:oneFingerSwipeLeft];
-    
-    UISwipeGestureRecognizer *oneFingerSwipeRight = [[[UISwipeGestureRecognizer alloc]
-                                                      initWithTarget:self
-                                                      action:@selector(oneFingerSwipeRight:)] autorelease];
-    [oneFingerSwipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-    [[self view] addGestureRecognizer:oneFingerSwipeRight];
-        
-    cameraViewIsHidden  = YES;
-    anyNodeSelected     = YES;
-    
-    // Hide the views out of the screen
-    self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.bounds.size.width,self.LeftSlideView.center.y);
-    self.CameraView.center = CGPointMake(-self.CameraView.frame.size.width,
-                                         768 + self.CameraView.frame.size.height);
-    self.ParametersView.center = CGPointMake(self.ParametersView.center.x,
-                                             self.ParametersView.center.y + self.ParametersView.bounds.size.height);
+    [super viewDidLoad];
+    [self prepareRecognizers];
+    [self prepareAdditionalViews];
 }
 
 - (void)viewDidUnload
@@ -171,10 +156,6 @@ enum {
 
 - (void)setAnimationFrameInterval:(NSInteger)frameInterval
 {
-    /*
-	 Frame interval defines how many display frames must pass between each time the display link fires.
-	 The display link will only fire 30 times a second when the frame internal is two on a display that refreshes 60 times a second. The default frame interval setting of one will fire 60 times a second when the display refreshes at 60 times a second. A frame interval setting of less than one results in undefined behavior.
-	 */
     if (frameInterval >= 1) {
         animationFrameInterval = frameInterval;
         
@@ -239,10 +220,14 @@ enum {
         //CGPoint positionPrecedente = [touch previousLocationInView:self.view];
         
         // Try to translate a selected object if any
-        [[Scene getInstance].renderingTree translateSelectedNodes:
-            CGPointMake([self convertFromScreenToWorld:positionCourante].x,
-                        [self convertFromScreenToWorld:positionCourante].y)];
-    
+        if(!isCameraTranslateActive){
+            [[Scene getInstance].renderingTree translateSelectedNodes:
+                CGPointMake([self convertFromScreenToWorld:positionCourante].x,
+                            [self convertFromScreenToWorld:positionCourante].y)];
+        } else if(isCameraTranslateActive) {
+            camPosX = [self convertFromScreenToWorld:positionCourante].x;
+            camPosY = [self convertFromScreenToWorld:positionCourante].y;
+        }
     }
 }
 
@@ -284,10 +269,22 @@ enum {
 
 }
 
+- (IBAction)toggleTranslateCamera:(id)sender
+{
+    isCameraTranslateActive = !isCameraTranslateActive;
+}
+
 #pragma mark - Core GL Methods
 
 -(void)setupView
-{		
+{
+    camPosX = 0;
+    camPosY = 0;
+    camPosZ = 0;
+    zoomFactor = 1;
+    
+    distanceZ = 150*zoomFactor;
+    
     glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_PROJECTION);
 
@@ -323,12 +320,12 @@ enum {
 	glColor4f(1.0, 1.0, 1.0, 1.0);
         
 //    glMatrixMode(GL_PROJECTION);
-//    gluPerspective( 70, 1024/768, 0.1, 2000);
-//    gluLookAt(0, -20, -300,
-//              x, 0, 0,
+//    //gluPerspective(60, LARGEUR_FENETRE/HAUTEUR_FENETRE, 0.1, 2000);
+//    gluLookAt(camPosX, camPosY, -50,
+//              0, 0, 0,
 //              0, 1, 0);
-//    
-//    glMatrixMode(GL_MODELVIEW);
+    
+    glMatrixMode(GL_MODELVIEW);
     
     // Renders the whole rendring tree
     [[Scene getInstance].renderingTree render];
@@ -350,21 +347,20 @@ enum {
 }
 
 #pragma mark - UI Animations
-
 //Animation when user swipes a side view out (from left to right)
 -(void)slideOutAnimationView:(UIView*)view
 {
     if(view.tag == CAMERAVIEW_TAG){ // bottom left view
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
-                             view.center = CGPointMake(view.frame.size.width/2, 768 - view.frame.size.height/2);
+                             view.center = CGPointMake(view.frame.size.width/2, HAUTEUR_ECRAN - view.frame.size.height/2);
                          }
         completion:nil];
     }
     else if(view.tag == PARAMETERSVIEW_TAG){
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
-                             view.center = CGPointMake(view.center.x, 768 + view.frame.size.height/2);
+                             view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN + view.frame.size.height/2);
                              
                          }
                          completion:nil];
@@ -377,7 +373,7 @@ enum {
     if(view.tag == CAMERAVIEW_TAG){
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
-                             view.center = CGPointMake(-view.frame.size.width/2, 768 + view.frame.size.height);
+                             view.center = CGPointMake(-view.frame.size.width/2, HAUTEUR_ECRAN + view.frame.size.height);
                              
                          }
         completion:nil];
@@ -385,7 +381,7 @@ enum {
     else if(view.tag == PARAMETERSVIEW_TAG){
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
-                             view.center = CGPointMake(view.center.x, 768 - view.frame.size.height/2);
+                             view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN - view.frame.size.height/2);
                              
                          }
                          completion:nil];
@@ -393,7 +389,8 @@ enum {
 
 }
 
-- (void)oneFingerSwipeLeft:(UITapGestureRecognizer *)recognizer {
+- (void)oneFingerSwipeLeft:(UITapGestureRecognizer *)recognizer
+{
 
     CGPoint beginningPoint = [recognizer locationInView:[self view]];
     
@@ -411,7 +408,8 @@ enum {
 
 }
 
-- (void)oneFingerSwipeRight:(UITapGestureRecognizer *)recognizer {
+- (void)oneFingerSwipeRight:(UITapGestureRecognizer *)recognizer
+{
     
     CGPoint beginningPoint = [recognizer locationInView:[self view]];
     
@@ -426,11 +424,71 @@ enum {
 
 }
 
-// Takes a screen coordinate point and convert it to predefined world coords
--(CGPoint)convertFromScreenToWorld:(CGPoint)pos
+float mCurrentScale, mLastScale;
+-(void)handlePinch:(UIPinchGestureRecognizer*)sender
 {
-    pos = CGPointMake(pos.x * (LARGEUR_FENETRE/1024) - LARGEUR_FENETRE/2, -(pos.y * (HAUTEUR_FENETRE/768) - HAUTEUR_FENETRE/2));
+    NSLog(@"latscale = %f",mLastScale);
+    
+    mCurrentScale += [sender scale] - mLastScale;
+    mLastScale = [sender scale];
+    
+    if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        mLastScale = 1.0;
+    }
+    
+    zoomFactor = mCurrentScale;
+}
+
+#pragma mark - Screen conversion
+// Takes a screen coordinate point and convert it to predefined world coords
+- (CGPoint)convertFromScreenToWorld:(CGPoint)pos
+{
+    pos = CGPointMake(pos.x * (LARGEUR_FENETRE/1024) - LARGEUR_FENETRE/2, -(pos.y * (HAUTEUR_FENETRE/HAUTEUR_ECRAN) - HAUTEUR_FENETRE/2));
     return pos;
+}
+
+#pragma mark - UI Elements initialization
+- (void) prepareRecognizers
+{
+    // Rotation recognizer
+    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationDetectee:)];
+    [rotationGesture setDelegate:self];
+    [self.view addGestureRecognizer:rotationGesture];
+    [rotationGesture release];
+    
+    
+    
+    // SwipeGesture recognizers
+    UISwipeGestureRecognizer *oneFingerSwipeLeft = [[[UISwipeGestureRecognizer alloc]
+                                                     initWithTarget:self
+                                                     action:@selector(oneFingerSwipeLeft:)] autorelease];
+    [oneFingerSwipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [[self LeftSlideView] addGestureRecognizer:oneFingerSwipeLeft];
+    
+    UISwipeGestureRecognizer *oneFingerSwipeRight = [[[UISwipeGestureRecognizer alloc]
+                                                      initWithTarget:self
+                                                      action:@selector(oneFingerSwipeRight:)] autorelease];
+    [oneFingerSwipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [[self view] addGestureRecognizer:oneFingerSwipeRight];
+    
+    // PinchGesture recognizer
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    [self.view addGestureRecognizer:pinchGesture];
+    [pinchGesture release];
+}
+
+- (void) prepareAdditionalViews
+{
+    cameraViewIsHidden  = YES;
+    anyNodeSelected     = YES;
+    
+    // Hide the views out of the screen
+    self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.bounds.size.width,self.LeftSlideView.center.y);
+    self.CameraView.center = CGPointMake(-self.CameraView.frame.size.width,
+                                         HAUTEUR_ECRAN + self.CameraView.frame.size.height);
+    self.ParametersView.center = CGPointMake(self.ParametersView.center.x,
+                                             self.ParametersView.center.y + self.ParametersView.bounds.size.height);
 }
 
 @end

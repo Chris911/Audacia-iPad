@@ -42,6 +42,8 @@ extern float const HAUTEUR_FENETRE;
 
 - (IBAction)OpenCameraView:(id)sender;
 - (IBAction)TouchButtonInViewTEST:(id)sender;
+- (IBAction)toggleTranslateCamera:(id)sender;
+
 
 
 @end

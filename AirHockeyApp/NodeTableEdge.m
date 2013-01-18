@@ -13,13 +13,17 @@
 const int NB_OF_TRIANGLE = 2;
 const int EDGE_SIZE = 3;
 GLfloat edgeColor[NB_OF_TRIANGLE*3*4];
+GLfloat nodeHeight = 0.0f;
 
-- (id) initWithCoords:(float)x :(float)y
+- (id) initWithCoordsAndIndex:(float)x :(float)y :(int)index
 {
     if((self = [super init])) {
         self.type = @"EDGE";
         self.isSelectable = YES;
-        self.position = Vector3DMake(x, y, self.position.z);
+        
+        self.index = index;
+        self.position = Vector3DMake(x, y, nodeHeight);
+        self.lastPosition = Vector3DMake(x, y, nodeHeight);
         
         [self initTriangleColors];
     }
@@ -28,16 +32,22 @@ GLfloat edgeColor[NB_OF_TRIANGLE*3*4];
 
 - (void)render
 {
+    if(self.index == 1 || self.index == 6){
+        self.position = Vector3DMake(0, self.position.y, nodeHeight);
+    } else if (self.index == 3 || self.index == 4){
+        self.position = Vector3DMake(self.position.x, 0, nodeHeight);
+    }
+    
     GLfloat vertices[] = {
         // Triangle 1
-        self.position.x - EDGE_SIZE, self.position.y + EDGE_SIZE,0,
-        self.position.x - EDGE_SIZE, self.position.y - EDGE_SIZE,0,
-        self.position.x + EDGE_SIZE, self.position.y - EDGE_SIZE,0,
+        self.position.x - EDGE_SIZE, self.position.y + EDGE_SIZE,nodeHeight,
+        self.position.x - EDGE_SIZE, self.position.y - EDGE_SIZE,nodeHeight,
+        self.position.x + EDGE_SIZE, self.position.y - EDGE_SIZE,nodeHeight,
         
         // Triangle 2
-        self.position.x + EDGE_SIZE, self.position.y - EDGE_SIZE,0,
-        self.position.x + EDGE_SIZE, self.position.y + EDGE_SIZE,0,
-        self.position.x - EDGE_SIZE, self.position.y + EDGE_SIZE,0,
+        self.position.x + EDGE_SIZE, self.position.y - EDGE_SIZE,nodeHeight,
+        self.position.x + EDGE_SIZE, self.position.y + EDGE_SIZE,nodeHeight,
+        self.position.x - EDGE_SIZE, self.position.y + EDGE_SIZE,nodeHeight,
     };
     
     glPushMatrix();
@@ -53,6 +63,8 @@ GLfloat edgeColor[NB_OF_TRIANGLE*3*4];
     glDisableClientState(GL_COLOR_ARRAY);
     
     glPopMatrix();
+    
+    self.lastPosition = self.position;
 }
 
 - (void) initTriangleColors

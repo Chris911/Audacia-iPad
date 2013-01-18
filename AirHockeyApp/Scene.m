@@ -8,6 +8,7 @@
 //  Singleton Class.  
 
 #import "Scene.h"
+#import "NodeTable.h"   
 #import "RenderingTree.h"
 
 @implementation Scene
@@ -34,6 +35,16 @@ static Scene *scene = NULL;
 {
     [self initialize];
     return (scene);
+}
+
++ (void) loadDefaultElements
+{
+    NodeTable* table = [[[NodeTable alloc]init]autorelease];
+    [scene.renderingTree addNodeToTree:table];
+    
+    // Very important to add the edges AFTER the table
+    // (inherited from Projet2 XML's structure)
+    [table addEdgesToTree];
 }
 
 - (void)dealloc

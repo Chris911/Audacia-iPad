@@ -9,9 +9,11 @@
 #import "Node.h"
 
 @interface NodeTableEdge : Node
+@property (nonatomic) Vector3D lastPosition;
+@property (nonatomic) int index;
 
 // Constuctor with coordinates
-- (id) initWithCoords:(float)x :(float)y;
+- (id) initWithCoordsAndIndex:(float)x :(float)y :(int)index;
 
 // Render the node
 - (void)render;

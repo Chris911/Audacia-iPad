@@ -9,8 +9,11 @@
 #import "Node.h"
 
 @interface NodeTable : Node
-
 - (id) init;
 - (void) render;
+
+// Table's specific methods
+- (void) addEdgesToTree;
+
 
 @end

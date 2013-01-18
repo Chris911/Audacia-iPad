@@ -18,25 +18,8 @@
 {
     if((self = [super init])) {
         tree = [[NSMutableArray alloc]init];
-        [self loadBaseObjects];
     }
     return self;
-}
-
-// Loads objects that are always present in the scene,
-// whatever the context might be (ex : the table)
-- (void)loadBaseObjects
-{
-//    NodeCube* cube = [[[NodeCube alloc]init]autorelease];
-//    
-//    if([self addNodeToTree:cube]){
-//        NSLog(@"Node of type: %@ added to tree",cube.type);
-//    } else {
-//        NSLog(@"Failed to add Node of type: %@ to tree",cube.type);
-//    }
-    
-    //NodeTable* table = [[[NodeTable alloc]init]autorelease];
-    //[self addNodeToTree:table];
 }
 
 // Render all of the tree objects
@@ -57,9 +40,9 @@
 
         // count of nodes before is lower than actual count
         if(countBeforeAdding < [tree count]){
-            NSLog(@"node added");
+            NSLog(@"node of type : %@ added",node.type);
         } else {
-            NSLog(@"error adding node");
+            NSLog(@"error adding node of type : %@",node.type);
         }
     }
 }
@@ -136,14 +119,17 @@
     
 }
 
-- (void) translateSelectedNodes:(CGPoint) deltaPoint
+// Return YES if any node was selected
+- (BOOL) translateSelectedNodes:(CGPoint) deltaPoint
 {
     for(Node* node in self.tree)
     {
         if(node.isSelected) {
             node.position = Vector3DMake(deltaPoint.x, deltaPoint.y, 0);
+            return YES;
         }
     }
+    return NO;
 }
 
 - (int) getNumberOfNodes

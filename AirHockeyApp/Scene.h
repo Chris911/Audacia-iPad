@@ -14,5 +14,6 @@
 @property (nonatomic,retain)RenderingTree* renderingTree;
 
 + (Scene *)getInstance;
++ (void) loadDefaultElements;
 
 @end

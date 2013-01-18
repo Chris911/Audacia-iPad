@@ -13,6 +13,7 @@
 @interface NodeTable()
 {
     NodeTableEdge *edges[8];
+    CGPoint symetricalPoint[8];
 }
 
 @end
@@ -42,6 +43,8 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
 
 - (void) render
 {
+    [self updateEdgesPositions];
+    
     // Renders the table's edges
     for (int i = 0; i < NB_OF_TABLE_EDGES; i++) {
         [edges[i] render];
@@ -73,6 +76,8 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
         edges[3].position.x,edges[3].position.y,TABLE_DEPTH,
         edges[0].position.x,edges[0].position.y,TABLE_DEPTH,
     };
+    
+    
     
     glPushMatrix();
     
@@ -131,15 +136,19 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
      5-----6------7
      */
     
-    edges[0] = [[[NodeTableEdge alloc]initWithCoords:-70 :50]autorelease];
-    edges[1] = [[[NodeTableEdge alloc]initWithCoords:0 :50]autorelease];
-    edges[2] = [[[NodeTableEdge alloc]initWithCoords:70 :50]autorelease];
-    edges[3] = [[[NodeTableEdge alloc]initWithCoords:-70 :0]autorelease];
-    edges[4] = [[[NodeTableEdge alloc]initWithCoords:70 :0]autorelease];
-    edges[5] = [[[NodeTableEdge alloc]initWithCoords:-70 :-50]autorelease];
-    edges[6] = [[[NodeTableEdge alloc]initWithCoords:0 :-50]autorelease];
-    edges[7] = [[[NodeTableEdge alloc]initWithCoords:70 :-50]autorelease];
-    
+    edges[0] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:-70 :50 :0]autorelease];
+    edges[1] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:0 :50 :1]autorelease];
+    edges[2] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:70 :50 :2]autorelease];
+    edges[3] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:-70 :0 :3]autorelease];
+    edges[4] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:70 :0 :4]autorelease];
+    edges[5] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:-70 :-50 :5]autorelease];
+    edges[6] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:0 :-50 :6]autorelease];
+    edges[7] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:70 :-50 :7]autorelease];
+
+}
+
+- (void) addEdgesToTree
+{
     [[Scene getInstance].renderingTree addNodeToTree:edges[0]];
     [[Scene getInstance].renderingTree addNodeToTree:edges[1]];
     [[Scene getInstance].renderingTree addNodeToTree:edges[2]];
@@ -148,7 +157,42 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
     [[Scene getInstance].renderingTree addNodeToTree:edges[5]];
     [[Scene getInstance].renderingTree addNodeToTree:edges[6]];
     [[Scene getInstance].renderingTree addNodeToTree:edges[7]];
+}
 
+
+// Required to update the symetry of the table's edges
+- (void) updateEdgesPositions
+{
+    // Top Edges
+    if(edges[0].lastPosition.x != edges[0].position.x || edges[0].lastPosition.y != edges[0].position.y) {
+        edges[2].position = Vector3DMake(-edges[0].position.x, edges[0].position.y, edges[2].position.z);
+        
+    } else if(edges[2].lastPosition.x != edges[2].position.x || edges[2].lastPosition.y != edges[2].position.y) {
+        edges[0].position = Vector3DMake(-edges[2].position.x, edges[2].position.y, edges[0].position.z);
+    }
+    
+    // Vertical Middle Edges
+    if(edges[1].lastPosition.y != edges[1].position.y) {
+        edges[6].position = Vector3DMake(edges[6].position.x, -edges[1].position.y, edges[6].position.z);
+    }
+    else if(edges[6].lastPosition.y != edges[6].position.y) {
+        edges[1].position = Vector3DMake(edges[1].position.x, -edges[6].position.y, edges[1].position.z);
+    }
+    
+    if(edges[5].lastPosition.x != edges[5].position.x || edges[5].lastPosition.y != edges[5].position.y) {
+        edges[7].position = Vector3DMake(-edges[5].position.x, edges[5].position.y, edges[7].position.z);
+        
+    } else if(edges[7].lastPosition.x != edges[7].position.x || edges[7].lastPosition.y != edges[7].position.y) {
+        edges[5].position = Vector3DMake(-edges[7].position.x, edges[7].position.y, edges[5].position.z);
+    }
+    
+    // Horizontal Middle Edges
+    if(edges[3].lastPosition.y != edges[3].position.y) {
+        edges[4].position = Vector3DMake(-edges[3].position.x, edges[4].position.y, edges[4].position.z);
+    }
+    else if(edges[4].lastPosition.y != edges[4].position.y) {
+        edges[3].position = Vector3DMake(-edges[4].position.x, edges[3].position.y, edges[3].position.z);
+    }
 }
 
 @end

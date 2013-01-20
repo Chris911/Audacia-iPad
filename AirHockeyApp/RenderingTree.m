@@ -56,10 +56,12 @@
 }
 
 // Select node using its position
-// Temporary since it only works in a 2D Plane
-- (void) selectNodeByPosition:(Vector3D) position
+// FIXME: only works in the default 2D Plane
+- (BOOL) selectNodeByPosition:(Vector3D) position
 {
-    // The bigger the value, the easiest it is to select an object
+    BOOL nodeWasSelected = NO;
+    
+    // The bigger the value, the easier it is to select an object
     int offset = 8;
     
     // New selection pass, make sure
@@ -68,16 +70,19 @@
     
     for(Node* node in self.tree)
     {
-        // bounding box check, not optimal
+        // bounding box check, FIXME: selection not optimal
         if(node.isSelectable
            && (node.position.x <= position.x + offset
            && node.position.x >= position.x - offset
            && node.position.y <= position.y + offset
            && node.position.y >= position.y - offset)) {
-            node.isSelected = YES;
-            NSLog(@"Selected Type:%@",node.type);
+               node.isSelected = YES;
+               NSLog(@"Selected Type:%@",node.type);
+               
+               nodeWasSelected = YES;
         }
     }
+    return nodeWasSelected;
 }
 
 // Remove selected nodes
@@ -93,7 +98,10 @@
     {
         node.isSelected = NO;
     }
+    NSLog(@"All nodes deselectedß");
 }
+
+// Select all nodes of the rendering tree
 - (void) selectAllNodes
 {
     for(Node* node in self.tree)

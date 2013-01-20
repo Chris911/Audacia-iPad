@@ -18,7 +18,7 @@
 - (void) addNodeToTreeWithInitialPosition:(Node*) node:(Vector3D)pos;
 
 // Select node using its position
-- (void) selectNodeByPosition:(Vector3D) position;
+- (BOOL) selectNodeByPosition:(Vector3D) position;
 
 // Remove selected nodes
 - (BOOL) removeSelectedNodes;

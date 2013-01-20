@@ -41,7 +41,7 @@ enum {
     BOOL isCameraTranslateActive;
     
     float camPosX, camPosY, camPosZ;
-    float zoomFactor, distanceZ;
+    float zoomFactor;
 }
 @property (nonatomic, retain) EAGLContext *context;
 @property (nonatomic, assign) CADisplayLink *displayLink;
@@ -76,10 +76,10 @@ enum {
     
     isCameraTranslateActive = NO;
  
-    //Initialize Scene
+    //Initialize Scene and rendring tree
     [Scene getInstance];
     
-    // If we want to load the Default Map
+    // Loading the Default Map
     [Scene loadDefaultElements];
 }
 
@@ -104,9 +104,7 @@ enum {
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
+    [super didReceiveMemoryWarning];    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -145,6 +143,13 @@ enum {
     if ([EAGLContext currentContext] == context)
         [EAGLContext setCurrentContext:nil];
 	self.context = nil;	
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+            || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
 #pragma mark - GL Animation methods
@@ -195,20 +200,26 @@ enum {
     NSLog(@"Position de tous les doigts venant de commencer à toucher l'écran");            
     for(UITouch* touch in touches) {
         CGPoint positionCourante = [touch locationInView:self.view];
-        NSLog(@"x: %f y: %f", [self convertFromScreenToWorld:positionCourante].x, [self convertFromScreenToWorld:positionCourante].y);
         
+        // Use touch coordinates to try and select a Node
         Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x, [self convertFromScreenToWorld:positionCourante].y, 0);
-        [[Scene getInstance].renderingTree selectNodeByPosition:pos];
         
-    }        
-    NSLog(@"Position de tous les doigts sur l'écran");            
+        // Check if any node was selected with the first touch.
+        // If not, we can move the camera
+        if([[Scene getInstance].renderingTree selectNodeByPosition:pos])
+        {
+            NSLog(@"Touch resulted in node selection");
+        } else {
+            NSLog(@"Touch did not select any node");
+            // TODO: Introduce camera movement here
+        }
+    }
+    
+    // Multi-touch 
     NSSet *allTouches = [event allTouches];
     for(UITouch* touch in allTouches) {
-        CGPoint positionCourante = [touch locationInView:self.view];
-        NSLog(@"x: %f y: %f", positionCourante.x, positionCourante.y);        
-    }
-    NSLog(@"\n\n");
-    
+        //CGPoint positionCourante = [touch locationInView:self.view];
+    }    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -220,11 +231,13 @@ enum {
         //CGPoint positionPrecedente = [touch previousLocationInView:self.view];
         
         // Try to translate a selected object if any
+        // FIXME: Only one type of camera by now, so this
+        // statement may not make sense.  It will later
         if(!isCameraTranslateActive){
             [[Scene getInstance].renderingTree translateSelectedNodes:
                 CGPointMake([self convertFromScreenToWorld:positionCourante].x,
                             [self convertFromScreenToWorld:positionCourante].y)];
-        } else if(isCameraTranslateActive) {
+        } else if (isCameraTranslateActive) {
             camPosX = [self convertFromScreenToWorld:positionCourante].x;
             camPosY = [self convertFromScreenToWorld:positionCourante].y;
         }
@@ -283,16 +296,12 @@ enum {
     camPosZ = 0;
     zoomFactor = 1;
     
-    distanceZ = 150*zoomFactor;
-    
     glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_PROJECTION);
 
-	CGRect rect = self.view.bounds; 
+	CGRect rect = self.view.bounds;
     
-    glOrthof(-(LARGEUR_FENETRE / 2), (LARGEUR_FENETRE / 2), -(HAUTEUR_FENETRE / 2), (HAUTEUR_FENETRE / 2), 0, 100);
-
-	glViewport(0, 0, rect.size.width, rect.size.height);  
+    glViewport(0, 0, rect.size.width, rect.size.height);    
 	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity(); 
@@ -301,47 +310,43 @@ enum {
 	glGetError(); // Clear error codes
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft
-            || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
-}
-
 - (void)drawFrame
 {
 
     [(EAGLView *)self.view setFramebuffer];
-    
-	static GLfloat rotation = 0.0;
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity(); 
-	glColor4f(1.0, 1.0, 1.0, 1.0);
         
-//    glMatrixMode(GL_PROJECTION);
-//    //gluPerspective(60, LARGEUR_FENETRE/HAUTEUR_FENETRE, 0.1, 2000);
+//    gluPerspective(60, LARGEUR_FENETRE/HAUTEUR_FENETRE, 0.1, 2000);
 //    gluLookAt(camPosX, camPosY, -50,
 //              0, 0, 0,
 //              0, 1, 0);
+
     
-    glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    
+    glOrthof(-(LARGEUR_FENETRE / 2 + camPosX)*zoomFactor, (LARGEUR_FENETRE / 2 + camPosX)*zoomFactor,
+             -(HAUTEUR_FENETRE / 2 + camPosY)*zoomFactor, (HAUTEUR_FENETRE / 2 +camPosY)*zoomFactor, 0, 100);
+	glMatrixMode(GL_MODELVIEW);
+    
+    glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     
     // Renders the whole rendring tree
     [[Scene getInstance].renderingTree render];
         
-	static NSTimeInterval lastDrawTime;
-	if (lastDrawTime)
-	{
-		NSTimeInterval timeSinceLastDraw = [NSDate timeIntervalSinceReferenceDate] - lastDrawTime;
-		rotation+=50 * timeSinceLastDraw;				
-		Rotation3D rot;
-		rot.x = rotation;
-		rot.y = rotation;
-		rot.z = rotation;
-		[[Scene getInstance].renderingTree rotateSelectedNodes:rot];
-	}
-	lastDrawTime = [NSDate timeIntervalSinceReferenceDate];
+//	static NSTimeInterval lastDrawTime;
+//	if (lastDrawTime)
+//	{
+//		NSTimeInterval timeSinceLastDraw = [NSDate timeIntervalSinceReferenceDate] - lastDrawTime;
+//		rotation+=50 * timeSinceLastDraw;				
+//		Rotation3D rot;
+//		rot.x = rotation;
+//		rot.y = rotation;
+//		rot.z = rotation;
+//		[[Scene getInstance].renderingTree rotateSelectedNodes:rot];
+//	}
+//	lastDrawTime = [NSDate timeIntervalSinceReferenceDate];
     
     [(EAGLView *)self.view presentFramebuffer];
 }
@@ -350,20 +355,20 @@ enum {
 //Animation when user swipes a side view out (from left to right)
 -(void)slideOutAnimationView:(UIView*)view
 {
-    if(view.tag == CAMERAVIEW_TAG){ // bottom left view
+    if(view.tag == CAMERAVIEW_TAG) { // bottom left view
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             view.center = CGPointMake(view.frame.size.width/2, HAUTEUR_ECRAN - view.frame.size.height/2);
-                         }
+             animations:^{
+                 view.center = CGPointMake(view.frame.size.width/2, HAUTEUR_ECRAN - view.frame.size.height/2);
+             }
         completion:nil];
     }
-    else if(view.tag == PARAMETERSVIEW_TAG){
+    else if(view.tag == PARAMETERSVIEW_TAG) {
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN + view.frame.size.height/2);
-                             
-                         }
-                         completion:nil];
+             animations:^{
+                 view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN + view.frame.size.height/2);
+                 
+             }
+             completion:nil];
     }
 }
 
@@ -372,21 +377,20 @@ enum {
 {
     if(view.tag == CAMERAVIEW_TAG){
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             view.center = CGPointMake(-view.frame.size.width/2, HAUTEUR_ECRAN + view.frame.size.height);
-                             
-                         }
+             animations:^{
+                 view.center = CGPointMake(-view.frame.size.width/2, HAUTEUR_ECRAN + view.frame.size.height);
+                 
+             }
         completion:nil];
     }
     else if(view.tag == PARAMETERSVIEW_TAG){
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN - view.frame.size.height/2);
-                             
-                         }
-                         completion:nil];
+             animations:^{
+                 view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN - view.frame.size.height/2);
+                 
+             }
+        completion:nil];
     }
-
 }
 
 - (void)oneFingerSwipeLeft:(UITapGestureRecognizer *)recognizer
@@ -397,38 +401,35 @@ enum {
     // Slide from left to right on LeftSideView
     if(beginningPoint.x < 300){
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.frame.size.width, self.LeftSlideView.center.y);
-                         }
-                         completion:nil];
+             animations:^{
+                 self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.frame.size.width, self.LeftSlideView.center.y);
+             }
+        completion:nil];
         
         //Also close parameters view bar if opened
         [self slideOutAnimationView:self.ParametersView];
     }
-
 }
 
 - (void)oneFingerSwipeRight:(UITapGestureRecognizer *)recognizer
 {
-    
     CGPoint beginningPoint = [recognizer locationInView:[self view]];
     
     // Slide from right to left on LeftSideView
     if(beginningPoint.x < 50){
         [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             self.LeftSlideView.center = CGPointMake(self.LeftSlideView.frame.size.width/2, self.LeftSlideView.center.y);
-                         }
+             animations:^{
+                 self.LeftSlideView.center = CGPointMake(self.LeftSlideView.frame.size.width/2, self.LeftSlideView.center.y);
+             }
         completion:nil];
     }
-
 }
 
 float mCurrentScale, mLastScale;
 -(void)handlePinch:(UIPinchGestureRecognizer*)sender
 {
-    NSLog(@"latscale = %f",mLastScale);
-    
+    NSLog(@"ZoomFactor = %f",zoomFactor);
+
     mCurrentScale += [sender scale] - mLastScale;
     mLastScale = [sender scale];
     
@@ -436,15 +437,24 @@ float mCurrentScale, mLastScale;
     {
         mLastScale = 1.0;
     }
-    
-    zoomFactor = mCurrentScale;
+    if(mCurrentScale > 1) {
+        zoomFactor += mCurrentScale/20;
+        if(zoomFactor >= 3.0f)
+            zoomFactor = 2.9f;
+    } else {
+        
+        zoomFactor -= mCurrentScale/20;
+        if(zoomFactor <= 0.5f)
+            zoomFactor = 0.51f;
+    }
 }
 
 #pragma mark - Screen conversion
 // Takes a screen coordinate point and convert it to predefined world coords
 - (CGPoint)convertFromScreenToWorld:(CGPoint)pos
 {
-    pos = CGPointMake(pos.x * (LARGEUR_FENETRE/1024) - LARGEUR_FENETRE/2, -(pos.y * (HAUTEUR_FENETRE/HAUTEUR_ECRAN) - HAUTEUR_FENETRE/2));
+    pos = CGPointMake((pos.x * (LARGEUR_FENETRE/1024) - LARGEUR_FENETRE/2) * zoomFactor,
+                      -(pos.y * (HAUTEUR_FENETRE/HAUTEUR_ECRAN) - HAUTEUR_FENETRE/2) * zoomFactor);
     return pos;
 }
 
@@ -456,9 +466,7 @@ float mCurrentScale, mLastScale;
     [rotationGesture setDelegate:self];
     [self.view addGestureRecognizer:rotationGesture];
     [rotationGesture release];
-    
-    
-    
+
     // SwipeGesture recognizers
     UISwipeGestureRecognizer *oneFingerSwipeLeft = [[[UISwipeGestureRecognizer alloc]
                                                      initWithTarget:self

@@ -62,6 +62,7 @@
 		A8EBDE7A16A729CA002B2DD6 /* NodeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7916A729CA002B2DD6 /* NodeTable.m */; };
 		A8EBDE8D16A8849D002B2DD6 /* NodeTableEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE8C16A8849D002B2DD6 /* NodeTableEdge.m */; };
 		A8EBDE9616A890D1002B2DD6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE9516A890D1002B2DD6 /* Reachability.m */; };
+		A8EBDE9D16A9EE9B002B2DD6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE9C16A9EE9B002B2DD6 /* Constants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +157,8 @@
 		A8EBDE8C16A8849D002B2DD6 /* NodeTableEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTableEdge.m; sourceTree = "<group>"; };
 		A8EBDE9416A890D1002B2DD6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A8EBDE9516A890D1002B2DD6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		A8EBDE9B16A9EE9A002B2DD6 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		A8EBDE9C16A9EE9B002B2DD6 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +313,8 @@
 		968DACC11472ED46007D15A3 /* Utilitaires */ = {
 			isa = PBXGroup;
 			children = (
+				A8EBDE9B16A9EE9A002B2DD6 /* Constants.h */,
+				A8EBDE9C16A9EE9B002B2DD6 /* Constants.m */,
 				968DACC31472EDA4007D15A3 /* OpenGLTexture3D.h */,
 				968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */,
 				968DACC51472EDA4007D15A3 /* OpenGLWaveFrontCommon.h */,
@@ -527,6 +532,7 @@
 				A8EBDE7A16A729CA002B2DD6 /* NodeTable.m in Sources */,
 				A8EBDE8D16A8849D002B2DD6 /* NodeTableEdge.m in Sources */,
 				A8EBDE9616A890D1002B2DD6 /* Reachability.m in Sources */,
+				A8EBDE9D16A9EE9B002B2DD6 /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

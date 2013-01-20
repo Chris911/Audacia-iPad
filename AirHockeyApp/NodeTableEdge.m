@@ -12,6 +12,10 @@
 
 const int NB_OF_TRIANGLE = 2;
 const int EDGE_SIZE = 3;
+
+const int NODE_1_AND_6_LIMIT_Y = 25;
+const int NODE_3_AND_4_LIMIT_X = 50;
+
 GLfloat edgeColor[NB_OF_TRIANGLE*3*4];
 GLfloat nodeHeight = 0.0f;
 
@@ -30,13 +34,11 @@ GLfloat nodeHeight = 0.0f;
     return self;
 }
 
+// Render a NodeTableEdge
 - (void)render
 {
-    if(self.index == 1 || self.index == 6){
-        self.position = Vector3DMake(0, self.position.y, nodeHeight);
-    } else if (self.index == 3 || self.index == 4){
-        self.position = Vector3DMake(self.position.x, 0, nodeHeight);
-    }
+    // Test if node out of its bounds
+    [self checkIfOutOfBounds];
     
     GLfloat vertices[] = {
         // Triangle 1
@@ -67,6 +69,7 @@ GLfloat nodeHeight = 0.0f;
     self.lastPosition = self.position;
 }
 
+// Color array initialization (TEMPORARY)
 - (void) initTriangleColors
 {
     for (int i = 0; i < NB_OF_TRIANGLE*3*4; i += 4) {
@@ -74,6 +77,45 @@ GLfloat nodeHeight = 0.0f;
         edgeColor[i+1] = 0;
         edgeColor[i+2] = 1;
         edgeColor[i+3] = 1;
+    }
+}
+
+// Make sure that the node stays within some arbitrary limits
+- (void) checkIfOutOfBounds
+{
+    // Check if the node can be moved either vertically or horizontally (Node 1 and 6 Vert., Node 3 and 4 Hor.)
+    if(self.index == 1 || self.index == 6){
+        self.position = Vector3DMake(0, self.position.y, nodeHeight);
+    } else if (self.index == 3 || self.index == 4){
+        self.position = Vector3DMake(self.position.x, 0, nodeHeight);
+    }
+    
+    // Check if the node is inside the edition surface (in X and Y) 
+    if(self.position.x >= TABLE_LIMIT_X) {
+        self.position = Vector3DMake(TABLE_LIMIT_X,self.position.y,self.position.z);
+    } else if(self.position.x <= -TABLE_LIMIT_X) {
+        self.position = Vector3DMake(-TABLE_LIMIT_X,self.position.y,self.position.z);
+    }
+    
+    if(self.position.y >= TABLE_LIMIT_Y) {
+        self.position = Vector3DMake(self.position.x,TABLE_LIMIT_Y,self.position.z);
+    } else if(self.position.y <= -TABLE_LIMIT_Y) {
+        self.position = Vector3DMake(self.position.x,-TABLE_LIMIT_Y,self.position.z);
+    }
+    
+    // Check that the table proportions don't get too funky
+    if(self.index == 1 && self.position.y <= NODE_1_AND_6_LIMIT_Y) {
+        self.position = Vector3DMake(self.position.x,NODE_1_AND_6_LIMIT_Y,self.position.z);
+        
+    } else if(self.index == 6 && self.position.y >= -NODE_1_AND_6_LIMIT_Y) {
+        self.position = Vector3DMake(self.position.x,-NODE_1_AND_6_LIMIT_Y,self.position.z);
+        
+    } else if(self.index == 3 && self.position.x >= -NODE_3_AND_4_LIMIT_X) {
+        self.position = Vector3DMake(-NODE_3_AND_4_LIMIT_X,self.position.y,self.position.z);
+        
+    } else if(self.index == 4 && self.position.x <= NODE_3_AND_4_LIMIT_X) {
+        self.position = Vector3DMake(NODE_3_AND_4_LIMIT_X,self.position.y,self.position.z);
+        
     }
 }
 

@@ -18,7 +18,7 @@
 extern float const LARGEUR_FENETRE;
 extern float const HAUTEUR_FENETRE;
 
-@interface EAGLViewController : UIViewController <UIGestureRecognizerDelegate> {
+@interface EAGLViewController : UIViewController <UIGestureRecognizerDelegate, UIAlertViewDelegate> {
     EAGLContext *context;
     GLuint program;
     

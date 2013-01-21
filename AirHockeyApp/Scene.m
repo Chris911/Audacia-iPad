@@ -8,8 +8,10 @@
 //  Singleton Class.  
 
 #import "Scene.h"
-#import "NodeTable.h"   
 #import "RenderingTree.h"
+
+#import "NodeTable.h"   
+#import "NodeCube.h"
 
 @implementation Scene
 
@@ -45,6 +47,9 @@ static Scene *scene = NULL;
     // Very important to add the edges AFTER the table
     // (inherited from Projet2 XML's structure)
     [table addEdgesToTree];
+    
+    NodeCube* cube = [[[NodeCube alloc]init]autorelease];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:cube :Vector3DMake(-20, 10, cube.position.z)];
 }
 
 - (void)dealloc

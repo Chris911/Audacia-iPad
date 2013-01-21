@@ -12,7 +12,14 @@
 
 // Main constants interface for whole project
 
+
+// Table constants
 extern const int TABLE_LIMIT_X;
 extern const int TABLE_LIMIT_Y;
+extern const int NB_OF_TRIANGLES;
+extern const int NB_OF_TABLE_EDGES;
+extern const GLfloat TABLE_DEPTH;
+
+
 
 @end

@@ -257,22 +257,27 @@ static inline void	processOneVertex(VertexTextureIndex *rootNode, GLuint vertexI
 	}
 	return self;
 }
-
+GLfloat testRotation = 0.0f;
 - (void)drawSelf
 {
+    testRotation += 2;
+    glEnable(GL_TEXTURE_2D);
+
 	// Save the current transformation by pushing it on the stack
 	glPushMatrix();
 	
 	// Load the identity matrix to restore to origin
-	glLoadIdentity();
+	//glLoadIdentity();
     
 	// Translate to the current position
 	glTranslatef(currentPosition.x, currentPosition.y, currentPosition.z);
 	
 	// Rotate to the current rotation
-	glRotatef(currentRotation.x, 1.0, 0.0, 0.0);
-	glRotatef(currentRotation.y, 0.0, 1.0, 0.0);
-	glRotatef(currentPosition.z, 0.0, 0.0, 1.0);
+	glRotatef(testRotation, 1.0, 0.0, 0.0);
+	glRotatef(50, 0.0, 1.0, 0.0);
+	glRotatef(60, 0.0, 0.0, 1.0);
+    
+    glScalef(0.5f, 0.5f, 0.5f);
 	
 	// Enable and load the vertex array
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -311,6 +316,9 @@ static inline void	processOneVertex(VertexTextureIndex *rootNode, GLuint vertexI
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
 	// Restore the current transformation by popping it off
+    
+    //glClear(GL_COLOR_BUFFER_BIT);
+    glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 

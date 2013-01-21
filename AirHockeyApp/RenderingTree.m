@@ -79,6 +79,7 @@
                node.isSelected = YES;
                NSLog(@"Selected Type:%@",node.type);
                
+               // FIXME: This only works for SINGLE OBJECT selection
                nodeWasSelected = YES;
         }
     }
@@ -98,7 +99,7 @@
     {
         node.isSelected = NO;
     }
-    NSLog(@"All nodes deselectedß");
+    //NSLog(@"All nodes deselected");
 }
 
 // Select all nodes of the rendering tree
@@ -133,7 +134,7 @@
     for(Node* node in self.tree)
     {
         if(node.isSelected) {
-            node.position = Vector3DMake(deltaPoint.x, deltaPoint.y, 0);
+            node.position = Vector3DMake(deltaPoint.x, deltaPoint.y, node.position.z);
             return YES;
         }
     }

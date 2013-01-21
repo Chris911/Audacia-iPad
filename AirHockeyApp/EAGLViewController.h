@@ -13,6 +13,7 @@
 #import <OpenGLES/ES2/glext.h>
 #import "OpenGLWaveFrontObject.h"
 #import "Scene.h"
+#import "WebClient.h"
 
 extern float const LARGEUR_FENETRE;
 extern float const HAUTEUR_FENETRE;
@@ -24,9 +25,6 @@ extern float const HAUTEUR_FENETRE;
     BOOL animating;
     NSInteger animationFrameInterval;
     CADisplayLink *displayLink;
-    
-    // Position and color in shader
-    GLuint shaderPositionSlot, shaderColorSlot;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
@@ -43,6 +41,7 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)OpenCameraView:(id)sender;
 - (IBAction)TouchButtonInViewTEST:(id)sender;
 - (IBAction)toggleTranslateCamera:(id)sender;
+- (IBAction)toggleScreenshotButton:(id)sender;
 
 
 

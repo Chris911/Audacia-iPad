@@ -13,8 +13,8 @@
 float const LARGEUR_FENETRE = 200;
 float const HAUTEUR_FENETRE = 150;
 
-float const LARGEUR_ECRAN = 1024;
-float const HAUTEUR_ECRAN = 768;
+int const LARGEUR_ECRAN = 1024;
+int const HAUTEUR_ECRAN = 768;
 
 int const CAMERAVIEW_TAG      = 100;
 int const PARAMETERSVIEW_TAG  = 200;
@@ -497,6 +497,57 @@ float mCurrentScale, mLastScale;
                                          HAUTEUR_ECRAN + self.CameraView.frame.size.height);
     self.ParametersView.center = CGPointMake(self.ParametersView.center.x,
                                              self.ParametersView.center.y + self.ParametersView.bounds.size.height);
+}
+
+#pragma mark - Screenshot Utility
+
+- (IBAction)toggleScreenshotButton:(id)sender
+{
+    WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
+    [webClient uploadMapData:@"TEST_MAP1" :[self getGLScreenshot]];
+    [webClient release];
+}
+
+//
+//Source: http://getsetgames.com/2009/07/30/5-ways-to-take-screenshots-of-your-iphone-app/
+//
+- (UIImage*) getGLScreenshot
+{
+    NSInteger myDataLength = LARGEUR_ECRAN * HAUTEUR_ECRAN * 4;
+    
+    // allocate array and read pixels into it.
+    GLubyte *buffer = (GLubyte *) malloc(myDataLength);
+    glReadPixels(0, 0, LARGEUR_ECRAN, HAUTEUR_ECRAN, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+    
+    // gl renders "upside down" so swap top to bottom into new array.
+    // there's gotta be a better way, but this works.
+    GLubyte *buffer2 = (GLubyte *) malloc(myDataLength);
+    for(int y = 0; y<HAUTEUR_ECRAN; y++)
+    {
+        for(int x = 0; x<LARGEUR_ECRAN * 4; x++)
+        {
+            buffer2[(HAUTEUR_ECRAN-1 - y) * LARGEUR_ECRAN * 4 + x] = buffer[y * 4 * LARGEUR_ECRAN + x];
+        }
+    }
+    
+    // make data provider with data.
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, buffer2, myDataLength, NULL);
+    
+    // prep the ingredients
+    int bitsPerComponent = 8;
+    int bitsPerPixel = 32;
+    int bytesPerRow = 4 * LARGEUR_ECRAN;
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    
+    // make the cgimage
+    CGImageRef imageRef = CGImageCreate(LARGEUR_ECRAN, HAUTEUR_ECRAN, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpaceRef, bitmapInfo, provider, NULL, NO, renderingIntent);
+    
+    // then make the uiimage from that
+    UIImage *myImage = [UIImage imageWithCGImage:imageRef];
+    
+    return myImage;
 }
 
 @end

@@ -75,6 +75,12 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (IBAction)testUpload:(id)sender
+{
+    //WebClient* webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
+    //[webClient uploadImageData:@"Test"]
+}
+
 - (BOOL)isNetworkAvailable
 {
     BOOL available = NO;

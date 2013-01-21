@@ -24,6 +24,8 @@
     const char *shaderSourceCString = [shaderSource cStringUsingEncoding:NSUTF8StringEncoding];
     
     GLuint shaderHandle = glCreateShader(shaderType);
+    GLenum error = glGetError();
+    NSLog(@"%i", error);
     glShaderSource(shaderHandle, 1, &shaderSourceCString, NULL);
     glCompileShader(shaderHandle);
     

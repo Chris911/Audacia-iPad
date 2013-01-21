@@ -199,12 +199,12 @@ enum {
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"Position de tous les doigts venant de commencer à toucher l'écran");            
     for(UITouch* touch in touches) {
         CGPoint positionCourante = [touch locationInView:self.view];
         
         // Use touch coordinates to try and select a Node
-        Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x, [self convertFromScreenToWorld:positionCourante].y, 0);
+        Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x,
+                                    [self convertFromScreenToWorld:positionCourante].y, 0);
         
         // Check if any node was selected with the first touch.
         // If not, we can move the camera
@@ -234,11 +234,12 @@ enum {
         
         // Try to translate a selected object if any
         // FIXME: Only one type of camera by now, so this
-        // statement may not make sense.  It will later
+        // IF statement may not make sense.  It will later
         if(!isCameraTranslateActive){
             [[Scene getInstance].renderingTree translateSelectedNodes:
                 CGPointMake([self convertFromScreenToWorld:positionCourante].x,
                             [self convertFromScreenToWorld:positionCourante].y)];
+            
         } else if (isCameraTranslateActive) {
             camPosX = [self convertFromScreenToWorld:positionCourante].x;
             camPosY = [self convertFromScreenToWorld:positionCourante].y;
@@ -248,7 +249,8 @@ enum {
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+    // TODO: Check if any object out of the zone limits and replace them
+    // on an arbitrary X value, for example.
 }
 
 -(void)rotationDetectee:(UIGestureRecognizer *)gestureRecognizer
@@ -300,14 +302,17 @@ enum {
     
     glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_PROJECTION);
-
+    
+    //FIXME: Remove or change for lights
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
 	CGRect rect = self.view.bounds;
     
     glViewport(0, 0, rect.size.width, rect.size.height);    
 	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity(); 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     
 	glGetError(); // Clear error codes
 }
@@ -316,7 +321,7 @@ enum {
 {
 
     [(EAGLView *)self.view setFramebuffer];
-        
+      // Perspective Mode
 //    gluPerspective(60, LARGEUR_FENETRE/HAUTEUR_FENETRE, 0.1, 2000);
 //    gluLookAt(camPosX, camPosY, -50,
 //              0, 0, 0,
@@ -326,18 +331,19 @@ enum {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     
-    glOrthof(-(LARGEUR_FENETRE / 2 + camPosX)*zoomFactor, (LARGEUR_FENETRE / 2 + camPosX)*zoomFactor,
-             -(HAUTEUR_FENETRE / 2 + camPosY)*zoomFactor, (HAUTEUR_FENETRE / 2 +camPosY)*zoomFactor, 0, 100);
+    // Orthogonal Mode
+    glOrthof(camPosX -(LARGEUR_FENETRE / 2)*zoomFactor, camPosX + (LARGEUR_FENETRE / 2)*zoomFactor,
+             -(HAUTEUR_FENETRE / 2)*zoomFactor, (HAUTEUR_FENETRE / 2)*zoomFactor, -100, 100);
 	glMatrixMode(GL_MODELVIEW);
     
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     
     // Renders the whole rendring tree
     [[Scene getInstance].renderingTree render];
         
 //	static NSTimeInterval lastDrawTime;
+//    GLfloat rotation = 0.0f;
 //	if (lastDrawTime)
 //	{
 //		NSTimeInterval timeSinceLastDraw = [NSDate timeIntervalSinceReferenceDate] - lastDrawTime;
@@ -397,7 +403,6 @@ enum {
 
 - (void)oneFingerSwipeLeft:(UITapGestureRecognizer *)recognizer
 {
-
     CGPoint beginningPoint = [recognizer locationInView:[self view]];
     
     // Slide from left to right on LeftSideView

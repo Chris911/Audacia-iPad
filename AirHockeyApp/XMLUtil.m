@@ -72,6 +72,9 @@
     
 }
 
+// source : 
+// http://www.raywenderlich.com/725/how-to-read-and-write-xml-documents-with-gdataxml
+//
 + (void)savePartyWithFileName:(RenderingTree *)renderingTree:(NSString*) name {
     
     GDataXMLElement *treeElement = [GDataXMLNode elementWithName:@"Tree"];

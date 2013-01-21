@@ -9,6 +9,8 @@
 #import "EAGLView.h"
 #import "NodeTable.h"
 
+#define kAlertNameMapTag 1
+
 // Global constants
 float const LARGEUR_FENETRE = 200;
 float const HAUTEUR_FENETRE = 150;
@@ -503,9 +505,7 @@ float mCurrentScale, mLastScale;
 
 - (IBAction)toggleScreenshotButton:(id)sender
 {
-    WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
-    [webClient uploadMapData:@"TEST_MAP1" :[self getGLScreenshot]];
-    [webClient release];
+    [self showNameMapAlert];
 }
 
 //
@@ -548,6 +548,29 @@ float mCurrentScale, mLastScale;
     UIImage *myImage = [UIImage imageWithCGImage:imageRef];
     
     return myImage;
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)showNameMapAlert
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Veuillez entrer le nom de la carte"
+                                                      message:nil
+                                                     delegate:self
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@"Upload", nil];
+    [message setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    message.tag = kAlertNameMapTag;
+    [message show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == kAlertNameMapTag){
+        NSString *inputText = [[alertView textFieldAtIndex:0] text];
+        //TODO: Do some validation here
+        WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
+        [webClient uploadMapData:inputText :[self getGLScreenshot]];
+        [webClient release];
+    }
 }
 
 @end

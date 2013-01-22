@@ -99,7 +99,6 @@
     {
         node.isSelected = NO;
     }
-    //NSLog(@"All nodes deselected");
 }
 
 // Select all nodes of the rendering tree
@@ -117,22 +116,24 @@
     for(Node* node in self.tree)
     {
         if(node.isSelected) {
-            node.angle = rotation.y; // might not be the good axis
+            node.angle += rotation.x; // might not be the good axis
         }
     }
 }
 
+// Scale node that are currently selected
 - (void) scaleSelectedNodes:(float) deltaScale
 {
     for(Node* node in self.tree)
     {
         if(node.isSelected) {
-            if(deltaScale >= 3) {
-                deltaScale = 3;
-            } else if(deltaScale <= 0.5) {
-                deltaScale = 0.5f;
+
+            node.scaleFactor += deltaScale/30;
+            if(node.scaleFactor >= 4) {
+                node.scaleFactor = 4;
+            } else if(node.scaleFactor <= 0.5) {
+                node.scaleFactor = 0.5f;
             }
-            node.scaleFactor = deltaScale;
         }
     }
 }

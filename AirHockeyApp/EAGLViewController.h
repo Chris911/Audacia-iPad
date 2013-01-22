@@ -32,6 +32,7 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UIView *LeftSlideView;
 @property (retain, nonatomic) IBOutlet UIView *CameraView;
 @property (retain, nonatomic) IBOutlet UIView *ParametersView;
+@property (retain, nonatomic) IBOutlet UIView *TransformView;
 
 - (void)startAnimation;
 - (void)stopAnimation;
@@ -42,6 +43,8 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)TouchButtonInViewTEST:(id)sender;
 - (IBAction)toggleTranslateCamera:(id)sender;
 - (IBAction)toggleScreenshotButton:(id)sender;
+- (IBAction)toggleTransformRotation:(id)sender;
+- (IBAction)toggleTransformScale:(id)sender;
 
 
 

@@ -30,6 +30,7 @@
 - (void) render;
 
 - (void) setRotation:(Rotation3D)rotation;
-- (void) setScaling :(float)     scaleFactor;
+- (void) setScaling :(float) scaleFactor;
+- (void) checkIfInBounds;
 
 @end

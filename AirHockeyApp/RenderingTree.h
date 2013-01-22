@@ -37,5 +37,6 @@
 
 // RenderingTree util functions
 - (int) getNumberOfNodes;
+- (void) replaceNodesInBounds;
 
 @end

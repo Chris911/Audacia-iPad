@@ -52,6 +52,11 @@ static Scene *scene = NULL;
     [scene.renderingTree addNodeToTreeWithInitialPosition:cube :Vector3DMake(-20, 10, cube.position.z)];
 }
 
++ (void) replaceOutOfBoundsElements
+{
+    [scene.renderingTree replaceNodesInBounds];
+}
+
 - (void)dealloc
 {
     self.renderingTree = nil;

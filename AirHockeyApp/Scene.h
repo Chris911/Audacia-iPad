@@ -15,5 +15,6 @@
 
 + (Scene *)getInstance;
 + (void) loadDefaultElements;
++ (void) replaceOutOfBoundsElements;
 
 @end

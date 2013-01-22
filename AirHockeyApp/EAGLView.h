@@ -13,8 +13,6 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-#import "ShaderUtils.h"
-
 #import "GluLookAt.h"
 #import "GluPerspective.h"
 

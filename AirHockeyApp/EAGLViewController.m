@@ -20,6 +20,10 @@ int const HAUTEUR_ECRAN = 768;
 
 int const CAMERAVIEW_TAG      = 100;
 int const PARAMETERSVIEW_TAG  = 200;
+int const TRANSFORMVIEW_TAG   = 300;
+int const OBJECTSVIEW_TAG     = 400;
+
+
 
 // Uniform index.
 enum {
@@ -46,6 +50,7 @@ enum {
     float camPosX, camPosY, camPosZ;
     float zoomFactor;
 }
+
 @property (nonatomic, retain) EAGLContext *context;
 @property (nonatomic, assign) CADisplayLink *displayLink;
 @end
@@ -103,6 +108,7 @@ enum {
     [_LeftSlideView release];
     [_CameraView release];
     [_ParametersView release];
+    [_TransformView release];
     [super dealloc];
 }
 
@@ -136,6 +142,7 @@ enum {
     [self setLeftSlideView:nil];
     [self setCameraView:nil];
     [self setParametersView:nil];
+    [self setTransformView:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -213,11 +220,13 @@ enum {
         if([[Scene getInstance].renderingTree selectNodeByPosition:pos])
         {
             NSLog(@"Touch resulted in node selection");
+            [self slideInAnimationView:self.ParametersView];
             cameraTranslation = NO;
         } else {
             NSLog(@"Touch did not select any node");
             // TODO: Introduce camera movement here
             cameraTranslation = YES;
+            [self slideOutAnimationView:self.ParametersView];
         }
     }
     
@@ -234,11 +243,11 @@ enum {
     {
         UITouch *touch = [[event allTouches] anyObject];
         CGPoint positionCourante = [touch locationInView:self.view];
-        //CGPoint positionPrecedente = [touch previousLocationInView:self.view];
+        CGPoint positionPrecedente = [touch previousLocationInView:self.view];
         
-        // Try to translate a selected object if any
-        // FIXME: Only one type of camera by now, so this
-        // IF statement may not make sense.  It will later
+        // 3 types of transformations.  If no node is selected,
+        // then the camera will be panning around.  This allow
+        // to not interfer with the currentTransformState
         
         if(!cameraTranslation) {
             if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
@@ -247,8 +256,12 @@ enum {
                                 [self convertFromScreenToWorld:positionCourante].y)];
                 
             } else if(currentTransformState == STATE_TRANSFORM_ROTATION) {
+                CGPoint rotation = [self calculateVelocity:positionPrecedente :positionCourante];
+                [[Scene getInstance].renderingTree rotateSelectedNodes:Rotation3DMake(rotation.x, rotation.y, 0)];
                 
             } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
+                CGPoint scale = [self calculateVelocity:positionPrecedente :positionCourante];
+                [[Scene getInstance].renderingTree scaleSelectedNodes:scale.x];
                 
             }
             
@@ -263,19 +276,13 @@ enum {
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // TODO: Check if any object out of the zone limits and replace them
-    // on an arbitrary X value, for example.
     [Scene replaceOutOfBoundsElements];
     cameraTranslation = NO;
 }
 
--(void)rotationDetectee:(UIGestureRecognizer *)gestureRecognizer
+-(CGPoint) calculateVelocity:(CGPoint) lastTouch:(CGPoint) currentTouch
 {
-    if ([gestureRecognizer numberOfTouches] == 2)
-    {
-        CGPoint position = [gestureRecognizer locationInView:self.view];
-        NSLog(@"Centre de rotation x: %f y: %f",position.x, position.y);        
-    }
+    return CGPointMake(currentTouch.x - lastTouch.x, currentTouch.y - lastTouch.y);
 }
 
 #pragma mark - Button methods
@@ -304,6 +311,29 @@ enum {
 
 - (IBAction)toggleTranslateCamera:(id)sender
 {
+    [self slideInAnimationView:self.TransformView];
+}
+
+// If the current transform state is translation, switch to rotation
+// Will toggle back to translate if pressed again
+- (IBAction)toggleTransformRotation:(id)sender
+{
+    if(currentTransformState != STATE_TRANSFORM_ROTATION) {
+        currentTransformState = STATE_TRANSFORM_ROTATION;
+    } else {
+        currentTransformState = STATE_TRANSFORM_TRANSLATION;
+    }
+}
+
+// If the current transform state is translation, switch to scale
+// Will toggle back to translate if pressed again
+- (IBAction)toggleTransformScale:(id)sender
+{
+    if(currentTransformState != STATE_TRANSFORM_SCALE) {
+        currentTransformState = STATE_TRANSFORM_SCALE;
+    } else {
+        currentTransformState = STATE_TRANSFORM_TRANSLATION;
+    }
 }
 
 #pragma mark - Core GL Methods
@@ -356,21 +386,6 @@ enum {
     
     // Renders the whole rendring tree
     [[Scene getInstance].renderingTree render];
-        
-//	static NSTimeInterval lastDrawTime;
-//    GLfloat rotation = 0.0f;
-//	if (lastDrawTime)
-//	{
-//		NSTimeInterval timeSinceLastDraw = [NSDate timeIntervalSinceReferenceDate] - lastDrawTime;
-//		rotation+=50 * timeSinceLastDraw;				
-//		Rotation3D rot;
-//		rot.x = rotation;
-//		rot.y = rotation;
-//		rot.z = rotation;
-//		[[Scene getInstance].renderingTree rotateSelectedNodes:rot];
-//	}
-//	lastDrawTime = [NSDate timeIntervalSinceReferenceDate];
-    
     [(EAGLView *)self.view presentFramebuffer];
 }
 
@@ -379,19 +394,32 @@ enum {
 -(void)slideOutAnimationView:(UIView*)view
 {
     if(view.tag == CAMERAVIEW_TAG) { // bottom left view
-        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
              animations:^{
                  view.center = CGPointMake(view.frame.size.width/2, HAUTEUR_ECRAN - view.frame.size.height/2);
              }
         completion:nil];
-    }
-    else if(view.tag == PARAMETERSVIEW_TAG) {
-        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+    } else if(view.tag == PARAMETERSVIEW_TAG) {
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
              animations:^{
                  view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN + view.frame.size.height/2);
                  
              }
              completion:nil];
+    } else if(view.tag == TRANSFORMVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(1024 + view.frame.size.width/2, view.center.y);
+                             
+                         }
+                         completion:nil];
+    } else if(view.tag == OBJECTSVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(-view.frame.size.width/2, view.center.y);
+                             
+                         }
+                         completion:nil];
     }
 }
 
@@ -399,53 +427,66 @@ enum {
 -(void)slideInAnimationView:(UIView*)view
 {
     if(view.tag == CAMERAVIEW_TAG){
-        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
              animations:^{
                  view.center = CGPointMake(-view.frame.size.width/2, HAUTEUR_ECRAN + view.frame.size.height);
                  
              }
         completion:nil];
-    }
-    else if(view.tag == PARAMETERSVIEW_TAG){
-        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
+    } else if(view.tag == PARAMETERSVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
              animations:^{
                  view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN - view.frame.size.height/2);
                  
              }
         completion:nil];
+    } else if(view.tag == TRANSFORMVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(1024 - view.frame.size.width/2, view.center.y);
+                             
+                         }
+                         completion:nil];
+    } else if(view.tag == OBJECTSVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(view.frame.size.width/2, view.center.y);
+                             
+                         }
+                         completion:nil];
     }
 }
 
-- (void)oneFingerSwipeLeft:(UITapGestureRecognizer *)recognizer
+- (void)SwipeLeftSideView:(UITapGestureRecognizer *)recognizer
 {
-    CGPoint beginningPoint = [recognizer locationInView:[self view]];
-    
-    // Slide from left to right on LeftSideView
-    if(beginningPoint.x < 300){
-        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
-             animations:^{
-                 self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.frame.size.width, self.LeftSlideView.center.y);
-             }
-        completion:nil];
-        
-        //Also close parameters view bar if opened
-        [self slideOutAnimationView:self.ParametersView];
-    }
+    [self slideOutAnimationView:self.LeftSlideView];
 }
 
-- (void)oneFingerSwipeRight:(UITapGestureRecognizer *)recognizer
+- (void)SwipeTransformView:(UITapGestureRecognizer *)recognizer
+{
+    [self slideOutAnimationView:self.TransformView];
+}
+
+- (void)SwipeTransformView_Main:(UITapGestureRecognizer *)recognizer
 {
     CGPoint beginningPoint = [recognizer locationInView:[self view]];
     
     // Slide from right to left on LeftSideView
     if(beginningPoint.x < 50){
-        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveEaseOut
-             animations:^{
-                 self.LeftSlideView.center = CGPointMake(self.LeftSlideView.frame.size.width/2, self.LeftSlideView.center.y);
-             }
-        completion:nil];
+        [self slideInAnimationView:self.LeftSlideView];
     }
 }
+
+- (void)SwipeLeftSideView_Main:(UITapGestureRecognizer *)recognizer
+{
+    CGPoint beginningPoint = [recognizer locationInView:[self view]];
+    
+    // Slide from right to left on LeftSideView
+    if(beginningPoint.x >900){
+        [self slideInAnimationView:self.TransformView];
+    }
+}
+
 
 float mCurrentScale, mLastScale;
 -(void)handlePinch:(UIPinchGestureRecognizer*)sender
@@ -483,24 +524,35 @@ float mCurrentScale, mLastScale;
 #pragma mark - UI Elements initialization
 - (void) prepareRecognizers
 {
-    // Rotation recognizer
-    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationDetectee:)];
-    [rotationGesture setDelegate:self];
-    [self.view addGestureRecognizer:rotationGesture];
-    [rotationGesture release];
-
     // SwipeGesture recognizers
-    UISwipeGestureRecognizer *oneFingerSwipeLeft = [[[UISwipeGestureRecognizer alloc]
-                                                     initWithTarget:self
-                                                     action:@selector(oneFingerSwipeLeft:)] autorelease];
-    [oneFingerSwipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [[self LeftSlideView] addGestureRecognizer:oneFingerSwipeLeft];
     
-    UISwipeGestureRecognizer *oneFingerSwipeRight = [[[UISwipeGestureRecognizer alloc]
+    // Placed on the LeftSideView
+    UISwipeGestureRecognizer *SwipeLeftSideView = [[[UISwipeGestureRecognizer alloc]
+                                                     initWithTarget:self
+                                                     action:@selector(SwipeLeftSideView:)] autorelease];
+    [SwipeLeftSideView setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [[self LeftSlideView] addGestureRecognizer:SwipeLeftSideView];
+    
+    // Placed on the the main view (for LeftSideView)
+    UISwipeGestureRecognizer *SwipeTransformView_Main = [[[UISwipeGestureRecognizer alloc]
                                                       initWithTarget:self
-                                                      action:@selector(oneFingerSwipeRight:)] autorelease];
-    [oneFingerSwipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-    [[self view] addGestureRecognizer:oneFingerSwipeRight];
+                                                      action:@selector(SwipeTransformView_Main:)] autorelease];
+    [SwipeTransformView_Main setDirection:UISwipeGestureRecognizerDirectionRight];
+    [[self view] addGestureRecognizer:SwipeTransformView_Main];
+    
+    // Placed on the the main view (for TransformView)
+    UISwipeGestureRecognizer *SwipeLeftSideView_Main = [[[UISwipeGestureRecognizer alloc]
+                                                            initWithTarget:self
+                                                            action:@selector(SwipeLeftSideView_Main:)] autorelease];
+    [SwipeLeftSideView_Main setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [[self view] addGestureRecognizer:SwipeLeftSideView_Main];
+    
+    // Placed on the LeftSideView
+    UISwipeGestureRecognizer *SwipeTransformView = [[[UISwipeGestureRecognizer alloc]
+                                                       initWithTarget:self
+                                                       action:@selector(SwipeTransformView:)] autorelease];
+    [SwipeTransformView setDirection:UISwipeGestureRecognizerDirectionRight];
+    [[self TransformView] addGestureRecognizer:SwipeTransformView];
     
     // PinchGesture recognizer
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
@@ -519,6 +571,7 @@ float mCurrentScale, mLastScale;
                                          HAUTEUR_ECRAN + self.CameraView.frame.size.height);
     self.ParametersView.center = CGPointMake(self.ParametersView.center.x,
                                              self.ParametersView.center.y + self.ParametersView.bounds.size.height);
+    self.TransformView.center = CGPointMake(self.TransformView.center.x+self.TransformView.bounds.size.width,self.TransformView.center.y);
 }
 
 #pragma mark - Screenshot Utility

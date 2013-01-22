@@ -17,7 +17,7 @@ const int NODE_1_AND_6_LIMIT_Y = 25;
 const int NODE_3_AND_4_LIMIT_X = 50;
 
 GLfloat edgeColor[NB_OF_TRIANGLE*3*4];
-GLfloat nodeHeight = 0.0f;
+GLfloat nodeHeight = 1.1f;
 
 - (id) initWithCoordsAndIndex:(float)x :(float)y :(int)index
 {
@@ -51,7 +51,7 @@ GLfloat nodeHeight = 0.0f;
         self.position.x + EDGE_SIZE, self.position.y + EDGE_SIZE,nodeHeight,
         self.position.x - EDGE_SIZE, self.position.y + EDGE_SIZE,nodeHeight,
     };
-    
+    glDisable(GL_TEXTURE_2D);
     glPushMatrix();
     
     glVertexPointer(3, GL_FLOAT, 0, vertices);
@@ -65,6 +65,8 @@ GLfloat nodeHeight = 0.0f;
     glDisableClientState(GL_COLOR_ARRAY);
     
     glPopMatrix();
+    glEnable(GL_TEXTURE_2D);
+
     
     self.lastPosition = self.position;
 }

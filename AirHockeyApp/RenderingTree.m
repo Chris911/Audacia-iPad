@@ -116,16 +116,25 @@
 {
     for(Node* node in self.tree)
     {
-        // FIXME: Change to isSelected
-        if(YES) {
-            [node setRotation:rotation];
+        if(node.isSelected) {
+            node.angle = rotation.y; // might not be the good axis
         }
     }
 }
 
 - (void) scaleSelectedNodes:(float) deltaScale
 {
-    
+    for(Node* node in self.tree)
+    {
+        if(node.isSelected) {
+            if(deltaScale >= 3) {
+                deltaScale = 3;
+            } else if(deltaScale <= 0.5) {
+                deltaScale = 0.5f;
+            }
+            node.scaleFactor = deltaScale;
+        }
+    }
 }
 
 // Return YES if any node was selected
@@ -144,6 +153,18 @@
 - (int) getNumberOfNodes
 {
     return [tree count];
+}
+
+//  Make sure all active nodes (that have been released
+// from the user's touch) are in the Zone limits
+- (void) replaceNodesInBounds
+{
+    for(Node* node in self.tree)
+    {
+        if(node.isSelected) {
+            [node checkIfInBounds];
+        }
+    }
 }
 
 

@@ -40,7 +40,8 @@ enum {
     BOOL cameraViewIsHidden;
     BOOL anyNodeSelected;
     
-    BOOL isCameraTranslateActive;
+    BOOL cameraTranslation;
+    int  currentTransformState;
     
     float camPosX, camPosY, camPosZ;
     float zoomFactor;
@@ -76,7 +77,8 @@ enum {
     animationFrameInterval = 1;
     self.displayLink = nil;
     
-    isCameraTranslateActive = NO;
+    cameraTranslation = YES;
+    currentTransformState = STATE_TRANSFORM_TRANSLATION;
  
     //Initialize Scene and rendring tree
     [Scene getInstance];
@@ -211,9 +213,11 @@ enum {
         if([[Scene getInstance].renderingTree selectNodeByPosition:pos])
         {
             NSLog(@"Touch resulted in node selection");
+            cameraTranslation = NO;
         } else {
             NSLog(@"Touch did not select any node");
             // TODO: Introduce camera movement here
+            cameraTranslation = YES;
         }
     }
     
@@ -235,15 +239,25 @@ enum {
         // Try to translate a selected object if any
         // FIXME: Only one type of camera by now, so this
         // IF statement may not make sense.  It will later
-        if(!isCameraTranslateActive){
-            [[Scene getInstance].renderingTree translateSelectedNodes:
-                CGPointMake([self convertFromScreenToWorld:positionCourante].x,
-                            [self convertFromScreenToWorld:positionCourante].y)];
+        
+        if(!cameraTranslation) {
+            if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
+                [[Scene getInstance].renderingTree translateSelectedNodes:
+                    CGPointMake([self convertFromScreenToWorld:positionCourante].x,
+                                [self convertFromScreenToWorld:positionCourante].y)];
+                
+            } else if(currentTransformState == STATE_TRANSFORM_ROTATION) {
+                
+            } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
+                
+            }
             
-        } else if (isCameraTranslateActive) {
-            camPosX = [self convertFromScreenToWorld:positionCourante].x;
-            camPosY = [self convertFromScreenToWorld:positionCourante].y;
+        // User is dragging the screen.  Camera is thus moving
+        } else {
+            //camPosX = [self convertFromScreenToWorld:positionCourante].x;
+            //camPosY = [self convertFromScreenToWorld:positionCourante].y;
         }
+
     }
 }
 
@@ -251,6 +265,8 @@ enum {
 {
     // TODO: Check if any object out of the zone limits and replace them
     // on an arbitrary X value, for example.
+    [Scene replaceOutOfBoundsElements];
+    cameraTranslation = NO;
 }
 
 -(void)rotationDetectee:(UIGestureRecognizer *)gestureRecognizer
@@ -288,7 +304,6 @@ enum {
 
 - (IBAction)toggleTranslateCamera:(id)sender
 {
-    isCameraTranslateActive = !isCameraTranslateActive;
 }
 
 #pragma mark - Core GL Methods

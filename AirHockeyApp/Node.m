@@ -45,23 +45,42 @@ const float DEFAULT_ANGLE_VALUE = 0.0f;
 // Wavefront objects overload the render method instead.
 - (void) render
 {
-    
+    // Virtual - Do not put anything here
+
 }
 
 - (void) setRotation:(Rotation3D)rotation
 {
-    
+    // Virtual - Do not put anything here   
 }
 
 // Destroyed setPosition method as it was
-// redifining the synthetized method of the
-// same name and would thus enter en infinite
-// loop when assigning NodeTableEdge.position
+// redifining the synthetized method for
+// OpenGL objects. The function would enter an
+// infinite loop when assigning NodeTableEdge.position
 // - Sam (Obviously)
 
 - (void) setScaling :(float)scaleFactor
 {
+    // Virtual - Do not put anything here
+}
+
+//  Make sure that a specific node (that have been released
+// from the user's touch) is in the Zone limits
+- (void) checkIfInBounds
+{
+    // Check if the node is inside the edition surface (in X and Y)
+    if(self.position.x >= TABLE_LIMIT_X) {
+        self.position = Vector3DMake(TABLE_LIMIT_X,self.position.y,self.position.z);
+    } else if(self.position.x <= -TABLE_LIMIT_X) {
+        self.position = Vector3DMake(-TABLE_LIMIT_X,self.position.y,self.position.z);
+    }
     
+    if(self.position.y >= TABLE_LIMIT_Y) {
+        self.position = Vector3DMake(self.position.x,TABLE_LIMIT_Y,self.position.z);
+    } else if(self.position.y <= -TABLE_LIMIT_Y) {
+        self.position = Vector3DMake(self.position.x,-TABLE_LIMIT_Y,self.position.z);
+    }
 }
 
 - (NSString*) generateHash

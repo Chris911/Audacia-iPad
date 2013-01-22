@@ -14,19 +14,12 @@
 {
     NodeTableEdge *edges[8];
     CGPoint limits[4];
+    GLfloat topColors[40];
+    GLfloat borderColors[40];
 }
-
 @end
 
 @implementation NodeTable 
-
-const int NB_OF_TRIANGLES = 8;
-const int NB_OF_TABLE_EDGES = 8;
-
-const GLfloat TABLE_DEPTH = 0;  
-
-GLfloat topColors[(2+NB_OF_TRIANGLES)*4];
-GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
 
 - (id) init
 {
@@ -51,7 +44,7 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
     for (int i = 0; i < NB_OF_TABLE_EDGES; i++) {
         [edges[i] render];
     }
-
+    glDisable(GL_TEXTURE_2D);
     glPushMatrix();
     
     // Draw the top surface 
@@ -64,8 +57,11 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
     [self drawLimits];
     
     glPopMatrix();
+    glEnable(GL_TEXTURE_2D);
+
 }
 
+#pragma mark - Secondary Initialization functions
 // TEMP : initialize GL color buffers
 - (void) initColors
 {
@@ -78,8 +74,8 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
     
     for (int i = 0; i < (2+NB_OF_TRIANGLES)*4; i += 4) {
         borderColors[i] = 1;
-        borderColors[i+1] = 1;
-        borderColors[i+2] = 0;
+        borderColors[i+1] = 0;
+        borderColors[i+2] = 1;
         borderColors[i+3] = 1;
     }
 }
@@ -95,9 +91,10 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
      5-----6------7
      */
     
-    int initialX = 60;
-    int initialY = 40;
+    int initialX = 54;
+    int initialY = 36;
     
+    // Initialize all of the 8 table edges
     edges[0] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:   -initialX   :initialY   :0]autorelease];
     edges[1] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:   0           :initialY   :1]autorelease];
     edges[2] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:   initialX    :initialY   :2]autorelease];
@@ -107,23 +104,20 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
     edges[6] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:   0           :-initialY  :6]autorelease];
     edges[7] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:   initialX    :-initialY  :7]autorelease];
     
+    // Initialize the zone limits
     limits[0] = CGPointMake(-TABLE_LIMIT_X, TABLE_LIMIT_Y);
     limits[1] = CGPointMake(-TABLE_LIMIT_X, -TABLE_LIMIT_Y);
     limits[2] = CGPointMake(TABLE_LIMIT_X, -TABLE_LIMIT_Y);
     limits[3] = CGPointMake(TABLE_LIMIT_X, TABLE_LIMIT_Y);
 }
 
+#pragma mark - Pseudo Update Functions
 // Add all edges in the RenderingTree hierarchicaly
 - (void) addEdgesToTree
 {
-    [[Scene getInstance].renderingTree addNodeToTree:edges[0]];
-    [[Scene getInstance].renderingTree addNodeToTree:edges[1]];
-    [[Scene getInstance].renderingTree addNodeToTree:edges[2]];
-    [[Scene getInstance].renderingTree addNodeToTree:edges[3]];
-    [[Scene getInstance].renderingTree addNodeToTree:edges[4]];
-    [[Scene getInstance].renderingTree addNodeToTree:edges[5]];
-    [[Scene getInstance].renderingTree addNodeToTree:edges[6]];
-    [[Scene getInstance].renderingTree addNodeToTree:edges[7]];
+    for (int i = 0; i < NB_OF_TABLE_EDGES; i++) {
+        [[Scene getInstance].renderingTree addNodeToTree:edges[i]];
+    }
 }
 
 // Required to update the symetry of the table's edges
@@ -140,8 +134,8 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
     // Vertical Middle Edges
     if(edges[1].lastPosition.y != edges[1].position.y) {
         edges[6].position = Vector3DMake(edges[6].position.x, -edges[1].position.y, edges[6].position.z);
-    }
-    else if(edges[6].lastPosition.y != edges[6].position.y) {
+        
+    } else if(edges[6].lastPosition.y != edges[6].position.y) {
         edges[1].position = Vector3DMake(edges[1].position.x, -edges[6].position.y, edges[1].position.z);
     }
     
@@ -156,13 +150,13 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
     // Horizontal Middle Edges
     if(edges[3].lastPosition.y != edges[3].position.y) {
         edges[4].position = Vector3DMake(-edges[3].position.x, edges[4].position.y, edges[4].position.z);
-    }
-    else if(edges[4].lastPosition.y != edges[4].position.y) {
+         
+    } else if(edges[4].lastPosition.y != edges[4].position.y) {
         edges[3].position = Vector3DMake(-edges[4].position.x, edges[3].position.y, edges[3].position.z);
     }
 }
 
-#pragma mark - OpenGL Statements
+#pragma mark - OpenGL Drawing Statements
 // Draw the top surface 
 - (void) drawTopSurface
 {
@@ -223,7 +217,7 @@ GLfloat borderColors[(2+NB_OF_TABLE_EDGES)*4];
 - (void) drawLimits
 {
     GLfloat limitsVertices[] = {
-        //            * Table's border *
+        //            * Zone Limits *
         limits[0].x,limits[0].y,TABLE_DEPTH,
         limits[1].x,limits[1].y,TABLE_DEPTH,
         limits[2].x,limits[2].y,TABLE_DEPTH,

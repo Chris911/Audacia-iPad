@@ -12,6 +12,10 @@
 
 // Main constants interface for whole project
 
+// EAGLViewController Constants
+extern const int STATE_TRANSFORM_TRANSLATION;
+extern const int STATE_TRANSFORM_ROTATION;
+extern const int STATE_TRANSFORM_SCALE;
 
 // Table constants
 extern const int TABLE_LIMIT_X;

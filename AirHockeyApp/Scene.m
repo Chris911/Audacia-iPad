@@ -12,6 +12,8 @@
 
 #import "NodeTable.h"   
 #import "NodeCube.h"
+#import "NodeBooster.h"
+#import "NodePommeau.h"
 
 @implementation Scene
 
@@ -50,6 +52,9 @@ static Scene *scene = NULL;
     
     NodeCube* cube = [[[NodeCube alloc]init]autorelease];
     [scene.renderingTree addNodeToTreeWithInitialPosition:cube :Vector3DMake(-20, 10, cube.position.z)];
+    
+    NodePommeau* pommeau = [[[NodePommeau alloc]init]autorelease];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau :Vector3DMake(20, 10, pommeau.position.z)];
 }
 
 + (void) replaceOutOfBoundsElements

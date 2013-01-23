@@ -1,6 +1,6 @@
 # Blender v2.65 (sub 0) OBJ File: 'booster.blend'
 # www.blender.org
-mtllib booster2.mtl
+mtllib booster.mtl
 o Cone
 v -0.180264 1.028097 -0.512127
 v 0.015200 1.043032 -0.511883

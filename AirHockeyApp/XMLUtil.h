@@ -15,6 +15,6 @@
 
 + (NSString *)dataFilePath:(NSString*)fileName:(BOOL)forSave;
 + (RenderingTree *)loadRenderingTreeFromGDataXMLDocument:(GDataXMLDocument*)doc;
-+ (void)savePartyWithFileName:(RenderingTree *)renderingTree:(NSString*)name;
++ (NSData *)getRenderingTreeXmlData:(RenderingTree *)renderingTree;
 
 @end

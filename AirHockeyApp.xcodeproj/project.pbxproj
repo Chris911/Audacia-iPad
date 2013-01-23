@@ -132,10 +132,6 @@
 		04F43C5B16B038D00017756F /* puck.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = puck.psd; sourceTree = "<group>"; };
 		04F43C5C16B038D00017756F /* puck.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = puck.mtl; sourceTree = "<group>"; };
 		04F43C5D16B038D00017756F /* puck.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = puck.obj; sourceTree = "<group>"; };
-		04F43C5F16B038D00017756F /* booster_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = booster_texture.png; sourceTree = "<group>"; };
-		04F43C6016B038D00017756F /* pommeau_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pommeau_texture.png; sourceTree = "<group>"; };
-		04F43C6116B038D00017756F /* portal_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = portal_texture.png; sourceTree = "<group>"; };
-		04F43C6216B038D00017756F /* pucktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pucktexture.png; sourceTree = "<group>"; };
 		96378D761472C71100F543EA /* AirHockeyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96378D7A1472C71100F543EA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		96378D7C1472C71100F543EA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -323,10 +319,6 @@
 				A889F22416B067E10008E534 /* pommeau_texture.png */,
 				A889F22516B067E10008E534 /* portal_texture.png */,
 				A889F22616B067E10008E534 /* pucktexture.png */,
-				04F43C5F16B038D00017756F /* booster_texture.png */,
-				04F43C6016B038D00017756F /* pommeau_texture.png */,
-				04F43C6116B038D00017756F /* portal_texture.png */,
-				04F43C6216B038D00017756F /* pucktexture.png */,
 			);
 			path = Texture;
 			sourceTree = "<group>";

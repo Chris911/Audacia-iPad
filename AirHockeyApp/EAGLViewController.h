@@ -14,6 +14,7 @@
 #import "OpenGLWaveFrontObject.h"
 #import "Scene.h"
 #import "WebClient.h"
+#import "XMLUtil.h"
 
 extern float const LARGEUR_FENETRE;
 extern float const HAUTEUR_FENETRE;

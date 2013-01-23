@@ -22,20 +22,30 @@
         NSURL *url = [NSURL URLWithString:self.server];
         AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
         self.AFClient = httpClient;
-        [url release];
         [httpClient release];
     }
     return self;
 }
 
-- (void) uploadMapData:(NSString*)mapName :(UIImage*)mapImage
+- (void) uploadMapData:(NSString*)mapName :(NSData *)xmlData :(UIImage*)mapImage
 {
+    [self uploadXMLData:xmlData :mapName];
     [self uploadImageData:mapImage :mapName];
 }
 
-- (void) uploadXMLData:(NSString*)mapName
+- (void) uploadXMLData:(NSData*)xmlData :(NSString *)mapName
 {
+    NSString *fileName = [mapName stringByAppendingString:@".xml"];
     
+    NSMutableURLRequest *request = [self.AFClient multipartFormRequestWithMethod:@"POST" path:self.uploadScript parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+        [formData appendPartWithFileData:xmlData name:@"file" fileName:fileName mimeType:@"application/xml"];
+    }];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        NSLog(@"Sent %lld of %lld bytes [XML]", totalBytesWritten, totalBytesExpectedToWrite);
+    }];
+    [operation start];
 }
 
 - (void) uploadImageData:(UIImage*)image :(NSString*)mapName
@@ -44,12 +54,12 @@
     NSString *fileName = [mapName stringByAppendingString:@".png"];
     
     NSMutableURLRequest *request = [self.AFClient multipartFormRequestWithMethod:@"POST" path:self.uploadScript parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-        [formData appendPartWithFileData:imageData name:@"image" fileName:fileName mimeType:@"image/png"];
+        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
     }];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-        NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
+        NSLog(@"Sent %lld of %lld bytes [SS]", totalBytesWritten, totalBytesExpectedToWrite);
     }];
     [operation start];
 }

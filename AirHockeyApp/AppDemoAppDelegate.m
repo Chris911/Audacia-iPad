@@ -21,9 +21,7 @@
 
 - (void) afficherMenu
 {
-    //self.window.rootViewController = self.menuViewController;
-    
-    [UIView transitionWithView:self.window duration:0.3 options:(UIViewAnimationOptionTransitionCrossDissolve) animations:^{
+    [UIView transitionWithView:self.window duration:1.0 options:(UIViewAnimationOptionTransitionFlipFromBottom) animations:^{
         self.window.rootViewController = self.menuViewController;
     } completion:nil];
 }

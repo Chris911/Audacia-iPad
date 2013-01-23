@@ -91,6 +91,11 @@
     return YES;
 }
 
+- (void) emptyRenderingTree
+{
+    [self.tree removeAllObjects];
+}
+
 // Selection utils
 - (void) deselectAllNodes
 {

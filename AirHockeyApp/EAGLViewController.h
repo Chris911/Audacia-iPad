@@ -33,6 +33,7 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UIView *CameraView;
 @property (retain, nonatomic) IBOutlet UIView *ParametersView;
 @property (retain, nonatomic) IBOutlet UIView *TransformView;
+@property (retain, nonatomic) IBOutlet UIView *SettingsView;
 
 - (void)startAnimation;
 - (void)stopAnimation;
@@ -44,7 +45,7 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)toggleScreenshotButton:(id)sender;
 - (IBAction)toggleTransformRotation:(id)sender;
 - (IBAction)toggleTransformScale:(id)sender;
-
-
+- (IBAction)toggleSettingsView:(id)sender;
+- (IBAction)ExitProgram:(id)sender;
 
 @end

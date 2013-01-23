@@ -4,6 +4,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "AppDemoAppDelegate.h"
 
 #import "EAGLViewController.h"
 #import "EAGLView.h"
@@ -22,6 +23,7 @@ int const CAMERAVIEW_TAG      = 100;
 int const PARAMETERSVIEW_TAG  = 200;
 int const TRANSFORMVIEW_TAG   = 300;
 int const OBJECTSVIEW_TAG     = 400;
+int const SETTINGSVIEW_TAG    = 500;
 
 
 
@@ -41,7 +43,9 @@ enum {
 
 @interface EAGLViewController ()
 {
+    BOOL firstTimeBuilding;
     BOOL cameraViewIsHidden;
+    BOOL settingViewIsHidden;
     BOOL anyNodeSelected;
     
     BOOL cameraTranslation;
@@ -83,12 +87,13 @@ enum {
     self.displayLink = nil;
     
     cameraTranslation = YES;
+    firstTimeBuilding = YES;
     currentTransformState = STATE_TRANSFORM_TRANSLATION;
  
-    //Initialize Scene and rendring tree
+    // Initialize Scene and rendring tree
     [Scene getInstance];
     
-    // Loading the Default Map
+    // Init from default map
     [Scene loadDefaultElements];
 }
 
@@ -109,6 +114,7 @@ enum {
     [_CameraView release];
     [_ParametersView release];
     [_TransformView release];
+    [_SettingsView release];
     [super dealloc];
 }
 
@@ -121,6 +127,13 @@ enum {
 {
     [self startAnimation];
     [super viewWillAppear:animated];
+    
+    // Load default elements only when switching to this EAGL View
+    if(!firstTimeBuilding) {
+        [self setupView];
+        [Scene loadDefaultElements];
+    }
+    firstTimeBuilding = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -143,6 +156,7 @@ enum {
     [self setCameraView:nil];
     [self setParametersView:nil];
     [self setTransformView:nil];
+    [self setSettingsView:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -337,8 +351,26 @@ enum {
     }
 }
 
-#pragma mark - Core GL Methods
+- (IBAction)toggleSettingsView:(id)sender
+{
+    if(settingViewIsHidden){
+        [self slideOutAnimationView:self.SettingsView];
+    } else {
+        [self slideInAnimationView:self.SettingsView];
+    }
+    settingViewIsHidden = !settingViewIsHidden;
+}
 
+- (IBAction)ExitProgram:(id)sender
+{
+    //[self stopAnimation];
+    [self resetTable];
+    [self resetUI];
+    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    [delegate afficherMenu];
+}
+
+#pragma mark - Core GL Methods
 -(void)setupView
 {
     camPosX = 0;
@@ -376,7 +408,7 @@ enum {
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // Orthogonal Mode
     glOrthof(camPosX -(LARGEUR_FENETRE / 2)*zoomFactor, camPosX + (LARGEUR_FENETRE / 2)*zoomFactor,
              -(HAUTEUR_FENETRE / 2)*zoomFactor, (HAUTEUR_FENETRE / 2)*zoomFactor, -100, 100);
@@ -422,10 +454,16 @@ enum {
                              
                          }
                          completion:nil];
+    } else if(view.tag == SETTINGSVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(1024 - view.frame.size.width/2, HAUTEUR_ECRAN - view.frame.size.height/2);
+                             
+                         }
+                         completion:nil];
     }
 }
 
-//Animation when user swipes a side view in (from right to left)
 -(void)slideInAnimationView:(UIView*)view
 {
     if(view.tag == CAMERAVIEW_TAG){
@@ -453,6 +491,13 @@ enum {
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
                              view.center = CGPointMake(view.bounds.size.width/2, view.center.y);
+                             
+                         }
+                         completion:nil];
+    } else if(view.tag == SETTINGSVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(1024 + view.frame.size.width/2, HAUTEUR_ECRAN + view.frame.size.height);
                              
                          }
                          completion:nil];
@@ -558,6 +603,7 @@ float mCurrentScale, mLastScale;
 - (void) prepareAdditionalViews
 {
     cameraViewIsHidden  = YES;
+    settingViewIsHidden = YES;
     anyNodeSelected     = YES;
     
     // Hide the views out of the screen
@@ -567,6 +613,20 @@ float mCurrentScale, mLastScale;
     self.ParametersView.center = CGPointMake(self.ParametersView.center.x,
                                              self.ParametersView.center.y + self.ParametersView.bounds.size.height);
     self.TransformView.center = CGPointMake(TRANSFORMVIEW_INITIAL_POSITION,self.TransformView.center.y);
+    self.SettingsView.center = CGPointMake(1024 + self.SettingsView.frame.size.width,
+                                         HAUTEUR_ECRAN + self.SettingsView.frame.size.height);
+}
+
+#pragma mark - Reset table utility
+
+- (void) resetUI
+{
+    [self prepareAdditionalViews];
+}
+
+- (void) resetTable
+{
+    [[Scene getInstance].renderingTree emptyRenderingTree];
 }
 
 #pragma mark - Screenshot Utility

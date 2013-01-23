@@ -22,6 +22,7 @@
 
 // Remove selected nodes
 - (BOOL) removeSelectedNodes;
+- (void) emptyRenderingTree;
 
 // Selection utils
 - (void) deselectAllNodes;

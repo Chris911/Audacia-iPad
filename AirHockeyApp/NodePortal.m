@@ -40,11 +40,12 @@
 	// Translate to the current position
 	glTranslatef(self.model.currentPosition.x, self.model.currentPosition.y, self.model.currentPosition.z);
     
-    glRotatef(90, 1.0, 0, 0);
 	// Rotate to the current rotation in Z
+    glRotatef(90, 1.0, 0, 0);
 	glRotatef(self.angle, 0.0, 0.0, 1.0);
     
     // Scale the model
+    glScalef(3.0f, 3.0f, 3.0f);
     glScalef(self.scaleFactor, self.scaleFactor, self.scaleFactor);
     
     // Draw the .obj Model

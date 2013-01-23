@@ -37,7 +37,6 @@ extern float const HAUTEUR_FENETRE;
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)setupView;
-- (void)rotationDetectee:(UIGestureRecognizer *)gestureRecognizer;
 
 - (IBAction)OpenCameraView:(id)sender;
 - (IBAction)TouchButtonInViewTEST:(id)sender;

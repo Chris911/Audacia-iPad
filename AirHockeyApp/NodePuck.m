@@ -16,11 +16,11 @@
 {
     if((self = [super init])) {
         self.isWaveFrontObject = YES;
-        self.type = @"BOOSTER";
+        self.type = @"PUCK";
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"puck" ofType:@"obj"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"puckfinal" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];
-        Vertex3D position = Vertex3DMake(0, 0, 20.0);
+        Vertex3D position = Vertex3DMake(0, 0, 50.0);
         self.model = theObject;
         self.position = position;
         self.model.currentPosition = self.position;
@@ -40,6 +40,7 @@
 	// Translate to the current position
 	glTranslatef(self.model.currentPosition.x, self.model.currentPosition.y, self.model.currentPosition.z);
     
+    glRotatef(90, 1.0, 0.0, 0.0);
 	// Rotate to the current rotation in Z
 	glRotatef(self.angle, 0.0, 0.0, 1.0);
     

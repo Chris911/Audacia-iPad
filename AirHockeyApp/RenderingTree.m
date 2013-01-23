@@ -78,7 +78,6 @@
            && node.position.y >= position.y - offset)) {
                node.isSelected = YES;
                NSLog(@"Selected Type:%@",node.type);
-               
                // FIXME: This only works for SINGLE OBJECT selection
                nodeWasSelected = YES;
         }

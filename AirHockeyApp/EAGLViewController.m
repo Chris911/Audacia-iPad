@@ -214,7 +214,7 @@ enum {
         // Use touch coordinates to try and select a Node
         Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x,
                                     [self convertFromScreenToWorld:positionCourante].y, 0);
-        
+        NSLog(@"TouchBegan, x: %f y:%f",pos.x,pos.y);
         // Check if any node was selected with the first touch.
         // If not, we can move the camera
         if([[Scene getInstance].renderingTree selectNodeByPosition:pos])
@@ -239,38 +239,36 @@ enum {
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if ([[event allTouches] count] == 1)
-    {
-        UITouch *touch = [[event allTouches] anyObject];
-        CGPoint positionCourante = [touch locationInView:self.view];
-        CGPoint positionPrecedente = [touch previousLocationInView:self.view];
-        
-        // 3 types of transformations.  If no node is selected,
-        // then the camera will be panning around.  This allow
-        // to not interfer with the currentTransformState
-        
-        if(!cameraTranslation) {
-            if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
-                [[Scene getInstance].renderingTree translateSelectedNodes:
-                    CGPointMake([self convertFromScreenToWorld:positionCourante].x,
-                                [self convertFromScreenToWorld:positionCourante].y)];
-                
-            } else if(currentTransformState == STATE_TRANSFORM_ROTATION) {
-                CGPoint rotation = [self calculateVelocity:positionPrecedente :positionCourante];
-                [[Scene getInstance].renderingTree rotateSelectedNodes:Rotation3DMake(rotation.x, rotation.y, 0)];
-                
-            } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
-                CGPoint scale = [self calculateVelocity:positionPrecedente :positionCourante];
-                [[Scene getInstance].renderingTree scaleSelectedNodes:scale.x];
-                
-            }
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint positionCourante = [touch locationInView:self.view];
+    CGPoint positionPrecedente = [touch previousLocationInView:self.view];
+    
+    // 3 types of transformations.  If no node is selected,
+    // then the camera will be panning around.  This allow
+    // to not interfer with the currentTransformState
+    
+    if(!cameraTranslation) {
+        if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
+            [[Scene getInstance].renderingTree translateSelectedNodes:
+                CGPointMake([self convertFromScreenToWorld:positionCourante].x,
+                            [self convertFromScreenToWorld:positionCourante].y)];
+            NSLog(@"TouchMoved, x: %f y:%f",[self convertFromScreenToWorld:positionCourante].x,[self convertFromScreenToWorld:positionCourante].y);
             
-        // User is dragging the screen.  Camera is thus moving
-        } else {
-            //camPosX = [self convertFromScreenToWorld:positionCourante].x;
-            //camPosY = [self convertFromScreenToWorld:positionCourante].y;
+        } else if(currentTransformState == STATE_TRANSFORM_ROTATION) {
+            CGPoint rotation = [self calculateVelocity:positionPrecedente :positionCourante];
+            [[Scene getInstance].renderingTree rotateSelectedNodes:Rotation3DMake(rotation.x, rotation.y, 0)];
+            
+        } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
+            CGPoint scale = [self calculateVelocity:positionPrecedente :positionCourante];
+            [[Scene getInstance].renderingTree scaleSelectedNodes:scale.x];
+            
         }
-
+        
+    // User is dragging the screen.  Camera is thus moving
+    } else {
+        //camPosX = [self convertFromScreenToWorld:positionCourante].x;
+        //camPosY = [self convertFromScreenToWorld:positionCourante].y;
     }
 }
 
@@ -464,7 +462,10 @@ enum {
 
 - (void)SwipeTransformView:(UITapGestureRecognizer *)recognizer
 {
+    // When closing the transform view, return to translation mode
+    currentTransformState = STATE_TRANSFORM_TRANSLATION;
     [self slideOutAnimationView:self.TransformView];
+
 }
 
 - (void)SwipeTransformView_Main:(UITapGestureRecognizer *)recognizer
@@ -516,8 +517,8 @@ float mCurrentScale, mLastScale;
 // Takes a screen coordinate point and convert it to predefined world coords
 - (CGPoint)convertFromScreenToWorld:(CGPoint)pos
 {
-    pos = CGPointMake((pos.x * (LARGEUR_FENETRE/1024) - LARGEUR_FENETRE/2) * zoomFactor,
-                      -(pos.y * (HAUTEUR_FENETRE/HAUTEUR_ECRAN) - HAUTEUR_FENETRE/2) * zoomFactor);
+    pos = CGPointMake((pos.x * (LARGEUR_FENETRE/1024) - LARGEUR_FENETRE/2) ,
+                      -(pos.y * (HAUTEUR_FENETRE/HAUTEUR_ECRAN) - HAUTEUR_FENETRE/2));
     return pos;
 }
 

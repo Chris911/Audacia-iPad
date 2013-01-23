@@ -363,6 +363,7 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{670, 111}</string>
 								<reference key="NSSuperview" ref="868566068"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<float key="IBUIAlpha">0.5</float>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -406,7 +407,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 20}, {73, 67}}</string>
 								<reference key="NSSuperview" ref="964176458"/>
-								<reference key="NSNextKeyView" ref="909410144"/>
+								<reference key="NSNextKeyView" ref="156385654"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -428,6 +429,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 109}, {73, 72}}</string>
 								<reference key="NSSuperview" ref="964176458"/>
+								<reference key="NSNextKeyView" ref="909410144"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>

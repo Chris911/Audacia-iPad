@@ -210,7 +210,8 @@ enum {
 {
     for(UITouch* touch in touches) {
         CGPoint positionCourante = [touch locationInView:self.view];
-        
+        NSLog(@"TouchBegan, x: %f y:%f",positionCourante.x,positionCourante.y);
+
         // Use touch coordinates to try and select a Node
         Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x,
                                     [self convertFromScreenToWorld:positionCourante].y, 0);
@@ -230,50 +231,52 @@ enum {
         }
     }
     
-    // Multi-touch 
-    NSSet *allTouches = [event allTouches];
-    for(UITouch* touch in allTouches) {
-        //CGPoint positionCourante = [touch locationInView:self.view];
-    }    
+//    // Multi-touch 
+//    NSSet *allTouches = [event allTouches];
+//    for(UITouch* touch in allTouches) {
+//        //CGPoint positionCourante = [touch locationInView:self.view];
+//    }    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint positionCourante = [touch locationInView:self.view];
-    CGPoint positionPrecedente = [touch previousLocationInView:self.view];
-    
-    // 3 types of transformations.  If no node is selected,
-    // then the camera will be panning around.  This allow
-    // to not interfer with the currentTransformState
-    
-    if(!cameraTranslation) {
-        if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
-            [[Scene getInstance].renderingTree translateSelectedNodes:
-                CGPointMake([self convertFromScreenToWorld:positionCourante].x,
-                            [self convertFromScreenToWorld:positionCourante].y)];
-            NSLog(@"TouchMoved, x: %f y:%f",[self convertFromScreenToWorld:positionCourante].x,[self convertFromScreenToWorld:positionCourante].y);
-            
-        } else if(currentTransformState == STATE_TRANSFORM_ROTATION) {
-            CGPoint rotation = [self calculateVelocity:positionPrecedente :positionCourante];
-            [[Scene getInstance].renderingTree rotateSelectedNodes:Rotation3DMake(rotation.x, rotation.y, 0)];
-            
-        } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
-            CGPoint scale = [self calculateVelocity:positionPrecedente :positionCourante];
-            [[Scene getInstance].renderingTree scaleSelectedNodes:scale.x];
-            
-        }
+    if ([[event allTouches] count] >= 1){
+        UITouch *touch = [[event allTouches] anyObject];
+        CGPoint positionCourante = [touch locationInView:self.view];
+        CGPoint positionPrecedente = [touch previousLocationInView:self.view];
         
-    // User is dragging the screen.  Camera is thus moving
-    } else {
-        //camPosX = [self convertFromScreenToWorld:positionCourante].x;
-        //camPosY = [self convertFromScreenToWorld:positionCourante].y;
+        // 3 types of transformations.  If no node is selected,
+        // then the camera will be panning around.  This allow
+        // to not interfer with the currentTransformState
+        NSLog(@"TouchMoved, x: %f y:%f",positionCourante.x,positionCourante.y);
+
+        if(!cameraTranslation) {
+            if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
+                [[Scene getInstance].renderingTree translateSelectedNodes:
+                    CGPointMake([self convertFromScreenToWorld:positionCourante].x,
+                                [self convertFromScreenToWorld:positionCourante].y)];
+                
+            } else if(currentTransformState == STATE_TRANSFORM_ROTATION) {
+                CGPoint rotation = [self calculateVelocity:positionPrecedente :positionCourante];
+                [[Scene getInstance].renderingTree rotateSelectedNodes:Rotation3DMake(rotation.x, rotation.y, 0)];
+                
+            } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
+                CGPoint scale = [self calculateVelocity:positionPrecedente :positionCourante];
+                [[Scene getInstance].renderingTree scaleSelectedNodes:scale.x];
+                
+            }
+            
+        // User is dragging the screen.  Camera is thus moving
+        } else {
+            //camPosX = [self convertFromScreenToWorld:positionCourante].x;
+            //camPosY = [self convertFromScreenToWorld:positionCourante].y;
+        }
     }
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"TouchEnded");
     [Scene replaceOutOfBoundsElements];
     cameraTranslation = NO;
 }
@@ -391,6 +394,7 @@ enum {
 //Animation when user swipes a side view out (from left to right)
 -(void)slideOutAnimationView:(UIView*)view
 {
+    //FIXME: HardCoded slide in values, change that to const
     if(view.tag == CAMERAVIEW_TAG) { // bottom left view
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
              animations:^{
@@ -407,14 +411,14 @@ enum {
     } else if(view.tag == TRANSFORMVIEW_TAG){
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
-                             view.center = CGPointMake(1024 + view.frame.size.width/2, view.center.y);
+                             view.center = CGPointMake(TRANSFORMVIEW_INITIAL_POSITION, view.center.y);
                              
                          }
                          completion:nil];
     } else if(view.tag == OBJECTSVIEW_TAG){
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
-                             view.center = CGPointMake(-view.frame.size.width/2, view.center.y);
+                             view.center = CGPointMake(OBJECTVIEW_INITIAL_POSITION, view.center.y);
                              
                          }
                          completion:nil];
@@ -448,7 +452,7 @@ enum {
     } else if(view.tag == OBJECTSVIEW_TAG){
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
-                             view.center = CGPointMake(view.frame.size.width/2, view.center.y);
+                             view.center = CGPointMake(view.bounds.size.width/2, view.center.y);
                              
                          }
                          completion:nil];
@@ -470,22 +474,12 @@ enum {
 
 - (void)SwipeTransformView_Main:(UITapGestureRecognizer *)recognizer
 {
-    CGPoint beginningPoint = [recognizer locationInView:[self view]];
-    
-    // Slide from right to left on LeftSideView
-    if(beginningPoint.x < 50){
-        [self slideInAnimationView:self.LeftSlideView];
-    }
+    [self slideInAnimationView:self.LeftSlideView];
 }
 
 - (void)SwipeLeftSideView_Main:(UITapGestureRecognizer *)recognizer
-{
-    CGPoint beginningPoint = [recognizer locationInView:[self view]];
-    
-    // Slide from right to left on LeftSideView
-    if(beginningPoint.x >900){
-        [self slideInAnimationView:self.TransformView];
-    }
+{    
+    [self slideInAnimationView:self.TransformView];    
 }
 
 
@@ -539,14 +533,14 @@ float mCurrentScale, mLastScale;
                                                       initWithTarget:self
                                                       action:@selector(SwipeTransformView_Main:)] autorelease];
     [SwipeTransformView_Main setDirection:UISwipeGestureRecognizerDirectionRight];
-    [[self view] addGestureRecognizer:SwipeTransformView_Main];
+    [[self LeftSlideView] addGestureRecognizer:SwipeTransformView_Main];
     
     // Placed on the the main view (for TransformView)
     UISwipeGestureRecognizer *SwipeLeftSideView_Main = [[[UISwipeGestureRecognizer alloc]
                                                             initWithTarget:self
                                                             action:@selector(SwipeLeftSideView_Main:)] autorelease];
     [SwipeLeftSideView_Main setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [[self view] addGestureRecognizer:SwipeLeftSideView_Main];
+    [[self TransformView] addGestureRecognizer:SwipeLeftSideView_Main];
     
     // Placed on the LeftSideView
     UISwipeGestureRecognizer *SwipeTransformView = [[[UISwipeGestureRecognizer alloc]
@@ -567,12 +561,12 @@ float mCurrentScale, mLastScale;
     anyNodeSelected     = YES;
     
     // Hide the views out of the screen
-    self.LeftSlideView.center = CGPointMake(-self.LeftSlideView.bounds.size.width,self.LeftSlideView.center.y);
+    self.LeftSlideView.center = CGPointMake(OBJECTVIEW_INITIAL_POSITION ,self.LeftSlideView.center.y);
     self.CameraView.center = CGPointMake(-self.CameraView.frame.size.width,
                                          HAUTEUR_ECRAN + self.CameraView.frame.size.height);
     self.ParametersView.center = CGPointMake(self.ParametersView.center.x,
                                              self.ParametersView.center.y + self.ParametersView.bounds.size.height);
-    self.TransformView.center = CGPointMake(self.TransformView.center.x+self.TransformView.bounds.size.width,self.TransformView.center.y);
+    self.TransformView.center = CGPointMake(TRANSFORMVIEW_INITIAL_POSITION,self.TransformView.center.y);
 }
 
 #pragma mark - Screenshot Utility

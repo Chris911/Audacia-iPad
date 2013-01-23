@@ -16,6 +16,9 @@
 extern const int STATE_TRANSFORM_TRANSLATION;
 extern const int STATE_TRANSFORM_ROTATION;
 extern const int STATE_TRANSFORM_SCALE;
+extern const int OBJECTVIEW_INITIAL_POSITION;
+extern const int TRANSFORMVIEW_INITIAL_POSITION;
+
 
 // Table constants
 extern const int TABLE_LIMIT_X;

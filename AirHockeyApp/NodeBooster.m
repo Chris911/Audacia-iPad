@@ -40,6 +40,7 @@
 	// Translate to the current position
 	glTranslatef(self.model.currentPosition.x, self.model.currentPosition.y, self.model.currentPosition.z);
     
+    glRotatef(90, 1.0, 0, 0);
 	// Rotate to the current rotation in Z
 	glRotatef(self.angle, 0.0, 0.0, 1.0);
     

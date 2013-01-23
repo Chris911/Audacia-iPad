@@ -19,6 +19,6 @@
 @property (retain,nonatomic) NSString* uploadScript;
 
 - (id) initWithDefaultServer;
-- (void) uploadMapData:(NSString*)mapName :(UIImage*)mapImage;
+- (void) uploadMapData:(NSString*)mapName :(NSData *)xmlData :(UIImage*)mapImage;
 
 @end

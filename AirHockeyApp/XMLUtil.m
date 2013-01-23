@@ -75,9 +75,9 @@
 // source : 
 // http://www.raywenderlich.com/725/how-to-read-and-write-xml-documents-with-gdataxml
 //
-+ (void)savePartyWithFileName:(RenderingTree *)renderingTree:(NSString*) name {
-    
-    GDataXMLElement *treeElement = [GDataXMLNode elementWithName:@"Tree"];
++ (NSData *)getRenderingTreeXmlData:(RenderingTree *)renderingTree
+{
+    GDataXMLElement *treeElement = [GDataXMLNode elementWithName:@"Objets"];
     
     for(Node *node in renderingTree.tree) {
         
@@ -94,12 +94,13 @@
     
     // Save the constructed tree to an xml file
     GDataXMLDocument *document = [[[GDataXMLDocument alloc]initWithRootElement:treeElement] autorelease];
-    NSData *xmlData = document.XMLData;
+    
+    return document.XMLData;
     
     // Need to specify the path
-    NSString *filePath = [self dataFilePath:name:TRUE];
-    NSLog(@"Saving xml data to %@...", filePath);
-    [xmlData writeToFile:filePath atomically:YES];
+//    NSString *filePath = [self dataFilePath:name:TRUE];
+//    NSLog(@"Saving xml data to %@...", filePath);
+//    [xmlData writeToFile:filePath atomically:YES];
 
 }
 

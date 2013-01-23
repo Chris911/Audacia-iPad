@@ -689,6 +689,7 @@ float mCurrentScale, mLastScale;
     [message setAlertViewStyle:UIAlertViewStylePlainTextInput];
     message.tag = kAlertNameMapTag;
     [message show];
+    [message release];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -696,8 +697,11 @@ float mCurrentScale, mLastScale;
         NSString *inputText = [[alertView textFieldAtIndex:0] text];
         //TODO: Do some validation here
         WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
-        [webClient uploadMapData:inputText :[self getGLScreenshot]];
+        NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
+        // Upload data to server
+        [webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
         [webClient release];
+        //[xmlData release];
     }
 }
 

@@ -66,16 +66,16 @@
 - (void) initColors
 {
     for (int i = 0; i < (2+NB_OF_TRIANGLES)*4; i += 4) {
-        topColors[i] = 1;
-        topColors[i+1] = 0;
-        topColors[i+2] = 0;
+        topColors[i] = 0.9;
+        topColors[i+1] = 0.9;
+        topColors[i+2] = 1;
         topColors[i+3] = 1;
     }
     
     for (int i = 0; i < (2+NB_OF_TRIANGLES)*4; i += 4) {
         borderColors[i] = 1;
         borderColors[i+1] = 0;
-        borderColors[i+2] = 1;
+        borderColors[i+2] = 0;
         borderColors[i+3] = 1;
     }
 }

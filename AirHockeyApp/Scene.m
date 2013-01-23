@@ -52,20 +52,20 @@ static Scene *scene = NULL;
     // (inherited from Projet2 XML's structure)
     [table addEdgesToTree];
     
-    NodeCube* cube = [[[NodeCube alloc]init]autorelease];
-    [scene.renderingTree addNodeToTreeWithInitialPosition:cube :Vector3DMake(10, 10, cube.position.z)];
-    
     NodePuck* puck = [[[NodePuck alloc]init]autorelease];
-    [scene.renderingTree addNodeToTreeWithInitialPosition:puck :Vector3DMake(20, 10, puck.position.z)];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:puck :Vector3DMake(0, 0, puck.position.z)];
     
-//    NodePortal* portal = [[[NodePortal alloc]init]autorelease];
-//    [scene.renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(40, 10, portal.position.z)];
-//    
-//    NodePommeau* pommeau = [[[NodePommeau alloc]init]autorelease];
-//    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau :Vector3DMake(60, 10, pommeau.position.z)];
-//    
-//    NodeBooster* booster = [[[NodeBooster alloc]init]autorelease];
-//    [scene.renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(60, 30, booster.position.z)];
+    NodePortal* portal = [[[NodePortal alloc]init]autorelease];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(-20, -30, portal.position.z)];
+    
+    NodePommeau* pommeau1 = [[[NodePommeau alloc]init]autorelease];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau1 :Vector3DMake(-50, 0, pommeau1.position.z)];
+    
+    NodePommeau* pommeau2 = [[[NodePommeau alloc]init]autorelease];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau2 :Vector3DMake(50, 0, pommeau2.position.z)];
+    
+    NodeBooster* booster = [[[NodeBooster alloc]init]autorelease];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(20, 30, booster.position.z)];
 }
 
 + (void) replaceOutOfBoundsElements

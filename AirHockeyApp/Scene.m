@@ -15,6 +15,7 @@
 #import "NodeBooster.h"
 #import "NodePommeau.h"
 #import "NodePuck.h"
+#import "NodePortal.h"
 
 @implementation Scene
 
@@ -52,10 +53,19 @@ static Scene *scene = NULL;
     [table addEdgesToTree];
     
     NodeCube* cube = [[[NodeCube alloc]init]autorelease];
-    [scene.renderingTree addNodeToTreeWithInitialPosition:cube :Vector3DMake(-20, 10, cube.position.z)];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:cube :Vector3DMake(10, 10, cube.position.z)];
     
     NodePuck* puck = [[[NodePuck alloc]init]autorelease];
     [scene.renderingTree addNodeToTreeWithInitialPosition:puck :Vector3DMake(20, 10, puck.position.z)];
+    
+//    NodePortal* portal = [[[NodePortal alloc]init]autorelease];
+//    [scene.renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(40, 10, portal.position.z)];
+//    
+//    NodePommeau* pommeau = [[[NodePommeau alloc]init]autorelease];
+//    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau :Vector3DMake(60, 10, pommeau.position.z)];
+//    
+//    NodeBooster* booster = [[[NodeBooster alloc]init]autorelease];
+//    [scene.renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(60, 30, booster.position.z)];
 }
 
 + (void) replaceOutOfBoundsElements

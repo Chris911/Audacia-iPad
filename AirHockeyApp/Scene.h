@@ -16,5 +16,5 @@
 + (Scene *)getInstance;
 + (void) loadDefaultElements;
 + (void) replaceOutOfBoundsElements;
-
++ (BOOL) checkIfAddingLocationInBounds:(CGPoint)location;
 @end

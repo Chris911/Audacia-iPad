@@ -246,7 +246,7 @@ enum {
         Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x,
                                     [self convertFromScreenToWorld:positionCourante].y, 0);
 
-        
+        NSLog(@"x:%f, y:%f",pos.x,pos.y);
         // Detect touch events on the EAGLView (self.view)
         if(touch.view == self.view){
             // Check if any node was selected with the first touch.
@@ -395,31 +395,42 @@ enum {
 {
     CGPoint location = [gesture locationInView:self.view];
     if ([gesture state] == UIGestureRecognizerStateBegan) {
+        
         // Drag started
         [self.view viewWithTag:activeObjectTag].center = location;
+        
     } else if ([gesture state] == UIGestureRecognizerStateChanged) {
+        
         // Drag moved
         [self.view viewWithTag:activeObjectTag].center = location;
+        
     } else if ([gesture state] == UIGestureRecognizerStateEnded) {
+        
         // Drag completed
         [self.view viewWithTag:activeObjectTag].center = location;
+        CGPoint worldPos = [self convertFromScreenToWorld:CGPointMake(location.x,location.y)];
 
-        // Add a specific Node to the scene and replace the dragged view
+        // Check if last touch location is legal
+        if([Scene checkIfAddingLocationInBounds:worldPos]){
+            // Add a specific Node to the scene and replace the dragged view
+            if(activeObjectTag == PORTALVIEW_TAG) {
+                NodePortal *portal = [[[NodePortal alloc]init]autorelease];
+                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(worldPos.x, worldPos.y, 10)];
+                
+            } else if(activeObjectTag == BOOSTERVIEW_TAG) {
+                NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
+                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(worldPos.x, worldPos.y, 10)];
+            }
+        }
+        
+        //Finally, replace the views to their distinct origins
         if(activeObjectTag == PORTALVIEW_TAG) {
-            NodePortal *portal = [[[NodePortal alloc]init]autorelease];
-            CGPoint worldPos = [self convertFromScreenToWorld:CGPointMake(location.x,location.y)];
-            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(worldPos.x, worldPos.y, 10)];
             [self.view viewWithTag:activeObjectTag].center =  self.PortalImageView.center;
             
         } else if(activeObjectTag == BOOSTERVIEW_TAG) {
-            NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
-            CGPoint worldPos = [self convertFromScreenToWorld:CGPointMake(location.x,location.y)];
-            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(worldPos.x, worldPos.y, 10)];
             [self.view viewWithTag:activeObjectTag].center =  self.BoosterImageView.center;
         }
     }
-    
-    [Scene replaceOutOfBoundsElements];
 }
 
 #pragma mark - Core GL Methods
@@ -516,6 +527,7 @@ enum {
     }
 }
 
+// Animate a view so it slides in the iPad screen
 -(void)slideInAnimationView:(UIView*)view
 {
     if(view.tag == CAMERAVIEW_TAG){

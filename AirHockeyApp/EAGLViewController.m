@@ -11,6 +11,7 @@
 #import "NodeTable.h"
 #import "NodePortal.h"
 #import "NodeBooster.h"
+#import "NetworkUtils.h"
 
 #define kAlertNameMapTag 1
 
@@ -693,7 +694,12 @@ float mCurrentScale, mLastScale;
 
 - (IBAction)toggleScreenshotButton:(id)sender
 {
-    [self showNameMapAlert];
+    if([NetworkUtils isNetworkAvailable])
+    {
+        [self showNameMapAlert];
+    } else {
+        [NetworkUtils showNetworkUnavailableAlert];
+    }
 }
 
 //
@@ -751,6 +757,7 @@ float mCurrentScale, mLastScale;
     [message show];
     [message release];
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == kAlertNameMapTag){

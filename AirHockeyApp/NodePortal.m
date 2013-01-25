@@ -17,7 +17,8 @@
     if((self = [super init])) {
         self.isWaveFrontObject = YES;
         self.type = @"PORTAL";
-        
+        self.xmlType = @"Portal";
+
         NSString *path = [[NSBundle mainBundle] pathForResource:@"portal" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];
         Vertex3D position = Vertex3DMake(0, 0, 20.0);

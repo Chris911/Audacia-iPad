@@ -11,6 +11,9 @@
 #import "NodeTable.h"
 #import "NodePortal.h"
 #import "NodeBooster.h"
+#import "NodePommeau.h" 
+#import "NodePuck.h"
+#import "NodeMurret.h"
 #import "NetworkUtils.h"
 
 #define kAlertNameMapTag 1
@@ -22,14 +25,19 @@ float const HAUTEUR_FENETRE = 150;
 int const LARGEUR_ECRAN = 1024;
 int const HAUTEUR_ECRAN = 768;
 
+// UI Views tags
 int const CAMERAVIEW_TAG      = 100;
 int const PARAMETERSVIEW_TAG  = 200;
 int const TRANSFORMVIEW_TAG   = 300;
 int const OBJECTSVIEW_TAG     = 400;
 int const SETTINGSVIEW_TAG    = 500;
 
+// Drag and Drop views tags
 int const PORTALVIEW_TAG      = 10;
 int const BOOSTERVIEW_TAG     = 20;
+int const MURETVIEW_TAG       = 30;
+int const PUCKVIEW_TAG        = 40;
+int const POMMEAUVIEW_TAG     = 50;
 
 // Uniform index.
 enum {
@@ -128,6 +136,12 @@ enum {
     [_PortalImageView release];
     [_BoosterView release];
     [_BoosterImageView release];
+    [_MuretImageView release];
+    [_PuckImageView release];
+    [_PommeauImageView release];
+    [_MuretView release];
+    [_PuckView release];
+    [_PommeauView release];
     [super dealloc];
 }
 
@@ -174,6 +188,12 @@ enum {
     [self setPortalImageView:nil];
     [self setBoosterView:nil];
     [self setBoosterImageView:nil];
+    [self setMuretImageView:nil];
+    [self setPuckImageView:nil];
+    [self setPommeauImageView:nil];
+    [self setMuretView:nil];
+    [self setPuckView:nil];
+    [self setPommeauView:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -413,6 +433,7 @@ enum {
         // Check if last touch location is legal
         if([Scene checkIfAddingLocationInBounds:worldPos]){
             // Add a specific Node to the scene and replace the dragged view
+            //FIXME: Z positions can break the adding
             if(activeObjectTag == PORTALVIEW_TAG) {
                 NodePortal *portal = [[[NodePortal alloc]init]autorelease];
                 [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(worldPos.x, worldPos.y, 10)];
@@ -420,15 +441,32 @@ enum {
             } else if(activeObjectTag == BOOSTERVIEW_TAG) {
                 NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
                 [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(worldPos.x, worldPos.y, 10)];
+                
+            } else if(activeObjectTag == MURETVIEW_TAG) {
+                NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
+                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(worldPos.x, worldPos.y, 10)];
+                
+            } else if(activeObjectTag == PUCKVIEW_TAG) {
+                NodePuck *puck = [[[NodePuck alloc]init]autorelease];
+                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:puck :Vector3DMake(worldPos.x, worldPos.y, 10)];
+                
+            } else if(activeObjectTag == POMMEAUVIEW_TAG) {
+                NodePommeau *pomel = [[[NodePommeau alloc]init]autorelease];
+                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:pomel :Vector3DMake(worldPos.x, worldPos.y, 10)];
             }
         }
         
         //Finally, replace the views to their distinct origins
         if(activeObjectTag == PORTALVIEW_TAG) {
             [self.view viewWithTag:activeObjectTag].center =  self.PortalImageView.center;
-            
         } else if(activeObjectTag == BOOSTERVIEW_TAG) {
             [self.view viewWithTag:activeObjectTag].center =  self.BoosterImageView.center;
+        } else if(activeObjectTag == MURETVIEW_TAG) {
+            [self.view viewWithTag:activeObjectTag].center =  self.MuretImageView.center;
+        } else if(activeObjectTag == PUCKVIEW_TAG) {
+            [self.view viewWithTag:activeObjectTag].center =  self.PuckImageView.center;
+        } else if(activeObjectTag == POMMEAUVIEW_TAG) {
+            [self.view viewWithTag:activeObjectTag].center =  self.PommeauImageView.center;
         }
     }
 }
@@ -663,13 +701,22 @@ float mCurrentScale, mLastScale;
     [self.view addGestureRecognizer:pinchGesture];
     [pinchGesture release];
     
-    // PanGesture recognizer
+    // PanGesture recognizer for drag n drop
     UIPanGestureRecognizer *dndPortal = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
     UIPanGestureRecognizer *dndBooster = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
+    UIPanGestureRecognizer *dndMuret = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
+    UIPanGestureRecognizer *dndPuck = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
+    UIPanGestureRecognizer *dndPommeau = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
     [self.PortalView addGestureRecognizer:dndPortal];
     [self.BoosterView addGestureRecognizer:dndBooster];
+    [self.MuretView addGestureRecognizer:dndMuret];
+    [self.PuckView addGestureRecognizer:dndPuck];
+    [self.PommeauView addGestureRecognizer:dndPommeau];
     [dndBooster release];
     [dndPortal release];
+    [dndMuret release];
+    [dndPuck release];
+    [dndPommeau release];
 }
 
 - (void) prepareAdditionalViews

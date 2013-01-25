@@ -73,6 +73,17 @@ static Scene *scene = NULL;
     [scene.renderingTree replaceNodesInBounds];
 }
 
+// Check if, when drag and dropping, the position the user is
+// placing the new node is within the zone limits
++ (BOOL) checkIfAddingLocationInBounds:(CGPoint)location
+{
+    if(location.x <= TABLE_LIMIT_X && location.x >= -TABLE_LIMIT_X
+       && location.y <= TABLE_LIMIT_Y && location.y >= -TABLE_LIMIT_Y) {
+        return YES;
+    }
+    return NO;
+}
+
 - (void)dealloc
 {
     self.renderingTree = nil;

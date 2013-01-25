@@ -265,7 +265,8 @@ enum {
             
         // If a view other than EAGLView is touched, we want
         // to handle the drag and drop functionnality
-        } else { 
+        } else {
+            [[Scene getInstance].renderingTree deselectAllNodes];
             [self handleFirstTouchOnView:touch.view];
         }
     }

@@ -17,7 +17,8 @@
     if((self = [super init])) {
         self.isWaveFrontObject = YES;
         self.type = @"POMMEAU";
-        
+        self.xmlType = @"Pommeau";
+
         NSString *path = [[NSBundle mainBundle] pathForResource:@"pommeau" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];
         Vertex3D position = Vertex3DMake(0, 0, 10.0);

@@ -11,6 +11,7 @@
 @implementation Node
 
 @synthesize type;
+@synthesize xmlType;
 @synthesize hash;
 @synthesize angle;
 @synthesize position;

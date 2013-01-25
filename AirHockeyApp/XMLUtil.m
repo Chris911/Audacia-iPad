@@ -69,7 +69,6 @@
     
     [doc release];
     return renderingTree;
-    
 }
 
 // source : 
@@ -79,30 +78,70 @@
 {
     GDataXMLElement *treeElement = [GDataXMLNode elementWithName:@"Objets"];
     
+    //Not a good XML design. Only implemented this way for compability with game engine
+    GDataXMLElement *boosterRoot = [GDataXMLNode elementWithName:@"Booster"];
+    GDataXMLElement *portalRoot = [GDataXMLNode elementWithName:@"Portal"];
+    GDataXMLElement *pommeauRoot = [GDataXMLNode elementWithName:@"Pommeau"];
+    GDataXMLElement *murretRoot = [GDataXMLNode elementWithName:@"Murret"];
+    GDataXMLElement *puckRoot = [GDataXMLNode elementWithName:@"Puck"];
+    GDataXMLElement *pointControleRoot = [GDataXMLNode elementWithName:@"PointControle"];
+    GDataXMLElement *butRoot = [GDataXMLNode elementWithName:@"But"];
+    
     for(Node *node in renderingTree.tree) {
+        //Object node
+        GDataXMLElement *nodeElement = [GDataXMLNode elementWithName:node.xmlType];
+        //Common Properties (all objects have a position)
+        GDataXMLElement *posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x]];
+        GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y]];
+        GDataXMLElement *posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",node.position.z   ]];
         
-        // Get the values from the node (ex : type, scale, angle, etc.)
-        GDataXMLElement *nodeElement = [GDataXMLNode elementWithName:@"Node"];
-        GDataXMLElement *typeElement = [GDataXMLNode elementWithName:@"Type" stringValue:node.type];
+        // Add attribute to the current nodeElement
+        [nodeElement addAttribute:posXProperty];
+        [nodeElement addAttribute:posYProperty];
+        [nodeElement addAttribute:posZProperty];
         
-        // Add values to the current nodeElement
-        [nodeElement addChild:typeElement];
-        
-        // Add the nodeElement to the tree
-        [treeElement addChild:nodeElement];
+        if([node.xmlType isEqualToString:@"Booster"])
+        {
+            [boosterRoot addChild:nodeElement];
+        }
+        else if([node.xmlType isEqualToString:@"Portal"])
+        {
+            [portalRoot addChild:nodeElement];
+        }
+        else if([node.xmlType isEqualToString:@"Pommeau"])
+        {
+            [pommeauRoot addChild:nodeElement];
+        }
+        else if([node.xmlType isEqualToString:@"Murret"])
+        {
+            [murretRoot addChild:nodeElement];
+        }
+        else if([node.xmlType isEqualToString:@"Puck"])
+        {
+            [puckRoot addChild:nodeElement];
+        }
+        else if([node.xmlType isEqualToString:@"PointControle"])
+        {
+            [pointControleRoot addChild:nodeElement];
+        }
+        else if([node.xmlType isEqualToString:@"But"])
+        {
+            [butRoot addChild:nodeElement];
+        }
     }
+    
+    [treeElement addChild:boosterRoot];
+    [treeElement addChild:portalRoot];
+    [treeElement addChild:pommeauRoot];
+    [treeElement addChild:murretRoot];
+    [treeElement addChild:puckRoot];
+    [treeElement addChild:pointControleRoot];
+    [treeElement addChild:butRoot];
     
     // Save the constructed tree to an xml file
     GDataXMLDocument *document = [[[GDataXMLDocument alloc]initWithRootElement:treeElement] autorelease];
     
     return document.XMLData;
-    
-    // Need to specify the path
-//    NSString *filePath = [self dataFilePath:name:TRUE];
-//    NSLog(@"Saving xml data to %@...", filePath);
-//    [xmlData writeToFile:filePath atomically:YES];
-
 }
-
 
 @end

@@ -23,6 +23,7 @@ GLfloat nodeHeight = 1.1f;
 {
     if((self = [super init])) {
         self.type = @"EDGE";
+        self.xmlType = @"PointControle";
         self.isSelectable = YES;
         
         self.index = index;

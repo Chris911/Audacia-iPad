@@ -9,6 +9,8 @@
 #import "EAGLViewController.h"
 #import "EAGLView.h"
 #import "NodeTable.h"
+#import "NodePortal.h"
+#import "NodeBooster.h"
 
 #define kAlertNameMapTag 1
 
@@ -25,7 +27,8 @@ int const TRANSFORMVIEW_TAG   = 300;
 int const OBJECTSVIEW_TAG     = 400;
 int const SETTINGSVIEW_TAG    = 500;
 
-
+int const PORTALVIEW_TAG      = 10;
+int const BOOSTERVIEW_TAG     = 20;
 
 // Uniform index.
 enum {
@@ -49,7 +52,12 @@ enum {
     BOOL anyNodeSelected;
     
     BOOL cameraTranslation;
+    
+    // Define the current transformation state (translate,rotation or scale)
     int  currentTransformState;
+    
+    // Define the current type of object to add
+    int activeObjectTag;
     
     float camPosX, camPosY, camPosZ;
     float zoomFactor;
@@ -86,9 +94,9 @@ enum {
     animationFrameInterval = 1;
     self.displayLink = nil;
     
-    cameraTranslation = YES;
-    firstTimeBuilding = YES;
-    currentTransformState = STATE_TRANSFORM_TRANSLATION;
+    firstTimeBuilding       = YES;
+    currentTransformState   = STATE_TRANSFORM_TRANSLATION;
+    activeObjectTag      = -1;
  
     // Initialize Scene and rendring tree
     [Scene getInstance];
@@ -115,6 +123,10 @@ enum {
     [_ParametersView release];
     [_TransformView release];
     [_SettingsView release];
+    [_PortalView release];
+    [_PortalImageView release];
+    [_BoosterView release];
+    [_BoosterImageView release];
     [super dealloc];
 }
 
@@ -157,6 +169,10 @@ enum {
     [self setParametersView:nil];
     [self setTransformView:nil];
     [self setSettingsView:nil];
+    [self setPortalView:nil];
+    [self setPortalImageView:nil];
+    [self setBoosterView:nil];
+    [self setBoosterImageView:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -224,32 +240,34 @@ enum {
 {
     for(UITouch* touch in touches) {
         CGPoint positionCourante = [touch locationInView:self.view];
-        NSLog(@"TouchBegan, x: %f y:%f",positionCourante.x,positionCourante.y);
 
         // Use touch coordinates to try and select a Node
         Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x,
                                     [self convertFromScreenToWorld:positionCourante].y, 0);
-        NSLog(@"TouchBegan, x: %f y:%f",pos.x,pos.y);
-        // Check if any node was selected with the first touch.
-        // If not, we can move the camera
-        if([[Scene getInstance].renderingTree selectNodeByPosition:pos])
-        {
-            NSLog(@"Touch resulted in node selection");
-            [self slideInAnimationView:self.ParametersView];
-            cameraTranslation = NO;
-        } else {
-            NSLog(@"Touch did not select any node");
-            // TODO: Introduce camera movement here
-            cameraTranslation = YES;
-            [self slideOutAnimationView:self.ParametersView];
+
+        
+        // Detect touch events on the EAGLView (self.view)
+        if(touch.view == self.view){
+            // Check if any node was selected with the first touch.
+            // If not, we can move the camera
+            if([[Scene getInstance].renderingTree selectNodeByPosition:pos])
+            {
+                NSLog(@"Touch resulted in node selection");
+                [self slideInAnimationView:self.ParametersView];
+                cameraTranslation = NO;
+            } else {
+                NSLog(@"Touch did not select any node");
+                // TODO: Introduce camera movement here
+                cameraTranslation = YES;
+                [self slideOutAnimationView:self.ParametersView];
+            }
+            
+        // If a view other than EAGLView is touched, we want
+        // to handle the drag and drop functionnality
+        } else { 
+            [self handleFirstTouchOnView:touch.view];
         }
     }
-    
-//    // Multi-touch 
-//    NSSet *allTouches = [event allTouches];
-//    for(UITouch* touch in allTouches) {
-//        //CGPoint positionCourante = [touch locationInView:self.view];
-//    }    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -262,8 +280,6 @@ enum {
         // 3 types of transformations.  If no node is selected,
         // then the camera will be panning around.  This allow
         // to not interfer with the currentTransformState
-        NSLog(@"TouchMoved, x: %f y:%f",positionCourante.x,positionCourante.y);
-
         if(!cameraTranslation) {
             if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
                 [[Scene getInstance].renderingTree translateSelectedNodes:
@@ -290,7 +306,6 @@ enum {
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"TouchEnded");
     [Scene replaceOutOfBoundsElements];
     cameraTranslation = NO;
 }
@@ -312,16 +327,6 @@ enum {
         [self slideInAnimationView:self.CameraView];
         cameraViewIsHidden = YES;
     }
-}
-
-- (IBAction)TouchButtonInViewTEST:(id)sender
-{
-    if(anyNodeSelected)
-        [self slideInAnimationView:self.ParametersView];
-    else
-        [self slideOutAnimationView:self.ParametersView];
-    anyNodeSelected = !anyNodeSelected;
-
 }
 
 - (IBAction)toggleTranslateCamera:(id)sender
@@ -368,6 +373,51 @@ enum {
     [self resetUI];
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     [delegate afficherMenu];
+}
+
+#pragma mark - Drag And Drop function
+
+// Assign the view type (ex : PortalView) so that
+// we know what object to add next
+- (void) handleFirstTouchOnView:(UIView*) view
+{
+    if(view.tag > 0) {
+        activeObjectTag = view.tag;
+    } else {
+        NSLog(@"Invalid Tag");
+    }
+}
+
+// Drag and drop objects on the table by using UIView
+- (void) dragAndDrop:(UIPanGestureRecognizer *) gesture
+{
+    CGPoint location = [gesture locationInView:self.view];
+    if ([gesture state] == UIGestureRecognizerStateBegan) {
+        // Drag started
+        [self.view viewWithTag:activeObjectTag].center = location;
+    } else if ([gesture state] == UIGestureRecognizerStateChanged) {
+        // Drag moved
+        [self.view viewWithTag:activeObjectTag].center = location;
+    } else if ([gesture state] == UIGestureRecognizerStateEnded) {
+        // Drag completed
+        [self.view viewWithTag:activeObjectTag].center = location;
+
+        // Add a specific Node to the scene and replace the dragged view
+        if(activeObjectTag == PORTALVIEW_TAG) {
+            NodePortal *portal = [[[NodePortal alloc]init]autorelease];
+            CGPoint worldPos = [self convertFromScreenToWorld:CGPointMake(location.x,location.y)];
+            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(worldPos.x, worldPos.y, 10)];
+            [self.view viewWithTag:activeObjectTag].center =  self.PortalImageView.center;
+            
+        } else if(activeObjectTag == BOOSTERVIEW_TAG) {
+            NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
+            CGPoint worldPos = [self convertFromScreenToWorld:CGPointMake(location.x,location.y)];
+            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(worldPos.x, worldPos.y, 10)];
+            [self.view viewWithTag:activeObjectTag].center =  self.BoosterImageView.center;
+        }
+    }
+    
+    [Scene replaceOutOfBoundsElements];
 }
 
 #pragma mark - Core GL Methods
@@ -598,6 +648,14 @@ float mCurrentScale, mLastScale;
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
     [self.view addGestureRecognizer:pinchGesture];
     [pinchGesture release];
+    
+    // PanGesture recognizer
+    UIPanGestureRecognizer *dndPortal = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
+    UIPanGestureRecognizer *dndBooster = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
+    [self.PortalView addGestureRecognizer:dndPortal];
+    [self.BoosterView addGestureRecognizer:dndBooster];
+    [dndBooster release];
+    [dndPortal release];
 }
 
 - (void) prepareAdditionalViews
@@ -615,8 +673,8 @@ float mCurrentScale, mLastScale;
     self.TransformView.center = CGPointMake(TRANSFORMVIEW_INITIAL_POSITION,self.TransformView.center.y);
     self.SettingsView.center = CGPointMake(1024 + self.SettingsView.frame.size.width,
                                          HAUTEUR_ECRAN + self.SettingsView.frame.size.height);
-}
 
+}
 #pragma mark - Reset table utility
 
 - (void) resetUI
@@ -626,6 +684,8 @@ float mCurrentScale, mLastScale;
 
 - (void) resetTable
 {
+    currentTransformState = STATE_TRANSFORM_TRANSLATION;
+    activeObjectTag = -1;
     [[Scene getInstance].renderingTree emptyRenderingTree];
 }
 

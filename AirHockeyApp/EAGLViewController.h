@@ -35,18 +35,20 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UIView *ParametersView;
 @property (retain, nonatomic) IBOutlet UIView *TransformView;
 @property (retain, nonatomic) IBOutlet UIView *SettingsView;
+@property (retain, nonatomic) IBOutlet UIView *PortalView;
+@property (retain, nonatomic) IBOutlet UIView *PortalImageView;
+@property (retain, nonatomic) IBOutlet UIView *BoosterView;
+@property (retain, nonatomic) IBOutlet UIImageView *BoosterImageView;
 
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)setupView;
 
 - (IBAction)OpenCameraView:(id)sender;
-- (IBAction)TouchButtonInViewTEST:(id)sender;
 - (IBAction)toggleTranslateCamera:(id)sender;
 - (IBAction)toggleScreenshotButton:(id)sender;
 - (IBAction)toggleTransformRotation:(id)sender;
 - (IBAction)toggleTransformScale:(id)sender;
 - (IBAction)toggleSettingsView:(id)sender;
 - (IBAction)ExitProgram:(id)sender;
-
 @end

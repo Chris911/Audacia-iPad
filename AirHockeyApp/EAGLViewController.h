@@ -35,10 +35,20 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UIView *ParametersView;
 @property (retain, nonatomic) IBOutlet UIView *TransformView;
 @property (retain, nonatomic) IBOutlet UIView *SettingsView;
-@property (retain, nonatomic) IBOutlet UIView *PortalView;
+
+// Image Views for drag n drop
 @property (retain, nonatomic) IBOutlet UIView *PortalImageView;
-@property (retain, nonatomic) IBOutlet UIView *BoosterView;
 @property (retain, nonatomic) IBOutlet UIImageView *BoosterImageView;
+@property (retain, nonatomic) IBOutlet UIImageView *MuretImageView;
+@property (retain, nonatomic) IBOutlet UIImageView *PuckImageView;
+@property (retain, nonatomic) IBOutlet UIImageView *PommeauImageView;
+
+// Views for drag and drop
+@property (retain, nonatomic) IBOutlet UIView *PortalView;
+@property (retain, nonatomic) IBOutlet UIView *BoosterView;
+@property (retain, nonatomic) IBOutlet UIView *MuretView;
+@property (retain, nonatomic) IBOutlet UIView *PuckView;
+@property (retain, nonatomic) IBOutlet UIView *PommeauView;
 
 - (void)startAnimation;
 - (void)stopAnimation;

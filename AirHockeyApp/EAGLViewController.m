@@ -266,7 +266,6 @@ enum {
         Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x,
                                     [self convertFromScreenToWorld:positionCourante].y, 0);
 
-        NSLog(@"x:%f, y:%f",pos.x,pos.y);
         // Detect touch events on the EAGLView (self.view)
         if(touch.view == self.view){
             // Check if any node was selected with the first touch.
@@ -397,6 +396,11 @@ enum {
     [delegate afficherMenu];
 }
 
+- (IBAction)deleteItem:(id)sender
+{
+    [[Scene getInstance].renderingTree removeSelectedNodes];
+}
+
 #pragma mark - Drag And Drop function
 
 // Assign the view type (ex : PortalView) so that
@@ -418,6 +422,7 @@ enum {
         
         // Drag started
         [self.view viewWithTag:activeObjectTag].center = location;
+        [self slideOutAnimationView:self.ParametersView];
         
     } else if ([gesture state] == UIGestureRecognizerStateChanged) {
         
@@ -447,12 +452,10 @@ enum {
                 [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(worldPos.x, worldPos.y, 10)];
                 
             } else if(activeObjectTag == PUCKVIEW_TAG) {
-                NodePuck *puck = [[[NodePuck alloc]init]autorelease];
-                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:puck :Vector3DMake(worldPos.x, worldPos.y, 10)];
+                [[Scene getInstance].renderingTree addPuckToTreeWithInitialPosition:Vector3DMake(worldPos.x, worldPos.y, 10)];
                 
             } else if(activeObjectTag == POMMEAUVIEW_TAG) {
-                NodePommeau *pomel = [[[NodePommeau alloc]init]autorelease];
-                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:pomel :Vector3DMake(worldPos.x, worldPos.y, 10)];
+                [[Scene getInstance].renderingTree addStickToTreeWithInitialPosition:Vector3DMake(worldPos.x, worldPos.y, 10)];
             }
         }
         

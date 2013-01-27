@@ -21,7 +21,7 @@
 
 @property BOOL isSelected;
 @property BOOL isVisible;
-@property BOOL isSelectable;
+@property BOOL isRemovable;
 @property BOOL isWaveFrontObject;
 
 // Constructor

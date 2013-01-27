@@ -16,6 +16,8 @@
 // Add node to rendering tree
 - (void) addNodeToTree:(Node*) node;
 - (void) addNodeToTreeWithInitialPosition:(Node*) node:(Vector3D)pos;
+- (void) addStickToTreeWithInitialPosition:(Vector3D)pos;
+- (void) addPuckToTreeWithInitialPosition:(Vector3D)pos;
 
 // Select node using its position
 - (BOOL) selectNodeByPosition:(Vector3D) position;

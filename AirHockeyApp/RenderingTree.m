@@ -9,6 +9,8 @@
 #import "RenderingTree.h"
 #import "NodeCube.h"
 #import "NodeTable.h"
+#import "NodePommeau.h"
+#import "NodePuck.h"
 
 @implementation RenderingTree
 
@@ -31,6 +33,7 @@
    }
 }
 
+#pragma mark - Adding nodes to the tree
 // Add node to rendering tree
 - (void) addNodeToTree:(Node*) node
 {
@@ -55,6 +58,48 @@
     [tree addObject:node];
 }
 
+// Add a stick to the table while checking for constraints
+// on this game element
+- (void) addStickToTreeWithInitialPosition:(Vector3D)pos
+{
+    int stickCount = 0;
+    for(Node* node in self.tree) {
+        if([node.type isEqualToString:@"POMMEAU"]) {
+            stickCount ++;
+        }
+    }
+
+    // if there is 2 sticks on the table, don't add a new one
+    if (stickCount < 2) {
+        NodePommeau *pom = [[[NodePommeau alloc]init]autorelease];
+        pom.position = pos;
+        [tree addObject:pom];
+    } else {
+        NSLog(@"Table already has 2 sticks");
+    }
+}
+
+// Add a puck to the table while checking for constraints
+// on this game element
+- (void) addPuckToTreeWithInitialPosition:(Vector3D)pos
+{
+    int puckCount = 0;
+    for(Node* node in self.tree) {
+        if([node.type isEqualToString:@"PUCK"]) {
+            puckCount ++;
+        }
+    }
+    
+    if(puckCount == 0) {
+        NodePuck *puck = [[[NodePuck alloc]init]autorelease];
+        puck.position = pos;
+        [tree addObject:puck];
+    } else {
+        NSLog(@"Table already has 1 puck");
+    }
+}
+
+#pragma mark - Selecting nodes
 // Select node using its position
 // FIXME: only works in the default 2D Plane
 - (BOOL) selectNodeByPosition:(Vector3D) position
@@ -71,11 +116,10 @@
     for(Node* node in self.tree)
     {
         // bounding box check, FIXME: selection not optimal
-        if(node.isSelectable
-           && (node.position.x <= position.x + offset
+        if(node.position.x <= position.x + offset
            && node.position.x >= position.x - offset
            && node.position.y <= position.y + offset
-           && node.position.y >= position.y - offset)) {
+           && node.position.y >= position.y - offset) {
                node.isSelected = YES;
                NSLog(@"Selected Type:%@",node.type);
                // FIXME: This only works for SINGLE OBJECT selection
@@ -85,9 +129,26 @@
     return nodeWasSelected;
 }
 
+// Select all nodes of the rendering tree
+- (void) selectAllNodes
+{
+    for(Node* node in self.tree)
+    {
+        node.isSelected = YES;
+    }
+}
+
 // Remove selected nodes
 - (BOOL) removeSelectedNodes
 {
+    // Need regular for loop here for sync problem.
+    for(int i = 0; i < [self.tree count]; i++)
+    {
+        Node *node = [self.tree objectAtIndex:i];
+        if(node.isSelected && node.isRemovable) {
+            [self.tree removeObject:node];
+        }
+    }
     return YES;
 }
 
@@ -105,15 +166,6 @@
     }
 }
 
-// Select all nodes of the rendering tree
-- (void) selectAllNodes
-{
-    for(Node* node in self.tree)
-    {
-        node.isSelected = YES;
-    }
-}
-
 // Transforms on selected nodes
 - (void) rotateSelectedNodes:(Rotation3D)rotation
 {
@@ -125,6 +177,7 @@
     }
 }
 
+#pragma mark - Transformation on nodes
 // Scale node that are currently selected
 - (void) scaleSelectedNodes:(float) deltaScale
 {
@@ -155,6 +208,7 @@
     return NO;
 }
 
+#pragma mark - Utility functions
 - (int) getNumberOfNodes
 {
     return [tree count];

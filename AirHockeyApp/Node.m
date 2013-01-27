@@ -17,7 +17,7 @@
 @synthesize position;
 @synthesize scaleFactor;
 
-@synthesize isSelectable;
+@synthesize isRemovable;
 @synthesize isSelected;
 @synthesize isVisible;
 
@@ -34,7 +34,7 @@ const float DEFAULT_ANGLE_VALUE = 0.0f;
         self.scaleFactor        = DEFAULT_SCALE_VALUE;
         self.angle              = DEFAULT_ANGLE_VALUE;
         
-        self.isSelectable       = YES;
+        self.isRemovable        = YES;
         self.isVisible          = YES;
         self.isSelected         = NO;
         self.isWaveFrontObject  = NO;

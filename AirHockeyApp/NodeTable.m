@@ -26,7 +26,7 @@
     if((self = [super init])) {
         
         self.type = @"TABLE";
-        self.isSelectable = NO;
+        self.isRemovable = NO;
         
         [self initTableEdges];
         [self initColors];

@@ -36,25 +36,20 @@
     [super viewDidLoad];
     
     if([self isNetworkAvailable]){
-    
-    //[XMLUtil savePartyWithFileName:[Scene getInstance].renderingTree :@"test"];
-    //RenderingTree* newTestTree = [XMLUtil loadRenderingTreeFromFileName:@"test"];
-    
-    AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://legalindexes.indoff.com/sitemap.xml"]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument) {
-        NSLog(@"XMLDocument: %@", XMLDocument);
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, GDataXMLDocument *XMLDocument) {
-        NSLog(@"Failure!");
-    }];
-    // Just start the operation on a background thread
-    [operation start];
+        AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://legalindexes.indoff.com/sitemap.xml"]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument) {
+            NSLog(@"XMLDocument: %@", XMLDocument);
+            
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, GDataXMLDocument *XMLDocument) {
+            NSLog(@"Failure! :%@",response);
+        }];
+        // Just start the operation on a background thread
+        [operation start];
     } 
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -65,9 +60,11 @@
 }
 
 - (void)dealloc {
+    [_downloadSelectedMap release];
     [super dealloc];
 }
 - (void)viewDidUnload {
+    [self setDownloadSelectedMap:nil];
     [super viewDidUnload];
 }
 - (IBAction)goBack:(id)sender

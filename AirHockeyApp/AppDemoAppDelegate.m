@@ -13,7 +13,6 @@
 @synthesize menuViewController = _menuViewController;
 @synthesize eaglViewController = _eaglViewController;
 
-
 - (void) afficherVueAnimee
 {
     self.window.rootViewController = self.eaglViewController;
@@ -31,6 +30,8 @@
 {
     // Override point for customization after application launch.
     self.window.rootViewController = self.menuViewController;
+    
+    // Create a user session
     return YES;
 }
 

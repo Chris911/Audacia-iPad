@@ -17,5 +17,4 @@
 @property (nonatomic, retain) IBOutlet MenuViewController *menuViewController;
 @property (nonatomic, retain) IBOutlet EAGLViewController *eaglViewController;
 
-
 @end

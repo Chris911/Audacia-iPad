@@ -12,5 +12,6 @@
 @interface BetaViewController : UIViewController
 - (IBAction)goBack:(id)sender;
 - (IBAction)testUpload:(id)sender;
+@property (retain, nonatomic) IBOutlet UIButton *downloadSelectedMap;
 
 @end

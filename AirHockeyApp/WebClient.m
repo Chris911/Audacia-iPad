@@ -15,6 +15,7 @@
 @synthesize uploadScript;
 @synthesize mapsAPIScript;
 
+
 - (id) initWithDefaultServer
 {
     if((self = [super init])) {
@@ -29,11 +30,13 @@
     return self;
 }
 
+
 - (void) uploadMapData:(NSString*)mapName :(NSData *)xmlData :(UIImage*)mapImage
 {
     [self uploadXMLData:xmlData :mapName];
     [self uploadImageData:mapImage :mapName];
 }
+
 
 - (void) uploadXMLData:(NSData*)xmlData :(NSString *)mapName
 {
@@ -49,6 +52,7 @@
     }];
     [operation start];
 }
+
 
 - (void) uploadImageData:(UIImage*)image :(NSString*)mapName
 {
@@ -66,19 +70,28 @@
     [operation start];
 }
 
-- (void) fetchAllMapsFromDatabase
+
+- (NSArray*) fetchAllMapsFromDatabase
 {
     NSMutableURLRequest *request = [self.AFClient requestWithMethod:@"POST"
                                                                path:self.mapsAPIScript
                                                          parameters:@{@"action":@"fetchAllMaps"}];
     
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString* response = [operation responseString];
-        NSLog(@"response: %@",response);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error: %@", [operation error]);
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"Map Name: %@", [JSON valueForKeyPath:@"mapId"]);
+        
+        NSArray *mapIdArray = [JSON valueForKeyPath:@"mapId"];
+        NSArray *nameArray = [JSON valueForKeyPath:@"name"];
+        NSArray *dateAddedArray = [JSON valueForKeyPath:@"dateAdded"];
+        NSArray *ratingArray = [JSON valueForKeyPath:@"rating"];
+        NSArray *privateArray = [JSON valueForKeyPath:@"private"];
+        
+        NSMutableArray *allMaps = [[NSMutableArray alloc]init];
+        for(int i=0; i<[mapIdArray count]; i++) {
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"Error: %@", error);
     }];
     
     [operation start];

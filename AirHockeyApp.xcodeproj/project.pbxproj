@@ -19,6 +19,7 @@
 		04A04E6A16AEF7C6006D1FEB /* NodePuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6916AEF7C5006D1FEB /* NodePuck.m */; };
 		04A04E6D16AEF7CF006D1FEB /* NodePortal.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6C16AEF7CF006D1FEB /* NodePortal.m */; };
 		04A04E7016AEF7DB006D1FEB /* NodePommeau.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6F16AEF7DB006D1FEB /* NodePommeau.m */; };
+		04CE82AF16B887D300F8B796 /* MapContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE82AE16B887D300F8B796 /* MapContainer.m */; };
 		04DF183116ACAC6400339EDB /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DF183016ACAC6400339EDB /* WebClient.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		04F43C6316B038D00017756F /* booster.blend in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C4D16B038D00017756F /* booster.blend */; };
 		04F43C6416B038D00017756F /* pommeau.blend in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C4E16B038D00017756F /* pommeau.blend */; };
@@ -44,9 +45,6 @@
 		96378D8E1472C71200F543EA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D8C1472C71200F543EA /* MainWindow.xib */; };
 		96378D971472C7CC00F543EA /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D961472C7CC00F543EA /* MenuViewController.m */; };
 		96378D9A1472C80A00F543EA /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D991472C80A00F543EA /* MenuViewController.xib */; };
-		968DACBE1472EB55007D15A3 /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 968DACBB1472EB55007D15A3 /* cube.mtl */; };
-		968DACBF1472EB55007D15A3 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 968DACBC1472EB55007D15A3 /* cube.obj */; };
-		968DACC01472EB55007D15A3 /* poly.png in Resources */ = {isa = PBXBuildFile; fileRef = 968DACBD1472EB55007D15A3 /* poly.png */; };
 		968DACCC1472EDA4007D15A3 /* OpenGLTexture3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */; };
 		968DACCD1472EDA4007D15A3 /* OpenGLWaveFrontGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC71472EDA4007D15A3 /* OpenGLWaveFrontGroup.m */; };
 		968DACCE1472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC91472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m */; };
@@ -118,6 +116,8 @@
 		04A04E6C16AEF7CF006D1FEB /* NodePortal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodePortal.m; sourceTree = "<group>"; };
 		04A04E6E16AEF7DB006D1FEB /* NodePommeau.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodePommeau.h; sourceTree = "<group>"; };
 		04A04E6F16AEF7DB006D1FEB /* NodePommeau.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodePommeau.m; sourceTree = "<group>"; };
+		04CE82AD16B887D300F8B796 /* MapContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapContainer.h; sourceTree = "<group>"; };
+		04CE82AE16B887D300F8B796 /* MapContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapContainer.m; sourceTree = "<group>"; };
 		04DF182F16ACAC6400339EDB /* WebClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebClient.h; sourceTree = "<group>"; };
 		04DF183016ACAC6400339EDB /* WebClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebClient.m; sourceTree = "<group>"; };
 		04F43C4D16B038D00017756F /* booster.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = booster.blend; sourceTree = "<group>"; };
@@ -148,9 +148,6 @@
 		96378D951472C7CC00F543EA /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		96378D961472C7CC00F543EA /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		96378D991472C80A00F543EA /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
-		968DACBB1472EB55007D15A3 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.mtl; sourceTree = "<group>"; };
-		968DACBC1472EB55007D15A3 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
-		968DACBD1472EB55007D15A3 /* poly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poly.png; sourceTree = "<group>"; };
 		968DACC31472EDA4007D15A3 /* OpenGLTexture3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLTexture3D.h; sourceTree = "<group>"; };
 		968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLTexture3D.m; sourceTree = "<group>"; };
 		968DACC51472EDA4007D15A3 /* OpenGLWaveFrontCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLWaveFrontCommon.h; sourceTree = "<group>"; };
@@ -247,6 +244,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044CD6C716B86E9700218CA1 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				044CD6C916B86EB000218CA1 /* Map */,
+				A831CEA316B7216B00A30C39 /* Session */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		044CD6C916B86EB000218CA1 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				04CE82AD16B887D300F8B796 /* MapContainer.h */,
+				04CE82AE16B887D300F8B796 /* MapContainer.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
 		048C9D2F16A4A873006A7082 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +383,7 @@
 		96378D801472C71100F543EA /* AirHockeyApp */ = {
 			isa = PBXGroup;
 			children = (
+				044CD6C716B86E9700218CA1 /* Classes */,
 				048C9D3716A4BCB7006A7082 /* Scene */,
 				048C9D2F16A4A873006A7082 /* Objects */,
 				04DF182D16ACABE000339EDB /* Networking */,
@@ -376,9 +392,7 @@
 				96378D981472C7F200F543EA /* Interface Builder */,
 				96378D941472C78200F543EA /* Controleurs */,
 				96378D811472C71200F543EA /* Supporting Files */,
-				968DACBA1472EAFF007D15A3 /* Modèles 3D */,
 				A8CC901E16A6E7B800CFD27D /* XMLUtil */,
-				A831CEA316B7216B00A30C39 /* Session */,
 			);
 			path = AirHockeyApp;
 			sourceTree = "<group>";
@@ -418,16 +432,6 @@
 				969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */,
 			);
 			name = "Interface Builder";
-			sourceTree = "<group>";
-		};
-		968DACBA1472EAFF007D15A3 /* Modèles 3D */ = {
-			isa = PBXGroup;
-			children = (
-				968DACBB1472EB55007D15A3 /* cube.mtl */,
-				968DACBC1472EB55007D15A3 /* cube.obj */,
-				968DACBD1472EB55007D15A3 /* poly.png */,
-			);
-			name = "Modèles 3D";
 			sourceTree = "<group>";
 		};
 		968DACC11472ED46007D15A3 /* Utilitaires */ = {
@@ -624,9 +628,6 @@
 				96378D8E1472C71200F543EA /* MainWindow.xib in Resources */,
 				96378D9A1472C80A00F543EA /* MenuViewController.xib in Resources */,
 				969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */,
-				968DACBE1472EB55007D15A3 /* cube.mtl in Resources */,
-				968DACBF1472EB55007D15A3 /* cube.obj in Resources */,
-				968DACC01472EB55007D15A3 /* poly.png in Resources */,
 				A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */,
 				A8C5A8C2169E39A5008B29EF /* CameraButton1.png in Resources */,
 				A8BD086A169F871E00B7A95D /* SideBar.png in Resources */,
@@ -706,6 +707,7 @@
 				04A04E7016AEF7DB006D1FEB /* NodePommeau.m in Sources */,
 				0409924916B21087009DBE1D /* NetworkUtils.m in Sources */,
 				A831CEA716B7219800A30C39 /* Session.m in Sources */,
+				04CE82AF16B887D300F8B796 /* MapContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

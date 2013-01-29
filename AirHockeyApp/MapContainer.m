@@ -27,7 +27,6 @@
     }
     return self;
 }
-- (void) fuckYou
-{}
+
 @end
 

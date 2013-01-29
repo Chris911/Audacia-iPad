@@ -10,7 +10,6 @@
 
 @interface MapContainer : NSObject
 
-
 @property int mapId;
 @property (nonatomic, retain)NSString *name;
 @property (nonatomic, retain)NSString *timeStamp;
@@ -18,7 +17,5 @@
 @property BOOL private;
 
 - (id) initWithMapData:(int)_mapId :(NSString *)_name :(NSString *)_timeStamp :(int)_rating :(BOOL)_private;
-
-- (void) fuckYou;
 
 @end

@@ -77,6 +77,8 @@
                                                                path:self.mapsAPIScript
                                                          parameters:@{@"action":@"fetchAllMaps"}];
     
+    NSMutableArray *allMaps = [[NSMutableArray alloc]init];
+    
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSLog(@"Map Name: %@", [JSON valueForKeyPath:@"mapId"]);
         
@@ -86,8 +88,10 @@
         NSArray *ratingArray = [JSON valueForKeyPath:@"rating"];
         NSArray *privateArray = [JSON valueForKeyPath:@"private"];
         
-        NSMutableArray *allMaps = [[NSMutableArray alloc]init];
         for(int i=0; i<[mapIdArray count]; i++) {
+            MapContainer *map = [[MapContainer alloc]initWithMapData:[mapIdArray objectAtIndex:i]  :[nameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :[ratingArray objectAtIndex:i] :[privateArray objectAtIndex:i]];
+            
+            [allMaps addObject:map];
         }
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {

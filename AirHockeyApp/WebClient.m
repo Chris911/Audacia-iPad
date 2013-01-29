@@ -13,12 +13,14 @@
 @synthesize AFClient;
 @synthesize server;
 @synthesize uploadScript;
+@synthesize mapsAPIScript;
 
 - (id) initWithDefaultServer
 {
     if((self = [super init])) {
         self.server = @"http://kepler.step.polymtl.ca/";
         self.uploadScript = @"/projet3/scripts/upload.php";
+        self.mapsAPIScript = @"/projet3/scripts/MapsAPI.php";
         NSURL *url = [NSURL URLWithString:self.server];
         AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
         self.AFClient = httpClient;
@@ -61,6 +63,24 @@
     [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
         NSLog(@"Sent %lld of %lld bytes [SS]", totalBytesWritten, totalBytesExpectedToWrite);
     }];
+    [operation start];
+}
+
+- (void) fetchAllMapsFromDatabase
+{
+    NSMutableURLRequest *request = [self.AFClient requestWithMethod:@"POST"
+                                                               path:self.mapsAPIScript
+                                                         parameters:@{@"action":@"fetchAllMaps"}];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString* response = [operation responseString];
+        NSLog(@"response: %@",response);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error: %@", [operation error]);
+    }];
+    
     [operation start];
 }
 

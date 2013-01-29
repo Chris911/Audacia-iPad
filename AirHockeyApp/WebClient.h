@@ -17,8 +17,10 @@
 @property (retain,nonatomic) AFHTTPClient* AFClient;
 @property (retain,nonatomic) NSString* server;
 @property (retain,nonatomic) NSString* uploadScript;
+@property (retain,nonatomic) NSString* mapsAPIScript;
 
 - (id) initWithDefaultServer;
 - (void) uploadMapData:(NSString*)mapName :(NSData *)xmlData :(UIImage*)mapImage;
+- (void) fetchAllMapsFromDatabase;
 
 @end

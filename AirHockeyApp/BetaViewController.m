@@ -74,8 +74,8 @@
 
 - (IBAction)testUpload:(id)sender
 {
-    //WebClient* webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
-    //[webClient uploadImageData:@"Test"]
+    WebClient* webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
+    [webClient fetchAllMapsFromDatabase];
 }
 
 - (BOOL)isNetworkAvailable

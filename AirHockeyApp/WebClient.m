@@ -77,7 +77,7 @@
                                                                path:self.mapsAPIScript
                                                          parameters:@{@"action":@"fetchAllMaps"}];
     
-    NSMutableArray *allMaps = [[NSMutableArray alloc]init];
+    NSMutableArray *allMaps = [[[NSMutableArray alloc]init]autorelease];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSLog(@"Map Name: %@", [JSON valueForKeyPath:@"mapId"]);
@@ -89,10 +89,11 @@
         NSArray *privateArray = [JSON valueForKeyPath:@"private"];
         
         for(int i=0; i<[mapIdArray count]; i++) {
-            MapContainer *map = [[MapContainer alloc]initWithMapData:[mapIdArray objectAtIndex:i]  :[nameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :[ratingArray objectAtIndex:i] :[privateArray objectAtIndex:i]];
+            Map *map = [[Map alloc]initWithMapData:[mapIdArray objectAtIndex:i]  :[nameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :[ratingArray objectAtIndex:i] :[privateArray objectAtIndex:i]];
             
             [allMaps addObject:map];
         }
+        [self assignNewMaps:allMaps];
         
         // NEED TO LET BETAVIEW KNOW WE ARE DONE AND SEND MAPS DATA
         
@@ -101,6 +102,13 @@
     }];
     
     [operation start];
+}
+
+- (void) assignNewMaps:(NSMutableArray*)maps
+{
+    [MapContainer getInstance];
+    [MapContainer assignNewMaps:maps];
+    NSLog(@"Maps done loading in the array");
 }
 
 @end

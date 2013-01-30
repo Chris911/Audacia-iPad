@@ -10,10 +10,12 @@
 #import "AppDemoAppDelegate.h"
 #import "MenuViewController.h"
 
+#import "Map.h"
 #import "XMLUtil.h"
 #import "Scene.h"
 #import "AFNetworking.h"
 #import "NetworkUtils.h"
+#import "MapContainer.h"    
 #import "AFGDataXMLRequestOperation.h"
 
 @interface BetaViewController ()
@@ -37,7 +39,7 @@
 {
     [super viewDidLoad];
     
-//    if([NetworkUtils isNetworkAvailable]){
+    if([NetworkUtils isNetworkAvailable]){
 //        AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://legalindexes.indoff.com/sitemap.xml"]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument) {
 //            NSLog(@"XMLDocument: %@", XMLDocument);
 //            
@@ -46,7 +48,18 @@
 //        }];
 //        // Just start the operation on a background thread
 //        [operation start];
-//    } 
+        
+        // Start the spinner
+        [self.loadingIndicator startAnimating];
+        
+        // Start the maps fetching on a background thread
+        [self performSelectorInBackground:@selector(loadNewMaps) withObject:nil];
+        
+    } else { // Internet not connected, display error
+        self.mapsTextView.text = @"Vous n'etes pas connecte a Internet!";
+    }
+    
+
 }
 
 // No keyboard
@@ -71,11 +84,13 @@
 - (void)dealloc {
     [_downloadSelectedMap release];
     [mapsTextView release];
+    [_loadingIndicator release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setDownloadSelectedMap:nil];
     [self setMapsTextView:nil];
+    [self setLoadingIndicator:nil];
     [super viewDidUnload];
 }
 - (IBAction)goBack:(id)sender
@@ -89,13 +104,34 @@
     [webClient fetchAllMapsFromDatabase];
 }
 
-- (void)mapsDataFetchingDone:(NSMutableArray*)allMaps
+- (void) loadNewMaps
 {
-    for(MapContainer *map in allMaps) {
-        NSString *mapIdString = [NSString stringWithFormat:@"Id: @%i",map.mapId];
-        [mapsTextView setText:[mapsTextView.text stringByAppendingString:mapIdString]];
+    // While a new maps array isn't ready in the MapContainer, block the background thread.
+    while (![MapContainer getInstance].isMapsLoaded) {
         
-        [mapsTextView setText:[mapsTextView.text stringByAppendingString:map.name]];
+    }
+    // Stop the spinner
+    [self.loadingIndicator stopAnimating];
+    
+    // Relaunch the UI modification on the main thread OR IT WILL CRASH (iOS specific, can't modify
+    // the UI on a background thread)
+    [self performSelectorOnMainThread:@selector(mapsDataFetchingDone) withObject:nil waitUntilDone:NO];
+}
+
+- (void)mapsDataFetchingDone
+{
+    // Safety check on the maps loaded attribute
+    if ([MapContainer getInstance].isMapsLoaded){
+        
+        for(Map *map in [MapContainer getInstance].maps) {
+            NSString *mapIdString = [NSString stringWithFormat:@"Id: @%i",map.mapId];
+            [mapsTextView setText:[mapsTextView.text stringByAppendingString:mapIdString]];
+            
+            [mapsTextView setText:[mapsTextView.text stringByAppendingString:map.name]];
+        }
+        
+        // Reset to NO so we can load a new map array when the user switches views.
+        [MapContainer getInstance].isMapsLoaded = NO;
     }
 }
 

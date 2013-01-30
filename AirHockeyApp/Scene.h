@@ -15,6 +15,7 @@
 
 + (Scene *)getInstance;
 + (void) loadDefaultElements;
++ (void) loadCustomTree:(RenderingTree*) tree;
 + (void) replaceOutOfBoundsElements;
 + (BOOL) checkIfAddingLocationInBounds:(CGPoint)location;
 @end

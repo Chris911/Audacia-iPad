@@ -10,6 +10,7 @@
 #import "Scene.h"
 #import "Session.h" 
 
+
 @interface MenuViewController()
 {
     BOOL isConnectionViewVisible;
@@ -42,7 +43,7 @@
     
     // Prepare for connection view and hide it
     isConnectionViewVisible = NO;
-    self.ConnectionView.center = CGPointMake(self.ConnectionView.center.x, -(768/2));
+    self.ConnectionView.center = CGPointMake(512, -125);
     self.UsernameLabel.text = [Session getInstance].username;
 }
 
@@ -76,7 +77,8 @@
 
 - (IBAction)usernameChanged:(id)sender
 {
-    self.UsernameLabel.text = ((UITextField*)sender).text;
+    [Session getInstance].username = ((UITextField*)sender).text;
+    self.UsernameLabel.text = [Session getInstance].username;
 }
 
 - (IBAction)passwordChanged:(id)sender
@@ -89,29 +91,32 @@
     [self toggleConnectionView];
 }
 
+// Show or hide the connection view
 - (void) toggleConnectionView
 {
     if(!isConnectionViewVisible) {
-        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseOut
+        [UIView animateWithDuration:0.3 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
-                             self.ConnectionView.center = CGPointMake(512, 768/2);
+                             self.ConnectionView.center = CGPointMake(512, 125);
                          }
                          completion:nil];
     } else {
-        [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationCurveEaseOut
+        [UIView animateWithDuration:0.3 delay: 0.0 options: UIViewAnimationCurveEaseIn
                          animations:^{
-                             self.ConnectionView.center = CGPointMake(512, -768/2);
+                             self.ConnectionView.center = CGPointMake(512, -125);
                          }
                          completion:nil];
     }
     isConnectionViewVisible = !isConnectionViewVisible;
 }
 
+// Allows the keyboard to do different actions on 'return' pressed
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.UserNameTextField) {
         [self.PasswordTextField becomeFirstResponder];
     } else if(textField == self.PasswordTextField) {
         [textField resignFirstResponder];
+        [self toggleConnectionView];
     }
     return NO;
 }

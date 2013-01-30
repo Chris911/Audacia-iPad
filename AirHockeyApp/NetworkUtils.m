@@ -3,7 +3,7 @@
 //  AirHockeyApp
 //
 //  Created by Chris on 13-01-24.
-//
+//  Edited from http://stackoverflow.com/questions/8812459/easiest-way-to-detect-a-connection-on-ios
 //
 
 #import "NetworkUtils.h"

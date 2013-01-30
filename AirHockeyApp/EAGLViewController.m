@@ -1,6 +1,6 @@
 //
 //  EAGLViewController.m
-//  AppDemo
+//  Modified by Team Audacity, orignial code from AppDemo
 //
 
 #import <QuartzCore/QuartzCore.h>

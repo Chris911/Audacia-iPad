@@ -10,6 +10,7 @@
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
 #import "MapContainer.h"
+#import "BetaViewController.h"
 
 //NSString* const defaultServer = @"http://kepler.step.polymtl.ca/";
 //NSString* const defaultUploadScript = @"/projet3/scripts/upload.php";

@@ -13,7 +13,7 @@
 #import "XMLUtil.h"
 #import "Scene.h"
 #import "AFNetworking.h"
-#import "Reachability.h"
+#import "NetworkUtils.h"
 #import "AFGDataXMLRequestOperation.h"
 
 @interface BetaViewController ()
@@ -21,6 +21,8 @@
 @end
 
 @implementation BetaViewController
+
+@synthesize mapsTextView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,16 +37,23 @@
 {
     [super viewDidLoad];
     
-    if([self isNetworkAvailable]){
-        AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://legalindexes.indoff.com/sitemap.xml"]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument) {
-            NSLog(@"XMLDocument: %@", XMLDocument);
-            
-        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, GDataXMLDocument *XMLDocument) {
-            NSLog(@"Failure! :%@",response);
-        }];
-        // Just start the operation on a background thread
-        [operation start];
-    } 
+//    if([NetworkUtils isNetworkAvailable]){
+//        AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://legalindexes.indoff.com/sitemap.xml"]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument) {
+//            NSLog(@"XMLDocument: %@", XMLDocument);
+//            
+//        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, GDataXMLDocument *XMLDocument) {
+//            NSLog(@"Failure! :%@",response);
+//        }];
+//        // Just start the operation on a background thread
+//        [operation start];
+//    } 
+}
+
+// No keyboard
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"touchesBegan:withEvent:");
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,10 +70,12 @@
 
 - (void)dealloc {
     [_downloadSelectedMap release];
+    [mapsTextView release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setDownloadSelectedMap:nil];
+    [self setMapsTextView:nil];
     [super viewDidUnload];
 }
 - (IBAction)goBack:(id)sender
@@ -78,18 +89,14 @@
     [webClient fetchAllMapsFromDatabase];
 }
 
-- (BOOL)isNetworkAvailable
+- (void)mapsDataFetchingDone:(NSMutableArray*)allMaps
 {
-    BOOL available = NO;
-    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-    if (networkStatus == NotReachable) {
-        NSLog(@"NOT Connected to internet");
-    } else {
-        available = YES;
-        NSLog(@"Connected to internet");
+    for(MapContainer *map in allMaps) {
+        NSString *mapIdString = [NSString stringWithFormat:@"Id: @%i",map.mapId];
+        [mapsTextView setText:[mapsTextView.text stringByAppendingString:mapIdString]];
+        
+        [mapsTextView setText:[mapsTextView.text stringByAppendingString:map.name]];
     }
-    return available;
 }
 
 @end

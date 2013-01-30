@@ -10,8 +10,11 @@
 #import "WebClient.h"
 
 @interface BetaViewController : UIViewController
+@property (retain, nonatomic) IBOutlet UIButton *downloadSelectedMap;
+@property (retain, nonatomic) IBOutlet UITextView *mapsTextView;
+
 - (IBAction)goBack:(id)sender;
 - (IBAction)testUpload:(id)sender;
-@property (retain, nonatomic) IBOutlet UIButton *downloadSelectedMap;
+- (void)mapsDataFetchingDone:(NSMutableArray*)allMaps;
 
 @end

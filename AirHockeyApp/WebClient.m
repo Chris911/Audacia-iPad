@@ -71,7 +71,7 @@
 }
 
 
-- (NSArray*) fetchAllMapsFromDatabase
+- (void) fetchAllMapsFromDatabase
 {
     NSMutableURLRequest *request = [self.AFClient requestWithMethod:@"POST"
                                                                path:self.mapsAPIScript
@@ -93,6 +93,8 @@
             
             [allMaps addObject:map];
         }
+        
+        // NEED TO LET BETAVIEW KNOW WE ARE DONE AND SEND MAPS DATA
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Error: %@", error);

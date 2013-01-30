@@ -18,10 +18,6 @@
 #import "MapContainer.h"    
 #import "AFGDataXMLRequestOperation.h"
 
-@interface BetaViewController ()
-
-@end
-
 @implementation BetaViewController
 
 @synthesize mapsTextView;
@@ -126,7 +122,6 @@
         for(Map *map in [MapContainer getInstance].maps) {
             NSString *mapIdString = [NSString stringWithFormat:@"Id: @%i",map.mapId];
             [mapsTextView setText:[mapsTextView.text stringByAppendingString:mapIdString]];
-            
             [mapsTextView setText:[mapsTextView.text stringByAppendingString:map.name]];
         }
         

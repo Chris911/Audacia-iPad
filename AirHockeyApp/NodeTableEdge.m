@@ -17,7 +17,7 @@ const int NODE_1_AND_6_LIMIT_Y = 25;
 const int NODE_3_AND_4_LIMIT_X = 50;
 
 GLfloat edgeColor[NB_OF_TRIANGLE*3*4];
-GLfloat nodeHeight = 1.1f;
+GLfloat nodeHeight = 4.1f;
 
 - (id) initWithCoordsAndIndex:(float)x :(float)y :(int)index
 {

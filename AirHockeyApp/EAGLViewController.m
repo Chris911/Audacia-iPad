@@ -1,7 +1,7 @@
 //
 //  EAGLViewController.m
 //  Modified by Team Audacity, orignial code from AppDemo
-//
+//  Master OpenGL container, inherited from EAGLView and and UIViewController
 
 #import <QuartzCore/QuartzCore.h>
 #import "AppDemoAppDelegate.h"
@@ -504,6 +504,7 @@ enum {
 
     [(EAGLView *)self.view setFramebuffer];
       // Perspective Mode
+//    glMatrixMode(GL_PROJECTION);
 //    gluPerspective(60, LARGEUR_FENETRE/HAUTEUR_FENETRE, 0.1, 2000);
 //    gluLookAt(camPosX, camPosY, -50,
 //              0, 0, 0,

@@ -7,8 +7,11 @@
 //
 
 #import "Node.h"
+#import "Border3D.h"
 
 @interface NodeTable : Node
+@property (nonatomic,retain)Border3D* border1;
+
 - (id) init;
 - (void) render;
 

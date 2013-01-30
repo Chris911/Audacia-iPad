@@ -2,9 +2,9 @@
 //  MapContainer.m
 //  AirHockeyApp
 //
-//  Created by Chris on 13-01-29.
+//  Created by Sam Des Rochers on 13-01-29.
 //
-//
+//  
 
 #import "MapContainer.h"
 
@@ -15,6 +15,7 @@
 
 static MapContainer *mapContainer = NULL;
 
+// Classic Obj-C singleton
 + (void)initialize
 {
     static BOOL initialized = NO;
@@ -32,6 +33,9 @@ static MapContainer *mapContainer = NULL;
     return (mapContainer);
 }
 
+// Switch the current maps set with the one fetched from
+// the webclient.  Set isMapsLoaded to YES so the UI know
+// this task is finished.
 + (void) assignNewMaps:(NSMutableArray*)newMaps
 {
     if(newMaps != nil){

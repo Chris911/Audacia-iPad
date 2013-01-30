@@ -93,7 +93,7 @@
         //Common Properties (all objects have a position)
         GDataXMLElement *posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x]];
         GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y]];
-        GDataXMLElement *posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",node.position.z   ]];
+        GDataXMLElement *posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",node.position.z]];
         
         // Add attribute to the current nodeElement
         [nodeElement addAttribute:posXProperty];

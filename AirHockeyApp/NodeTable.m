@@ -16,6 +16,7 @@
     CGPoint limits[4];
     GLfloat topColors[40];
     GLfloat borderColors[40];
+    Border3D *borders[8];
 }
 @end
 
@@ -109,6 +110,16 @@
     limits[1] = CGPointMake(-TABLE_LIMIT_X, -TABLE_LIMIT_Y);
     limits[2] = CGPointMake(TABLE_LIMIT_X, -TABLE_LIMIT_Y);
     limits[3] = CGPointMake(TABLE_LIMIT_X, TABLE_LIMIT_Y);
+    
+    borders[0] = [[Border3D alloc]initWithStartAndEndPoints:edges[0].position :edges[1].position];
+    borders[1] = [[Border3D alloc]initWithStartAndEndPoints:edges[1].position :edges[2].position];
+    borders[2] = [[Border3D alloc]initWithStartAndEndPoints:edges[2].position :edges[4].position];
+    borders[3] = [[Border3D alloc]initWithStartAndEndPoints:edges[4].position :edges[7].position];
+    borders[4] = [[Border3D alloc]initWithStartAndEndPoints:edges[6].position :edges[7].position];
+    borders[5] = [[Border3D alloc]initWithStartAndEndPoints:edges[5].position :edges[6].position];
+    borders[6] = [[Border3D alloc]initWithStartAndEndPoints:edges[3].position :edges[5].position];
+    borders[7] = [[Border3D alloc]initWithStartAndEndPoints:edges[0].position :edges[3].position];
+
 }
 
 #pragma mark - Pseudo Update Functions
@@ -188,29 +199,33 @@
 // Draw the borders of the table.  Currently only a line
 - (void) drawBorders
 {
-    GLfloat borderVertices[] = {
-        //            * Table's border *
-        edges[0].position.x,edges[0].position.y,TABLE_DEPTH,
-        edges[1].position.x,edges[1].position.y,TABLE_DEPTH,
-        edges[2].position.x,edges[2].position.y,TABLE_DEPTH,
-        edges[4].position.x,edges[4].position.y,TABLE_DEPTH,
-        edges[7].position.x,edges[7].position.y,TABLE_DEPTH,
-        edges[6].position.x,edges[6].position.y,TABLE_DEPTH,
-        edges[5].position.x,edges[5].position.y,TABLE_DEPTH,
-        edges[3].position.x,edges[3].position.y,TABLE_DEPTH,
-        edges[0].position.x,edges[0].position.y,TABLE_DEPTH
-    };
+    BOOL vertical = YES;
+    BOOL horizontal = NO;
     
-    glVertexPointer(3, GL_FLOAT, 0, borderVertices);
-    glColorPointer(4, GL_FLOAT, 0, borderColors);
+    [borders[0] setNewPosition:edges[0].position :edges[1].position:horizontal];
+    [borders[0] drawVertices];
     
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
+    [borders[1] setNewPosition:edges[1].position :edges[2].position:horizontal];
+    [borders[1] drawVertices];
     
-    glLineWidth(6.0f);
-    glDrawArrays(GL_LINE_LOOP, 0, 2+NB_OF_TRIANGLES);
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
+    [borders[2] setNewPosition:edges[2].position :edges[4].position:vertical];
+    [borders[2] drawVertices];
+    
+    [borders[3] setNewPosition:edges[4].position :edges[7].position:vertical];
+    [borders[3] drawVertices];
+    
+    [borders[4] setNewPosition:edges[6].position :edges[7].position:horizontal];
+    [borders[4] drawVertices];
+    
+    [borders[5] setNewPosition:edges[5].position :edges[6].position:horizontal];
+    [borders[5] drawVertices];
+    
+    [borders[6] setNewPosition:edges[3].position :edges[5].position:vertical];
+    [borders[6] drawVertices];
+    
+    [borders[7] setNewPosition:edges[0].position :edges[3].position:vertical];
+    [borders[7] drawVertices];
+    
 }
 
 // Draw the limits of the table
@@ -230,7 +245,7 @@
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
     
-    glLineWidth(8.0f);
+    glLineWidth(4.0f);
     glDrawArrays(GL_LINE_LOOP, 0, 4);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);

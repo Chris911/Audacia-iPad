@@ -95,7 +95,6 @@
         }
         [self assignNewMaps:allMaps];
         
-        // NEED TO LET BETAVIEW KNOW WE ARE DONE AND SEND MAPS DATA
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Error: %@", error);

@@ -194,8 +194,8 @@
         }
     }
 }
-
-// Return YES if any node was selected
+// Move selected nodes.  DeltaPoint should be already
+// normalized
 - (BOOL) translateSelectedNodes:(CGPoint) deltaPoint
 {
     for(Node* node in self.tree)

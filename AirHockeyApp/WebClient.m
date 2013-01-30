@@ -88,13 +88,20 @@
         NSArray *ratingArray = [JSON valueForKeyPath:@"rating"];
         NSArray *privateArray = [JSON valueForKeyPath:@"private"];
         
-        for(int i=0; i<[mapIdArray count]; i++) {
-            Map *map = [[Map alloc]initWithMapData:[mapIdArray objectAtIndex:i]  :[nameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :[ratingArray objectAtIndex:i] :[privateArray objectAtIndex:i]];
+        for(int i=0; i < [mapIdArray count]; i++) {
+
+            // Convert from string to int or we obtain a weird pointe value
+            NSString *mapIdString = [NSString stringWithFormat:@"%@",mapIdArray[i]];
+            int mapIdInt = [mapIdString intValue];
             
+            NSString *ratingString = [NSString stringWithFormat:@"%@",ratingArray[i]];
+            int ratingInt = [ratingString intValue];
+            
+            Map *map = [[Map alloc]initWithMapData:mapIdInt  :[nameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :ratingInt  :[privateArray objectAtIndex:i]];
             [allMaps addObject:map];
         }
-        [self assignNewMaps:allMaps];
         
+        [self assignNewMaps:allMaps];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Error: %@", error);

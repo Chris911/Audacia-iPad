@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
+#import "Map.h"
 #import "MapContainer.h"
 #import "BetaViewController.h"
 

@@ -3,7 +3,7 @@
 //  AirHockeyApp
 //
 //  Created by Sam DesRochers on 2013-01-16.
-//
+//  Original article by http://www.raywenderlich.com/725/how-to-read-and-write-xml-documents-with-gdataxml
 //
 
 #import "XMLUtil.h"

@@ -62,6 +62,7 @@
 		A889F22816B067E10008E534 /* pommeau_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22416B067E10008E534 /* pommeau_texture.png */; };
 		A889F22916B067E10008E534 /* portal_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22516B067E10008E534 /* portal_texture.png */; };
 		A889F22A16B067E10008E534 /* pucktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22616B067E10008E534 /* pucktexture.png */; };
+		A89FD22E16B949FB005383E4 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = A89FD22D16B949FB005383E4 /* Map.m */; };
 		A8BD086A169F871E00B7A95D /* SideBar.png in Resources */ = {isa = PBXBuildFile; fileRef = A8BD0869169F871E00B7A95D /* SideBar.png */; };
 		A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */; };
 		A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8BA169E025E008B29EF /* CameraImage1.png */; };
@@ -174,6 +175,8 @@
 		A889F22416B067E10008E534 /* pommeau_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pommeau_texture.png; path = AirHockeyApp/pommeau_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22516B067E10008E534 /* portal_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = portal_texture.png; path = AirHockeyApp/portal_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22616B067E10008E534 /* pucktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pucktexture.png; path = AirHockeyApp/pucktexture.png; sourceTree = SOURCE_ROOT; };
+		A89FD22C16B949FB005383E4 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		A89FD22D16B949FB005383E4 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		A8BD0869169F871E00B7A95D /* SideBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar.png; path = Assets/UI/Images/SideBar.png; sourceTree = "<group>"; };
 		A8C459FB169DD985000B9586 /* AppDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDemoAppDelegate.h; sourceTree = "<group>"; };
 		A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDemoAppDelegate.m; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 		044CD6C916B86EB000218CA1 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				A89FD22C16B949FB005383E4 /* Map.h */,
+				A89FD22D16B949FB005383E4 /* Map.m */,
 				04CE82AD16B887D300F8B796 /* MapContainer.h */,
 				04CE82AE16B887D300F8B796 /* MapContainer.m */,
 			);
@@ -708,6 +713,7 @@
 				0409924916B21087009DBE1D /* NetworkUtils.m in Sources */,
 				A831CEA716B7219800A30C39 /* Session.m in Sources */,
 				04CE82AF16B887D300F8B796 /* MapContainer.m in Sources */,
+				A89FD22E16B949FB005383E4 /* Map.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,12 +10,11 @@
 
 @interface MapContainer : NSObject
 
-@property int mapId;
-@property (nonatomic, retain)NSString *name;
-@property (nonatomic, retain)NSString *timeStamp;
-@property int rating;
-@property BOOL private;
+@property BOOL isMapsLoaded;
+@property (nonatomic, retain) NSMutableArray* maps;
 
-- (id) initWithMapData:(int)_mapId :(NSString *)_name :(NSString *)_timeStamp :(int)_rating :(BOOL)_private;
++ (MapContainer *)getInstance;
++ (void) assignNewMaps:(NSMutableArray*)newMaps;
+
 
 @end

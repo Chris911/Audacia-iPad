@@ -10,22 +10,40 @@
 
 @implementation MapContainer
 
-@synthesize mapId;
-@synthesize name;
-@synthesize timeStamp;
-@synthesize rating;
-@synthesize private;
+@synthesize maps;
+@synthesize isMapsLoaded;
 
-- (id) initWithMapData:(int)_mapId :(NSString *)_name :(NSString *)_timeStamp :(int)_rating :(BOOL)_private
+static MapContainer *mapContainer = NULL;
+
++ (void)initialize
 {
-    if((self = [super init])) {
-        self.mapId = _mapId;
-        self.name  = _name;
-        self.timeStamp = _timeStamp;
-        self.rating = _rating;
-        self.private = _private;
+    static BOOL initialized = NO;
+    if(!initialized)
+    {
+        initialized = YES;
+        mapContainer = [[MapContainer alloc]init];
+        mapContainer.isMapsLoaded = NO;
     }
-    return self;
+}
+
++ (MapContainer *)getInstance
+{
+    [self initialize];
+    return (mapContainer);
+}
+
++ (void) assignNewMaps:(NSMutableArray*)newMaps
+{
+    if(newMaps != nil){
+        mapContainer.maps = newMaps;
+        mapContainer.isMapsLoaded = YES;
+    }
+}
+
+- (void) dealloc
+{
+    [super dealloc];
+    [mapContainer release];
 }
 
 @end

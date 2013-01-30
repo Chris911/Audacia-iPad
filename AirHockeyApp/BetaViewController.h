@@ -12,9 +12,9 @@
 @interface BetaViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UIButton *downloadSelectedMap;
 @property (retain, nonatomic) IBOutlet UITextView *mapsTextView;
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 - (IBAction)goBack:(id)sender;
 - (IBAction)testUpload:(id)sender;
-- (void)mapsDataFetchingDone:(NSMutableArray*)allMaps;
 
 @end

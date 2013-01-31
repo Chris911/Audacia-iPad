@@ -43,7 +43,7 @@
     
 	// Rotate to the current rotation in Z
     glRotatef(90, 1.0, 0, 0);
-	glRotatef(self.angle, 0.0, 0.0, 1.0);
+	glRotatef(self.angle, 0.0, 1.0, 0.0);
     
     // Scale the model
     glScalef(3.0f, 3.0f, 3.0f);
@@ -59,6 +59,18 @@
 - (void) setRotation:(Rotation3D)rot
 {
     self.model.currentRotation = rot;
+}
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    // We'll ignore the zone for now
+    NodeBooster *copyObj = [[[NodeBooster alloc] init]autorelease];
+    copyObj.position = Vector3DMake(self.position.x + 10, self.position.y, self.position.z);
+    copyObj.scaleFactor = self.scaleFactor;
+    copyObj.angle = self.angle;
+    copyObj.isSelected = NO;
+    
+    return copyObj;
 }
 
 @end

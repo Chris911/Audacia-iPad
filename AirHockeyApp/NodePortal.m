@@ -61,4 +61,16 @@
     self.model.currentRotation = rot;
 }
 
+-(id)copyWithZone:(NSZone *)zone
+{
+    // We'll ignore the zone for now
+    NodePortal *copyObj = [[[NodePortal alloc] init]autorelease];
+    copyObj.position = Vector3DMake(self.position.x + 10, self.position.y, self.position.z);
+    copyObj.scaleFactor = self.scaleFactor;
+    copyObj.angle = self.angle;
+    copyObj.isSelected = NO;
+    
+    return copyObj;
+}
+
 @end

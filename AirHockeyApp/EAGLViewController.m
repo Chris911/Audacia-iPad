@@ -401,6 +401,11 @@ enum {
     [[Scene getInstance].renderingTree removeSelectedNodes];
 }
 
+- (IBAction)copyItem:(id)sender
+{
+    [[Scene getInstance].renderingTree copySelectedNodes];
+}
+
 #pragma mark - Drag And Drop function
 
 // Assign the view type (ex : PortalView) so that

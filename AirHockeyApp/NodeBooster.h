@@ -9,7 +9,7 @@
 #import "Node.h"
 #import "OpenGLWaveFrontObject.h"
 
-@interface NodeBooster : Node
+@interface NodeBooster : Node <NSCopying>
 
 @property (nonatomic, retain) OpenGLWaveFrontObject *model;
 

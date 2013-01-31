@@ -26,6 +26,8 @@ GLfloat nodeHeight = 4.1f;
         self.xmlType = @"PointControle";
         self.isRemovable = NO;
         
+        self.isCopyable = NO;
+        self.isScalable = NO;
         self.index = index;
         self.position = Vector3DMake(x, y, nodeHeight);
         self.lastPosition = Vector3DMake(x, y, nodeHeight);

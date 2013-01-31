@@ -22,8 +22,9 @@
 // Select node using its position
 - (BOOL) selectNodeByPosition:(Vector3D) position;
 
-// Remove selected nodes
+// Modify tree
 - (BOOL) removeSelectedNodes;
+- (BOOL) copySelectedNodes;
 - (void) emptyRenderingTree;
 
 // Selection utils

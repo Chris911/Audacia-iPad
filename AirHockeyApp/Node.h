@@ -22,6 +22,8 @@
 @property BOOL isSelected;
 @property BOOL isVisible;
 @property BOOL isRemovable;
+@property BOOL isCopyable;
+@property BOOL isScalable;
 @property BOOL isWaveFrontObject;
 
 // Constructor

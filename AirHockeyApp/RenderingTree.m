@@ -113,8 +113,9 @@
     // no other nodes are still selected
     [self deselectAllNodes];
     
-    for(Node* node in self.tree)
+    for(int i = [self.tree count]-1; i > 0; i--) //FIXME: Inverted selection order, may cause problems but fixes table selection
     {
+        Node *node = [self.tree objectAtIndex:i];
         // bounding box check, FIXME: selection not optimal
         if(node.position.x <= position.x + offset
            && node.position.x >= position.x - offset

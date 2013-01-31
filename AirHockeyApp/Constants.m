@@ -22,4 +22,9 @@ const int NB_OF_TRIANGLES                = 8;
 const int NB_OF_TABLE_EDGES              = 8;
 const GLfloat TABLE_DEPTH                = 1;
 
+float const LARGEUR_FENETRE = 200;
+float const HAUTEUR_FENETRE = 150;
+int const LARGEUR_ECRAN = 1024;
+int const HAUTEUR_ECRAN = 768;
+
 @end

@@ -27,6 +27,12 @@ extern const int NB_OF_TRIANGLES;
 extern const int NB_OF_TABLE_EDGES;
 extern const GLfloat TABLE_DEPTH;
 
+// Camera constants
+extern float const LARGEUR_FENETRE;
+extern float const HAUTEUR_FENETRE;
+extern int const LARGEUR_ECRAN;
+extern int const HAUTEUR_ECRAN;
+
 
 
 @end

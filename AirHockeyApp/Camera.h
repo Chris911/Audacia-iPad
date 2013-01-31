@@ -1,0 +1,39 @@
+//
+//  Camera.h
+//  AirHockeyApp
+//
+//  Created by Sam DesRochers on 2013-01-31.
+//
+//
+
+#import <Foundation/Foundation.h>
+#import "OpenGLWaveFrontCommon.h"
+
+@interface Camera : NSObject
+
+@property Vector3D currentPosition;
+@property Vector3D centerPosition;
+@property Vector3D eyePosition;
+@property Vector3D orientation;
+@property Vector3D worldPosition;
+
+@property CGPoint orthoCenter;
+@property BOOL isPerspective;
+
+@property GLfloat  zoomFactor;
+@property GLfloat  orthoWidth;
+@property GLfloat  orthoHeight;
+@property GLfloat  windowWidth;
+@property GLfloat  windowHeight;
+
+
+- (void) setCamera;
+- (void) assignWorldPosition:(CGPoint)screenPos;
+- (void) orthoTranslate:(CGPoint)newPosition:(CGPoint)lastPosition;
+- (CGPoint)convertFromScreenToWorld:(CGPoint)pos;
+- (CGPoint) calculateVelocity:(CGPoint) lastTouch:(CGPoint) currentTouch;
+- (void) replaceCamera;
+
+
+
+@end

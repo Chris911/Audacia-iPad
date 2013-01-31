@@ -15,6 +15,7 @@
 #import "Scene.h"
 #import "WebClient.h"
 #import "XMLUtil.h"
+#import "Camera.h"
 
 extern float const LARGEUR_FENETRE;
 extern float const HAUTEUR_FENETRE;
@@ -30,6 +31,8 @@ extern float const HAUTEUR_FENETRE;
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
+@property (nonatomic, retain) Camera *camera;
+
 @property (retain, nonatomic) IBOutlet UIView *LeftSlideView;
 @property (retain, nonatomic) IBOutlet UIView *CameraView;
 @property (retain, nonatomic) IBOutlet UIView *ParametersView;

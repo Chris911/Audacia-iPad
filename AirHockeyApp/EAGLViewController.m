@@ -19,11 +19,6 @@
 #define kAlertNameMapTag 1
 
 // Global constants
-float const LARGEUR_FENETRE = 200;
-float const HAUTEUR_FENETRE = 150;
-
-int const LARGEUR_ECRAN = 1024;
-int const HAUTEUR_ECRAN = 768;
 
 // UI Views tags
 int const CAMERAVIEW_TAG      = 100;
@@ -67,9 +62,6 @@ enum {
     
     // Define the current type of object to add
     int activeObjectTag;
-    
-    float camPosX, camPosY, camPosZ;
-    float zoomFactor;
 }
 
 @property (nonatomic, retain) EAGLContext *context;
@@ -107,6 +99,9 @@ enum {
     currentTransformState   = STATE_TRANSFORM_TRANSLATION;
     activeObjectTag      = -1;
  
+    // Create the camera
+    self.camera = [[[Camera alloc]init]autorelease];
+    
     // Initialize Scene and rendring tree
     [Scene getInstance];
     
@@ -262,15 +257,14 @@ enum {
     for(UITouch* touch in touches) {
         CGPoint positionCourante = [touch locationInView:self.view];
 
-        // Use touch coordinates to try and select a Node
-        Vector3D pos = Vector3DMake([self convertFromScreenToWorld:positionCourante].x,
-                                    [self convertFromScreenToWorld:positionCourante].y, 0);
+        // Correct touch position according to the camera position
+        [self.camera assignWorldPosition:positionCourante];
 
         // Detect touch events on the EAGLView (self.view)
         if(touch.view == self.view){
             // Check if any node was selected with the first touch.
             // If not, we can move the camera
-            if([[Scene getInstance].renderingTree selectNodeByPosition:pos])
+            if([[Scene getInstance].renderingTree selectNodeByPosition:self.camera.worldPosition])
             {
                 NSLog(@"Touch resulted in node selection");
                 [self slideInAnimationView:self.ParametersView];
@@ -278,6 +272,8 @@ enum {
             } else {
                 NSLog(@"Touch did not select any node");
                 // TODO: Introduce camera movement here
+                //[self.camera orthoTranslate:positionCourante:positionPrecedente];
+                
                 cameraTranslation = YES;
                 [self slideOutAnimationView:self.ParametersView];
             }
@@ -302,25 +298,26 @@ enum {
         // then the camera will be panning around.  This allow
         // to not interfer with the currentTransformState
         if(!cameraTranslation) {
+            
+            // Place the world positions according to the current camera position
+            [self.camera assignWorldPosition:positionCourante];
+            
             if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
                 [[Scene getInstance].renderingTree translateSelectedNodes:
-                    CGPointMake([self convertFromScreenToWorld:positionCourante].x,
-                                [self convertFromScreenToWorld:positionCourante].y)];
+                    CGPointMake(self.camera.worldPosition.x,self.camera.worldPosition.y)];
                 
             } else if(currentTransformState == STATE_TRANSFORM_ROTATION) {
-                CGPoint rotation = [self calculateVelocity:positionPrecedente :positionCourante];
+                CGPoint rotation = [self.camera calculateVelocity:positionPrecedente :positionCourante];
                 [[Scene getInstance].renderingTree rotateSelectedNodes:Rotation3DMake(rotation.x, rotation.y, 0)];
                 
             } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
-                CGPoint scale = [self calculateVelocity:positionPrecedente :positionCourante];
+                CGPoint scale = [self.camera calculateVelocity:positionPrecedente :positionCourante];
                 [[Scene getInstance].renderingTree scaleSelectedNodes:scale.x];
-                
             }
             
         // User is dragging the screen.  Camera is thus moving
         } else {
-            //camPosX = [self convertFromScreenToWorld:positionCourante].x;
-            //camPosY = [self convertFromScreenToWorld:positionCourante].y;
+            [self.camera orthoTranslate:positionCourante:positionPrecedente];
         }
     }
 }
@@ -329,11 +326,6 @@ enum {
 {
     [Scene replaceOutOfBoundsElements];
     cameraTranslation = NO;
-}
-
--(CGPoint) calculateVelocity:(CGPoint) lastTouch:(CGPoint) currentTouch
-{
-    return CGPointMake(currentTouch.x - lastTouch.x, currentTouch.y - lastTouch.y);
 }
 
 #pragma mark - Button methods
@@ -352,7 +344,7 @@ enum {
 
 - (IBAction)toggleTranslateCamera:(id)sender
 {
-    [self slideInAnimationView:self.TransformView];
+    [self performSelectorInBackground:@selector(replaceView) withObject:nil];
 }
 
 // If the current transform state is translation, switch to rotation
@@ -406,6 +398,17 @@ enum {
     [[Scene getInstance].renderingTree copySelectedNodes];
 }
 
+- (IBAction)toggleScreenshotButton:(id)sender
+{
+    if([NetworkUtils isNetworkAvailable])
+    {
+        [self performSelectorInBackground:@selector(replaceView) withObject:nil];
+        [self showNameMapAlert];
+    } else {
+        [NetworkUtils showNetworkUnavailableAlert];
+    }
+}
+
 #pragma mark - Drag And Drop function
 
 // Assign the view type (ex : PortalView) so that
@@ -438,29 +441,39 @@ enum {
         
         // Drag completed
         [self.view viewWithTag:activeObjectTag].center = location;
-        CGPoint worldPos = [self convertFromScreenToWorld:CGPointMake(location.x,location.y)];
-
+        [self.camera assignWorldPosition:location];
+        
         // Check if last touch location is legal
-        if([Scene checkIfAddingLocationInBounds:worldPos]){
+        if([Scene checkIfAddingLocationInBounds:CGPointMake(self.camera.worldPosition.x, self.camera.worldPosition.y)]){
             // Add a specific Node to the scene and replace the dragged view
             //FIXME: Z positions can break the adding
             if(activeObjectTag == PORTALVIEW_TAG) {
                 NodePortal *portal = [[[NodePortal alloc]init]autorelease];
-                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(worldPos.x, worldPos.y, 10)];
+                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(self.camera.worldPosition.x,
+                                                                                                         self.camera.worldPosition.y,
+                                                                                                         5)];
                 
             } else if(activeObjectTag == BOOSTERVIEW_TAG) {
                 NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
-                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(worldPos.x, worldPos.y, 10)];
+                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
+                                                                                                          self.camera.worldPosition.y,
+                                                                                                          5)];
                 
             } else if(activeObjectTag == MURETVIEW_TAG) {
                 NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
-                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(worldPos.x, worldPos.y, 10)];
+                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
+                                                                                                          self.camera.worldPosition.y,
+                                                                                                          5)];
                 
             } else if(activeObjectTag == PUCKVIEW_TAG) {
-                [[Scene getInstance].renderingTree addPuckToTreeWithInitialPosition:Vector3DMake(worldPos.x, worldPos.y, 10)];
+                [[Scene getInstance].renderingTree addPuckToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
+                                                                                                 self.camera.worldPosition.y,
+                                                                                                 5)];
                 
             } else if(activeObjectTag == POMMEAUVIEW_TAG) {
-                [[Scene getInstance].renderingTree addStickToTreeWithInitialPosition:Vector3DMake(worldPos.x, worldPos.y, 10)];
+                [[Scene getInstance].renderingTree addStickToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
+                                                                                                  self.camera.worldPosition.y,
+                                                                                                  5)];
             }
         }
         
@@ -482,11 +495,6 @@ enum {
 #pragma mark - Core GL Methods
 -(void)setupView
 {
-    camPosX = 0;
-    camPosY = 0;
-    camPosZ = 0;
-    zoomFactor = 1;
-    
     glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_PROJECTION);
     
@@ -516,13 +524,14 @@ enum {
 //              0, 1, 0);
 
     
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    // Orthogonal Mode
-    glOrthof(camPosX -(LARGEUR_FENETRE / 2)*zoomFactor, camPosX + (LARGEUR_FENETRE / 2)*zoomFactor,
-             -(HAUTEUR_FENETRE / 2)*zoomFactor, (HAUTEUR_FENETRE / 2)*zoomFactor, -100, 100);
-	glMatrixMode(GL_MODELVIEW);
+//    glMatrixMode(GL_PROJECTION);
+//    glLoadIdentity();
+//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//    // Orthogonal Mode
+//    glOrthof(camPosX -(LARGEUR_FENETRE / 2)*zoomFactor, camPosX + (LARGEUR_FENETRE / 2)*zoomFactor,
+//             -(HAUTEUR_FENETRE / 2)*zoomFactor, (HAUTEUR_FENETRE / 2)*zoomFactor, -100, 100);
+//	glMatrixMode(GL_MODELVIEW);
+    [self.camera setCamera];
     
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -638,40 +647,6 @@ enum {
     [self slideInAnimationView:self.TransformView];    
 }
 
-
-float mCurrentScale, mLastScale;
--(void)handlePinch:(UIPinchGestureRecognizer*)sender
-{
-    NSLog(@"ZoomFactor = %f",zoomFactor);
-
-    mCurrentScale += [sender scale] - mLastScale;
-    mLastScale = [sender scale];
-    
-    if (sender.state == UIGestureRecognizerStateEnded)
-    {
-        mLastScale = 1.0;
-    }
-    if(mCurrentScale > 1) {
-        zoomFactor += mCurrentScale/20;
-        if(zoomFactor >= 3.0f)
-            zoomFactor = 2.9f;
-    } else {
-        
-        zoomFactor -= mCurrentScale/20;
-        if(zoomFactor <= 0.5f)
-            zoomFactor = 0.51f;
-    }
-}
-
-#pragma mark - Screen conversion
-// Takes a screen coordinate point and convert it to predefined world coords
-- (CGPoint)convertFromScreenToWorld:(CGPoint)pos
-{
-    pos = CGPointMake((pos.x * (LARGEUR_FENETRE/1024) - LARGEUR_FENETRE/2) ,
-                      -(pos.y * (HAUTEUR_FENETRE/HAUTEUR_ECRAN) - HAUTEUR_FENETRE/2));
-    return pos;
-}
-
 #pragma mark - UI Elements initialization
 - (void) prepareRecognizers
 {
@@ -705,10 +680,10 @@ float mCurrentScale, mLastScale;
     [SwipeTransformView setDirection:UISwipeGestureRecognizerDirectionRight];
     [[self TransformView] addGestureRecognizer:SwipeTransformView];
     
-    // PinchGesture recognizer
-    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
-    [self.view addGestureRecognizer:pinchGesture];
-    [pinchGesture release];
+//    // PinchGesture recognizer
+//    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+//    [self.view addGestureRecognizer:pinchGesture];
+//    [pinchGesture release];
     
     // PanGesture recognizer for drag n drop
     UIPanGestureRecognizer *dndPortal = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
@@ -761,15 +736,7 @@ float mCurrentScale, mLastScale;
 
 #pragma mark - Screenshot Utility
 
-- (IBAction)toggleScreenshotButton:(id)sender
-{
-    if([NetworkUtils isNetworkAvailable])
-    {
-        [self showNameMapAlert];
-    } else {
-        [NetworkUtils showNetworkUnavailableAlert];
-    }
-}
+
 
 //
 //Source: http://getsetgames.com/2009/07/30/5-ways-to-take-screenshots-of-your-iphone-app/
@@ -835,10 +802,19 @@ float mCurrentScale, mLastScale;
         WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
         NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
         // Upload data to server
+        
+        
         [webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
         [webClient release];
-        //[xmlData release];
+        [xmlData release];
     }
 }
+
+- (void) replaceView
+{
+    [self.camera replaceCamera];
+}
+
+
 
 @end

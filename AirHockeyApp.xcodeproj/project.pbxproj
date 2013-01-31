@@ -55,6 +55,7 @@
 		969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
 		969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */; };
 		A812858116A0A53900C8EF6D /* ParametersImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A812858016A0A53900C8EF6D /* ParametersImage1.png */; };
+		A818E02516BAD7D900CA5823 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = A818E02416BAD7D900CA5823 /* Camera.m */; };
 		A831CEA716B7219800A30C39 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = A831CEA616B7219800A30C39 /* Session.m */; };
 		A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A83AA9EC16A4D924003388F3 /* BetaViewController.m */; };
 		A83AA9EF16A4D925003388F3 /* BetaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A83AA9ED16A4D925003388F3 /* BetaViewController.xib */; };
@@ -167,6 +168,8 @@
 		969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EAGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
 		A812858016A0A53900C8EF6D /* ParametersImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ParametersImage1.png; path = Assets/UI/Images/ParametersImage1.png; sourceTree = "<group>"; };
+		A818E02316BAD7D900CA5823 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		A818E02416BAD7D900CA5823 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		A831CEA516B7219800A30C39 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		A831CEA616B7219800A30C39 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		A83AA9EB16A4D924003388F3 /* BetaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetaViewController.h; sourceTree = "<group>"; };
@@ -396,6 +399,7 @@
 				048C9D3716A4BCB7006A7082 /* Scene */,
 				048C9D2F16A4A873006A7082 /* Objects */,
 				04DF182D16ACABE000339EDB /* Networking */,
+				A818E02116BAD7C600CA5823 /* Camera */,
 				968DACC11472ED46007D15A3 /* Utilitaires */,
 				969DDEDC1472CF6000ED5DC8 /* Vues */,
 				96378D981472C7F200F543EA /* Interface Builder */,
@@ -472,6 +476,15 @@
 				969DDEDF1472CF8C00ED5DC8 /* EAGLView.m */,
 			);
 			name = Vues;
+			sourceTree = "<group>";
+		};
+		A818E02116BAD7C600CA5823 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				A818E02316BAD7D900CA5823 /* Camera.h */,
+				A818E02416BAD7D900CA5823 /* Camera.m */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 		A831CEA316B7216B00A30C39 /* Session */ = {
@@ -728,6 +741,7 @@
 				04CE82AF16B887D300F8B796 /* MapContainer.m in Sources */,
 				A89FD22E16B949FB005383E4 /* Map.m in Sources */,
 				A89FD23B16B96576005383E4 /* Border3D.m in Sources */,
+				A818E02516BAD7D900CA5823 /* Camera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

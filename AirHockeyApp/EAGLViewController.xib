@@ -876,8 +876,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="173839497"/>
-							<reference ref="88289242"/>
 							<reference ref="181947498"/>
+							<reference ref="88289242"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">CameraView</string>

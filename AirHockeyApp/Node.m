@@ -20,6 +20,9 @@
 @synthesize isRemovable;
 @synthesize isSelected;
 @synthesize isVisible;
+@synthesize isCopyable;
+@synthesize isScalable;
+@synthesize isWaveFrontObject;
 
 
 // Constants definition
@@ -35,7 +38,9 @@ const float DEFAULT_ANGLE_VALUE = 0.0f;
         self.angle              = DEFAULT_ANGLE_VALUE;
         
         self.isRemovable        = YES;
+        self.isCopyable         = YES;
         self.isVisible          = YES;
+        self.isScalable         = YES;
         self.isSelected         = NO;
         self.isWaveFrontObject  = NO;
     }

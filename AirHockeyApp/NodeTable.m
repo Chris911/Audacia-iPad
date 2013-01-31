@@ -29,6 +29,8 @@
         self.type = @"TABLE";
         self.isRemovable = NO;
         
+        self.isCopyable = NO;
+        self.isScalable = NO;
         [self initTableEdges];
         [self initColors];
     }

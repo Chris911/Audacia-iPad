@@ -62,6 +62,7 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)toggleSettingsView:(id)sender;
 - (IBAction)ExitProgram:(id)sender;
 - (IBAction)deleteItem:(id)sender;
+- (IBAction)copyItem:(id)sender;
 
 
 @end

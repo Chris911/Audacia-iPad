@@ -24,6 +24,8 @@
         Vertex3D position = Vertex3DMake(0, 0, 20.0);
         self.model = theObject;
         self.position = position;
+        self.isCopyable = NO;
+        self.isScalable = NO;
         self.model.currentPosition = self.position;
         [theObject release];
     }

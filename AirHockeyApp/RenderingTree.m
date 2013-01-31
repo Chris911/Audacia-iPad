@@ -152,6 +152,21 @@
     return YES;
 }
 
+// Remove selected nodes
+- (BOOL) copySelectedNodes
+{
+    // Need regular for loop here for sync problem.
+    for(int i = 0; i < [self.tree count]; i++)
+    {
+        Node *node = [self.tree objectAtIndex:i];
+        if(node.isSelected && node.isCopyable) {
+            [self.tree addObject:[node copy]];
+        }
+    }
+    [self replaceNodesInBounds];
+    return YES;
+}
+
 - (void) emptyRenderingTree
 {
     [self.tree removeAllObjects];
@@ -183,7 +198,8 @@
 {
     for(Node* node in self.tree)
     {
-        if(node.isSelected) {
+        // Check if node is selected AND scalable (Puck and Stick shouldn't scale according to SRS)
+        if(node.isSelected && node.isScalable) {
 
             node.scaleFactor += deltaScale/30;
             if(node.scaleFactor >= 4) {
@@ -220,9 +236,7 @@
 {
     for(Node* node in self.tree)
     {
-        if(node.isSelected) {
-            [node checkIfInBounds];
-        }
+        [node checkIfInBounds];
     }
 }
 

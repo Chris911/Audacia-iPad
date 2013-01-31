@@ -20,7 +20,6 @@
 
 @property (retain,nonatomic) AFHTTPClient* AFClient;
 @property (retain,nonatomic) NSString* server;
-@property (retain,nonatomic) NSString* uploadScript;
 @property (retain,nonatomic) NSString* mapsAPIScript;
 
 - (id) initWithDefaultServer;

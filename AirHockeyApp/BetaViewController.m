@@ -118,11 +118,13 @@
 {
     // Safety check on the maps loaded attribute
     if ([MapContainer getInstance].isMapsLoaded){
-        
+        [mapsTextView setText:@""];
         for(Map *map in [MapContainer getInstance].maps) {
-            NSString *mapIdString = [NSString stringWithFormat:@"Id: @%i",map.mapId];
+            NSString *mapIdString = [NSString stringWithFormat:@"Id: %i",map.mapId];
             [mapsTextView setText:[mapsTextView.text stringByAppendingString:mapIdString]];
+            [mapsTextView setText:[mapsTextView.text stringByAppendingString:@"\n"]];
             [mapsTextView setText:[mapsTextView.text stringByAppendingString:map.name]];
+            [mapsTextView setText:[mapsTextView.text stringByAppendingString:@"\n\n"]];
         }
         
         // Reset to NO so we can load a new map array when the user switches views.

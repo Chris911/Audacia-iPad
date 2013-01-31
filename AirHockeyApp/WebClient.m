@@ -12,7 +12,6 @@
 @implementation WebClient
 @synthesize AFClient;
 @synthesize server;
-@synthesize uploadScript;
 @synthesize mapsAPIScript;
 
 
@@ -20,7 +19,6 @@
 {
     if((self = [super init])) {
         self.server = @"http://kepler.step.polymtl.ca/";
-        self.uploadScript = @"/projet3/scripts/upload.php";
         self.mapsAPIScript = @"/projet3/scripts/MapsAPI.php";
         NSURL *url = [NSURL URLWithString:self.server];
         AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -35,6 +33,19 @@
 {
     [self uploadXMLData:xmlData :mapName];
     [self uploadImageData:mapImage :mapName];
+    
+    //Add to database
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"addMapToDatabase", @"action",
+                            mapName, @"mapName",
+                            nil];
+
+    [self.AFClient postPath:self.mapsAPIScript parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Success [Map to DB]: %@", operation.responseString);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error [Map to DB]: %@", operation.responseString);
+    }];
 }
 
 
@@ -42,14 +53,19 @@
 {
     NSString *fileName = [mapName stringByAppendingString:@".xml"];
     
-    NSMutableURLRequest *request = [self.AFClient multipartFormRequestWithMethod:@"POST" path:self.uploadScript parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+    NSMutableURLRequest *request = [self.AFClient multipartFormRequestWithMethod:@"POST" path:self.mapsAPIScript parameters:@{@"action":@"uploadMap"} constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
         [formData appendPartWithFileData:xmlData name:@"file" fileName:fileName mimeType:@"application/xml"];
     }];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-        NSLog(@"Sent %lld of %lld bytes [XML]", totalBytesWritten, totalBytesExpectedToWrite);
-    }];
+    [operation  setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success [Map XML]: %@", operation.responseString);
+    }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error [Map XML]: %@",  operation.responseString);
+          }
+     ];
+    
     [operation start];
 }
 
@@ -59,14 +75,19 @@
     NSData *imageData = UIImagePNGRepresentation(image);
     NSString *fileName = [mapName stringByAppendingString:@".png"];
     
-    NSMutableURLRequest *request = [self.AFClient multipartFormRequestWithMethod:@"POST" path:self.uploadScript parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+    NSMutableURLRequest *request = [self.AFClient multipartFormRequestWithMethod:@"POST" path:self.mapsAPIScript parameters:@{@"action":@"uploadMap"} constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
     }];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-        NSLog(@"Sent %lld of %lld bytes [SS]", totalBytesWritten, totalBytesExpectedToWrite);
-    }];
+    [operation  setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success [Map Image]: %@", operation.responseString);
+    }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error [Map Image]: %@",  operation.responseString);
+          }
+     ];
+    
     [operation start];
 }
 
@@ -80,7 +101,7 @@
     NSMutableArray *allMaps = [[[NSMutableArray alloc]init]autorelease];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"Map Name: %@", [JSON valueForKeyPath:@"mapId"]);
+        //NSLog(@"Map Name: %@", [JSON valueForKeyPath:@"mapId"]);
         
         NSArray *mapIdArray = [JSON valueForKeyPath:@"mapId"];
         NSArray *nameArray = [JSON valueForKeyPath:@"name"];

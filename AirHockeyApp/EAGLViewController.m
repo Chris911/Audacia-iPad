@@ -318,6 +318,7 @@ enum {
             } else {
                 [[Scene getInstance].renderingTree deselectAllNodes];
                 [self handleFirstTouchOnView:touch.view];
+                currentTouchesMode = TOUCH_TRANSFORM_MODE;
             }
         }
     }
@@ -366,6 +367,9 @@ enum {
     [Scene replaceOutOfBoundsElements];
     if(currentTouchesMode == TOUCH_ELASTIC_MODE) {
         [[Scene getInstance].renderingTree selectNodesByZone:elasticRect.beginPosition :elasticRect.endPosition];
+        if([Scene getInstance].renderingTree.multipleNodesSelected) {
+            [self slideInAnimationView:self.ParametersView];
+        }
         [elasticRect reset];
     }
 }

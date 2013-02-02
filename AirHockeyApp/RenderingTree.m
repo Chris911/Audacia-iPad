@@ -193,17 +193,21 @@
 - (BOOL) removeSelectedNodes
 {
     // Need regular for loop here for sync problem.
-    for(int i = 0; i < [self.tree count]; i++)
+    int nbNodes = [self.tree count];
+    for(int i = nbNodes-1; i > 0; i--)
     {
+        NSLog(@"Count bef:%i",[self.tree count]);
+
         Node *node = [self.tree objectAtIndex:i];
         if(node.isSelected && node.isRemovable) {
             [self.tree removeObject:node];
+            NSLog(@"Count aft:%i",[self.tree count]);
         }
     }
     return YES;
 }
 
-// Remove selected nodes
+// Copy selected nodes
 - (BOOL) copySelectedNodes
 {
     // Need regular for loop here for sync problem.

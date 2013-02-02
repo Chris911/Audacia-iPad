@@ -33,6 +33,7 @@
 - (void) orthoTranslate:(CGPoint)newPosition:(CGPoint)lastPosition;
 - (void) orthoZoom:(float) factor;
 - (CGPoint)convertFromScreenToWorld:(CGPoint)pos;
+- (CGPoint) convertToWorldPosition:(CGPoint)pos;
 - (CGPoint) calculateVelocity:(CGPoint) lastTouch:(CGPoint) currentTouch;
 - (void) replaceCamera;
 - (void) resetCamera;

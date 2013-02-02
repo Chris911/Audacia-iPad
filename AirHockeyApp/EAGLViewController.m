@@ -15,10 +15,16 @@
 #import "NodePuck.h"
 #import "NodeMurret.h"
 #import "NetworkUtils.h"
+#import "ElasticRect.h"
 
 #define kAlertNameMapTag 1
 
 // Global constants
+
+// Touches modes
+int const TOUCH_TRANSFORM_MODE = 0;
+int const TOUCH_CAMERA_MODE = 1;
+int const TOUCH_ELASTIC_MODE = 2;
 
 // UI Views tags
 int const CAMERAVIEW_TAG      = 100;
@@ -57,11 +63,17 @@ enum {
     
     BOOL cameraTranslation;
     
-    // Define the current transformation state (translate,rotation or scale)
+    // Defines the current transformation state (translate,rotation or scale)
     int  currentTransformState;
     
-    // Define the current type of object to add
+    // Defines the current type of object to add
     int activeObjectTag;
+    
+    // Defines the current touch moved mode (Transform, Camera or Elastic Rectangle)
+    int currentTouchesMode;
+    
+    // Elastic Rectangle
+    ElasticRect *elasticRect;
 }
 
 @property (nonatomic, retain) EAGLContext *context;
@@ -97,10 +109,14 @@ enum {
     
     firstTimeBuilding       = YES;
     currentTransformState   = STATE_TRANSFORM_TRANSLATION;
-    activeObjectTag      = -1;
+    currentTouchesMode      = TOUCH_CAMERA_MODE;
+    activeObjectTag         = -1;
  
     // Create the camera
     self.camera = [[[Camera alloc]init]autorelease];
+    
+    // Create the elastic rectangle
+    elasticRect = [[ElasticRect alloc]init];
     
     // Initialize Scene and rendring tree
     [Scene getInstance];
@@ -121,6 +137,9 @@ enum {
         [EAGLContext setCurrentContext:nil];
     
     [context release];
+    
+    [self.camera release];
+    [elasticRect release];
     
     [_LeftSlideView release];
     [_CameraView release];
@@ -257,32 +276,48 @@ enum {
     for(UITouch* touch in touches) {
         CGPoint positionCourante = [touch locationInView:self.view];
 
-        // Correct touch position according to the camera position
-        [self.camera assignWorldPosition:positionCourante];
+        // Elastic rectangle mode (Zoom or selection).  Bypass object transformations
+        // or Drag and Drop modes.
+        if(elasticRect.isActive) {
+            elasticRect.beginPosition = [self.camera convertToWorldPosition:positionCourante];
+            elasticRect.endPosition = [self.camera convertToWorldPosition:positionCourante];
 
-        // Detect touch events on the EAGLView (self.view)
-        if(touch.view == self.view){
-            // Check if any node was selected with the first touch.
-            // If not, we can move the camera
-            if([[Scene getInstance].renderingTree selectNodeByPosition:self.camera.worldPosition])
-            {
-                NSLog(@"Touch resulted in node selection");
-                [self slideInAnimationView:self.ParametersView];
-                cameraTranslation = NO;
-            } else {
-                NSLog(@"Touch did not select any node");
-                // TODO: Introduce camera movement here
-                //[self.camera orthoTranslate:positionCourante:positionPrecedente];
-                
-                cameraTranslation = YES;
-                [self slideOutAnimationView:self.ParametersView];
-            }
-            
-        // If a view other than EAGLView is touched, we want
-        // to handle the drag and drop functionnality
+            currentTouchesMode = TOUCH_ELASTIC_MODE;
         } else {
-            [[Scene getInstance].renderingTree deselectAllNodes];
-            [self handleFirstTouchOnView:touch.view];
+        
+            // Correct touch position according to the camera position
+            [self.camera assignWorldPosition:positionCourante];
+
+            // Detect touch events on the EAGLView (self.view)
+            if(touch.view == self.view){
+                
+                
+                
+                // Check if any node was selected with the first touch and that there aren't multiple nodes selected at the time
+                // If not, we can move the camera
+                if([[Scene getInstance].renderingTree selectNodeByPosition:self.camera.worldPosition] && ![Scene getInstance].renderingTree.multipleNodesSelected)
+                {
+                    NSLog(@"Touch resulted in node selection");
+                    [self slideInAnimationView:self.ParametersView];
+                    currentTouchesMode = TOUCH_TRANSFORM_MODE;
+                } else if([Scene getInstance].renderingTree.multipleNodesSelected) {
+                    NSLog(@"Touch resulted in Multi node selection");
+                    currentTouchesMode = TOUCH_TRANSFORM_MODE;
+                } else {
+                    NSLog(@"Touch did not select any node");
+                    // TODO: Introduce camera movement here
+                    //[self.camera orthoTranslate:positionCourante:positionPrecedente];
+                    
+                    currentTouchesMode = TOUCH_CAMERA_MODE;
+                    [self slideOutAnimationView:self.ParametersView];
+                }
+                
+            // If a view other than EAGLView is touched, we want
+            // to handle the drag and drop functionnality
+            } else {
+                [[Scene getInstance].renderingTree deselectAllNodes];
+                [self handleFirstTouchOnView:touch.view];
+            }
         }
     }
 }
@@ -294,10 +329,8 @@ enum {
         CGPoint positionCourante = [touch locationInView:self.view];
         CGPoint positionPrecedente = [touch previousLocationInView:self.view];
         
-        // 3 types of transformations.  If no node is selected,
-        // then the camera will be panning around.  This allow
-        // to not interfer with the currentTransformState
-        if(!cameraTranslation) {
+        // This allows to not interfer with the currentTransformState
+        if(currentTouchesMode == TOUCH_TRANSFORM_MODE) {
             
             // Place the world positions according to the current camera position
             [self.camera assignWorldPosition:positionCourante];
@@ -316,8 +349,13 @@ enum {
             }
             
         // User is dragging the screen.  Camera is thus moving
-        } else {
+        } else if (currentTouchesMode == TOUCH_CAMERA_MODE){
             [self.camera orthoTranslate:positionCourante:positionPrecedente];
+            
+        } else if (currentTouchesMode == TOUCH_ELASTIC_MODE) { // Elastic Rectangle mode
+            [elasticRect modifyRect:[self.camera convertToWorldPosition:positionCourante]
+                                   :[self.camera convertToWorldPosition:positionPrecedente]];
+            elasticRect.endPosition = [self.camera convertToWorldPosition:positionCourante];
         }
     }
 }
@@ -325,7 +363,10 @@ enum {
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [Scene replaceOutOfBoundsElements];
-    cameraTranslation = NO;
+    if(currentTouchesMode == TOUCH_ELASTIC_MODE) {
+        [[Scene getInstance].renderingTree selectNodesByZone:elasticRect.beginPosition :elasticRect.endPosition];
+        [elasticRect reset];
+    }
 }
 
 #pragma mark - Button methods
@@ -377,6 +418,16 @@ enum {
         [self slideInAnimationView:self.SettingsView];
     }
     settingViewIsHidden = !settingViewIsHidden;
+}
+
+// Turn elastic rectangle setting on or off
+- (IBAction)toggleElasticRect:(id)sender
+{   //Can't just toggle or there will be a coherence problem
+    if(elasticRect.isActive == YES){
+        elasticRect.isActive = NO;
+    } else {
+        elasticRect.isActive = YES;
+    }
 }
 
 - (IBAction)ExitProgram:(id)sender
@@ -539,6 +590,12 @@ enum {
     
     // Renders the whole rendring tree
     [[Scene getInstance].renderingTree render];
+    
+    // Render the elastic rectangle if active
+    if(elasticRect.isActive){
+        [elasticRect render];
+    }
+    
     [(EAGLView *)self.view presentFramebuffer];
 }
 

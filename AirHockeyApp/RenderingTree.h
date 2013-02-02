@@ -12,6 +12,7 @@
 @interface RenderingTree : NSObject
 
 @property (nonatomic, retain) NSMutableArray* tree;
+@property BOOL multipleNodesSelected;
 
 // Add node to rendering tree
 - (void) addNodeToTree:(Node*) node;
@@ -21,6 +22,7 @@
 
 // Select node using its position
 - (BOOL) selectNodeByPosition:(Vector3D) position;
+- (BOOL) selectNodesByZone:(CGPoint)beginPoint:(CGPoint)endPoint;
 
 // Modify tree
 - (BOOL) removeSelectedNodes;

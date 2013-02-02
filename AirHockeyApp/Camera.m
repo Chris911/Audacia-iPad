@@ -113,6 +113,13 @@
     return pos;
 }
 
+// return a fully converted point, considering the orthoCenter offset and screen ratio
+- (CGPoint) convertToWorldPosition:(CGPoint)pos
+{
+    CGPoint cg_worldPos = [self convertFromScreenToWorld:pos];
+     return (CGPointMake(cg_worldPos.x + self.orthoCenter.x, cg_worldPos.y + self.orthoCenter.y));
+}
+
 -(CGPoint) calculateVelocity:(CGPoint) lastTouch:(CGPoint) currentTouch
 {
     return CGPointMake(currentTouch.x - lastTouch.x, currentTouch.y - lastTouch.y);

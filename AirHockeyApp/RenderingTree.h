@@ -44,5 +44,6 @@
 // RenderingTree util functions
 - (int) getNumberOfNodes;
 - (void) replaceNodesInBounds;
+- (BOOL) checkIfAnyNodeClicked:(Vector3D)click;
 
 @end

@@ -291,22 +291,23 @@ enum {
             // Detect touch events on the EAGLView (self.view)
             if(touch.view == self.view){
                 
-                
-                
                 // Check if any node was selected with the first touch and that there aren't multiple nodes selected at the time
                 // If not, we can move the camera
-                if([[Scene getInstance].renderingTree selectNodeByPosition:self.camera.worldPosition] && ![Scene getInstance].renderingTree.multipleNodesSelected)
+                if([[Scene getInstance].renderingTree selectNodeByPosition:self.camera.worldPosition]
+                   && ![Scene getInstance].renderingTree.multipleNodesSelected)
                 {
                     NSLog(@"Touch resulted in node selection");
                     [self slideInAnimationView:self.ParametersView];
                     currentTouchesMode = TOUCH_TRANSFORM_MODE;
-                } else if([Scene getInstance].renderingTree.multipleNodesSelected) {
+                } else if([Scene getInstance].renderingTree.multipleNodesSelected
+                          && [[Scene getInstance].renderingTree checkIfAnyNodeClicked:self.camera.worldPosition]) {
                     NSLog(@"Touch resulted in Multi node selection");
                     currentTouchesMode = TOUCH_TRANSFORM_MODE;
                 } else {
                     NSLog(@"Touch did not select any node");
                     // TODO: Introduce camera movement here
                     //[self.camera orthoTranslate:positionCourante:positionPrecedente];
+                    [[Scene getInstance].renderingTree deselectAllNodes];
                     
                     currentTouchesMode = TOUCH_CAMERA_MODE;
                     [self slideOutAnimationView:self.ParametersView];

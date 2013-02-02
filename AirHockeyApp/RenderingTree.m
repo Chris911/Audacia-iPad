@@ -125,10 +125,11 @@
            && node.position.x >= position.x - offset
            && node.position.y <= position.y + offset
            && node.position.y >= position.y - offset) {
-               node.isSelected = YES;
-               NSLog(@"Selected Type:%@",node.type);
-               // FIXME: This only works for SINGLE OBJECT selection
-               nodeWasSelected = YES;
+                node.isSelected = YES;
+                NSLog(@"Selected Type:%@",node.type);
+                // FIXME: This only works for SINGLE OBJECT selection
+                nodeWasSelected = YES;
+                return YES; 
         }
     }
     return nodeWasSelected;
@@ -164,9 +165,12 @@
            && node.position.x >= beginPoint.x
            && node.position.y >= endPoint.y
            && node.position.y <= beginPoint.y) {
-            node.isSelected = YES;
-            NSLog(@"Selected Type:%@",node.type);
-            nodeWasSelected = YES;
+            
+            if(![node.type isEqualToString:@"EDGE"] && ![node.type isEqualToString:@"TABLE"]){
+                node.isSelected = YES;
+                NSLog(@"Selected Type:%@",node.type);
+                nodeWasSelected = YES;
+            }
             self.multipleNodesSelected = YES;
         }
     }
@@ -264,7 +268,7 @@
     {
         if(node.isSelected) {
             node.position = Vector3DMake(deltaPoint.x, deltaPoint.y, node.position.z);
-            return YES;
+            
         }
     }
     return NO;
@@ -285,6 +289,26 @@
         [node checkIfInBounds];
     }
 }
+
+- (BOOL) checkIfAnyNodeClicked:(Vector3D)click
+{
+    BOOL anyNodeHit = NO;
+    int offset = 8;
+    for(int i = [self.tree count]-1; i > 0; i--) //FIXME: Inverted selection order, may cause problems but fixes table selection
+    {
+        
+        Node *node = [self.tree objectAtIndex:i];
+        // bounding box check, FIXME: selection not optimal
+        if(node.position.x <= click.x + offset
+           && node.position.x >= click.x - offset
+           && node.position.y <= click.y + offset
+           && node.position.y >= click.y - offset) {
+            anyNodeHit = YES;
+        }
+    }
+    return anyNodeHit;
+}
+
 
 
 @end

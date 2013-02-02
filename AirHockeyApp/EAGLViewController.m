@@ -381,7 +381,8 @@ enum {
 
 - (IBAction)ExitProgram:(id)sender
 {
-    //[self stopAnimation];
+    [self stopAnimation];
+    [self.camera resetCamera];
     [self resetTable];
     [self resetUI];
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
@@ -647,6 +648,12 @@ enum {
     [self slideInAnimationView:self.TransformView];    
 }
 
+- (void) handlePinch:(UIGestureRecognizer *)sender 
+{
+    CGFloat factor = [(UIPinchGestureRecognizer *)sender scale];
+    [self.camera orthoZoom:factor];
+}
+
 #pragma mark - UI Elements initialization
 - (void) prepareRecognizers
 {
@@ -680,10 +687,10 @@ enum {
     [SwipeTransformView setDirection:UISwipeGestureRecognizerDirectionRight];
     [[self TransformView] addGestureRecognizer:SwipeTransformView];
     
-//    // PinchGesture recognizer
-//    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
-//    [self.view addGestureRecognizer:pinchGesture];
-//    [pinchGesture release];
+    // PinchGesture recognizer
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    [self.view addGestureRecognizer:pinchGesture];
+    [pinchGesture release];
     
     // PanGesture recognizer for drag n drop
     UIPanGestureRecognizer *dndPortal = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
@@ -735,9 +742,6 @@ enum {
 }
 
 #pragma mark - Screenshot Utility
-
-
-
 //
 //Source: http://getsetgames.com/2009/07/30/5-ways-to-take-screenshots-of-your-iphone-app/
 //

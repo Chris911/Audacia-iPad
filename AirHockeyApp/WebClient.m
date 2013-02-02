@@ -135,7 +135,6 @@
 {
     [MapContainer getInstance];
     [MapContainer assignNewMaps:maps];
-    NSLog(@"Maps done loading in the array");
 }
 
 @end

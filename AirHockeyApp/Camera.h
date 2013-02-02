@@ -18,9 +18,10 @@
 @property Vector3D worldPosition;
 
 @property CGPoint orthoCenter;
+@property CGPoint zoomFactor;
+
 @property BOOL isPerspective;
 
-@property GLfloat  zoomFactor;
 @property GLfloat  orthoWidth;
 @property GLfloat  orthoHeight;
 @property GLfloat  windowWidth;
@@ -30,9 +31,11 @@
 - (void) setCamera;
 - (void) assignWorldPosition:(CGPoint)screenPos;
 - (void) orthoTranslate:(CGPoint)newPosition:(CGPoint)lastPosition;
+- (void) orthoZoom:(float) factor;
 - (CGPoint)convertFromScreenToWorld:(CGPoint)pos;
 - (CGPoint) calculateVelocity:(CGPoint) lastTouch:(CGPoint) currentTouch;
 - (void) replaceCamera;
+- (void) resetCamera;
 
 
 

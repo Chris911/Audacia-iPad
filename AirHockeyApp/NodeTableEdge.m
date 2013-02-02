@@ -121,6 +121,9 @@ GLfloat nodeHeight = 4.1f;
     } else if(self.index == 4 && self.position.x <= NODE_3_AND_4_LIMIT_X) {
         self.position = Vector3DMake(NODE_3_AND_4_LIMIT_X,self.position.y,self.position.z);
         
+    } else if(self.index == 4 && self.position.x <= NODE_3_AND_4_LIMIT_X) {
+        self.position = Vector3DMake(NODE_3_AND_4_LIMIT_X,self.position.y,self.position.z);
+        
     }
 }
 

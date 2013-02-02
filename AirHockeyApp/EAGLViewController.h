@@ -63,6 +63,7 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)toggleTransformRotation:(id)sender;
 - (IBAction)toggleTransformScale:(id)sender;
 - (IBAction)toggleSettingsView:(id)sender;
+- (IBAction)toggleElasticRect:(id)sender;
 - (IBAction)ExitProgram:(id)sender;
 - (IBAction)deleteItem:(id)sender;
 - (IBAction)copyItem:(id)sender;

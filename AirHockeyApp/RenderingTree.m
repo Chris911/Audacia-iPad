@@ -15,11 +15,13 @@
 @implementation RenderingTree
 
 @synthesize tree;
+@synthesize multipleNodesSelected;
 
 - (id) init
 {
     if((self = [super init])) {
         tree = [[NSMutableArray alloc]init];
+        self.multipleNodesSelected = NO;
     }
     return self;
 }
@@ -111,7 +113,9 @@
     
     // New selection pass, make sure
     // no other nodes are still selected
-    [self deselectAllNodes];
+    if(!self.multipleNodesSelected){
+        [self deselectAllNodes];
+    }
     
     for(int i = [self.tree count]-1; i > 0; i--) //FIXME: Inverted selection order, may cause problems but fixes table selection
     {
@@ -127,6 +131,46 @@
                nodeWasSelected = YES;
         }
     }
+    return nodeWasSelected;
+}
+
+- (BOOL) selectNodesByZone:(CGPoint)beginPoint:(CGPoint)endPoint
+{
+    [self deselectAllNodes];
+    
+    BOOL nodeWasSelected = NO;
+    
+    for(int i = [self.tree count]-1; i > 0; i--) //FIXME: Inverted selection order, may cause problems but fixes table selection
+    {
+        Node *node = [self.tree objectAtIndex:i];
+        
+        // Invert if the rectangle isn't started from upper left and ended to lower right.
+        if(beginPoint.x > endPoint.x){
+            beginPoint = CGPointMake(-beginPoint.x, beginPoint.y);
+            endPoint = CGPointMake(-endPoint.x, endPoint.y);
+        }
+        
+        if(endPoint.y > beginPoint.y){
+            beginPoint = CGPointMake(beginPoint.x, -beginPoint.y);
+            endPoint = CGPointMake(endPoint.x, -endPoint.y);
+        }
+        
+        //Always according to this figure after correction :
+        //  B ------ *
+        //  |  Node  |
+        //  * ------ E
+        
+        if(node.position.x <= endPoint.x
+           && node.position.x >= beginPoint.x
+           && node.position.y >= endPoint.y
+           && node.position.y <= beginPoint.y) {
+            node.isSelected = YES;
+            NSLog(@"Selected Type:%@",node.type);
+            nodeWasSelected = YES;
+            self.multipleNodesSelected = YES;
+        }
+    }
+    
     return nodeWasSelected;
 }
 
@@ -180,6 +224,7 @@
     {
         node.isSelected = NO;
     }
+    self.multipleNodesSelected = NO;
 }
 
 // Transforms on selected nodes

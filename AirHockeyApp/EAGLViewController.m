@@ -427,6 +427,7 @@ enum {
     if(elasticRect.isActive == YES){
         elasticRect.isActive = NO;
     } else {
+        [elasticRect reset];
         elasticRect.isActive = YES;
     }
 }
@@ -471,7 +472,7 @@ enum {
     if(view.tag > 0) {
         activeObjectTag = view.tag;
     } else {
-        NSLog(@"Invalid Tag");
+        NSLog(@"Invalid Tag"); 
     }
 }
 
@@ -692,6 +693,8 @@ enum {
 {
     // When closing the transform view, return to translation mode
     currentTransformState = STATE_TRANSFORM_TRANSLATION;
+    [Scene getInstance].renderingTree.multipleNodesSelected = NO;
+    [elasticRect reset];
     [self slideOutAnimationView:self.TransformView];
 
 }

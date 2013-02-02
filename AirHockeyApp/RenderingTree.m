@@ -147,13 +147,15 @@
         
         // Invert if the rectangle isn't started from upper left and ended to lower right.
         if(beginPoint.x > endPoint.x){
-            beginPoint = CGPointMake(-beginPoint.x, beginPoint.y);
-            endPoint = CGPointMake(-endPoint.x, endPoint.y);
+            CGPoint temp = beginPoint;
+            beginPoint = CGPointMake(endPoint.x, beginPoint.y);
+            endPoint = CGPointMake(temp.x, endPoint.y);
         }
         
         if(endPoint.y > beginPoint.y){
-            beginPoint = CGPointMake(beginPoint.x, -beginPoint.y);
-            endPoint = CGPointMake(endPoint.x, -endPoint.y);
+            CGPoint temp = beginPoint;
+            beginPoint = CGPointMake(beginPoint.x, endPoint.y);
+            endPoint = CGPointMake(endPoint.x, temp.y);
         }
         
         //Always according to this figure after correction :

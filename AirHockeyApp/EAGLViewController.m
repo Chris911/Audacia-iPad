@@ -16,6 +16,7 @@
 #import "NodeMurret.h"
 #import "NetworkUtils.h"
 #import "ElasticRect.h"
+#import "Particle.h"    
 
 #define kAlertNameMapTag 1
 
@@ -74,6 +75,9 @@ enum {
     
     // Elastic Rectangle
     ElasticRect *elasticRect;
+    
+    //NSMutableArray *particles;
+    
 }
 
 @property (nonatomic, retain) EAGLContext *context;
@@ -117,6 +121,16 @@ enum {
     
     // Create the elastic rectangle
     elasticRect = [[ElasticRect alloc]init];
+    
+//    particles = [[NSMutableArray alloc]init];
+//    
+//    for(int i = 0; i < 30; i++) {
+//        Particle *p = [[Particle alloc]init];
+//        p.position = Vector3DMake(0, 0, 0);
+//        p.isActive = YES;
+//        [particles addObject:p];
+//    }
+    
     
     // Initialize Scene and rendring tree
     [Scene getInstance];
@@ -337,13 +351,24 @@ enum {
             // Place the world positions according to the current camera position
             [self.camera assignWorldPosition:positionCourante];
             
-            if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
-                [[Scene getInstance].renderingTree translateSelectedNodes:
-                    CGPointMake(self.camera.worldPosition.x,self.camera.worldPosition.y)];
+            if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {                
+                if([Scene getInstance].renderingTree.multipleNodesSelected){ // Multiple Nodes translation
+                    [[Scene getInstance].renderingTree translateMultipleNodes:
+                     CGPointMake(self.camera.worldPosition.x,self.camera.worldPosition.y)];
+                } else { // Single Node translation
+                    [[Scene getInstance].renderingTree translateSingleNode:
+                     CGPointMake(self.camera.worldPosition.x,self.camera.worldPosition.y)];
+                }
                 
             } else if(currentTransformState == STATE_TRANSFORM_ROTATION) {
                 CGPoint rotation = [self.camera calculateVelocity:positionPrecedente :positionCourante];
-                [[Scene getInstance].renderingTree rotateSelectedNodes:Rotation3DMake(rotation.x, rotation.y, 0)];
+                
+                // Multiple Nodes rotation
+                if([Scene getInstance].renderingTree.multipleNodesSelected){
+                    ;
+                } else { // Single Node rotation
+                    [[Scene getInstance].renderingTree rotateSelectedNodes:Rotation3DMake(rotation.x, rotation.y, 0)];
+                }
                 
             } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
                 CGPoint scale = [self.camera calculateVelocity:positionPrecedente :positionCourante];
@@ -601,6 +626,9 @@ enum {
     if(elasticRect.isActive){
         [elasticRect render];
     }
+    
+    // Render the particles
+
     
     [(EAGLView *)self.view presentFramebuffer];
 }

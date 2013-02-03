@@ -135,13 +135,15 @@
     return nodeWasSelected;
 }
 
+
+// Multiple nodes selection, using a zone (the begin and end points of the elastic rect)
 - (BOOL) selectNodesByZone:(CGPoint)beginPoint:(CGPoint)endPoint
 {
     [self deselectAllNodes];
     
     BOOL nodeWasSelected = NO;
     
-    for(int i = [self.tree count]-1; i > 0; i--) //FIXME: Inverted selection order, may cause problems but fixes table selection
+    for(int i = [self.tree count]-1; i > 0; i--) 
     {
         Node *node = [self.tree objectAtIndex:i];
         
@@ -266,19 +268,50 @@
         }
     }
 }
-// Move selected nodes.  DeltaPoint should be already
+// Moves a single node.  DeltaPoint should be already
 // normalized
-- (BOOL) translateSelectedNodes:(CGPoint) deltaPoint
+- (BOOL) translateSingleNode:(CGPoint) deltaPoint
 {
     for(Node* node in self.tree)
     {
         if(node.isSelected) {
             node.position = Vector3DMake(deltaPoint.x, deltaPoint.y, node.position.z);
-            
+            return YES;
         }
     }
     return NO;
 }
+
+// Translate multiple nodes, according to the currently clicked node
+- (BOOL) translateMultipleNodes:(CGPoint) deltaPoint
+{
+    Vector3D hitPosition = Vector3DMake(0, 0, 0);
+    int offset = 8;
+    for(Node* node in self.tree)
+    {
+        if(node.isSelected && // Pick the node being clicked to calculate offset
+           node.position.x <= deltaPoint.x + offset
+           && node.position.x >= deltaPoint.x - offset
+           && node.position.y <= deltaPoint.y + offset
+           && node.position.y >= deltaPoint.y - offset) {
+            hitPosition = node.position;
+        }
+    }
+    
+    CGPoint deltaPos = CGPointMake(deltaPoint.x -  hitPosition.x, deltaPoint.y - hitPosition.y);
+    
+    for(Node* node in self.tree)
+    {
+        if(node.isSelected) {
+            node.position = Vector3DMake(node.position.x + deltaPos.x,
+                                         node.position.y + deltaPos.y,
+                                         node.position.z);
+        }
+    }
+    return NO;
+}
+
+
 
 #pragma mark - Utility functions
 - (int) getNumberOfNodes
@@ -315,6 +348,26 @@
     return anyNodeHit;
 }
 
+
+//    Vector3D positions[[self.tree count]]; // max number of selected nodes is all of them...
+//    int selectedNodes = 0;
+//
+//    for(Node* node in self.tree) {
+//        if(node.isSelected) {
+//            positions[selectedNodes] = node.position;
+//            selectedNodes ++;
+//        }
+//    }
+//
+//    // Find the center point
+//    float medianX = 0.0f;
+//    float medianY = 0.0f;
+//    for(int i = 0; i < selectedNodes; i++) {
+//        medianX += positions[i].x;
+//        medianY += positions[i].y;
+//    }
+//
+//    CGPoint center = CGPointMake(medianX/selectedNodes, medianY/selectedNodes);
 
 
 @end

@@ -86,16 +86,15 @@
 - (void) orthoZoom:(float) factor
 {
     // Important : 4 and 3 represents the screen ratio of the iPad (4:3 , 1024:768)
-    if(factor > 1){ // zoom in, pinch in
+    if(factor > 1){ // zoom out, pinch out
         if(self.orthoWidth < LARGEUR_FENETRE + 100 && self.orthoHeight < HAUTEUR_FENETRE + 75){
-            self.orthoWidth += factor*8;
-            self.orthoHeight += factor*6;
+            self.orthoWidth += factor*4;
+            self.orthoHeight += factor*3;
         }
-        
-    } else { // Zoom out
+    } else { // Zoom in
         if(self.orthoWidth > LARGEUR_FENETRE - 100 && self.orthoHeight > HAUTEUR_FENETRE - 75){
-            self.orthoWidth -= factor*4;
-            self.orthoHeight -= factor*3;
+            self.orthoWidth -= factor*8;
+            self.orthoHeight -= factor*6;
         }
     }
 }

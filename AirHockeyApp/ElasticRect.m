@@ -39,14 +39,6 @@ GLfloat colors[] = {
     self.isActive = NO;
 }
 
-- (void) modifyRect:(CGPoint)curentPoint:(CGPoint)lastPoint
-{
-    float deltaX = curentPoint.x - lastPoint.x;
-    float deltaY = curentPoint.y - lastPoint.y;
-    
-    self.dimension = CGPointMake(self.dimension.x + deltaX, self.dimension.y + deltaY);
-}
-
 - (void) render
 {
     glPushMatrix();

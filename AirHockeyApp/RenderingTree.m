@@ -7,7 +7,6 @@
 //
 
 #import "RenderingTree.h"
-#import "NodeCube.h"
 #import "NodeTable.h"
 #import "NodePommeau.h"
 #import "NodePuck.h"
@@ -105,9 +104,7 @@
 // Select node using its position
 // FIXME: only works in the default 2D Plane
 - (BOOL) selectNodeByPosition:(Vector3D) position
-{
-    BOOL nodeWasSelected = NO;
-    
+{    
     // The bigger the value, the easier it is to select an object
     int offset = 8;
     
@@ -128,11 +125,10 @@
                 node.isSelected = YES;
                 NSLog(@"Selected Type:%@",node.type);
                 // FIXME: This only works for SINGLE OBJECT selection
-                nodeWasSelected = YES;
                 return YES; 
         }
     }
-    return nodeWasSelected;
+    return NO;
 }
 
 

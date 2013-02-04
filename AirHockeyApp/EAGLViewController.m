@@ -152,7 +152,6 @@ enum {
     
     [context release];
     
-    [self.camera release];
     [elasticRect release];
     
     [_LeftSlideView release];
@@ -380,8 +379,6 @@ enum {
             [self.camera orthoTranslate:positionCourante:positionPrecedente];
             
         } else if (currentTouchesMode == TOUCH_ELASTIC_MODE) { // Elastic Rectangle mode
-            [elasticRect modifyRect:[self.camera convertToWorldPosition:positionCourante]
-                                   :[self.camera convertToWorldPosition:positionPrecedente]];
             elasticRect.endPosition = [self.camera convertToWorldPosition:positionCourante];
         }
     }
@@ -874,7 +871,7 @@ enum {
     // then make the uiimage from that
     UIImage *myImage = [UIImage imageWithCGImage:imageRef];
     
-    return myImage;
+    return myImage; 
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -903,7 +900,6 @@ enum {
         
         [webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
         [webClient release];
-        [xmlData release];
     }
 }
 

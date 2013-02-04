@@ -17,7 +17,6 @@
 @property BOOL isActive;
 
 - (void) render;
-- (void) modifyRect:(CGPoint)curentPoint:(CGPoint)lastPoint;
 - (void) reset;
 
 

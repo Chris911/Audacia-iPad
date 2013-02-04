@@ -9,11 +9,13 @@
 #import "BetaViewController.h"
 #import "Scene.h"
 #import "Session.h" 
+#import "AudioInterface.h"
 
 
 @interface MenuViewController()
 {
     BOOL isConnectionViewVisible;
+    BOOL isSoundEnabled;
 }
 
 @end
@@ -36,6 +38,12 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    isSoundEnabled = YES;
+}
+
 #pragma mark - View lifecycle
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -45,6 +53,13 @@
     isConnectionViewVisible = NO;
     self.ConnectionView.center = CGPointMake(512, -125);
     self.UsernameLabel.text = [Session getInstance].username;
+    
+    // Setup and start sounds
+    //[AudioInterface loadSounds];
+    if(isSoundEnabled){
+        [AudioInterface startBackgroundMusic];
+    }
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -89,6 +104,17 @@
 - (IBAction)showConnectionView:(id)sender
 {
     [self toggleConnectionView];
+}
+
+- (IBAction)toggleSound:(id)sender
+{
+    isSoundEnabled = !isSoundEnabled;
+    if(isSoundEnabled){
+        [AudioInterface startBackgroundMusic];
+    } else {
+        [AudioInterface stopBackgroundMusic];
+    }
+        
 }
 
 // Show or hide the connection view

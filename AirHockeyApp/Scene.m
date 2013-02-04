@@ -11,7 +11,6 @@
 #import "RenderingTree.h"
 
 #import "NodeTable.h"   
-#import "NodeCube.h"
 #import "NodeBooster.h"
 #import "NodePommeau.h"
 #import "NodePuck.h"

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0409924916B21087009DBE1D /* NetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0409924816B21087009DBE1D /* NetworkUtils.m */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
-		044D7FA016A5BBF900AE8E11 /* NodeCube.m in Sources */ = {isa = PBXBuildFile; fileRef = 044D7F9F16A5BBF900AE8E11 /* NodeCube.m */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
 		048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3516A4AFB9006A7082 /* RenderingTree.m */; };
 		048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3916A4BD8F006A7082 /* Scene.m */; };
@@ -61,6 +60,8 @@
 		A83AA9EF16A4D925003388F3 /* BetaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A83AA9ED16A4D925003388F3 /* BetaViewController.xib */; };
 		A83C226116BD94E2007AA035 /* ElasticRect.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C226016BD94E2007AA035 /* ElasticRect.m */; };
 		A83C227B16BEC38F007AA035 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C227A16BEC38F007AA035 /* Particle.m */; };
+		A842302F16BF3A04007F97CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842302E16BF3A04007F97CB /* OpenAL.framework */; };
+		A842303216BF3A1A007F97CB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842303116BF3A1A007F97CB /* AudioToolbox.framework */; };
 		A889F22716B067E10008E534 /* booster_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22316B067E10008E534 /* booster_texture.png */; };
 		A889F22816B067E10008E534 /* pommeau_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22416B067E10008E534 /* pommeau_texture.png */; };
 		A889F22916B067E10008E534 /* portal_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22516B067E10008E534 /* portal_texture.png */; };
@@ -92,6 +93,13 @@
 		A8EBDE8D16A8849D002B2DD6 /* NodeTableEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE8C16A8849D002B2DD6 /* NodeTableEdge.m */; };
 		A8EBDE9616A890D1002B2DD6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE9516A890D1002B2DD6 /* Reachability.m */; };
 		A8EBDE9D16A9EE9B002B2DD6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE9C16A9EE9B002B2DD6 /* Constants.m */; };
+		A8EEE40916BF3CA900EA3FB0 /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40216BF3CA900EA3FB0 /* CDAudioManager.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		A8EEE40A16BF3CA900EA3FB0 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40616BF3CA900EA3FB0 /* CocosDenshion.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		A8EEE40B16BF3CA900EA3FB0 /* SimpleAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40816BF3CA900EA3FB0 /* SimpleAudioEngine.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		A8EEE40E16BF3EDD00EA3FB0 /* AudioInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */; };
+		A8EEE41716BF43D700EA3FB0 /* technoloop.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */; };
+		A8EEE41916BF442800EA3FB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */; };
+		A8EEE41B16BF495B00EA3FB0 /* jazzloop.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A8EEE41A16BF495B00EA3FB0 /* jazzloop.m4a */; };
 		A8F13CA916AF190E00CB5885 /* SideBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CA816AF190E00CB5885 /* SideBar2.png */; };
 		A8F13CB916B027F300CB5885 /* SettingsButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CB716B027F300CB5885 /* SettingsButton1.png */; };
 		A8F13CBA16B027F300CB5885 /* SettingsImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CB816B027F300CB5885 /* SettingsImage1.png */; };
@@ -101,8 +109,6 @@
 		0409924716B21087009DBE1D /* NetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkUtils.h; sourceTree = "<group>"; };
 		0409924816B21087009DBE1D /* NetworkUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkUtils.m; sourceTree = "<group>"; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		044D7F9E16A5BBF900AE8E11 /* NodeCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeCube.h; sourceTree = "<group>"; };
-		044D7F9F16A5BBF900AE8E11 /* NodeCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeCube.m; sourceTree = "<group>"; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		048C9D3216A4A8D9006A7082 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		048C9D3416A4AFB9006A7082 /* RenderingTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingTree.h; sourceTree = "<group>"; };
@@ -181,6 +187,8 @@
 		A83C226016BD94E2007AA035 /* ElasticRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElasticRect.m; sourceTree = "<group>"; };
 		A83C227716BEC08E007AA035 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		A83C227A16BEC38F007AA035 /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
+		A842302E16BF3A04007F97CB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		A842303116BF3A1A007F97CB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A889F22316B067E10008E534 /* booster_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = booster_texture.png; path = AirHockeyApp/booster_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22416B067E10008E534 /* pommeau_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pommeau_texture.png; path = AirHockeyApp/pommeau_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22516B067E10008E534 /* portal_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = portal_texture.png; path = AirHockeyApp/portal_texture.png; sourceTree = SOURCE_ROOT; };
@@ -234,6 +242,19 @@
 		A8EBDE9516A890D1002B2DD6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A8EBDE9B16A9EE9A002B2DD6 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		A8EBDE9C16A9EE9B002B2DD6 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		A8EEE40116BF3CA900EA3FB0 /* CDAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDAudioManager.h; sourceTree = "<group>"; };
+		A8EEE40216BF3CA900EA3FB0 /* CDAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDAudioManager.m; sourceTree = "<group>"; };
+		A8EEE40316BF3CA900EA3FB0 /* CDConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDConfig.h; sourceTree = "<group>"; };
+		A8EEE40416BF3CA900EA3FB0 /* CDOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOpenALSupport.h; sourceTree = "<group>"; };
+		A8EEE40516BF3CA900EA3FB0 /* CocosDenshion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocosDenshion.h; sourceTree = "<group>"; };
+		A8EEE40616BF3CA900EA3FB0 /* CocosDenshion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocosDenshion.m; sourceTree = "<group>"; };
+		A8EEE40716BF3CA900EA3FB0 /* SimpleAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAudioEngine.h; sourceTree = "<group>"; };
+		A8EEE40816BF3CA900EA3FB0 /* SimpleAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAudioEngine.m; sourceTree = "<group>"; };
+		A8EEE40C16BF3EDD00EA3FB0 /* AudioInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInterface.h; sourceTree = "<group>"; };
+		A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInterface.m; sourceTree = "<group>"; };
+		A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = technoloop.m4a; sourceTree = "<group>"; };
+		A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A8EEE41A16BF495B00EA3FB0 /* jazzloop.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jazzloop.m4a; sourceTree = "<group>"; };
 		A8F13CA816AF190E00CB5885 /* SideBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar2.png; path = Assets/UI/Images/SideBar2.png; sourceTree = "<group>"; };
 		A8F13CB716B027F300CB5885 /* SettingsButton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsButton1.png; path = Assets/UI/Images/SettingsButton1.png; sourceTree = "<group>"; };
 		A8F13CB816B027F300CB5885 /* SettingsImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsImage1.png; path = Assets/UI/Images/SettingsImage1.png; sourceTree = "<group>"; };
@@ -244,6 +265,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8EEE41916BF442800EA3FB0 /* AVFoundation.framework in Frameworks */,
+				A842303216BF3A1A007F97CB /* AudioToolbox.framework in Frameworks */,
+				A842302F16BF3A04007F97CB /* OpenAL.framework in Frameworks */,
 				A8CC902416A6E88600CFD27D /* libxml2.dylib in Frameworks */,
 				A8CC906516A6FD9D00CFD27D /* MobileCoreServices.framework in Frameworks */,
 				A8CC906316A6FD8E00CFD27D /* SystemConfiguration.framework in Frameworks */,
@@ -388,6 +412,9 @@
 		96378D791472C71100F543EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */,
+				A842303116BF3A1A007F97CB /* AudioToolbox.framework */,
+				A842302E16BF3A04007F97CB /* OpenAL.framework */,
 				A8CC906416A6FD9D00CFD27D /* MobileCoreServices.framework */,
 				A8CC906216A6FD8E00CFD27D /* SystemConfiguration.framework */,
 				A8CC902316A6E88600CFD27D /* libxml2.dylib */,
@@ -404,6 +431,7 @@
 		96378D801472C71100F543EA /* AirHockeyApp */ = {
 			isa = PBXGroup;
 			children = (
+				A8EEE3FF16BF3C2400EA3FB0 /* Audio */,
 				044CD6C716B86E9700218CA1 /* Classes */,
 				048C9D3716A4BCB7006A7082 /* Scene */,
 				048C9D2F16A4A873006A7082 /* Objects */,
@@ -412,8 +440,8 @@
 				969DDEDC1472CF6000ED5DC8 /* Vues */,
 				96378D981472C7F200F543EA /* Interface Builder */,
 				96378D941472C78200F543EA /* Controleurs */,
-				A8CC901E16A6E7B800CFD27D /* XMLUtil */,
 				96378D811472C71200F543EA /* Supporting Files */,
+				A8CC901E16A6E7B800CFD27D /* XMLUtil */,
 			);
 			path = AirHockeyApp;
 			sourceTree = "<group>";
@@ -534,6 +562,7 @@
 		A8C5A8B0169DECD7008B29EF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A8EEE41516BF43D700EA3FB0 /* Sounds */,
 				04A04E3316AEEED1006D1FEB /* Models */,
 				A8C5A8B1169DECDF008B29EF /* UI */,
 			);
@@ -599,8 +628,6 @@
 			children = (
 				048C9D3116A4A8D9006A7082 /* Node.h */,
 				048C9D3216A4A8D9006A7082 /* Node.m */,
-				044D7F9E16A5BBF900AE8E11 /* NodeCube.h */,
-				044D7F9F16A5BBF900AE8E11 /* NodeCube.m */,
 				A8EBDE7816A729CA002B2DD6 /* NodeTable.h */,
 				A8EBDE7916A729CA002B2DD6 /* NodeTable.m */,
 				A8EBDE8B16A8849D002B2DD6 /* NodeTableEdge.h */,
@@ -630,6 +657,42 @@
 			name = Reachability;
 			path = libs/Reachability;
 			sourceTree = SOURCE_ROOT;
+		};
+		A8EEE3FF16BF3C2400EA3FB0 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				A8EEE40016BF3CA900EA3FB0 /* CocosDenshion */,
+				A8EEE40C16BF3EDD00EA3FB0 /* AudioInterface.h */,
+				A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
+		A8EEE40016BF3CA900EA3FB0 /* CocosDenshion */ = {
+			isa = PBXGroup;
+			children = (
+				A8EEE40116BF3CA900EA3FB0 /* CDAudioManager.h */,
+				A8EEE40216BF3CA900EA3FB0 /* CDAudioManager.m */,
+				A8EEE40316BF3CA900EA3FB0 /* CDConfig.h */,
+				A8EEE40416BF3CA900EA3FB0 /* CDOpenALSupport.h */,
+				A8EEE40516BF3CA900EA3FB0 /* CocosDenshion.h */,
+				A8EEE40616BF3CA900EA3FB0 /* CocosDenshion.m */,
+				A8EEE40716BF3CA900EA3FB0 /* SimpleAudioEngine.h */,
+				A8EEE40816BF3CA900EA3FB0 /* SimpleAudioEngine.m */,
+			);
+			name = CocosDenshion;
+			path = libs/CocosDenshion;
+			sourceTree = SOURCE_ROOT;
+		};
+		A8EEE41516BF43D700EA3FB0 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				A8EEE41A16BF495B00EA3FB0 /* jazzloop.m4a */,
+				A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */,
+			);
+			name = Sounds;
+			path = Assets/Sounds;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -713,6 +776,8 @@
 				A889F22816B067E10008E534 /* pommeau_texture.png in Resources */,
 				A889F22916B067E10008E534 /* portal_texture.png in Resources */,
 				A889F22A16B067E10008E534 /* pucktexture.png in Resources */,
+				A8EEE41716BF43D700EA3FB0 /* technoloop.m4a in Resources */,
+				A8EEE41B16BF495B00EA3FB0 /* jazzloop.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,7 +801,6 @@
 				048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */,
 				048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */,
 				A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */,
-				044D7FA016A5BBF900AE8E11 /* NodeCube.m in Sources */,
 				A8CC902216A6E84100CFD27D /* GDataXMLNode.m in Sources */,
 				A8CC902716A6E95D00CFD27D /* XMLUtil.m in Sources */,
 				A8CC905916A6FD2D00CFD27D /* AFHTTPClient.m in Sources */,
@@ -770,6 +834,10 @@
 				A818E02516BAD7D900CA5823 /* Camera.m in Sources */,
 				A83C226116BD94E2007AA035 /* ElasticRect.m in Sources */,
 				A83C227B16BEC38F007AA035 /* Particle.m in Sources */,
+				A8EEE40916BF3CA900EA3FB0 /* CDAudioManager.m in Sources */,
+				A8EEE40A16BF3CA900EA3FB0 /* CocosDenshion.m in Sources */,
+				A8EEE40B16BF3CA900EA3FB0 /* SimpleAudioEngine.m in Sources */,
+				A8EEE40E16BF3EDD00EA3FB0 /* AudioInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

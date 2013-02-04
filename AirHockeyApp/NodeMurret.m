@@ -62,7 +62,7 @@
 -(id)copyWithZone:(NSZone *)zone
 {
     // We'll ignore the zone for now
-    NodeMurret *copyObj = [[[NodeMurret alloc] init]autorelease];
+    NodeMurret *copyObj = [[NodeMurret alloc] init];
     copyObj.position = Vector3DMake(self.position.x + 10, self.position.y, self.position.z);
     copyObj.scaleFactor = self.scaleFactor;
     copyObj.angle = self.angle;

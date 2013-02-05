@@ -7,6 +7,7 @@
 #import "EAGLViewController.h"
 #import "AppDemoAppDelegate.h"
 #import "BetaViewController.h"
+#import "CarouselTestView.h"
 #import "Scene.h"
 #import "Session.h" 
 #import "AudioInterface.h"
@@ -115,6 +116,17 @@
         [AudioInterface stopBackgroundMusic];
     }
         
+}
+
+- (IBAction)showCarouselView:(id)sender
+{
+    if(!isConnectionViewVisible) {
+        CarouselTestView* carousel_vc = [[[CarouselTestView alloc]init]autorelease];
+        carousel_vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:carousel_vc animated:YES];
+    } else {
+        [self toggleConnectionView];
+    }
 }
 
 // Show or hide the connection view

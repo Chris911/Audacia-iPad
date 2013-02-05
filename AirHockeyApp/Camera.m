@@ -55,14 +55,14 @@
     }
 }
 
-
+// Use a screenPosition and convert it to the current world position (inlcudes zoom and pan differences)
 - (void) assignWorldPosition:(CGPoint)screenPos
 {
     CGPoint cg_worldPos = [self convertFromScreenToWorld:screenPos];
     self.worldPosition = Vector3DMake(cg_worldPos.x + self.orthoCenter.x, cg_worldPos.y + self.orthoCenter.y, -1); // ignore Z
 }
 
-
+// Translate position when in ortho mode
 - (void) orthoTranslate:(CGPoint)newPosition:(CGPoint)lastPosition
 {
     CGPoint convertedNewPos = [self convertFromScreenToWorld:newPosition];
@@ -70,7 +70,6 @@
     
     GLfloat deltaX = (convertedNewPos.x - convertedLastPos.x)/2;
     GLfloat deltaY = (convertedNewPos.y - convertedLastPos.y)/2;
-    
     
     self.orthoCenter = CGPointMake(self.orthoCenter.x+deltaX, self.orthoCenter.y+deltaY);
     [self applyOrthoTransfromation];
@@ -124,12 +123,56 @@
     return CGPointMake(currentTouch.x - lastTouch.x, currentTouch.y - lastTouch.y);
 }
 
+#pragma mark - Zooming methods
+- (void) zoomInFromRect:(CGPoint)begin:(CGPoint)end
+{
+    // Invert if the rectangle isn't started from upper left and ended to lower right.
+    if(begin.x > end.x){
+        CGPoint temp = begin;
+        begin = CGPointMake(end.x, begin.y);
+        end = CGPointMake(temp.x, end.y);
+    }
+    
+    if(end.y > begin.y){
+        CGPoint temp = begin;
+        begin = CGPointMake(begin.x, end.y);
+        end = CGPointMake(end.x, temp.y);
+    }
+    
+    float centerX = (end.x + begin.x)/2;
+    float centerY = (begin.y + end.y)/2;
+    
+    float dimensionX = abs(end.x - begin.x);
+    float dimensionY = abs(end.y - begin.y);
+    
+    if(dimensionX < dimensionY){
+        dimensionY = dimensionX/4*3;
+    } else{
+        dimensionX = dimensionY/3*4;
+    }
+    
+    self.orthoCenter = CGPointMake(centerX, centerY);
+    self.orthoWidth = dimensionX;
+    self.orthoHeight = dimensionY;
+    
+    // Limit zoom
+    if(self.orthoWidth > LARGEUR_FENETRE + 100 || self.orthoHeight > LARGEUR_FENETRE + 75){
+        self.orthoWidth = LARGEUR_FENETRE + 100;
+        self.orthoHeight = HAUTEUR_FENETRE + 75;
+    } else if(self.orthoWidth < LARGEUR_FENETRE - 100 || self.orthoHeight < LARGEUR_FENETRE - 75) {
+        self.orthoWidth = LARGEUR_FENETRE - 100;
+        self.orthoHeight = HAUTEUR_FENETRE - 75;
+    }
+    
+    [self applyOrthoTransfromation];
+}
+
 
 #pragma mark - Replace camera animation
 - (void) replaceCamera
 {
     while(![self replaceCameraToOrigin:YES]) {
-        // Block
+        // Block while animating
     }
 }
 
@@ -164,10 +207,10 @@
 
 - (void) animateCameraBackToOrigin
 {
-    float xIncrement = 0.0001f;
-    float yIncrement = 0.0001f;
-    float zoomIncrementX = 0.0003f;
-    float zoomIncrementY = 0.0003f;
+    float xIncrement = 0.01f;
+    float yIncrement = 0.01f;
+    float zoomIncrementX = 0.03f;
+    float zoomIncrementY = 0.03f;
 
     
     float newXpos = 0;

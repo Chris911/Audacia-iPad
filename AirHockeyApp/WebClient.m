@@ -104,7 +104,6 @@
     NSMutableArray *allMaps = [[[NSMutableArray alloc]init]autorelease];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        //NSLog(@"Map Name: %@", [JSON valueForKeyPath:@"mapId"]);
         
         NSArray *mapIdArray = [JSON valueForKeyPath:@"mapId"];
         NSArray *nameArray = [JSON valueForKeyPath:@"name"];
@@ -122,9 +121,7 @@
             int ratingInt = [ratingString intValue];
             
             Map *map = [[Map alloc]initWithMapData:mapIdInt :[nameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :ratingInt  :[privateArray objectAtIndex:i]];
-            
             map.image = [self fetchMapImageWithName:map.name];
-            
             [allMaps addObject:map];
         }
         

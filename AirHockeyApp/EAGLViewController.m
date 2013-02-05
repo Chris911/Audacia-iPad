@@ -76,7 +76,7 @@ enum {
     // Elastic Rectangle
     ElasticRect *elasticRect;
     
-    //NSMutableArray *particles;
+    NSMutableArray *particles;
     
 }
 
@@ -122,14 +122,14 @@ enum {
     // Create the elastic rectangle
     elasticRect = [[ElasticRect alloc]init];
     
-//    particles = [[NSMutableArray alloc]init];
-//    
-//    for(int i = 0; i < 30; i++) {
-//        Particle *p = [[Particle alloc]init];
-//        p.position = Vector3DMake(0, 0, 0);
-//        p.isActive = YES;
-//        [particles addObject:p];
-//    }
+    particles = [[NSMutableArray alloc]init];
+    
+    for(int i = 0; i < 30; i++) {
+        Particle *p = [[Particle alloc]init];
+        p.position = Vector3DMake(0, 0, 0);
+        p.isActive = YES;
+        [particles addObject:p];
+    }
     
     
     // Initialize Scene and rendring tree
@@ -364,9 +364,9 @@ enum {
                 
                 // Multiple Nodes rotation
                 if([Scene getInstance].renderingTree.multipleNodesSelected){
-                    ;
+                    [[Scene getInstance].renderingTree rotateMultipleNodes:positionCourante:positionPrecedente];
                 } else { // Single Node rotation
-                    [[Scene getInstance].renderingTree rotateSelectedNodes:Rotation3DMake(rotation.x, rotation.y, 0)];
+                    [[Scene getInstance].renderingTree rotateSingleNode:Rotation3DMake(rotation.x, rotation.y, 0)];
                 }
                 
             } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
@@ -388,7 +388,12 @@ enum {
 {
     [Scene replaceOutOfBoundsElements];
     if(currentTouchesMode == TOUCH_ELASTIC_MODE) {
-        [[Scene getInstance].renderingTree selectNodesByZone:elasticRect.beginPosition :elasticRect.endPosition];
+        if(elasticRect.isSelectionMode){
+            [[Scene getInstance].renderingTree selectNodesByZone:elasticRect.beginPosition :elasticRect.endPosition];
+        } else {
+            [self.camera zoomInFromRect:elasticRect.beginPosition :elasticRect.endPosition];
+        }
+        
         if([Scene getInstance].renderingTree.multipleNodesSelected) {
             [self slideInAnimationView:self.ParametersView];
         }
@@ -448,12 +453,24 @@ enum {
 }
 
 // Turn elastic rectangle setting on or off
-- (IBAction)toggleElasticRect:(id)sender
+- (IBAction)toggleElasticSelection:(id)sender
 {   //Can't just toggle or there will be a coherence problem
     if(elasticRect.isActive == YES){
         elasticRect.isActive = NO;
     } else {
         [elasticRect reset];
+        elasticRect.isSelectionMode = YES;
+        elasticRect.isActive = YES;
+    }
+}
+
+- (IBAction)toggleElasticZoom:(id)sender
+{
+    if(elasticRect.isActive == YES){
+        elasticRect.isActive = NO;
+    } else {
+        [elasticRect reset];
+        elasticRect.isSelectionMode = NO;
         elasticRect.isActive = YES;
     }
 }
@@ -625,7 +642,11 @@ enum {
     }
     
     // Render the particles
-
+//    for(Particle *p in particles){
+//        if(p.isActive){
+//            [p render];
+//        }
+//    }
     
     [(EAGLView *)self.view presentFramebuffer];
 }

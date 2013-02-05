@@ -42,7 +42,7 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    isSoundEnabled = YES;
+    isSoundEnabled = NO;
 }
 
 #pragma mark - View lifecycle

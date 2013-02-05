@@ -34,7 +34,8 @@
 - (void) selectAllNodes;
 
 // Transforms on selected nodes
-- (void) rotateSelectedNodes:(Rotation3D) deltaAngle;
+- (void) rotateSingleNode:(Rotation3D) deltaAngle;
+- (void) rotateMultipleNodes:(CGPoint) currentPoint:(CGPoint)lastPoint;
 - (void) scaleSelectedNodes:(float) deltaScale;
 - (BOOL) translateSingleNode:(CGPoint) deltaPoint;
 - (BOOL) translateMultipleNodes:(CGPoint) deltaPoint;

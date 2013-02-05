@@ -15,6 +15,7 @@
 @synthesize endPosition;
 @synthesize dimension;
 @synthesize isActive;
+@synthesize isSelectionMode;
 
 GLfloat colors[] = {
     0,1,1,1,
@@ -37,6 +38,7 @@ GLfloat colors[] = {
     self.endPosition = CGPointMake(0, 0);
     self.dimension = CGPointMake(0, 0);
     self.isActive = NO;
+    self.isSelectionMode = YES;
 }
 
 - (void) render

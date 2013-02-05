@@ -115,7 +115,7 @@
     if (view == nil)
     {
         view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f, 384.0f)] autorelease];
-        ((UIImageView *)view).image = map.image;
+        
         view.contentMode = UIViewContentModeScaleAspectFit;
         //view.contentMode = UIViewContentModeCenter;
         CGRect frame = view.frame;
@@ -149,6 +149,7 @@
     //in the wrong place in the carousel
     titleLabel.text = map.name;
     authorLabel.text = @"By author";
+    ((UIImageView *)view).image = map.image;
     
     return view;
 }

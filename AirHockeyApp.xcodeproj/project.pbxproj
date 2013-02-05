@@ -108,6 +108,7 @@
 		A8F13CA916AF190E00CB5885 /* SideBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CA816AF190E00CB5885 /* SideBar2.png */; };
 		A8F13CB916B027F300CB5885 /* SettingsButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CB716B027F300CB5885 /* SettingsButton1.png */; };
 		A8F13CBA16B027F300CB5885 /* SettingsImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CB816B027F300CB5885 /* SettingsImage1.png */; };
+		A8F2FFB616C199EF008E5BDD /* carousel_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8F2FFB516C199EF008E5BDD /* carousel_background.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -270,6 +271,7 @@
 		A8F13CA816AF190E00CB5885 /* SideBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar2.png; path = Assets/UI/Images/SideBar2.png; sourceTree = "<group>"; };
 		A8F13CB716B027F300CB5885 /* SettingsButton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsButton1.png; path = Assets/UI/Images/SettingsButton1.png; sourceTree = "<group>"; };
 		A8F13CB816B027F300CB5885 /* SettingsImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsImage1.png; path = Assets/UI/Images/SettingsImage1.png; sourceTree = "<group>"; };
+		A8F2FFB516C199EF008E5BDD /* carousel_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = carousel_background.jpg; path = Assets/UI/Images/carousel_background.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +304,7 @@
 				A818E02116BAD7C600CA5823 /* Camera */,
 				044CD6C916B86EB000218CA1 /* Maps */,
 				A831CEA316B7216B00A30C39 /* Session */,
+				04D9C3E216BCAFE1005C6197 /* iCarousel */,
 				A83C226316BD94E6007AA035 /* ElasticRect */,
 				A89FD23516B96301005383E4 /* Border3D */,
 			);
@@ -452,7 +455,6 @@
 		96378D801472C71100F543EA /* AirHockeyApp */ = {
 			isa = PBXGroup;
 			children = (
-				04D9C3E216BCAFE1005C6197 /* iCarousel */,
 				A8EEE3FF16BF3C2400EA3FB0 /* Audio */,
 				044CD6C716B86E9700218CA1 /* Classes */,
 				048C9D3716A4BCB7006A7082 /* Scene */,
@@ -597,6 +599,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A8F2FFB516C199EF008E5BDD /* carousel_background.jpg */,
 				04F3B01816C0B23C00532EF7 /* background.png */,
 				04F3B01916C0B23C00532EF7 /* page.png */,
 				A8F13CB716B027F300CB5885 /* SettingsButton1.png */,
@@ -808,6 +811,7 @@
 				A8EEE41B16BF495B00EA3FB0 /* jazzloop.m4a in Resources */,
 				04F3B01A16C0B23C00532EF7 /* background.png in Resources */,
 				04F3B01B16C0B23C00532EF7 /* page.png in Resources */,
+				A8F2FFB616C199EF008E5BDD /* carousel_background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

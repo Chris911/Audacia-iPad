@@ -235,8 +235,11 @@
     self.multipleNodesSelected = NO;
 }
 
-// Transforms on selected nodes
-- (void) rotateSelectedNodes:(Rotation3D)rotation
+
+
+#pragma mark - Transformation on nodes
+// rotate a single node
+- (void) rotateSingleNode:(Rotation3D)rotation
 {
     for(Node* node in self.tree)
     {
@@ -246,7 +249,47 @@
     }
 }
 
-#pragma mark - Transformation on nodes
+// Rotate multiple nodes
+- (void) rotateMultipleNodes:(CGPoint) currentPoint:(CGPoint)lastPoint;
+{
+    float normalizedDirection = currentPoint.x - lastPoint.x;
+    if(normalizedDirection == 0){
+        normalizedDirection = 1;
+    }
+    
+    Vector3D positions[[self.tree count]]; // max number of selected nodes is all of them...
+    int selectedNodes = 0;
+
+    // Find selected nodes positions
+    for(Node* node in self.tree) {
+        if(node.isSelected) {
+            positions[selectedNodes] = node.position;
+            selectedNodes ++;
+        }
+    }
+
+    // Find the origin point (median of all points)
+    float medianX = 0.0f;
+    float medianY = 0.0f;
+    for(int i = 0; i < selectedNodes; i++) {
+        medianX += positions[i].x;
+        medianY += positions[i].y;
+    }
+
+    CGPoint origin = CGPointMake(medianX/selectedNodes, medianY/selectedNodes);
+    
+    for(Node* node in self.tree) {
+        if(node.isSelected) {
+            
+            float angle = (normalizedDirection/3) * 3.1416/180; // deg to rad and normalized (+ or -)
+            float x = origin.x + ((node.position.x - origin.x) * cos(angle)) - ((node.position.y - origin.y) * sin(angle)) ;
+            float y = origin.y + ((node.position.y - origin.y) * cos(angle)) + ((node.position.x - origin.x) * sin(angle)) ;
+            
+            node.position = Vector3DMake(x, y, node.position.z);
+        }
+    }
+}
+
 // Scale node that are currently selected
 - (void) scaleSelectedNodes:(float) deltaScale
 {
@@ -307,8 +350,6 @@
     return NO;
 }
 
-
-
 #pragma mark - Utility functions
 - (int) getNumberOfNodes
 {
@@ -343,27 +384,4 @@
     }
     return anyNodeHit;
 }
-
-
-//    Vector3D positions[[self.tree count]]; // max number of selected nodes is all of them...
-//    int selectedNodes = 0;
-//
-//    for(Node* node in self.tree) {
-//        if(node.isSelected) {
-//            positions[selectedNodes] = node.position;
-//            selectedNodes ++;
-//        }
-//    }
-//
-//    // Find the center point
-//    float medianX = 0.0f;
-//    float medianY = 0.0f;
-//    for(int i = 0; i < selectedNodes; i++) {
-//        medianX += positions[i].x;
-//        medianY += positions[i].y;
-//    }
-//
-//    CGPoint center = CGPointMake(medianX/selectedNodes, medianY/selectedNodes);
-
-
 @end

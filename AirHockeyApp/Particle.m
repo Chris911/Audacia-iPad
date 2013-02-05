@@ -32,7 +32,7 @@
         alpha = 1.0f;
         angle = 0.0f;
         
-        velocity = [self makeRandomVectorWithRange:5:-5];
+        velocity = [self makeRandomVectorWithRange:15:-15];
         velocity = Vector3DMake(velocity.x*0.1f, velocity.y*0.1f, 0);
     }
     return self;
@@ -47,6 +47,8 @@
         self.position = Vector3DAdd(self.position, velocity);
         glTranslatef(self.position.x, self.position.y, 2);
         glRotatef(angle, 0, 0, 1);
+        glRotatef(angle, 1, 0, 0);
+
 
         glScalef(scale.x, scale.y, scale.z);
         

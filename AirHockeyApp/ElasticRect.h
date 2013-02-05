@@ -15,6 +15,7 @@
 @property CGPoint dimension;
 
 @property BOOL isActive;
+@property BOOL isSelectionMode; // implying !isSelectionMode = zoom mode
 
 - (void) render;
 - (void) reset;

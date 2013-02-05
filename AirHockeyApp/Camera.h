@@ -37,7 +37,6 @@
 - (CGPoint) calculateVelocity:(CGPoint) lastTouch:(CGPoint) currentTouch;
 - (void) replaceCamera;
 - (void) resetCamera;
-
-
+- (void) zoomInFromRect:(CGPoint)begin:(CGPoint)end;
 
 @end

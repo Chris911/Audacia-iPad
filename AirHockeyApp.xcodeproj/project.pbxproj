@@ -19,7 +19,12 @@
 		04A04E6D16AEF7CF006D1FEB /* NodePortal.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6C16AEF7CF006D1FEB /* NodePortal.m */; };
 		04A04E7016AEF7DB006D1FEB /* NodePommeau.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6F16AEF7DB006D1FEB /* NodePommeau.m */; };
 		04CE82AF16B887D300F8B796 /* MapContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE82AE16B887D300F8B796 /* MapContainer.m */; };
+		04D9C3E916BCB042005C6197 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9C3E816BCB042005C6197 /* iCarousel.m */; };
+		04D9C3EB16BCB0A3005C6197 /* CarouselTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */; };
+		04D9C3F616BCB217005C6197 /* CarouselTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9C3F516BCB217005C6197 /* CarouselTestView.m */; };
 		04DF183116ACAC6400339EDB /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DF183016ACAC6400339EDB /* WebClient.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		04F3B01A16C0B23C00532EF7 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F3B01816C0B23C00532EF7 /* background.png */; };
+		04F3B01B16C0B23C00532EF7 /* page.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F3B01916C0B23C00532EF7 /* page.png */; };
 		04F43C6316B038D00017756F /* booster.blend in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C4D16B038D00017756F /* booster.blend */; };
 		04F43C6416B038D00017756F /* pommeau.blend in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C4E16B038D00017756F /* pommeau.blend */; };
 		04F43C6516B038D00017756F /* portal.blend in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C4F16B038D00017756F /* portal.blend */; };
@@ -129,8 +134,15 @@
 		04A04E6F16AEF7DB006D1FEB /* NodePommeau.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodePommeau.m; sourceTree = "<group>"; };
 		04CE82AD16B887D300F8B796 /* MapContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapContainer.h; sourceTree = "<group>"; };
 		04CE82AE16B887D300F8B796 /* MapContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapContainer.m; sourceTree = "<group>"; };
+		04D9C3E716BCB042005C6197 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		04D9C3E816BCB042005C6197 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarouselTestView.xib; sourceTree = "<group>"; };
+		04D9C3F416BCB217005C6197 /* CarouselTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarouselTestView.h; sourceTree = "<group>"; };
+		04D9C3F516BCB217005C6197 /* CarouselTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarouselTestView.m; sourceTree = "<group>"; };
 		04DF182F16ACAC6400339EDB /* WebClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebClient.h; sourceTree = "<group>"; };
 		04DF183016ACAC6400339EDB /* WebClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebClient.m; sourceTree = "<group>"; };
+		04F3B01816C0B23C00532EF7 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		04F3B01916C0B23C00532EF7 /* page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page.png; sourceTree = "<group>"; };
 		04F43C4D16B038D00017756F /* booster.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = booster.blend; sourceTree = "<group>"; };
 		04F43C4E16B038D00017756F /* pommeau.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = pommeau.blend; sourceTree = "<group>"; };
 		04F43C4F16B038D00017756F /* portal.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = portal.blend; sourceTree = "<group>"; };
@@ -345,6 +357,15 @@
 			path = Assets/Models;
 			sourceTree = "<group>";
 		};
+		04D9C3E216BCAFE1005C6197 /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				04D9C3E716BCB042005C6197 /* iCarousel.h */,
+				04D9C3E816BCB042005C6197 /* iCarousel.m */,
+			);
+			name = iCarousel;
+			sourceTree = "<group>";
+		};
 		04DF182D16ACABE000339EDB /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +452,7 @@
 		96378D801472C71100F543EA /* AirHockeyApp */ = {
 			isa = PBXGroup;
 			children = (
+				04D9C3E216BCAFE1005C6197 /* iCarousel */,
 				A8EEE3FF16BF3C2400EA3FB0 /* Audio */,
 				044CD6C716B86E9700218CA1 /* Classes */,
 				048C9D3716A4BCB7006A7082 /* Scene */,
@@ -465,9 +487,11 @@
 				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
 				96378D951472C7CC00F543EA /* MenuViewController.h */,
 				A83AA9EB16A4D924003388F3 /* BetaViewController.h */,
+				04D9C3F416BCB217005C6197 /* CarouselTestView.h */,
 				96378D961472C7CC00F543EA /* MenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
 				A83AA9EC16A4D924003388F3 /* BetaViewController.m */,
+				04D9C3F516BCB217005C6197 /* CarouselTestView.m */,
 			);
 			name = Controleurs;
 			sourceTree = "<group>";
@@ -479,6 +503,7 @@
 				A83AA9ED16A4D925003388F3 /* BetaViewController.xib */,
 				96378D991472C80A00F543EA /* MenuViewController.xib */,
 				969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */,
+				04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */,
 			);
 			name = "Interface Builder";
 			sourceTree = "<group>";
@@ -572,6 +597,8 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				04F3B01816C0B23C00532EF7 /* background.png */,
+				04F3B01916C0B23C00532EF7 /* page.png */,
 				A8F13CB716B027F300CB5885 /* SettingsButton1.png */,
 				A8F13CB816B027F300CB5885 /* SettingsImage1.png */,
 				A8F13CA816AF190E00CB5885 /* SideBar2.png */,
@@ -776,8 +803,11 @@
 				A889F22816B067E10008E534 /* pommeau_texture.png in Resources */,
 				A889F22916B067E10008E534 /* portal_texture.png in Resources */,
 				A889F22A16B067E10008E534 /* pucktexture.png in Resources */,
+				04D9C3EB16BCB0A3005C6197 /* CarouselTestView.xib in Resources */,
 				A8EEE41716BF43D700EA3FB0 /* technoloop.m4a in Resources */,
 				A8EEE41B16BF495B00EA3FB0 /* jazzloop.m4a in Resources */,
+				04F3B01A16C0B23C00532EF7 /* background.png in Resources */,
+				04F3B01B16C0B23C00532EF7 /* page.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,6 +862,8 @@
 				A89FD22E16B949FB005383E4 /* Map.m in Sources */,
 				A89FD23B16B96576005383E4 /* Border3D.m in Sources */,
 				A818E02516BAD7D900CA5823 /* Camera.m in Sources */,
+				04D9C3E916BCB042005C6197 /* iCarousel.m in Sources */,
+				04D9C3F616BCB217005C6197 /* CarouselTestView.m in Sources */,
 				A83C226116BD94E2007AA035 /* ElasticRect.m in Sources */,
 				A83C227B16BEC38F007AA035 /* Particle.m in Sources */,
 				A8EEE40916BF3CA900EA3FB0 /* CDAudioManager.m in Sources */,

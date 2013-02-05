@@ -15,6 +15,7 @@
 @synthesize timeStamp;
 @synthesize rating;
 @synthesize private;
+@synthesize image;
 
 - (id) initWithMapData:(int)_mapId :(NSString *)_name :(NSString *)_timeStamp :(int)_rating :(BOOL)_private
 {

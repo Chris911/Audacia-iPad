@@ -15,6 +15,7 @@
 @property (nonatomic, retain)NSString *timeStamp;
 @property int rating;
 @property BOOL private;
+@property (nonatomic, retain)UIImage *image;
 
 - (id) initWithMapData:(int)_mapId :(NSString *)_name :(NSString *)_timeStamp :(int)_rating :(BOOL)_private;
 

@@ -8,12 +8,14 @@
 //  Wrapper for the AFNetworking HTTP Client
 
 #import "WebClient.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation WebClient
 @synthesize AFClient;
 @synthesize server;
 @synthesize mapsAPIScript;
-
+@synthesize xmlPath;
+@synthesize imagePath;
 
 - (id) initWithDefaultServer
 {
@@ -23,6 +25,7 @@
         NSURL *url = [NSURL URLWithString:self.server];
         AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
         self.AFClient = httpClient;
+        [self getConfigPaths];
         [httpClient release];
     }
     return self;
@@ -95,8 +98,8 @@
 - (void) fetchAllMapsFromDatabase
 {
     NSMutableURLRequest *request = [self.AFClient requestWithMethod:@"POST"
-                                                               path:self.mapsAPIScript
-                                                         parameters:@{@"action":@"fetchAllMaps"}];
+                                                       path:self.mapsAPIScript
+                                                       parameters:@{@"action":@"fetchAllMaps"}];
     
     NSMutableArray *allMaps = [[[NSMutableArray alloc]init]autorelease];
     
@@ -118,7 +121,10 @@
             NSString *ratingString = [NSString stringWithFormat:@"%@",ratingArray[i]];
             int ratingInt = [ratingString intValue];
             
-            Map *map = [[Map alloc]initWithMapData:mapIdInt  :[nameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :ratingInt  :[privateArray objectAtIndex:i]];
+            Map *map = [[Map alloc]initWithMapData:mapIdInt :[nameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :ratingInt  :[privateArray objectAtIndex:i]];
+            
+            map.image = [self fetchMapImageWithName:map.name];
+            
             [allMaps addObject:map];
         }
         
@@ -129,6 +135,35 @@
     }];
     
     [operation start];
+}
+
+- (void) getConfigPaths
+{
+    NSMutableURLRequest *request = [self.AFClient requestWithMethod:@"POST"
+                                                   path:self.mapsAPIScript
+                                                   parameters:@{@"action":@"getConfigPaths"}];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *basePath  = [JSON valueForKeyPath:@"BASE_PATH"];
+        NSString *xmlPath   = [JSON valueForKeyPath:@"XML_PATH"];
+        NSString *imagePath = [JSON valueForKeyPath:@"MAP_IMAGE_PATH"];
+        
+        self.xmlPath = [basePath stringByAppendingString:xmlPath];
+        self.imagePath = [basePath stringByAppendingString:imagePath];
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"Error: %@", error);
+        NSLog(@"Response %@", JSON);
+    }];
+    
+    [operation start];
+}
+
+- (UIImage*) fetchMapImageWithName:(NSString*) mapName
+{
+    NSString* imageName = [mapName stringByAppendingString:@".png"];
+    NSString* urlString = [self.imagePath stringByAppendingString:imageName];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
+    return image;
 }
 
 - (void) assignNewMaps:(NSMutableArray*)maps

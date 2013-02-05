@@ -7,6 +7,8 @@
 //
 
 #import "CarouselTestView.h"
+#import "MapContainer.h"
+#import "Map.h"
 
 @interface CarouselTestView () <UIActionSheetDelegate>
 
@@ -26,11 +28,7 @@
     //set up data
     wrap = YES;
     carousel.type = iCarouselTypeCoverFlow;
-    self.items = [NSMutableArray array];
-    for (int i = 0; i < 10; i++)
-    {
-        [items addObject:[NSNumber numberWithInt:i]];
-    }
+    self.items = [MapContainer getInstance].maps;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -111,13 +109,15 @@
 {
     UILabel *titleLabel = nil;
     UILabel *authorLabel = nil;
-    
+    Map* map = [self.items objectAtIndex:index];
+
     //create new view if no view is available for recycling
     if (view == nil)
     {
         view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f, 384.0f)] autorelease];
-        ((UIImageView *)view).backgroundColor = [UIColor redColor];
-        view.contentMode = UIViewContentModeCenter;
+        ((UIImageView *)view).image = map.image;
+        view.contentMode = UIViewContentModeScaleAspectFit;
+        //view.contentMode = UIViewContentModeCenter;
         CGRect frame = view.frame;
         frame.origin.y += 225;
         titleLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
@@ -147,7 +147,7 @@
     //views outside of the `if (view == nil) {...}` check otherwise
     //you'll get weird issues with carousel item content appearing
     //in the wrong place in the carousel
-    titleLabel.text = [[items objectAtIndex:index] stringValue];
+    titleLabel.text = map.name;
     authorLabel.text = @"By author";
     
     return view;

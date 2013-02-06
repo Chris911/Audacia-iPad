@@ -13,5 +13,7 @@
 
 @property (nonatomic, retain) IBOutlet iCarousel *carousel;
 - (IBAction)pressedSwitchButton:(id)sender;
+- (IBAction)pressedBack:(id)sender;
+- (IBAction)pressedRefresh:(id)sender;
 
 @end

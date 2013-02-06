@@ -73,6 +73,8 @@
 {
     [super viewDidLoad];
     carousel.type = iCarouselTypeInvertedCylinder;
+    //[self load];
+
 
 }
 
@@ -274,16 +276,29 @@
 }
 
 - (IBAction)pressedBack:(id)sender {
+    
+    // remove previous SHIT
+    for(int i = self.carousel.numberOfItems; i > 0; i--){
+        [self.carousel removeItemAtIndex:i animated:NO];
+    }
+    
+    [MapContainer getInstance].maps = nil;
+    //[[MapContainer getInstance] release];
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)pressedRefresh:(id)sender {
+    [self load];
+}
+
+- (void) load
+{
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     
     if([NetworkUtils isNetworkAvailable]){
         [self.loadingIndicator startAnimating];
         [self.hiddenView setHidden:NO];
-        
+        //[MapContainer removeMapsInContainers];
         // Start the maps fetching on a background thread
         [self performSelectorInBackground:@selector(loadNewMaps) withObject:nil];
         [delegate.webClient fetchAllMapsFromDatabase];
@@ -296,20 +311,22 @@
 - (void) loadNewMaps
 {
     // While a new maps array isn't ready in the MapContainer, block the background thread.
-    while (![MapContainer getInstance].isMapsLoaded) {
-        
-    }
-    [self performSelectorOnMainThread:@selector(mapsDataFetchingDone) withObject:nil waitUntilDone:NO];
+    while (![MapContainer getInstance].isMapsInfosLoaded) {}
+    
+    [self performSelectorOnMainThread:@selector(fetchAllImages) withObject:nil waitUntilDone:YES];
+    while(![MapContainer  allMapImagesLoaded]){}
+    
+    [self performSelectorOnMainThread:@selector(mapsDataFetchingDone) withObject:nil waitUntilDone:YES];
 }
 
 - (void)mapsDataFetchingDone
 {
     // Safety check on the maps loaded attribute
-    if ([MapContainer getInstance].isMapsLoaded){
+    if ([MapContainer getInstance].isMapsInfosLoaded){
         //FIXME : Needs memory checking OR error handling, rapid refresh will crash
         self.items = [MapContainer getInstance].maps;
         
-        // reomve previous SHIT
+        // remove previous SHIT
         for(int i = self.carousel.numberOfItems; i > 0; i--){
             [self.carousel removeItemAtIndex:i animated:NO];
         }
@@ -320,11 +337,20 @@
     }
     
     // Reset to NO so we can load a new map array when the user switches views.
-    [MapContainer getInstance].isMapsLoaded = NO;
+    [MapContainer getInstance].maps = nil;
+    [MapContainer getInstance].isMapsInfosLoaded = NO;
     [self.loadingIndicator stopAnimating];
     [self.hiddenView setHidden:YES];
 
 
+}
+
+- (void) fetchAllImages
+{
+    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    for(Map* m in [MapContainer getInstance].maps){
+        [delegate.webClient fetchMapImageWithName:m];
+    }
 }
 
 @end

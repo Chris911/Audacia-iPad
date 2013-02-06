@@ -12,7 +12,8 @@
 @implementation MapContainer
 
 @synthesize maps;
-@synthesize isMapsLoaded;
+@synthesize isMapsInfosLoaded;
+@synthesize isMapsImagesLoaded;
 
 static MapContainer *mapContainer = NULL;
 
@@ -24,7 +25,8 @@ static MapContainer *mapContainer = NULL;
     {
         initialized = YES;
         mapContainer = [[MapContainer alloc]init];
-        mapContainer.isMapsLoaded = NO;
+        mapContainer.isMapsInfosLoaded = NO;
+        mapContainer.isMapsImagesLoaded = NO;
     }
 }
 
@@ -41,16 +43,23 @@ static MapContainer *mapContainer = NULL;
 {
     if(newMaps != nil){
         mapContainer.maps = newMaps;
-        mapContainer.isMapsLoaded = YES;
+        mapContainer.isMapsInfosLoaded = YES;
     }
 }
 
-+ (BOOL) checkIfMapImagesLoaded
++ (BOOL) removeMapsInContainers
 {
-    for(Map *m in mapContainer.maps)
+    mapContainer.maps = nil;
+    return YES;
+}
+
++ (BOOL) allMapImagesLoaded
+{
+    
+    for(Map* m in mapContainer.maps)
     {
         CGImageRef cgref = [m.image CGImage];
-        if(cgref == NULL && ![m.name isEqualToString:@"daveisgod"]){
+        if(cgref == NULL){
             return NO;
         }
     }
@@ -61,6 +70,7 @@ static MapContainer *mapContainer = NULL;
 {
     [super dealloc];
     [mapContainer release];
+    [maps release];
 }
 
 @end

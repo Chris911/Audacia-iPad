@@ -33,11 +33,13 @@
 
 - (void) dealloc
 {
-//    [name dealloc];
-//    [authorName dealloc];
-//    [timeStamp dealloc];
-//    [image dealloc];
+    [name release];
+    [image release];
+    [timeStamp release];
+    [authorName release];
     [super dealloc];
+
 }
+
 @end
 

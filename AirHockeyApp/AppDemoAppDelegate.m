@@ -21,6 +21,8 @@
 
 - (void) afficherMenu
 {
+    //[self.eaglViewController release];
+    
     [UIView transitionWithView:self.window duration:1.0 options:(UIViewAnimationOptionTransitionFlipFromBottom) animations:^{
         self.window.rootViewController = self.menuViewController;
     } completion:nil];
@@ -81,7 +83,8 @@
 {
     [_window release];
     [_menuViewController release];
-    [self.webClient release];
+    [_eaglViewController release];
+    [webClient release];
     [super dealloc];
 }
 

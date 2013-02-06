@@ -92,7 +92,7 @@
 - (void) loadNewMaps
 {
     // While a new maps array isn't ready in the MapContainer, block the background thread.
-    while (![MapContainer getInstance].isMapsLoaded) {
+    while (![MapContainer getInstance].isMapsInfosLoaded) {
         
     }
     // Stop the spinner
@@ -106,7 +106,7 @@
 - (void)mapsDataFetchingDone
 {
     // Safety check on the maps loaded attribute
-    if ([MapContainer getInstance].isMapsLoaded){
+    if ([MapContainer getInstance].isMapsInfosLoaded){
         [mapsTextView setText:@""];
         for(Map *map in [MapContainer getInstance].maps) {
             NSString *mapIdString = [NSString stringWithFormat:@"Id: %i",map.mapId];
@@ -119,7 +119,7 @@
         }
         
         // Reset to NO so we can load a new map array when the user switches views.
-        [MapContainer getInstance].isMapsLoaded = NO;
+        [MapContainer getInstance].isMapsInfosLoaded = NO;
     }
 }
 

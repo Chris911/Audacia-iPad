@@ -15,14 +15,13 @@
 		04A04E4316AEEF4C006D1FEB /* NodeBooster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E4216AEEF4C006D1FEB /* NodeBooster.m */; };
 		04A04E6416AEF7B6006D1FEB /* NodeFilet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6316AEF7B6006D1FEB /* NodeFilet.m */; };
 		04A04E6716AEF7BD006D1FEB /* NodeMurret.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6616AEF7BD006D1FEB /* NodeMurret.m */; };
-		04A04E6A16AEF7C6006D1FEB /* NodePuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6916AEF7C5006D1FEB /* NodePuck.m */; };
 		04A04E6D16AEF7CF006D1FEB /* NodePortal.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6C16AEF7CF006D1FEB /* NodePortal.m */; };
 		04A04E7016AEF7DB006D1FEB /* NodePommeau.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6F16AEF7DB006D1FEB /* NodePommeau.m */; };
 		04CE82AF16B887D300F8B796 /* MapContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE82AE16B887D300F8B796 /* MapContainer.m */; };
 		04D9C3E916BCB042005C6197 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9C3E816BCB042005C6197 /* iCarousel.m */; };
 		04D9C3EB16BCB0A3005C6197 /* CarouselTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */; };
 		04D9C3F616BCB217005C6197 /* CarouselTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9C3F516BCB217005C6197 /* CarouselTestView.m */; };
-		04DF183116ACAC6400339EDB /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DF183016ACAC6400339EDB /* WebClient.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		04DF183116ACAC6400339EDB /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DF183016ACAC6400339EDB /* WebClient.m */; };
 		04F3B01A16C0B23C00532EF7 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F3B01816C0B23C00532EF7 /* background.png */; };
 		04F3B01B16C0B23C00532EF7 /* page.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F3B01916C0B23C00532EF7 /* page.png */; };
 		04F43C6316B038D00017756F /* booster.blend in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C4D16B038D00017756F /* booster.blend */; };
@@ -49,11 +48,11 @@
 		96378D8E1472C71200F543EA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D8C1472C71200F543EA /* MainWindow.xib */; };
 		96378D971472C7CC00F543EA /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D961472C7CC00F543EA /* MenuViewController.m */; };
 		96378D9A1472C80A00F543EA /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D991472C80A00F543EA /* MenuViewController.xib */; };
-		968DACCC1472EDA4007D15A3 /* OpenGLTexture3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */; };
-		968DACCD1472EDA4007D15A3 /* OpenGLWaveFrontGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC71472EDA4007D15A3 /* OpenGLWaveFrontGroup.m */; };
-		968DACCE1472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC91472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m */; };
-		968DACCF1472EDA4007D15A3 /* OpenGLWaveFrontObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACCB1472EDA4007D15A3 /* OpenGLWaveFrontObject.m */; };
-		969DDEE01472CF8C00ED5DC8 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDEDF1472CF8C00ED5DC8 /* EAGLView.m */; };
+		968DACCC1472EDA4007D15A3 /* OpenGLTexture3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		968DACCD1472EDA4007D15A3 /* OpenGLWaveFrontGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC71472EDA4007D15A3 /* OpenGLWaveFrontGroup.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		968DACCE1472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC91472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		968DACCF1472EDA4007D15A3 /* OpenGLWaveFrontObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACCB1472EDA4007D15A3 /* OpenGLWaveFrontObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		969DDEE01472CF8C00ED5DC8 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDEDF1472CF8C00ED5DC8 /* EAGLView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		969DDF891472E03500ED5DC8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF881472E03500ED5DC8 /* OpenGLES.framework */; };
 		969DDF8B1472E05400ED5DC8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */; };
 		969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
@@ -61,12 +60,15 @@
 		A812858116A0A53900C8EF6D /* ParametersImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A812858016A0A53900C8EF6D /* ParametersImage1.png */; };
 		A818E02516BAD7D900CA5823 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = A818E02416BAD7D900CA5823 /* Camera.m */; };
 		A831CEA716B7219800A30C39 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = A831CEA616B7219800A30C39 /* Session.m */; };
+		A838B77C16C2E88500050DDA /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A838B77A16C2E88500050DDA /* MapsViewController.m */; };
+		A838B77D16C2E88500050DDA /* MapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A838B77B16C2E88500050DDA /* MapsViewController.xib */; };
 		A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A83AA9EC16A4D924003388F3 /* BetaViewController.m */; };
 		A83AA9EF16A4D925003388F3 /* BetaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A83AA9ED16A4D925003388F3 /* BetaViewController.xib */; };
 		A83C226116BD94E2007AA035 /* ElasticRect.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C226016BD94E2007AA035 /* ElasticRect.m */; };
 		A83C227B16BEC38F007AA035 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C227A16BEC38F007AA035 /* Particle.m */; };
 		A842302F16BF3A04007F97CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842302E16BF3A04007F97CB /* OpenAL.framework */; };
 		A842303216BF3A1A007F97CB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842303116BF3A1A007F97CB /* AudioToolbox.framework */; };
+		A86C08B416C2A68200839C4B /* NodePuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6916AEF7C5006D1FEB /* NodePuck.m */; };
 		A889F22716B067E10008E534 /* booster_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22316B067E10008E534 /* booster_texture.png */; };
 		A889F22816B067E10008E534 /* pommeau_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22416B067E10008E534 /* pommeau_texture.png */; };
 		A889F22916B067E10008E534 /* portal_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22516B067E10008E534 /* portal_texture.png */; };
@@ -77,8 +79,8 @@
 		A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */; };
 		A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8BA169E025E008B29EF /* CameraImage1.png */; };
 		A8C5A8C2169E39A5008B29EF /* CameraButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8C1169E39A5008B29EF /* CameraButton1.png */; };
-		A8CB5C4B16A7028700EC4479 /* AFGDataXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CB5C4A16A7028700EC4479 /* AFGDataXMLRequestOperation.m */; };
-		A8CC902216A6E84100CFD27D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC902116A6E84100CFD27D /* GDataXMLNode.m */; };
+		A8CB5C4B16A7028700EC4479 /* AFGDataXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CB5C4A16A7028700EC4479 /* AFGDataXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A8CC902216A6E84100CFD27D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC902116A6E84100CFD27D /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A8CC902416A6E88600CFD27D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC902316A6E88600CFD27D /* libxml2.dylib */; };
 		A8CC902716A6E95D00CFD27D /* XMLUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC902616A6E95D00CFD27D /* XMLUtil.m */; };
 		A8CC905916A6FD2D00CFD27D /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC904716A6FD2D00CFD27D /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -98,9 +100,9 @@
 		A8EBDE8D16A8849D002B2DD6 /* NodeTableEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE8C16A8849D002B2DD6 /* NodeTableEdge.m */; };
 		A8EBDE9616A890D1002B2DD6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE9516A890D1002B2DD6 /* Reachability.m */; };
 		A8EBDE9D16A9EE9B002B2DD6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE9C16A9EE9B002B2DD6 /* Constants.m */; };
-		A8EEE40916BF3CA900EA3FB0 /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40216BF3CA900EA3FB0 /* CDAudioManager.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		A8EEE40A16BF3CA900EA3FB0 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40616BF3CA900EA3FB0 /* CocosDenshion.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		A8EEE40B16BF3CA900EA3FB0 /* SimpleAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40816BF3CA900EA3FB0 /* SimpleAudioEngine.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		A8EEE40916BF3CA900EA3FB0 /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40216BF3CA900EA3FB0 /* CDAudioManager.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
+		A8EEE40A16BF3CA900EA3FB0 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40616BF3CA900EA3FB0 /* CocosDenshion.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
+		A8EEE40B16BF3CA900EA3FB0 /* SimpleAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40816BF3CA900EA3FB0 /* SimpleAudioEngine.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
 		A8EEE40E16BF3EDD00EA3FB0 /* AudioInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */; };
 		A8EEE41716BF43D700EA3FB0 /* technoloop.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */; };
 		A8EEE41916BF442800EA3FB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */; };
@@ -192,6 +194,9 @@
 		A818E02416BAD7D900CA5823 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		A831CEA516B7219800A30C39 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		A831CEA616B7219800A30C39 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		A838B77916C2E88500050DDA /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapsViewController.h; sourceTree = "<group>"; };
+		A838B77A16C2E88500050DDA /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsViewController.m; sourceTree = "<group>"; };
+		A838B77B16C2E88500050DDA /* MapsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapsViewController.xib; sourceTree = "<group>"; };
 		A83AA9EB16A4D924003388F3 /* BetaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetaViewController.h; sourceTree = "<group>"; };
 		A83AA9EC16A4D924003388F3 /* BetaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetaViewController.m; sourceTree = "<group>"; };
 		A83AA9ED16A4D925003388F3 /* BetaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BetaViewController.xib; sourceTree = "<group>"; };
@@ -488,10 +493,12 @@
 				96378D951472C7CC00F543EA /* MenuViewController.h */,
 				A83AA9EB16A4D924003388F3 /* BetaViewController.h */,
 				04D9C3F416BCB217005C6197 /* CarouselTestView.h */,
+				A838B77916C2E88500050DDA /* MapsViewController.h */,
 				96378D961472C7CC00F543EA /* MenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
 				A83AA9EC16A4D924003388F3 /* BetaViewController.m */,
 				04D9C3F516BCB217005C6197 /* CarouselTestView.m */,
+				A838B77A16C2E88500050DDA /* MapsViewController.m */,
 			);
 			name = Controleurs;
 			sourceTree = "<group>";
@@ -499,6 +506,7 @@
 		96378D981472C7F200F543EA /* Interface Builder */ = {
 			isa = PBXGroup;
 			children = (
+				A838B77B16C2E88500050DDA /* MapsViewController.xib */,
 				96378D8C1472C71200F543EA /* MainWindow.xib */,
 				A83AA9ED16A4D925003388F3 /* BetaViewController.xib */,
 				96378D991472C80A00F543EA /* MenuViewController.xib */,
@@ -808,6 +816,7 @@
 				A8EEE41B16BF495B00EA3FB0 /* jazzloop.m4a in Resources */,
 				04F3B01A16C0B23C00532EF7 /* background.png in Resources */,
 				04F3B01B16C0B23C00532EF7 /* page.png in Resources */,
+				A838B77D16C2E88500050DDA /* MapsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -818,6 +827,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A86C08B416C2A68200839C4B /* NodePuck.m in Sources */,
 				96378D871472C71200F543EA /* main.m in Sources */,
 				96378D971472C7CC00F543EA /* MenuViewController.m in Sources */,
 				969DDEE01472CF8C00ED5DC8 /* EAGLView.m in Sources */,
@@ -853,7 +863,6 @@
 				04A04E4316AEEF4C006D1FEB /* NodeBooster.m in Sources */,
 				04A04E6416AEF7B6006D1FEB /* NodeFilet.m in Sources */,
 				04A04E6716AEF7BD006D1FEB /* NodeMurret.m in Sources */,
-				04A04E6A16AEF7C6006D1FEB /* NodePuck.m in Sources */,
 				04A04E6D16AEF7CF006D1FEB /* NodePortal.m in Sources */,
 				04A04E7016AEF7DB006D1FEB /* NodePommeau.m in Sources */,
 				0409924916B21087009DBE1D /* NetworkUtils.m in Sources */,
@@ -870,6 +879,7 @@
 				A8EEE40A16BF3CA900EA3FB0 /* CocosDenshion.m in Sources */,
 				A8EEE40B16BF3CA900EA3FB0 /* SimpleAudioEngine.m in Sources */,
 				A8EEE40E16BF3EDD00EA3FB0 /* AudioInterface.m in Sources */,
+				A838B77C16C2E88500050DDA /* MapsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,6 +954,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirHockeyApp/AirHockeyApp-Prefix.pch";
 				GCC_VERSION = "";
@@ -960,6 +972,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirHockeyApp/AirHockeyApp-Prefix.pch";
 				GCC_VERSION = "";

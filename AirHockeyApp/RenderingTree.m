@@ -384,4 +384,10 @@
     }
     return anyNodeHit;
 }
+
+- (void) dealloc
+{
+    [tree dealloc];
+    [super dealloc];
+}
 @end

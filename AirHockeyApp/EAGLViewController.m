@@ -121,15 +121,13 @@ enum {
     
     // Create the elastic rectangle
     elasticRect = [[ElasticRect alloc]init];
-    
-    particles = [[NSMutableArray alloc]init];
-    
-    for(int i = 0; i < 30; i++) {
-        Particle *p = [[Particle alloc]init];
-        p.position = Vector3DMake(0, 0, 0);
-        p.isActive = YES;
-        [particles addObject:p];
-    }
+        
+//    for(int i = 0; i < 30; i++) {
+//        Particle *p = [[Particle alloc]init];
+//        p.position = Vector3DMake(0, 0, 0);
+//        p.isActive = YES;
+//        [particles addObject:p];
+//    }
     
     
     // Initialize Scene and rendring tree

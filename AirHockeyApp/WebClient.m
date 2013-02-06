@@ -44,7 +44,6 @@
                             nil];
 
     [self.AFClient postPath:self.mapsAPIScript parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"Success [Map to DB]: %@", operation.responseString);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error [Map to DB]: %@", operation.responseString);
@@ -105,7 +104,6 @@
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         while(self.imagePath == 0){
-            NSLog(@"WTF");
         }
         NSArray *mapIdArray = [JSON valueForKeyPath:@"mapId"];
         NSArray *nameArray = [JSON valueForKeyPath:@"name"];
@@ -114,7 +112,7 @@
         NSArray *ratingArray = [JSON valueForKeyPath:@"rating"];
         NSArray *privateArray = [JSON valueForKeyPath:@"private"];
         
-        for(int i=0; i < [mapIdArray count]; i++) {
+        for(int i=0; i < 15; i++) {
 
             // Convert from string to int or we obtain a weird pointe value
             NSString *mapIdString = [NSString stringWithFormat:@"%@",mapIdArray[i]];
@@ -123,8 +121,19 @@
             NSString *ratingString = [NSString stringWithFormat:@"%@",ratingArray[i]];
             int ratingInt = [ratingString intValue];
             
-            Map *map = [[[Map alloc]initWithMapData:mapIdInt :[nameArray objectAtIndex:i] :[authorNameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :ratingInt  :[privateArray objectAtIndex:i]]autorelease];
-            map.image = [self fetchMapImageWithName:map.name];
+            NSString *privateString = [NSString stringWithFormat:@"%@",privateArray[i]];
+            int privateInt = [privateString intValue];
+            
+            Map *map = [[[Map alloc]initWithMapData:mapIdInt
+                                                   :[nameArray objectAtIndex:i]
+                                                   :[authorNameArray objectAtIndex:i]
+                                                   :[dateAddedArray objectAtIndex:i]
+                                                   :ratingInt
+                                                   :privateInt]autorelease];
+
+            //Map *map = [[[Map alloc]initWithMapData:0 :@"NOLEAKS":@"t":@"t":0 :YES]autorelease];
+            
+            //[self fetchMapImageWithName:map];
             [allMaps addObject:map];
         }
         [self assignNewMaps:allMaps];
@@ -133,7 +142,8 @@
         NSLog(@"Error: %@", error);
     }];
     
-    [operation start];
+    NSOperationQueue* opq = [[[NSOperationQueue alloc]init]autorelease];
+    [opq addOperation:operation];
 }
 
 - (void) getConfigPaths
@@ -143,11 +153,11 @@
                                                    parameters:@{@"action":@"getConfigPaths"}];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *basePath  = [JSON valueForKeyPath:@"BASE_PATH"];
-        NSString *xmlPath   = [JSON valueForKeyPath:@"XML_PATH"];
-        NSString *imagePath = [JSON valueForKeyPath:@"MAP_IMAGE_PATH"];
+        NSString *xmlPath1   = [JSON valueForKeyPath:@"XML_PATH"];
+        NSString *imagePath1 = [JSON valueForKeyPath:@"MAP_IMAGE_PATH"];
         
-        self.xmlPath = [basePath stringByAppendingString:xmlPath];
-        self.imagePath = [basePath stringByAppendingString:imagePath];
+        self.xmlPath = [basePath stringByAppendingString:xmlPath1];
+        self.imagePath = [basePath stringByAppendingString:imagePath1];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Error: %@", error);
@@ -157,19 +167,24 @@
     [operation start];
 }
 
-- (UIImage*) fetchMapImageWithName:(NSString*) mapName
+- (void) fetchMapImageWithName:(Map*) map
 {
-    NSString* imageName = [mapName stringByAppendingString:@".png"];
-    NSString* urlString = [self.imagePath stringByAppendingString:imageName];
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-    UIImage *image = [UIImage imageWithData:data];
+    NSString* imageName = [map.name stringByAppendingString:@".png"];
+ //   NSString* urlString = [self.imagePath stringByAppendingString:imageName];
+//    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+//    UIImage *image = [UIImage imageWithData:data];
     
-    if(image == nil)
+    NSURL *url = [NSURL URLWithString:[self.imagePath stringByAppendingString:imageName]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    
+    AFImageRequestOperation *requestOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image)
     {
-        NSLog(@"Could not create image with name :%s",mapName);
-    }
-    
-    return image;
+        map.image = image;
+    }];
+//    [requestOperation start];
+    NSOperationQueue* opq = [[[NSOperationQueue alloc]init]autorelease];
+    [opq addOperation:requestOperation];
 }
 
 - (void) assignNewMaps:(NSMutableArray*)maps

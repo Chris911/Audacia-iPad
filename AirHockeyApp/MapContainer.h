@@ -15,11 +15,14 @@
 
 @interface MapContainer : NSObject
 
-@property BOOL isMapsLoaded;
+@property BOOL isMapsInfosLoaded;
+@property BOOL isMapsImagesLoaded;
+
 @property (nonatomic, retain) NSMutableArray* maps;
 
 + (MapContainer *)getInstance;
 + (void) assignNewMaps:(NSMutableArray*)newMaps;
-+ (BOOL) checkIfMapImagesLoaded;
++ (BOOL) removeMapsInContainers;
++ (BOOL) allMapImagesLoaded;
 
 @end

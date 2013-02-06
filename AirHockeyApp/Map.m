@@ -12,15 +12,17 @@
 
 @synthesize mapId;
 @synthesize name;
+@synthesize authorName;
 @synthesize timeStamp;
 @synthesize rating;
 @synthesize private;
 @synthesize image;
 
-- (id) initWithMapData:(int)_mapId :(NSString *)_name :(NSString *)_timeStamp :(int)_rating :(BOOL)_private
+- (id) initWithMapData:(int)_mapId :(NSString *)_name :(NSString *)_authorName :(NSString *)_timeStamp :(int)_rating :(BOOL)_private
 {
     if((self = [super init])) {
         self.mapId = _mapId;
+        self.authorName = _authorName;
         self.name  = _name;
         self.timeStamp = _timeStamp;
         self.rating = _rating;
@@ -29,5 +31,13 @@
     return self;
 }
 
+- (void) dealloc
+{
+//    [name dealloc];
+//    [authorName dealloc];
+//    [timeStamp dealloc];
+//    [image dealloc];
+    [super dealloc];
+}
 @end
 

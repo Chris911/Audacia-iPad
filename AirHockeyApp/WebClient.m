@@ -109,6 +109,7 @@
         }
         NSArray *mapIdArray = [JSON valueForKeyPath:@"mapId"];
         NSArray *nameArray = [JSON valueForKeyPath:@"name"];
+        NSArray *authorNameArray = [JSON valueForKey:@"authorName"];
         NSArray *dateAddedArray = [JSON valueForKeyPath:@"dateAdded"];
         NSArray *ratingArray = [JSON valueForKeyPath:@"rating"];
         NSArray *privateArray = [JSON valueForKeyPath:@"private"];
@@ -122,11 +123,10 @@
             NSString *ratingString = [NSString stringWithFormat:@"%@",ratingArray[i]];
             int ratingInt = [ratingString intValue];
             
-            Map *map = [[Map alloc]initWithMapData:mapIdInt :[nameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :ratingInt  :[privateArray objectAtIndex:i]];
+            Map *map = [[[Map alloc]initWithMapData:mapIdInt :[nameArray objectAtIndex:i] :[authorNameArray objectAtIndex:i] :[dateAddedArray objectAtIndex:i] :ratingInt  :[privateArray objectAtIndex:i]]autorelease];
             map.image = [self fetchMapImageWithName:map.name];
             [allMaps addObject:map];
         }
-        
         [self assignNewMaps:allMaps];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {

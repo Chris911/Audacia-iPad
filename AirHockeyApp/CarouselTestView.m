@@ -158,9 +158,8 @@
     //in the wrong place in the carousel
     view.contentMode = UIViewContentModeScaleAspectFit;
     titleLabel.text = map.name;
-    authorLabel.text = @"By author";
+    authorLabel.text = [NSString stringWithFormat:@"Par: %@",map.authorName];
     ((UIImageView *)view).image = map.image;
-
     
     return view;
 }

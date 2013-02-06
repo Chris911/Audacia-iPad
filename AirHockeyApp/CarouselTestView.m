@@ -307,10 +307,16 @@
 {
     // Safety check on the maps loaded attribute
     if ([MapContainer getInstance].isMapsLoaded){
-
+        //FIXME : Needs memory checking OR error handling, rapid refresh will crash
         self.items = [MapContainer getInstance].maps;
+        
+        // reomve previous SHIT
+        for(int i = self.carousel.numberOfItems; i > 0; i--){
+            [self.carousel removeItemAtIndex:i animated:NO];
+        }
+        
         for(int i = 0; i < [[MapContainer getInstance].maps count]; i++){
-            [self.carousel insertItemAtIndex:i animated:YES];
+            [self.carousel insertItemAtIndex:i animated:NO];
         }
     }
     

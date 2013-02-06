@@ -12,6 +12,7 @@
 @synthesize window = _window;
 @synthesize menuViewController = _menuViewController;
 @synthesize eaglViewController = _eaglViewController;
+@synthesize webClient;
 
 - (void) afficherVueAnimee
 {
@@ -30,6 +31,8 @@
 {
     // Override point for customization after application launch.
     self.window.rootViewController = self.menuViewController;
+    
+    self.webClient = [[WebClient alloc] initWithDefaultServer];
     
     // Create a user session
     return YES;
@@ -78,6 +81,7 @@
 {
     [_window release];
     [_menuViewController release];
+    [self.webClient release];
     [super dealloc];
 }
 

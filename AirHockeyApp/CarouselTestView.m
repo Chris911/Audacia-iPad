@@ -6,9 +6,12 @@
 //
 //
 
+#import "AppDemoAppDelegate.h"
+#import "NetworkUtils.h"   
 #import "CarouselTestView.h"
 #import "MapContainer.h"
 #import "Map.h"
+#import "WebClient.h"
 
 @interface CarouselTestView () <UIActionSheetDelegate>
 
@@ -114,8 +117,8 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f, 384.0f)] autorelease];
-        
+        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f/2, 384.0f/2)] autorelease];
+        ((UIImageView *)view).image = map.image;
         view.contentMode = UIViewContentModeScaleAspectFit;
         //view.contentMode = UIViewContentModeCenter;
         CGRect frame = view.frame;
@@ -150,6 +153,7 @@
     titleLabel.text = map.name;
     authorLabel.text = @"By author";
     ((UIImageView *)view).image = map.image;
+
     
     return view;
 }
@@ -254,12 +258,50 @@
 
 - (IBAction)pressedSwitchButton:(id)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Carousel Type"
-                                                       delegate:self
-                                              cancelButtonTitle:nil
-                                         destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Linear", @"Rotary", @"Inverted Rotary", @"Cylinder", @"Inverted Cylinder", @"Wheel", @"Inverted Wheel", @"CoverFlow", @"CoverFlow2", @"Time Machine", @"Inverted Time Machine", @"Custom", nil];
-    [sheet showInView:self.view];
-    [sheet release];
+    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    
+    if([NetworkUtils isNetworkAvailable]){
+        
+        // Start the maps fetching on a background thread
+        [self performSelectorInBackground:@selector(loadNewMaps) withObject:nil];
+        [delegate.webClient fetchAllMapsFromDatabase];
+        
+    } else { // Internet not connected, display error
+        //self.mapsTextView.text = @"Vous n'etes pas connecte a Internet!";
+    }
+    
+//    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Carousel Type"
+//                                                       delegate:self
+//                                              cancelButtonTitle:nil
+//                                         destructiveButtonTitle:nil
+//                                              otherButtonTitles:@"Linear", @"Rotary", @"Inverted Rotary", @"Cylinder", @"Inverted Cylinder", @"Wheel", @"Inverted Wheel", @"CoverFlow", @"CoverFlow2", @"Time Machine", @"Inverted Time Machine", @"Custom", nil];
+//    [sheet showInView:self.view];
+//    [sheet release];
 }
+
+- (void) loadNewMaps
+{
+    // While a new maps array isn't ready in the MapContainer, block the background thread.
+    while (![MapContainer getInstance].isMapsLoaded) {
+        
+    }
+    [self performSelectorOnMainThread:@selector(mapsDataFetchingDone) withObject:nil waitUntilDone:NO];
+}
+
+- (void)mapsDataFetchingDone
+{
+    // Safety check on the maps loaded attribute
+    if ([MapContainer getInstance].isMapsLoaded){
+
+        self.items = [MapContainer getInstance].maps;
+        for(int i = 0; i < [[MapContainer getInstance].maps count]; i++){
+            [self.carousel insertItemAtIndex:i animated:YES];
+        }
+    }
+    
+    // Reset to NO so we can load a new map array when the user switches views.
+    [MapContainer getInstance].isMapsLoaded = NO;
+
+}
+
 @end

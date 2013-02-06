@@ -258,6 +258,20 @@
 
 - (IBAction)pressedSwitchButton:(id)sender
 {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Carousel Type"
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Linear", @"Rotary", @"Inverted Rotary", @"Cylinder", @"Inverted Cylinder", @"Wheel", @"Inverted Wheel", @"CoverFlow", @"CoverFlow2", @"Time Machine", @"Inverted Time Machine", @"Custom", nil];
+    [sheet showInView:self.view];
+    [sheet release];
+}
+
+- (IBAction)pressedBack:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)pressedRefresh:(id)sender {
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     
     if([NetworkUtils isNetworkAvailable]){
@@ -269,14 +283,6 @@
     } else { // Internet not connected, display error
         //self.mapsTextView.text = @"Vous n'etes pas connecte a Internet!";
     }
-    
-//    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Carousel Type"
-//                                                       delegate:self
-//                                              cancelButtonTitle:nil
-//                                         destructiveButtonTitle:nil
-//                                              otherButtonTitles:@"Linear", @"Rotary", @"Inverted Rotary", @"Cylinder", @"Inverted Cylinder", @"Wheel", @"Inverted Wheel", @"CoverFlow", @"CoverFlow2", @"Time Machine", @"Inverted Time Machine", @"Custom", nil];
-//    [sheet showInView:self.view];
-//    [sheet release];
 }
 
 - (void) loadNewMaps

@@ -8,6 +8,7 @@
 #import "AppDemoAppDelegate.h"
 #import "BetaViewController.h"
 #import "CarouselTestView.h"
+#import "MapsViewController.h"
 #import "Scene.h"
 #import "Session.h" 
 #import "AudioInterface.h"
@@ -17,7 +18,6 @@
 {
     BOOL isConnectionViewVisible;
     BOOL isSoundEnabled;
-    WebClient *webClient;
 }
 
 @end
@@ -36,7 +36,6 @@
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
 }
 
@@ -44,13 +43,6 @@
 {
     [super viewDidLoad];
     isSoundEnabled = NO;
-    
-    //[self performSelectorInBackground:@selector(fetch) withObject:nil];
-}
-
-- (void) fetch
-{
-    //[webClient fetchAllMapsFromDatabase];
 }
 
 #pragma mark - View lifecycle
@@ -135,6 +127,14 @@
     } else {
         [self toggleConnectionView];
     }
+    
+//    if(!isConnectionViewVisible) {
+//        MapsViewController* carousel_vc = [[[MapsViewController alloc]init]autorelease];
+//        carousel_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//        [self presentModalViewController:carousel_vc animated:YES];
+//    } else {
+//        [self toggleConnectionView];
+//    }
 }
 
 // Show or hide the connection view

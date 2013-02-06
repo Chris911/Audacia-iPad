@@ -28,4 +28,5 @@
 - (void) uploadMapData:(NSString*)mapName :(NSData *)xmlData :(UIImage*)mapImage;
 - (void) fetchAllMapsFromDatabase;
 - (void) getConfigPaths;
+- (void) fetchMapImageWithName:(Map*) map;
 @end

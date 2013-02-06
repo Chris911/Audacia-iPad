@@ -27,7 +27,7 @@
 
 + (void) stopBackgroundMusic
 {
-    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
 }
 
 @end

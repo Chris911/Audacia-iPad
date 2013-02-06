@@ -34,28 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if([NetworkUtils isNetworkAvailable]){
-//        AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://legalindexes.indoff.com/sitemap.xml"]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument) {
-//            NSLog(@"XMLDocument: %@", XMLDocument);
-//            
-//        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, GDataXMLDocument *XMLDocument) {
-//            NSLog(@"Failure! :%@",response);
-//        }];
-//        // Just start the operation on a background thread
-//        [operation start];
-        
-        // Start the spinner
-        [self.loadingIndicator startAnimating];
-        
-        // Start the maps fetching on a background thread
-        [self performSelectorInBackground:@selector(loadNewMaps) withObject:nil];
-        
-    } else { // Internet not connected, display error
-        self.mapsTextView.text = @"Vous n'etes pas connecte a Internet!";
-    }
-    
-
 }
 
 // No keyboard
@@ -96,8 +74,19 @@
 
 - (IBAction)testUpload:(id)sender
 {
-    WebClient* webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
-    [webClient fetchAllMapsFromDatabase];
+    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    [self.loadingIndicator startAnimating];
+    
+    if([NetworkUtils isNetworkAvailable]){
+        
+        // Start the maps fetching on a background thread
+        [self performSelectorInBackground:@selector(loadNewMaps) withObject:nil];
+        [delegate.webClient fetchAllMapsFromDatabase];
+
+    } else { // Internet not connected, display error
+        self.mapsTextView.text = @"Vous n'etes pas connecte a Internet!";
+    }
+    
 }
 
 - (void) loadNewMaps
@@ -124,6 +113,8 @@
             [mapsTextView setText:[mapsTextView.text stringByAppendingString:mapIdString]];
             [mapsTextView setText:[mapsTextView.text stringByAppendingString:@"\n"]];
             [mapsTextView setText:[mapsTextView.text stringByAppendingString:map.name]];
+            [mapsTextView setText:[mapsTextView.text stringByAppendingString:@" Rating : "]];
+            [mapsTextView setText:[mapsTextView.text stringByAppendingString:[NSString stringWithFormat:@"%d", map.rating]]];
             [mapsTextView setText:[mapsTextView.text stringByAppendingString:@"\n\n"]];
         }
         

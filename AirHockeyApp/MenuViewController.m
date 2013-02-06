@@ -17,6 +17,7 @@
 {
     BOOL isConnectionViewVisible;
     BOOL isSoundEnabled;
+    WebClient *webClient;
 }
 
 @end
@@ -43,6 +44,13 @@
 {
     [super viewDidLoad];
     isSoundEnabled = NO;
+    
+    //[self performSelectorInBackground:@selector(fetch) withObject:nil];
+}
+
+- (void) fetch
+{
+    //[webClient fetchAllMapsFromDatabase];
 }
 
 #pragma mark - View lifecycle
@@ -120,9 +128,9 @@
 
 - (IBAction)showCarouselView:(id)sender
 {
-    if(!isConnectionViewVisible) {
+    if(!isConnectionViewVisible) {        
         CarouselTestView* carousel_vc = [[[CarouselTestView alloc]init]autorelease];
-        carousel_vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        carousel_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentModalViewController:carousel_vc animated:YES];
     } else {
         [self toggleConnectionView];

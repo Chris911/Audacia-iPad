@@ -7,6 +7,7 @@
 //  
 
 #import "MapContainer.h"
+#import "Map.h"
 
 @implementation MapContainer
 
@@ -42,6 +43,18 @@ static MapContainer *mapContainer = NULL;
         mapContainer.maps = newMaps;
         mapContainer.isMapsLoaded = YES;
     }
+}
+
++ (BOOL) checkIfMapImagesLoaded
+{
+    for(Map *m in mapContainer.maps)
+    {
+        CGImageRef cgref = [m.image CGImage];
+        if(cgref == NULL && ![m.name isEqualToString:@"daveisgod"]){
+            return NO;
+        }
+    }
+    return YES;
 }
 
 - (void) dealloc

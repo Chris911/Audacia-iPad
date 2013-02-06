@@ -104,7 +104,9 @@
     NSMutableArray *allMaps = [[[NSMutableArray alloc]init]autorelease];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
+        while(self.imagePath == 0){
+            NSLog(@"WTF");
+        }
         NSArray *mapIdArray = [JSON valueForKeyPath:@"mapId"];
         NSArray *nameArray = [JSON valueForKeyPath:@"name"];
         NSArray *dateAddedArray = [JSON valueForKeyPath:@"dateAdded"];
@@ -159,7 +161,14 @@
 {
     NSString* imageName = [mapName stringByAppendingString:@".png"];
     NSString* urlString = [self.imagePath stringByAppendingString:imageName];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+    UIImage *image = [UIImage imageWithData:data];
+    
+    if(image == nil)
+    {
+        NSLog(@"Could not create image with name :%s",mapName);
+    }
+    
     return image;
 }
 

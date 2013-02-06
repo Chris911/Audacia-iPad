@@ -20,6 +20,6 @@
 
 + (MapContainer *)getInstance;
 + (void) assignNewMaps:(NSMutableArray*)newMaps;
-
++ (BOOL) checkIfMapImagesLoaded;
 
 @end

@@ -30,7 +30,7 @@
 {
     //set up data
     wrap = YES;
-    carousel.type = iCarouselTypeCoverFlow;
+    carousel.type = iCarouselTypeInvertedCylinder;
     self.items = [MapContainer getInstance].maps;
 }
 
@@ -61,6 +61,8 @@
     
     [carousel release];
     [items release];
+    [_loadingIndicator release];
+    [_hiddenView release];
     [super dealloc];
 }
 
@@ -70,10 +72,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    carousel.type = iCarouselTypeInvertedCylinder;
+
 }
 
 - (void)viewDidUnload
 {
+    [self setLoadingIndicator:nil];
+    [self setHiddenView:nil];
     [super viewDidUnload];
     self.carousel = nil;
 }
@@ -117,7 +123,7 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f/2, 384.0f/2)] autorelease];
+        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f, 384.0f)] autorelease];
         ((UIImageView *)view).image = map.image;
         view.contentMode = UIViewContentModeScaleAspectFit;
         //view.contentMode = UIViewContentModeCenter;
@@ -150,6 +156,7 @@
     //views outside of the `if (view == nil) {...}` check otherwise
     //you'll get weird issues with carousel item content appearing
     //in the wrong place in the carousel
+    view.contentMode = UIViewContentModeScaleAspectFit;
     titleLabel.text = map.name;
     authorLabel.text = @"By author";
     ((UIImageView *)view).image = map.image;
@@ -174,7 +181,7 @@
         //don't do anything specific to the index within
         //this `if (view == nil) {...}` statement because the view will be
         //recycled and used with other index values later
-        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 200.0f)] autorelease];
+        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 600.0f, 600.0f)] autorelease];
         ((UIImageView *)view).image = [UIImage imageNamed:@"page.png"];
         view.contentMode = UIViewContentModeCenter;
         
@@ -275,6 +282,8 @@
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     
     if([NetworkUtils isNetworkAvailable]){
+        [self.loadingIndicator startAnimating];
+        [self.hiddenView setHidden:NO];
         
         // Start the maps fetching on a background thread
         [self performSelectorInBackground:@selector(loadNewMaps) withObject:nil];
@@ -307,6 +316,9 @@
     
     // Reset to NO so we can load a new map array when the user switches views.
     [MapContainer getInstance].isMapsLoaded = NO;
+    [self.loadingIndicator stopAnimating];
+    [self.hiddenView setHidden:YES];
+
 
 }
 

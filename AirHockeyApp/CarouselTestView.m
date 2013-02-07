@@ -25,6 +25,7 @@
 @synthesize carousel;
 @synthesize wrap;
 @synthesize items;
+@synthesize starsImageDict;
 
 - (void)setUp
 {
@@ -32,6 +33,16 @@
     wrap = YES;
     carousel.type = iCarouselTypeInvertedCylinder;
     self.items = [MapContainer getInstance].maps;
+    
+    //Initialize dictionnary
+    starsImageDict = [[NSDictionary alloc]initWithObjectsAndKeys:
+                      @"Stars-1.png",[NSNumber numberWithInt:0],
+                      @"Stars-1.png",[NSNumber numberWithInt:1],
+                      @"Stars-2.png",[NSNumber numberWithInt:2],
+                      @"Stars-3.png",[NSNumber numberWithInt:3],
+                      @"Stars-4.png",[NSNumber numberWithInt:4],
+                      @"Stars-5.png",[NSNumber numberWithInt:5],
+                       nil];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -61,6 +72,7 @@
     
     [carousel release];
     [items release];
+    [starsImageDict release];
     [_loadingIndicator release];
     [_hiddenView release];
     [super dealloc];
@@ -120,6 +132,8 @@
 {
     UILabel *titleLabel = nil;
     UILabel *authorLabel = nil;
+    //UILabel *ratingLabel = nil;
+    UIImageView *ratingImageView = nil;
     Map* map = [self.items objectAtIndex:index];
 
     //create new view if no view is available for recycling
@@ -145,12 +159,21 @@
         authorLabel.font = [authorLabel.font fontWithSize:20];
         authorLabel.tag = 2;
         [view addSubview:authorLabel];
+        
+//        frame.origin.y += 30;
+//        ratingLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
+//        ratingLabel.backgroundColor = [UIColor clearColor];
+//        ratingLabel.textAlignment = UITextAlignmentCenter;
+//        ratingLabel.font = [ratingLabel.font fontWithSize:20];
+//        ratingLabel.tag = 3;
+//        [view addSubview:ratingLabel];
     }
     else
     {
         //get a reference to the label in the recycled view
         titleLabel = (UILabel *)[view viewWithTag:1];
         authorLabel = (UILabel *)[view viewWithTag:2];
+        //ratingLabel = (UILabel *)[view viewWithTag:3];
     }
     
     //set item label
@@ -160,7 +183,15 @@
     //in the wrong place in the carousel
     view.contentMode = UIViewContentModeScaleAspectFit;
     titleLabel.text = map.name;
-    authorLabel.text = [NSString stringWithFormat:@"Par: %@",map.authorName];
+    authorLabel.text = [NSString stringWithFormat:@"Par: %@", map.authorName];
+    //ratingLabel.text = [NSString stringWithFormat:@"Rating: %i/5", map.rating];
+    //ratingLabel.text = [starsImageDict objectForKey:[NSNumber numberWithInt:map.rating]];
+    
+    ratingImageView = [[[UIImageView alloc]initWithFrame:CGRectMake(198.5, 10, 115.0f, 20.0f)] autorelease];
+    NSString* imagePath = [starsImageDict objectForKey:[NSNumber numberWithInt:map.rating]];
+    ((UIImageView *)ratingImageView).image = [UIImage imageNamed:imagePath];
+    [view addSubview:ratingImageView];
+
     ((UIImageView *)view).image = map.image;
     
     return view;

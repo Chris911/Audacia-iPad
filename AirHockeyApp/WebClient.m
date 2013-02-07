@@ -74,8 +74,8 @@
 
 - (void) uploadImageData:(UIImage*)image :(NSString*)mapName
 {
-    NSData *imageData = UIImagePNGRepresentation(image);
-    NSString *fileName = [mapName stringByAppendingString:@".png"];
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+    NSString *fileName = [mapName stringByAppendingString:@".jpg"];
     
     NSMutableURLRequest *request = [self.AFClient multipartFormRequestWithMethod:@"POST" path:self.mapsAPIScript parameters:@{@"action":@"uploadMap"} constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
@@ -112,7 +112,7 @@
         NSArray *ratingArray = [JSON valueForKeyPath:@"rating"];
         NSArray *privateArray = [JSON valueForKeyPath:@"private"];
         
-        for(int i=0; i < 15; i++) {
+        for(int i=0; i < [mapIdArray count]; i++) {
 
             // Convert from string to int or we obtain a weird pointe value
             NSString *mapIdString = [NSString stringWithFormat:@"%@",mapIdArray[i]];
@@ -169,7 +169,7 @@
 
 - (void) fetchMapImageWithName:(Map*) map
 {
-    NSString* imageName = [map.name stringByAppendingString:@".png"];
+      NSString* imageName = [map.name stringByAppendingString:@".jpg"];
  //   NSString* urlString = [self.imagePath stringByAppendingString:imageName];
 //    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
 //    UIImage *image = [UIImage imageWithData:data];

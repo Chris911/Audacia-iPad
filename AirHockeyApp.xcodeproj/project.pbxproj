@@ -17,6 +17,12 @@
 		04A04E6716AEF7BD006D1FEB /* NodeMurret.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6616AEF7BD006D1FEB /* NodeMurret.m */; };
 		04A04E6D16AEF7CF006D1FEB /* NodePortal.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6C16AEF7CF006D1FEB /* NodePortal.m */; };
 		04A04E7016AEF7DB006D1FEB /* NodePommeau.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6F16AEF7DB006D1FEB /* NodePommeau.m */; };
+		04BDB84616C41A1300648B51 /* Stars-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BDB84116C41A1300648B51 /* Stars-1.png */; };
+		04BDB84716C41A1300648B51 /* Stars-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BDB84216C41A1300648B51 /* Stars-2.png */; };
+		04BDB84816C41A1300648B51 /* Stars-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BDB84316C41A1300648B51 /* Stars-3.png */; };
+		04BDB84916C41A1300648B51 /* Stars-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BDB84416C41A1300648B51 /* Stars-4.png */; };
+		04BDB84A16C41A1300648B51 /* Stars-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BDB84516C41A1300648B51 /* Stars-5.png */; };
+		04BDB84D16C4255400648B51 /* Stars-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BDB84C16C4255400648B51 /* Stars-0.png */; };
 		04CE82AF16B887D300F8B796 /* MapContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE82AE16B887D300F8B796 /* MapContainer.m */; };
 		04D9C3E916BCB042005C6197 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9C3E816BCB042005C6197 /* iCarousel.m */; };
 		04D9C3EB16BCB0A3005C6197 /* CarouselTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */; };
@@ -134,6 +140,12 @@
 		04A04E6C16AEF7CF006D1FEB /* NodePortal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodePortal.m; sourceTree = "<group>"; };
 		04A04E6E16AEF7DB006D1FEB /* NodePommeau.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodePommeau.h; sourceTree = "<group>"; };
 		04A04E6F16AEF7DB006D1FEB /* NodePommeau.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodePommeau.m; sourceTree = "<group>"; };
+		04BDB84116C41A1300648B51 /* Stars-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars-1.png"; sourceTree = "<group>"; };
+		04BDB84216C41A1300648B51 /* Stars-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars-2.png"; sourceTree = "<group>"; };
+		04BDB84316C41A1300648B51 /* Stars-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars-3.png"; sourceTree = "<group>"; };
+		04BDB84416C41A1300648B51 /* Stars-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars-4.png"; sourceTree = "<group>"; };
+		04BDB84516C41A1300648B51 /* Stars-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars-5.png"; sourceTree = "<group>"; };
+		04BDB84C16C4255400648B51 /* Stars-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars-0.png"; sourceTree = "<group>"; };
 		04CE82AD16B887D300F8B796 /* MapContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapContainer.h; sourceTree = "<group>"; };
 		04CE82AE16B887D300F8B796 /* MapContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapContainer.m; sourceTree = "<group>"; };
 		04D9C3E716BCB042005C6197 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
@@ -361,6 +373,20 @@
 			);
 			name = Models;
 			path = Assets/Models;
+			sourceTree = "<group>";
+		};
+		04BDB84016C41A1300648B51 /* Stars */ = {
+			isa = PBXGroup;
+			children = (
+				04BDB84C16C4255400648B51 /* Stars-0.png */,
+				04BDB84116C41A1300648B51 /* Stars-1.png */,
+				04BDB84216C41A1300648B51 /* Stars-2.png */,
+				04BDB84316C41A1300648B51 /* Stars-3.png */,
+				04BDB84416C41A1300648B51 /* Stars-4.png */,
+				04BDB84516C41A1300648B51 /* Stars-5.png */,
+			);
+			name = Stars;
+			path = Assets/UI/Images/Stars;
 			sourceTree = "<group>";
 		};
 		04D9C3E216BCAFE1005C6197 /* iCarousel */ = {
@@ -605,6 +631,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				04BDB84016C41A1300648B51 /* Stars */,
 				04F3B01816C0B23C00532EF7 /* background.png */,
 				04F3B01916C0B23C00532EF7 /* page.png */,
 				A8F13CB716B027F300CB5885 /* SettingsButton1.png */,
@@ -817,6 +844,12 @@
 				04F3B01A16C0B23C00532EF7 /* background.png in Resources */,
 				04F3B01B16C0B23C00532EF7 /* page.png in Resources */,
 				A838B77D16C2E88500050DDA /* MapsViewController.xib in Resources */,
+				04BDB84616C41A1300648B51 /* Stars-1.png in Resources */,
+				04BDB84716C41A1300648B51 /* Stars-2.png in Resources */,
+				04BDB84816C41A1300648B51 /* Stars-3.png in Resources */,
+				04BDB84916C41A1300648B51 /* Stars-4.png in Resources */,
+				04BDB84A16C41A1300648B51 /* Stars-5.png in Resources */,
+				04BDB84D16C4255400648B51 /* Stars-0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

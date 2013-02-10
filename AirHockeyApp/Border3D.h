@@ -23,8 +23,8 @@
 @property  Vector3D v7;
 @property  Vector3D v8;
 
-- (id) initWithStartAndEndPoints:(Vector3D)startPt:(Vector3D)endPt;
+- (id) initWithStartAndEndPoints:(Vector3D)startPt :(Vector3D)endPt ;
 - (void) drawVertices;
-- (void) setNewPosition:(Vector3D)begPt:(Vector3D)endPt:(BOOL)isVertical;
+- (void) setNewPosition:(Vector3D)begPt :(Vector3D)endPt :(BOOL)isVertical ;
 
 @end

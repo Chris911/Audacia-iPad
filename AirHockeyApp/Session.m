@@ -41,6 +41,8 @@ static Session *session = NULL;
 - (void) dealloc
 {
     [super dealloc];
+    [username release];
+    [password release];
     [session release];
 }
 

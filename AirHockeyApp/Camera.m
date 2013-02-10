@@ -38,13 +38,38 @@
     return self;
 }
 
+#pragma mark - Reset camera
+- (void) resetCamera
+{
+    // Perspective attributes
+    self.currentPosition = Vector3DMake(0, 0, 0);
+    
+    self.centerPosition = Vector3DMake(0, 0, 0);
+    self.eyePosition = Vector3DMake(0, 0, 50);
+    self.orientation = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
+    
+    // Ortho attributes
+    self.isPerspective = NO;
+    self.zoomFactor = CGPointMake(1, 1);
+    
+    self.orthoCenter = CGPointMake(0, 0);
+    
+    self.orthoHeight = HAUTEUR_FENETRE;
+    self.orthoWidth = LARGEUR_FENETRE;
+    
+    self.windowHeight = HAUTEUR_ECRAN;
+    self.windowWidth = LARGEUR_ECRAN;
+    
+    self.worldPosition = Vector3DMake(self.orthoCenter.x, self.orthoCenter.y,-1); //Z Ignored
+}
 
 - (void) setCamera
 {
-    if(!self.isPerspective) {
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    if(!self.isPerspective) { // Orthogonal Mode
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         // Orthogonal Mode
         glOrthof(self.orthoCenter.x - self.orthoWidth/2,
                  self.orthoCenter.x + self.orthoWidth/2,
@@ -52,6 +77,23 @@
                  self.orthoCenter.y + self.orthoHeight/2,
                  -100, 100);
         glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+//        gluLookAt(self.eyePosition.x, self.eyePosition.y, self.eyePosition.z,
+//                  self.centerPosition.x, self.centerPosition.y, self.centerPosition.z,
+//                  self.orientation.x, self.orientation.y, self.orientation.z);
+        
+    } else { // Perspective Mode
+    
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluPerspective(45.0f, 4/3, 1, 1000);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        gluLookAt(self.eyePosition.x, self.eyePosition.y, self.eyePosition.z,
+                  self.centerPosition.x, self.centerPosition.y, self.centerPosition.z,
+                  self.orientation.x, self.orientation.y, self.orientation.z);
+        
     }
 }
 
@@ -63,7 +105,7 @@
 }
 
 // Translate position when in ortho mode
-- (void) orthoTranslate:(CGPoint)newPosition:(CGPoint)lastPosition
+- (void) orthoTranslate:(CGPoint)newPosition :(CGPoint)lastPosition
 {
     CGPoint convertedNewPos = [self convertFromScreenToWorld:newPosition];
     CGPoint convertedLastPos = [self convertFromScreenToWorld:lastPosition];
@@ -118,13 +160,13 @@
      return (CGPointMake(cg_worldPos.x + self.orthoCenter.x, cg_worldPos.y + self.orthoCenter.y));
 }
 
--(CGPoint) calculateVelocity:(CGPoint) lastTouch:(CGPoint) currentTouch
+-(CGPoint) calculateVelocity:(CGPoint)lastTouch :(CGPoint)currentTouch
 {
     return CGPointMake(currentTouch.x - lastTouch.x, currentTouch.y - lastTouch.y);
 }
 
 #pragma mark - Zooming methods
-- (void) zoomInFromRect:(CGPoint)begin:(CGPoint)end
+- (void) zoomInFromRect:(CGPoint)begin :(CGPoint)end
 {
     // Invert if the rectangle isn't started from upper left and ended to lower right.
     if(begin.x > end.x){
@@ -250,32 +292,4 @@
 
     self.orthoCenter = CGPointMake(newXpos,newYpos);
 }
-
-
-#pragma mark - Reset camera
-- (void) resetCamera
-{
-    // Perspective attributes
-    self.centerPosition = Vector3DMake(0, 0, 0);
-    self.currentPosition = Vector3DMake(0, 0, 0);
-    self.eyePosition = Vector3DMake(0, 0, 0);
-    self.orientation = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
-    
-    // Ortho attributes
-    self.isPerspective = NO;
-    self.zoomFactor = CGPointMake(1, 1);
-    
-    self.orthoCenter = CGPointMake(0, 0);
-    
-    self.orthoHeight = HAUTEUR_FENETRE;
-    self.orthoWidth = LARGEUR_FENETRE;
-    
-    self.windowHeight = HAUTEUR_ECRAN;
-    self.windowWidth = LARGEUR_ECRAN;
-    
-    self.worldPosition = Vector3DMake(self.orthoCenter.x, self.orthoCenter.y,-1); //Z Ignored
-}
-
-
-
 @end

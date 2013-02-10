@@ -429,7 +429,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     {
         if ([_delegate respondsToSelector:@selector(carousel:itemAlphaForOffset:)])
         {
-            return [(id<iCarouselDeprecated>)_delegate carousel:self itemAlphaForOffset:offset];
+            return [(id<iCarouselDeprecated>)_delegate carousel :self itemAlphaForOffset :offset];
         }
     }
     

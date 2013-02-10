@@ -90,12 +90,18 @@
         self.v3.x,self.v3.y,self.v3.z
 
     };
-    
+    //glDisable(GL_LIGHTING);
+    glNormal3f(0, -1, 0);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
     glVertexPointer(3, GL_FLOAT, 0, sideVertices);
     glEnableClientState(GL_VERTEX_ARRAY);
     glDrawArrays(GL_TRIANGLES, 0, 10*3);
     glDisableClientState(GL_VERTEX_ARRAY);
-    
+    //glEnable(GL_LIGHTING);
+
     GLfloat topVertices[] = {
         // Top
         self.v8.x,self.v8.y,self.v8.z,
@@ -141,7 +147,7 @@
 
 - (void) setNewPosition:(Vector3D)begPt :(Vector3D)endPt :(BOOL)isVertical
 {
-    int zValue = 2;
+    int zValue = 5;
     int yValue = 1;
     int xValue = 1;
     

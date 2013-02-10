@@ -53,6 +53,12 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UIView *PuckView;
 @property (retain, nonatomic) IBOutlet UIView *PommeauView;
 
+// Parameters UI elements
+@property (retain, nonatomic) IBOutlet UISlider *sizeSlider;
+@property (retain, nonatomic) IBOutlet UISlider *angleSlider;
+@property (retain, nonatomic) IBOutlet UILabel *sizeLabel;
+@property (retain, nonatomic) IBOutlet UILabel *angleLable;
+
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)setupView;
@@ -69,6 +75,9 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)copyItem:(id)sender;
 - (IBAction)toggleElasticZoom:(id)sender;
 - (IBAction)togglePerspective:(id)sender;
+- (IBAction)angleSliderChanged:(id)sender;
+- (IBAction)sizeSliderChanged:(id)sender;
+
 
 
 

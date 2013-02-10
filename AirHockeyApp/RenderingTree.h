@@ -40,6 +40,9 @@
 - (BOOL) translateSingleNode:(CGPoint) deltaPoint;
 - (BOOL) translateMultipleNodes:(CGPoint) deltaPoint;
 
+// Slider methods
+- (void) scaleBySliderSelectedNodes:(float) deltaScale;
+- (void) rotateBySliderSingleNode:(float) deltaAngle;
 
 // Rendering functions
 - (void) render;
@@ -48,5 +51,7 @@
 - (int) getNumberOfNodes;
 - (void) replaceNodesInBounds;
 - (BOOL) checkIfAnyNodeClicked:(Vector3D)click;
+- (Node*) getSingleSelectedNode;
+
 
 @end

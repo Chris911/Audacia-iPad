@@ -68,6 +68,8 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)deleteItem:(id)sender;
 - (IBAction)copyItem:(id)sender;
 - (IBAction)toggleElasticZoom:(id)sender;
+- (IBAction)togglePerspective:(id)sender;
+
 
 
 @end

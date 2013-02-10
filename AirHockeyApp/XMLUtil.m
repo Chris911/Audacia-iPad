@@ -13,7 +13,7 @@
 @implementation XMLUtil
 
 // Returns the complete path of the desired XML File
-+ (NSString *)dataFilePath:(NSString*)fileName:(BOOL)forSave {
++ (NSString *)dataFilePath:(NSString*)fileName :(BOOL)forSave {
 
     NSString *filePath = [fileName stringByAppendingString:@".xml"];
     

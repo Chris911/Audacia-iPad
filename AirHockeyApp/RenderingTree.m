@@ -19,7 +19,7 @@
 - (id) init
 {
     if((self = [super init])) {
-        tree = [[NSMutableArray alloc]init];
+        self.tree = [[NSMutableArray alloc]init];
         self.multipleNodesSelected = NO;
     }
     return self;
@@ -53,7 +53,7 @@
 
 // Defines position when adding the node.  Mainly used
 // when adding an object via drag-and-drop
-- (void) addNodeToTreeWithInitialPosition:(Node*) node:(Vector3D)pos
+- (void) addNodeToTreeWithInitialPosition:(Node*)node :(Vector3D)pos
 {
     node.position = pos;
     [tree addObject:node];
@@ -133,7 +133,7 @@
 
 
 // Multiple nodes selection, using a zone (the begin and end points of the elastic rect)
-- (BOOL) selectNodesByZone:(CGPoint)beginPoint:(CGPoint)endPoint
+- (BOOL) selectNodesByZone:(CGPoint)beginPoint :(CGPoint)endPoint
 {
     [self deselectAllNodes];
     
@@ -250,7 +250,7 @@
 }
 
 // Rotate multiple nodes
-- (void) rotateMultipleNodes:(CGPoint) currentPoint:(CGPoint)lastPoint;
+- (void) rotateMultipleNodes:(CGPoint)currentPoint :(CGPoint)lastPoint;
 {
     float normalizedDirection = currentPoint.x - lastPoint.x;
     if(normalizedDirection == 0){
@@ -387,7 +387,7 @@
 
 - (void) dealloc
 {
-    [tree dealloc];
+    [self.tree release];
     [super dealloc];
 }
 @end

@@ -33,6 +33,9 @@ extern float const HAUTEUR_FENETRE;
 extern int const LARGEUR_ECRAN;
 extern int const HAUTEUR_ECRAN;
 
-
+extern float lightAmbient[];
+extern float lightDiffuse[];
+extern float matAmbient[];
+extern float matDiffuse[];
 
 @end

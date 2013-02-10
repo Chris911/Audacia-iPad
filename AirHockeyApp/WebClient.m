@@ -169,11 +169,7 @@
 
 - (void) fetchMapImageWithName:(Map*) map
 {
-      NSString* imageName = [map.name stringByAppendingString:@".jpg"];
- //   NSString* urlString = [self.imagePath stringByAppendingString:imageName];
-//    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-//    UIImage *image = [UIImage imageWithData:data];
-    
+    NSString* imageName = [map.name stringByAppendingString:@".jpg"];    
     NSURL *url = [NSURL URLWithString:[self.imagePath stringByAppendingString:imageName]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
@@ -182,7 +178,6 @@
     {
         map.image = image;
     }];
-//    [requestOperation start];
     NSOperationQueue* opq = [[[NSOperationQueue alloc]init]autorelease];
     [opq addOperation:requestOperation];
 }
@@ -191,6 +186,15 @@
 {
     [MapContainer getInstance];
     [MapContainer assignNewMaps:maps];
+}
+
+- (void) dealloc
+{
+    [super dealloc];
+    [AFClient release];
+    [xmlPath release];
+    [imagePath release];
+    [mapsAPIScript release];
 }
 
 @end

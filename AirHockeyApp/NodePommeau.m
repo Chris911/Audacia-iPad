@@ -12,6 +12,11 @@
 
 @synthesize model;
 
+float lightAmbient1[] = { 0.2f, 0.3f, 0.6f, 1.0f };
+float lightDiffuse1[] = { 0.2f, 0.3f, 0.6f, 1.0f };
+float matAmbient1[] = { 0.6f, 0.6f, 0.6f, 1.0f };
+float matDiffuse1[] = { 0.6f, 0.6f, 0.6f, 1.0f };
+
 - (id) init
 {
     if((self = [super init])) {
@@ -53,6 +58,12 @@
     // Scale the model
     glScalef(self.scaleFactor, self.scaleFactor, self.scaleFactor);
     
+    //Prepare the light
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient1);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse1);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient1);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse1);
+    
     // Draw the .obj Model
     [model drawSelf];
     
@@ -63,6 +74,11 @@
 - (void) setRotation:(Rotation3D)rot
 {
     self.model.currentRotation = rot;
+}
+- (void) dealloc
+{
+    [model release];
+    [super dealloc];
 }
 
 @end

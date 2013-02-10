@@ -13,7 +13,7 @@
 
 @interface XMLUtil : NSObject
 
-+ (NSString *)dataFilePath:(NSString*)fileName:(BOOL)forSave;
++ (NSString *)dataFilePath:(NSString*)fileName :(BOOL)forSave;
 + (RenderingTree *)loadRenderingTreeFromGDataXMLDocument:(GDataXMLDocument*)doc;
 + (NSData *)getRenderingTreeXmlData:(RenderingTree *)renderingTree;
 

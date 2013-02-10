@@ -63,4 +63,9 @@
     self.model.currentRotation = rot;
 }
 
+- (void) dealloc
+{
+    [model release];
+    [super dealloc];
+}
 @end

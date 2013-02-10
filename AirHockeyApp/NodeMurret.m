@@ -71,4 +71,10 @@
     return copyObj;
 }
 
+- (void) dealloc
+{
+    [model release];
+    [super dealloc];
+}
+
 @end

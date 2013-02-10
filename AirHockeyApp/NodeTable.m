@@ -187,16 +187,16 @@
 {
     GLfloat topVertices[] = {
         //            * Table's surface *
-        0,0,TABLE_DEPTH,
-        edges[0].position.x,edges[0].position.y,TABLE_DEPTH,
-        edges[1].position.x,edges[1].position.y,TABLE_DEPTH,
-        edges[2].position.x,edges[2].position.y,TABLE_DEPTH,
-        edges[4].position.x,edges[4].position.y,TABLE_DEPTH,
-        edges[7].position.x,edges[7].position.y,TABLE_DEPTH,
-        edges[6].position.x,edges[6].position.y,TABLE_DEPTH,
-        edges[5].position.x,edges[5].position.y,TABLE_DEPTH,
-        edges[3].position.x,edges[3].position.y,TABLE_DEPTH,
-        edges[0].position.x,edges[0].position.y,TABLE_DEPTH
+        0,0,TABLE_HEIGHT,
+        edges[0].position.x,edges[0].position.y,TABLE_HEIGHT,
+        edges[1].position.x,edges[1].position.y,TABLE_HEIGHT,
+        edges[2].position.x,edges[2].position.y,TABLE_HEIGHT,
+        edges[4].position.x,edges[4].position.y,TABLE_HEIGHT,
+        edges[7].position.x,edges[7].position.y,TABLE_HEIGHT,
+        edges[6].position.x,edges[6].position.y,TABLE_HEIGHT,
+        edges[5].position.x,edges[5].position.y,TABLE_HEIGHT,
+        edges[3].position.x,edges[3].position.y,TABLE_HEIGHT,
+        edges[0].position.x,edges[0].position.y,TABLE_HEIGHT
     };
     
     GLfloat topTextures[] = {
@@ -271,10 +271,10 @@
 {
     GLfloat limitsVertices[] = {
         //            * Zone Limits *
-        limits[0].x,limits[0].y,TABLE_DEPTH,
-        limits[1].x,limits[1].y,TABLE_DEPTH,
-        limits[2].x,limits[2].y,TABLE_DEPTH,
-        limits[3].x,limits[3].y,TABLE_DEPTH,
+        limits[0].x,limits[0].y,TABLE_HEIGHT,
+        limits[1].x,limits[1].y,TABLE_HEIGHT,
+        limits[2].x,limits[2].y,TABLE_HEIGHT,
+        limits[3].x,limits[3].y,TABLE_HEIGHT,
     };
     
     glVertexPointer(3, GL_FLOAT, 0, limitsVertices);

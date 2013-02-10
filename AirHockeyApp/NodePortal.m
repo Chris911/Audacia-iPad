@@ -21,7 +21,7 @@
 
         NSString *path = [[NSBundle mainBundle] pathForResource:@"portal" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];
-        Vertex3D position = Vertex3DMake(0, 0, 20.0);
+        Vertex3D position = Vertex3DMake(0, 0, 1.0);
         self.model = theObject;
         self.position = position;
         self.model.currentPosition = self.position;

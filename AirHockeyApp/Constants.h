@@ -25,7 +25,7 @@ extern const int TABLE_LIMIT_X;
 extern const int TABLE_LIMIT_Y;
 extern const int NB_OF_TRIANGLES;
 extern const int NB_OF_TABLE_EDGES;
-extern const GLfloat TABLE_DEPTH;
+extern const GLfloat TABLE_HEIGHT;
 
 // Camera constants
 extern float const LARGEUR_FENETRE;

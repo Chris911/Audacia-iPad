@@ -290,6 +290,16 @@
     }
 }
 
+- (void) rotateBySliderSingleNode:(float) deltaAngle
+{
+    for(Node* node in self.tree)
+    {
+        if(node.isSelected) {
+            node.angle = deltaAngle; 
+        }
+    }
+}
+
 // Scale node that are currently selected
 - (void) scaleSelectedNodes:(float) deltaScale
 {
@@ -307,6 +317,25 @@
         }
     }
 }
+
+- (void) scaleBySliderSelectedNodes:(float) deltaScale
+{
+    for(Node* node in self.tree)
+    {
+        // Check if node is selected AND scalable (Puck and Stick shouldn't scale according to SRS)
+        if(node.isSelected && node.isScalable) {
+            
+            node.scaleFactor =deltaScale;
+            if(node.scaleFactor >= 4) {
+                node.scaleFactor = 4;
+            } else if(node.scaleFactor <= 0.5) {
+                node.scaleFactor = 0.5f;
+            }
+        }
+    }
+}
+
+
 // Moves a single node.  DeltaPoint should be already
 // normalized
 - (BOOL) translateSingleNode:(CGPoint) deltaPoint
@@ -384,6 +413,18 @@
     }
     return anyNodeHit;
 }
+
+- (Node*) getSingleSelectedNode;
+{
+    for(Node* node in self.tree)
+    {
+        if(node.isSelected)
+            return node;
+    }
+    
+    return nil;
+}
+
 
 - (void) dealloc
 {

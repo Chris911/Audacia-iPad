@@ -8,6 +8,7 @@
 
 #import "EAGLViewController.h"
 #import "EAGLView.h"
+#import "Node.h"
 #import "NodeTable.h"
 #import "NodePortal.h"
 #import "NodeBooster.h"
@@ -77,6 +78,7 @@ enum {
     
     NSMutableArray *particles;
     
+    Node *selectedNode;
 }
 
 @property (nonatomic, retain) EAGLContext *context;
@@ -158,6 +160,10 @@ enum {
     [_MuretView release];
     [_PuckView release];
     [_PommeauView release];
+    [_sizeSlider release];
+    [_angleSlider release];
+    [_sizeLabel release];
+    [_angleLable release];
     [super dealloc];
 }
 
@@ -203,6 +209,10 @@ enum {
     [self setMuretView:nil];
     [self setPuckView:nil];
     [self setPommeauView:nil];
+    [self setSizeSlider:nil];
+    [self setAngleSlider:nil];
+    [self setSizeLabel:nil];
+    [self setAngleLable:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -292,12 +302,17 @@ enum {
                    && ![Scene getInstance].renderingTree.multipleNodesSelected)
                 {
                     NSLog(@"Touch resulted in node selection");
-                    [self slideInAnimationView:self.ParametersView];
+                    
+                    // Modify the UI (Parameters) of the currently selected Node
+                    selectedNode = [[Scene getInstance].renderingTree getSingleSelectedNode];
+                    [self modifyUIParametersValues:selectedNode];
                     currentTouchesMode = TOUCH_TRANSFORM_MODE;
+                    
                 } else if([Scene getInstance].renderingTree.multipleNodesSelected
                           && [[Scene getInstance].renderingTree checkIfAnyNodeClicked:self.camera.worldPosition]) {
                     NSLog(@"Touch resulted in Multi node selection");
                     currentTouchesMode = TOUCH_TRANSFORM_MODE;
+                    
                 } else {
                     NSLog(@"Touch did not select any node");
                     // TODO: Introduce camera movement here
@@ -334,28 +349,40 @@ enum {
             // Place the world positions according to the current camera position
             [self.camera assignWorldPosition:positionCourante];
             
-            if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {                
-                if([Scene getInstance].renderingTree.multipleNodesSelected){ // Multiple Nodes translation
+            // Translation Mode ----------------------------------------------------------
+            if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {
+                
+                // Multiple Nodes translation
+                if([Scene getInstance].renderingTree.multipleNodesSelected){ 
                     [[Scene getInstance].renderingTree translateMultipleNodes:
                      CGPointMake(self.camera.worldPosition.x,self.camera.worldPosition.y)];
-                } else { // Single Node translation
+                
+                // Single Node translation
+                } else { 
                     [[Scene getInstance].renderingTree translateSingleNode:
                      CGPointMake(self.camera.worldPosition.x,self.camera.worldPosition.y)];
+                    [self modifyUIParametersValues:selectedNode];
                 }
-                
+            
+            // Rotation Mode ------------------------------------------------------------
             } else if(currentTransformState == STATE_TRANSFORM_ROTATION) {
                 CGPoint rotation = [self.camera calculateVelocity:positionPrecedente :positionCourante];
                 
                 // Multiple Nodes rotation
                 if([Scene getInstance].renderingTree.multipleNodesSelected){
                     [[Scene getInstance].renderingTree rotateMultipleNodes:positionCourante:positionPrecedente];
-                } else { // Single Node rotation
-                    [[Scene getInstance].renderingTree rotateSingleNode:Rotation3DMake(rotation.x, rotation.y, 0)];
-                }
                 
+                // Single Node rotation
+                } else { 
+                    [[Scene getInstance].renderingTree rotateSingleNode:Rotation3DMake(rotation.x, rotation.y, 0)];
+                    [self modifyUIParametersValues:selectedNode];
+                }
+               
+            // Scaling Mode -------------------------------------------------------------
             } else if(currentTransformState == STATE_TRANSFORM_SCALE) {
                 CGPoint scale = [self.camera calculateVelocity:positionPrecedente :positionCourante];
                 [[Scene getInstance].renderingTree scaleSelectedNodes:scale.x];
+                [self modifyUIParametersValues:selectedNode];
             }
             
         // User is dragging the screen.  Camera is thus moving
@@ -383,6 +410,7 @@ enum {
         }
         [elasticRect reset];
     }
+    selectedNode = nil; // invalidate pointer
 }
 
 #pragma mark - Button methods
@@ -477,6 +505,7 @@ enum {
 - (IBAction)deleteItem:(id)sender
 {
     [[Scene getInstance].renderingTree removeSelectedNodes];
+    [self slideOutAnimationView:self.ParametersView];
 }
 
 - (IBAction)copyItem:(id)sender
@@ -493,6 +522,19 @@ enum {
     } else {
         [NetworkUtils showNetworkUnavailableAlert];
     }
+}
+
+#pragma mark - Slider action methods
+- (IBAction)angleSliderChanged:(id)sender
+{
+    float angleValue = (self.angleSlider.value * 360);
+    [[Scene getInstance].renderingTree rotateBySliderSingleNode:angleValue];
+}
+
+- (IBAction)sizeSliderChanged:(id)sender
+{
+    float scaleValue = (self.sizeSlider.value * 3.5 ) + 0.5;
+    [[Scene getInstance].renderingTree scaleBySliderSelectedNodes:scaleValue];
 }
 
 #pragma mark - Drag And Drop function
@@ -537,29 +579,26 @@ enum {
                 NodePortal *portal = [[[NodePortal alloc]init]autorelease];
                 [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(self.camera.worldPosition.x,
                                                                                                          self.camera.worldPosition.y,
-                                                                                                         5)];
-                
+                                                                                                         1)];
             } else if(activeObjectTag == BOOSTERVIEW_TAG) {
                 NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
                 [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
                                                                                                           self.camera.worldPosition.y,
-                                                                                                          5)];
-                
+                                                                                                          2)];
             } else if(activeObjectTag == MURETVIEW_TAG) {
                 NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
                 [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
                                                                                                           self.camera.worldPosition.y,
-                                                                                                          5)];
-                
+                                                                                                          1)];
             } else if(activeObjectTag == PUCKVIEW_TAG) {
                 [[Scene getInstance].renderingTree addPuckToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
                                                                                                  self.camera.worldPosition.y,
-                                                                                                 5)];
+                                                                                                 1)];
                 
             } else if(activeObjectTag == POMMEAUVIEW_TAG) {
                 [[Scene getInstance].renderingTree addStickToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
                                                                                                   self.camera.worldPosition.y,
-                                                                                                  5)];
+                                                                                                  1)];
             }
         }
         
@@ -636,7 +675,7 @@ enum {
              }
         completion:nil];
     } else if(view.tag == PARAMETERSVIEW_TAG) {
-        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+        [UIView animateWithDuration:0.1 delay: 0.0 options: UIViewAnimationCurveEaseOut
              animations:^{
                  view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN + view.frame.size.height/2);
                  
@@ -677,7 +716,7 @@ enum {
              }
         completion:nil];
     } else if(view.tag == PARAMETERSVIEW_TAG){
-        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+        [UIView animateWithDuration:0.1 delay: 0.0 options: UIViewAnimationCurveEaseOut
              animations:^{
                  view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN - view.frame.size.height/2);
                  
@@ -820,6 +859,7 @@ enum {
                                          HAUTEUR_ECRAN + self.SettingsView.frame.size.height);
 
 }
+
 #pragma mark - Reset table utility
 
 - (void) resetUI
@@ -832,6 +872,33 @@ enum {
     currentTransformState = STATE_TRANSFORM_TRANSLATION;
     activeObjectTag = -1;
     [[Scene getInstance].renderingTree emptyRenderingTree];
+}
+
+#pragma mark - Modify UI Elements
+- (void) modifyUIParametersValues:(Node*)node 
+{
+    if(![node.type isEqualToString:@"EDGE"]){
+        [self slideInAnimationView:self.ParametersView];
+    } else {
+        [self slideOutAnimationView:self.ParametersView];
+    }
+
+    [self hideOrShowParameters:node];
+    self.sizeSlider.value = node.scaleFactor/4;
+    self.angleSlider.value = node.angle/360;
+}
+
+- (void) hideOrShowParameters:(Node*)node
+{
+    if([node.type isEqualToString:@"POMMEAU"] || [node.type isEqualToString:@"PUCK"]){
+        // Hide some parameters if the selected nodes are Puck or Stick
+        [self.sizeLabel setHidden:YES];
+        [self.sizeSlider setHidden:YES];
+        
+    } else {
+        [self.sizeLabel setHidden:NO];
+        [self.sizeSlider setHidden:NO];
+    }
 }
 
 #pragma mark - Screenshot Utility
@@ -941,9 +1008,5 @@ enum {
 {
     [self.camera replaceCamera];
 }
-
-
-
-
 
 @end

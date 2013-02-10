@@ -20,7 +20,7 @@ const int TABLE_LIMIT_X                  = 75;
 const int TABLE_LIMIT_Y                  = 55;
 const int NB_OF_TRIANGLES                = 8;
 const int NB_OF_TABLE_EDGES              = 8;
-const GLfloat TABLE_DEPTH                = 1;
+const GLfloat TABLE_HEIGHT                = 0;
 
 float const LARGEUR_FENETRE = 200;
 float const HAUTEUR_FENETRE = 150;

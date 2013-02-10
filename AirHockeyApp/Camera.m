@@ -45,7 +45,7 @@
     self.currentPosition = Vector3DMake(0, 0, 0);
     
     self.centerPosition = Vector3DMake(0, 0, 0);
-    self.eyePosition = Vector3DMake(0, 0, 50);
+    self.eyePosition = Vector3DMake(0, -25, 90);
     self.orientation = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
     
     // Ortho attributes
@@ -87,7 +87,7 @@
     
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(45.0f, 4/3, 1, 1000);
+        gluPerspective(60.0f, 4/3, 1, 1000);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         gluLookAt(self.eyePosition.x, self.eyePosition.y, self.eyePosition.z,

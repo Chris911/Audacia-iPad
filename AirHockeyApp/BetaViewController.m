@@ -34,9 +34,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+//    [NSTimer scheduledTimerWithTimeInterval:4.0
+//                                     target:self
+//                                   selector:@selector(load)
+//                                   userInfo:nil
+//                                    repeats:YES];
+    
 }
 
-// No keyboard
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     NSLog(@"touchesBegan:withEvent:");
     [self.view endEditing:YES];
@@ -46,6 +52,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -69,24 +76,29 @@
 }
 - (IBAction)goBack:(id)sender
 {
+    [MapContainer removeMapsInContainers];
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)testUpload:(id)sender
 {
+    [self load];
+}
+
+- (void) load
+{
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    [self.loadingIndicator startAnimating];
     
     if([NetworkUtils isNetworkAvailable]){
         
         // Start the maps fetching on a background thread
+        [self.loadingIndicator startAnimating];
         [self performSelectorInBackground:@selector(loadNewMaps) withObject:nil];
         [delegate.webClient fetchAllMapsFromDatabase];
-
+        
     } else { // Internet not connected, display error
         self.mapsTextView.text = @"Vous n'etes pas connecte a Internet!";
     }
-    
 }
 
 - (void) loadNewMaps
@@ -120,6 +132,7 @@
         
         // Reset to NO so we can load a new map array when the user switches views.
         [MapContainer getInstance].isMapsInfosLoaded = NO;
+        [MapContainer removeMapsInContainers];
     }
 }
 

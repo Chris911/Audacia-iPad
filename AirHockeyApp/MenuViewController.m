@@ -43,6 +43,7 @@
 {
     [super viewDidLoad];
     isSoundEnabled = NO;
+
 }
 
 #pragma mark - View lifecycle
@@ -60,7 +61,8 @@
     if(isSoundEnabled){
         [AudioInterface startBackgroundMusic];
     }
-
+    
+    [MapContainer removeMapsInContainers];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -63,6 +63,13 @@
     return self;
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    [self dismissModalViewControllerAnimated:YES];
+    [MapContainer getInstance].maps = nil;
+}
+
 - (void)dealloc
 {
     //it's a good idea to set these to nil here to avoid
@@ -85,9 +92,6 @@
 {
     [super viewDidLoad];
     carousel.type = iCarouselTypeInvertedCylinder;
-    //[self load];
-
-
 }
 
 - (void)viewDidUnload

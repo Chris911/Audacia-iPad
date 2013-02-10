@@ -15,14 +15,14 @@
 @property BOOL multipleNodesSelected;
 
 // Add node to rendering tree
-- (void) addNodeToTree:(Node*) node;
-- (void) addNodeToTreeWithInitialPosition:(Node*) node:(Vector3D)pos;
+- (void) addNodeToTree:(Node*)node ;
+- (void) addNodeToTreeWithInitialPosition:(Node*)node :(Vector3D) pos;
 - (void) addStickToTreeWithInitialPosition:(Vector3D)pos;
 - (void) addPuckToTreeWithInitialPosition:(Vector3D)pos;
 
 // Select node using its position
 - (BOOL) selectNodeByPosition:(Vector3D) position;
-- (BOOL) selectNodesByZone:(CGPoint)beginPoint:(CGPoint)endPoint;
+- (BOOL) selectNodesByZone:(CGPoint)beginPoint :(CGPoint)endPoint;
 
 // Modify tree
 - (BOOL) removeSelectedNodes;
@@ -35,7 +35,7 @@
 
 // Transforms on selected nodes
 - (void) rotateSingleNode:(Rotation3D) deltaAngle;
-- (void) rotateMultipleNodes:(CGPoint) currentPoint:(CGPoint)lastPoint;
+- (void) rotateMultipleNodes:(CGPoint) currentPoint :(CGPoint)lastPoint;
 - (void) scaleSelectedNodes:(float) deltaScale;
 - (BOOL) translateSingleNode:(CGPoint) deltaPoint;
 - (BOOL) translateMultipleNodes:(CGPoint) deltaPoint;

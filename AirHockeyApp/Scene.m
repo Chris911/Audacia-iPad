@@ -25,10 +25,10 @@ static Scene *scene = NULL;
 // Singleton of a rendering tree
 + (void)initialize
 {
-    static BOOL initialized = NO;
-    if(!initialized)
+    //static BOOL initialized = NO;
+    if(scene == nil)
     {
-        initialized = YES;
+        //initialized = YES;
         scene = [[Scene alloc]init];
         RenderingTree* tempTree = [[RenderingTree alloc]init];
         scene.renderingTree = tempTree;

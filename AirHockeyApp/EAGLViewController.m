@@ -57,7 +57,6 @@ enum {
 
 @interface EAGLViewController ()
 {
-    BOOL firstTimeBuilding;
     BOOL cameraViewIsHidden;
     BOOL settingViewIsHidden;
     BOOL anyNodeSelected;
@@ -111,7 +110,6 @@ enum {
     animationFrameInterval = 1;
     self.displayLink = nil;
     
-    firstTimeBuilding       = YES;
     currentTransformState   = STATE_TRANSFORM_TRANSLATION;
     currentTouchesMode      = TOUCH_CAMERA_MODE;
     activeObjectTag         = -1;
@@ -128,13 +126,6 @@ enum {
 //        p.isActive = YES;
 //        [particles addObject:p];
 //    }
-    
-    
-    // Initialize Scene and rendring tree
-    [Scene getInstance];
-    
-    // Init from default map
-    [Scene loadDefaultElements];
 }
 
 - (void)dealloc
@@ -179,13 +170,6 @@ enum {
 {
     [self startAnimation];
     [super viewWillAppear:animated];
-    
-    // Load default elements only when switching to this EAGL View
-    if(!firstTimeBuilding) {
-        [self setupView];
-        [Scene loadDefaultElements];
-    }
-    firstTimeBuilding = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -320,8 +304,10 @@ enum {
                     //[self.camera orthoTranslate:positionCourante:positionPrecedente];
                     [[Scene getInstance].renderingTree deselectAllNodes];
                     
-                    currentTouchesMode = TOUCH_CAMERA_MODE;
-                    [self slideOutAnimationView:self.ParametersView];
+                    if(self.camera.isPerspective == NO){
+                        currentTouchesMode = TOUCH_CAMERA_MODE;
+                        [self slideOutAnimationView:self.ParametersView];
+                    }
                 }
                 
             // If a view other than EAGLView is touched, we want
@@ -473,6 +459,11 @@ enum {
     }
 }
 
+- (IBAction)togglePerspective:(id)sender
+{
+    self.camera.isPerspective = !self.camera.isPerspective;
+}
+
 - (IBAction)ExitProgram:(id)sender
 {
     [self stopAnimation];
@@ -590,7 +581,15 @@ enum {
 #pragma mark - Core GL Methods
 -(void)setupView
 {
+    // Load the scene objects
+    [self loadScene];
+    
+    // Prepare the GL View
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_COLOR_MATERIAL);
+    
 	glMatrixMode(GL_PROJECTION);
     
     //FIXME: Remove or change for lights
@@ -609,27 +608,10 @@ enum {
 
 - (void)drawFrame
 {
-
     [(EAGLView *)self.view setFramebuffer];
-      // Perspective Mode
-//    glMatrixMode(GL_PROJECTION);
-//    gluPerspective(60, LARGEUR_FENETRE/HAUTEUR_FENETRE, 0.1, 2000);
-//    gluLookAt(camPosX, camPosY, -50,
-//              0, 0, 0,
-//              0, 1, 0);
-
     
-//    glMatrixMode(GL_PROJECTION);
-//    glLoadIdentity();
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//    // Orthogonal Mode
-//    glOrthof(camPosX -(LARGEUR_FENETRE / 2)*zoomFactor, camPosX + (LARGEUR_FENETRE / 2)*zoomFactor,
-//             -(HAUTEUR_FENETRE / 2)*zoomFactor, (HAUTEUR_FENETRE / 2)*zoomFactor, -100, 100);
-//	glMatrixMode(GL_MODELVIEW);
+    // Set the camera either in ortho or perspective mode
     [self.camera setCamera];
-    
-    glLoadIdentity();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     // Renders the whole rendring tree
     [[Scene getInstance].renderingTree render];
@@ -638,13 +620,6 @@ enum {
     if(elasticRect.isActive){
         [elasticRect render];
     }
-    
-    // Render the particles
-//    for(Particle *p in particles){
-//        if(p.isActive){
-//            [p render];
-//        }
-//    }
     
     [(EAGLView *)self.view presentFramebuffer];
 }
@@ -763,7 +738,16 @@ enum {
     [self.camera orthoZoom:factor];
 }
 
-#pragma mark - UI Elements initialization
+#pragma mark - Elements initialization
+- (void) loadScene
+{
+    // Initialize Scene and rendring tree
+    [Scene getInstance];
+    [[Scene getInstance].renderingTree emptyRenderingTree];
+    [Scene loadDefaultElements];
+    
+}
+
 - (void) prepareRecognizers
 {
     // SwipeGesture recognizers
@@ -948,8 +932,6 @@ enum {
         WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
         NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
         // Upload data to server
-        
-        
         [webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
         [webClient release];
     }
@@ -959,6 +941,8 @@ enum {
 {
     [self.camera replaceCamera];
 }
+
+
 
 
 

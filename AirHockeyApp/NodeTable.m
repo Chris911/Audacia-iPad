@@ -9,18 +9,21 @@
 #import "Scene.h"
 #import "NodeTable.h"
 #import "NodeTableEdge.h"
+#import "Texture2DUtil.h"
 
 @interface NodeTable()
 {
     NodeTableEdge *edges[8];
-    CGPoint limits[4];
-    GLfloat topColors[40];
-    GLfloat borderColors[40];
-    Border3D *borders[8];
+    CGPoint     limits[4];
+    GLfloat     topColors[40];
+    GLfloat     borderColors[40];
+    Border3D    *borders[8];
+    GLuint      texture[1];
+
 }
 @end
 
-@implementation NodeTable 
+@implementation NodeTable
 
 - (id) init
 {
@@ -33,6 +36,13 @@
         self.isScalable = NO;
         [self initTableEdges];
         [self initColors];
+        
+        glGenTextures(1, &texture[0]);
+        glBindTexture(GL_TEXTURE_2D, texture[0]);
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+        [Texture2DUtil load2DTextureFromName:@"table"];
     }
     return self;
 }
@@ -47,12 +57,14 @@
     for (int i = 0; i < NB_OF_TABLE_EDGES; i++) {
         [edges[i] render];
     }
-    glDisable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);
     glPushMatrix();
     
     // Draw the top surface 
     [self drawTopSurface];
     
+    glDisable(GL_TEXTURE_2D);
+
     // Draw the borders
     [self drawBorders];
     
@@ -187,15 +199,39 @@
         edges[0].position.x,edges[0].position.y,TABLE_DEPTH
     };
     
+    GLfloat topTextures[] = {
+        //            * Table's surface *
+        0.5, 0.5,        //mid
+        0, 1,           //0
+        0.5, 1,         //1
+        1, 1,           //2
+        1, 0.5,         //4
+        1, 0,           //7
+        0.5, 0,         //6
+        0,0,            //5
+        0,0.5,          //3
+        0,1             //0
+    };
+    glNormal3f(0.0f, 0.0f, 1.0f);
+    
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
+    
+    // Texture Binding
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
+
     glVertexPointer(3, GL_FLOAT, 0, topVertices);
-    glColorPointer(4, GL_FLOAT, 0, topColors);
+    glTexCoordPointer(2, GL_FLOAT, 0, topTextures);
     
     glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
     
     glDrawArrays(GL_TRIANGLE_FAN, 0, 2+NB_OF_TRIANGLES);
     glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 // Draw the borders of the table.  Currently only a line
@@ -251,6 +287,14 @@
     glDrawArrays(GL_LINE_LOOP, 0, 4);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
+}
+
+- (void) dealloc
+{
+    [super dealloc];
+    for (int i = 0; i < 8; i++) {
+        [borders[i] release];
+    }
 }
 
 @end

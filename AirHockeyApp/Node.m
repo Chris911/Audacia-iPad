@@ -52,7 +52,6 @@ const float DEFAULT_ANGLE_VALUE = 0.0f;
 - (void) render
 {
     // Virtual - Do not put anything here
-
 }
 
 - (void) setRotation:(Rotation3D)rotation
@@ -94,5 +93,13 @@ const float DEFAULT_ANGLE_VALUE = 0.0f;
     // TODO: Implement hash function using type and time
     NSString* emptyString = @"";
     return emptyString;
+}
+
+- (void) dealloc
+{
+    [super dealloc];
+    [xmlType release];
+    [type release];
+    [hash release];
 }
 @end

@@ -42,6 +42,7 @@ static MapContainer *mapContainer = NULL;
 + (void) assignNewMaps:(NSMutableArray*)newMaps
 {
     if(newMaps != nil){
+        [mapContainer.maps removeAllObjects];
         mapContainer.maps = newMaps;
         mapContainer.isMapsInfosLoaded = YES;
     }
@@ -49,13 +50,12 @@ static MapContainer *mapContainer = NULL;
 
 + (BOOL) removeMapsInContainers
 {
-    mapContainer.maps = nil;
+    [mapContainer.maps removeAllObjects];
     return YES;
 }
 
 + (BOOL) allMapImagesLoaded
 {
-    
     for(Map* m in mapContainer.maps)
     {
         CGImageRef cgref = [m.image CGImage];

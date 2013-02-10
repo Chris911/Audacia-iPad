@@ -87,7 +87,7 @@
     }
 }
 
-- (Vector3D) makeRandomVectorWithRange:(int)maxValue:(int)minValue
+- (Vector3D) makeRandomVectorWithRange:(int)maxValue : (int)minValue 
 {
     float rndValue1 = (((float)arc4random()/0x100000000)*(maxValue-minValue)+minValue);
     float rndValue2 = (((float)arc4random()/0x100000000)*(maxValue-minValue)+minValue);

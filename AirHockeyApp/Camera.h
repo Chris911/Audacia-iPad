@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "OpenGLWaveFrontCommon.h"
+#import "GluLookAt.h"
+#import "GluPerspective.h"
 
 @interface Camera : NSObject
 
@@ -30,13 +32,13 @@
 
 - (void) setCamera;
 - (void) assignWorldPosition:(CGPoint)screenPos;
-- (void) orthoTranslate:(CGPoint)newPosition:(CGPoint)lastPosition;
+- (void) orthoTranslate:(CGPoint)newPosition :(CGPoint)lastPosition ;
 - (void) orthoZoom:(float) factor;
 - (CGPoint)convertFromScreenToWorld:(CGPoint)pos;
 - (CGPoint) convertToWorldPosition:(CGPoint)pos;
-- (CGPoint) calculateVelocity:(CGPoint) lastTouch:(CGPoint) currentTouch;
+- (CGPoint) calculateVelocity:(CGPoint)lastTouch :(CGPoint) currentTouch ;
 - (void) replaceCamera;
 - (void) resetCamera;
-- (void) zoomInFromRect:(CGPoint)begin:(CGPoint)end;
+- (void) zoomInFromRect:(CGPoint)begin :(CGPoint)end ;
 
 @end

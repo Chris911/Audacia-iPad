@@ -26,7 +26,7 @@ float matDiffuse1[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 
         NSString *path = [[NSBundle mainBundle] pathForResource:@"pommeau" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];
-        Vertex3D position = Vertex3DMake(0, 0, 10.0);
+        Vertex3D position = Vertex3DMake(0, 0, 1.0);
         self.model = theObject;
         self.position = position;
         self.isScalable = NO;

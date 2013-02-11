@@ -144,8 +144,7 @@
     if (view == nil)
     {
         view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f, 384.0f)] autorelease];
-        ((UIImageView *)view).image = map.image;
-        view.contentMode = UIViewContentModeScaleAspectFit;
+        //view.contentMode = UIViewContentModeScaleAspectFit;
         //view.contentMode = UIViewContentModeCenter;
         CGRect frame = view.frame;
         frame.origin.y += 225;
@@ -196,7 +195,8 @@
     ((UIImageView *)ratingImageView).image = [UIImage imageNamed:imagePath];
     [view addSubview:ratingImageView];
 
-    ((UIImageView *)view).image = map.image;
+    //Assign image to view but first resize image in background thread
+    [self useImage:map.image :(UIImageView *)view];
     
     return view;
 }
@@ -386,6 +386,26 @@
     for(Map* m in [MapContainer getInstance].maps){
         [delegate.webClient fetchMapImageWithName:m];
     }
+}
+
+- (void)useImage:(UIImage *)image :(UIImageView *) view
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Create a graphics image context
+    CGSize newSize = CGSizeMake(512, 384);
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    view.image = newImage;
+    
+    [pool release];
 }
 
 @end

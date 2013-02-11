@@ -156,8 +156,6 @@
 		04D9C3F516BCB217005C6197 /* CarouselTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarouselTestView.m; sourceTree = "<group>"; };
 		04DF182F16ACAC6400339EDB /* WebClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebClient.h; sourceTree = "<group>"; };
 		04DF183016ACAC6400339EDB /* WebClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebClient.m; sourceTree = "<group>"; };
-		04F3B01816C0B23C00532EF7 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		04F3B01916C0B23C00532EF7 /* page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page.png; sourceTree = "<group>"; };
 		04F43C4D16B038D00017756F /* booster.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = booster.blend; sourceTree = "<group>"; };
 		04F43C4E16B038D00017756F /* pommeau.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = pommeau.blend; sourceTree = "<group>"; };
 		04F43C4F16B038D00017756F /* portal.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = portal.blend; sourceTree = "<group>"; };
@@ -650,8 +648,6 @@
 			isa = PBXGroup;
 			children = (
 				04BDB84016C41A1300648B51 /* Stars */,
-				04F3B01816C0B23C00532EF7 /* background.png */,
-				04F3B01916C0B23C00532EF7 /* page.png */,
 				A8F13CB716B027F300CB5885 /* SettingsButton1.png */,
 				A8F13CB816B027F300CB5885 /* SettingsImage1.png */,
 				A8F13CA816AF190E00CB5885 /* SideBar2.png */,

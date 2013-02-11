@@ -12,6 +12,7 @@
 #import "Scene.h"
 #import "Session.h" 
 #import "AudioInterface.h"
+#import "LoginViewController.h"
 
 
 @interface MenuViewController()
@@ -137,6 +138,17 @@
 //    } else {
 //        [self toggleConnectionView];
 //    }
+}
+
+- (IBAction)showLoginView:(id)sender
+{
+    if(!isConnectionViewVisible) {
+        LoginViewController* login_vc = [[[LoginViewController alloc]init]autorelease];
+        login_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:login_vc animated:YES completion:nil];
+    } else {
+        [self toggleConnectionView];
+    }
 }
 
 // Show or hide the connection view

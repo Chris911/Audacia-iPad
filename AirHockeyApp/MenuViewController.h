@@ -15,6 +15,7 @@
 - (IBAction)showConnectionView:(id)sender;
 - (IBAction)toggleSound:(id)sender;
 - (IBAction)showCarouselView:(id)sender;
+- (IBAction)showLoginView:(id)sender;
 
 @property (retain, nonatomic) IBOutlet UIView *ConnectionView;
 @property (retain, nonatomic) IBOutlet UITextField *UserNameTextField;

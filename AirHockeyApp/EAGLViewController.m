@@ -25,23 +25,29 @@
 // Global constants
 
 // Touches modes
-int const TOUCH_TRANSFORM_MODE = 0;
-int const TOUCH_CAMERA_MODE = 1;
-int const TOUCH_ELASTIC_MODE = 2;
+int const TOUCH_TRANSFORM_MODE  = 0;
+int const TOUCH_CAMERA_MODE     = 1;
+int const TOUCH_ELASTIC_MODE    = 2;
+int const TOUCH_HALFLIFE_MODE   = 3;
 
 // UI Views tags
-int const CAMERAVIEW_TAG      = 100;
-int const PARAMETERSVIEW_TAG  = 200;
-int const TRANSFORMVIEW_TAG   = 300;
-int const OBJECTSVIEW_TAG     = 400;
-int const SETTINGSVIEW_TAG    = 500;
+int const CAMERAVIEW_TAG        = 100;
+int const PARAMETERSVIEW_TAG    = 200;
+int const TRANSFORMVIEW_TAG     = 300;
+int const OBJECTSVIEW_TAG       = 400;
+int const SETTINGSVIEW_TAG      = 500;
+int const LJOYSTICKVIEW_TAG     = 600;
+int const RJOYSTICKVIEW_TAG     = 700;
+int const LEFTTIPVIEW_TAG       = 800;
+int const RIGHTTIPVIEW_TAG      = 900;
+
 
 // Drag and Drop views tags
-int const PORTALVIEW_TAG      = 10;
-int const BOOSTERVIEW_TAG     = 20;
-int const MURETVIEW_TAG       = 30;
-int const PUCKVIEW_TAG        = 40;
-int const POMMEAUVIEW_TAG     = 50;
+int const PORTALVIEW_TAG        = 10;
+int const BOOSTERVIEW_TAG       = 20;
+int const MURETVIEW_TAG         = 30;
+int const PUCKVIEW_TAG          = 40;
+int const POMMEAUVIEW_TAG       = 50;
 
 // Uniform index.
 enum {
@@ -63,7 +69,7 @@ enum {
     BOOL settingViewIsHidden;
     BOOL anyNodeSelected;
     
-    BOOL cameraTranslation;
+    BOOL isHalfLifeCamActive;
     
     // Defines the current transformation state (translate,rotation or scale)
     int  currentTransformState;
@@ -82,6 +88,8 @@ enum {
     Skybox* skybox;
     
     Node *selectedNode;
+    CGPoint leftJoystickCenter;
+    CGPoint rightJoystickCenter;
 }
 
 @property (nonatomic, retain) EAGLContext *context;
@@ -118,6 +126,13 @@ enum {
     currentTransformState   = STATE_TRANSFORM_TRANSLATION;
     currentTouchesMode      = TOUCH_CAMERA_MODE;
     activeObjectTag         = -1;
+    isHalfLifeCamActive     = NO;
+    
+    leftJoystickCenter = CGPointMake(self.leftJoystick.frame.size.width/2,
+                                      self.leftJoystick.frame.size.height/2);
+    
+    rightJoystickCenter = CGPointMake(self.rightJoystick.frame.size.width/2,
+                                      self.rightJoystick.frame.size.height/2);
  
     // Create the camera
     self.camera = [[[Camera alloc]init]autorelease];
@@ -126,14 +141,7 @@ enum {
     elasticRect = [[ElasticRect alloc]init];
     
     // Create the skybox
-    skybox = [[Skybox alloc]initWithSize:100.0f];
-        
-//    for(int i = 0; i < 30; i++) {
-//        Particle *p = [[Particle alloc]init];
-//        p.position = Vector3DMake(0, 0, 0);
-//        p.isActive = YES;
-//        [particles addObject:p];
-//    }
+    skybox = [[Skybox alloc]initWithSize:400.0f];
 }
 
 - (void)dealloc
@@ -171,6 +179,10 @@ enum {
     [_angleSlider release];
     [_sizeLabel release];
     [_angleLable release];
+    [_leftJoystick release];
+    [_rightJoystick release];
+    [_leftJoystickTip release];
+    [_rightJoystickTip release];
     [super dealloc];
 }
 
@@ -220,6 +232,10 @@ enum {
     [self setAngleSlider:nil];
     [self setSizeLabel:nil];
     [self setAngleLable:nil];
+    [self setLeftJoystick:nil];
+    [self setRightJoystick:nil];
+    [self setLeftJoystickTip:nil];
+    [self setRightJoystickTip:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -285,9 +301,9 @@ enum {
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    for(UITouch* touch in touches) {
+    for(UITouch* touch in [event allTouches]) {
         CGPoint positionCourante = [touch locationInView:self.view];
-
+        
         // Elastic rectangle mode (Zoom or selection).  Bypass object transformations
         // or Drag and Drop modes.
         if(elasticRect.isActive) {
@@ -326,17 +342,20 @@ enum {
                     [[Scene getInstance].renderingTree deselectAllNodes];
                     
                     currentTouchesMode = TOUCH_CAMERA_MODE;
-                    if(self.camera.isPerspective == NO){
+                    //if(self.camera.isPerspective == NO){
                         [self slideOutAnimationView:self.ParametersView];
-                    }
+                    //}
                 }
                 
-            // If a view other than EAGLView is touched, we want
-            // to handle the drag and drop functionnality
+            // If a view other than EAGLView is touched
             } else {
-                [[Scene getInstance].renderingTree deselectAllNodes];
-                [self handleFirstTouchOnView:touch.view];
-                currentTouchesMode = TOUCH_TRANSFORM_MODE;
+                if(isHalfLifeCamActive){
+                    [self handleFirstTouchOnView:touch.view];
+                } else {
+                    [[Scene getInstance].renderingTree deselectAllNodes];
+                    [self handleFirstTouchOnView:touch.view];
+                    currentTouchesMode = TOUCH_TRANSFORM_MODE;
+                }
             }
         }
     }
@@ -344,8 +363,9 @@ enum {
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if ([[event allTouches] count] >= 1){
-        UITouch *touch = [[event allTouches] anyObject];
+    for(UITouch* touch in [event allTouches]){        
+        NSLog(@"%i",[[event allTouches] count]);
+
         CGPoint positionCourante = [touch locationInView:self.view];
         CGPoint positionPrecedente = [touch previousLocationInView:self.view];
         
@@ -397,7 +417,6 @@ enum {
             // Move camera in perspective mode
             if(self.camera.isPerspective){
                 //[self.camera strafeCamera:positionCourante:positionPrecedente];
-                [self.camera assignAnglesFromScreenPoints:positionCourante:positionPrecedente];
 
             } else {
                 [self.camera orthoTranslate:positionCourante:positionPrecedente];
@@ -405,7 +424,15 @@ enum {
             
         } else if (currentTouchesMode == TOUCH_ELASTIC_MODE) { // Elastic Rectangle mode
             elasticRect.endPosition = [self.camera convertToWorldPosition:positionCourante];
+            
+        } else if (currentTouchesMode == TOUCH_HALFLIFE_MODE) { // Half-Life camera mode
+            if(positionCourante.x < LARGEUR_ECRAN/2){
+                [self handleLeftJoystickMovement:touch]; //FIXME: HELP!!!!!!
+            } else {
+                [self handleRightJoystickMovement:touch];
+            }
         }
+        
     }
 }
 
@@ -423,8 +450,60 @@ enum {
             [self slideInAnimationView:self.ParametersView];
         }
         [elasticRect reset];
+        
+    } else if(currentTouchesMode == TOUCH_HALFLIFE_MODE) {
+        [self replaceJoysticks];
     }
     selectedNode = nil; // invalidate pointer
+}
+
+#pragma mark - Joystick methods
+
+// Left joystick movements, Camera strafe
+- (void) handleLeftJoystickMovement:(UITouch*)touch
+{
+    CGPoint location = [touch locationInView:self.leftJoystick];
+    
+    // Strafe cam
+    float radius = self.leftJoystick.frame.size.width/2;
+    CGPoint delta = CGPointMake((location.x - leftJoystickCenter.x)/20, (location.y - leftJoystickCenter.y)/20);
+    float distanceTipToCenter = (delta.x * delta.x) + (delta.y * delta.y);
+    
+    if( distanceTipToCenter <= radius){
+        [self.camera strafeCamera:delta];
+        [self.view viewWithTag:activeObjectTag].center = location;
+    } else {
+        float angle = atan2(delta.y, delta.x);
+        [self.view viewWithTag:activeObjectTag].center = CGPointMake(128 + radius * cosf(angle),128 + radius*sinf(angle));
+    }
+}
+
+// Right joystick movements, Camera rotation
+- (void) handleRightJoystickMovement:(UITouch*)touch
+{
+    CGPoint location = [touch locationInView:self.rightJoystick];
+    
+    // Rotate cam
+    CGPoint delta = CGPointMake((location.x - rightJoystickCenter.x)/20, (location.y - rightJoystickCenter.y)/20);
+    float radius = self.rightJoystick.frame.size.width/2;
+    float distanceTipToCenter = (delta.x * delta.x) + (delta.y * delta.y);
+    
+    if( distanceTipToCenter <= radius){
+        [self.camera rotateCamera:delta];
+        [self.view viewWithTag:activeObjectTag].center = location;
+    } else {
+        float angle = atan2(delta.y, delta.x);
+        [self.view viewWithTag:activeObjectTag].center = CGPointMake(128 + radius * cosf(angle),128 + radius*sinf(angle));
+    }
+}
+
+- (void) replaceJoysticks
+{
+    if(activeObjectTag == LEFTTIPVIEW_TAG) {
+        [self.view viewWithTag:activeObjectTag].center =  leftJoystickCenter;
+    } else if(activeObjectTag == RIGHTTIPVIEW_TAG) {
+        [self.view viewWithTag:activeObjectTag].center =  rightJoystickCenter;
+    }
 }
 
 #pragma mark - Button methods
@@ -503,7 +582,10 @@ enum {
 
 - (IBAction)togglePerspective:(id)sender
 {
-    //[self.camera rotateEyeOnAxisXY:30 :30];
+    if(self.camera.isPerspective){
+        [self slideOutAnimationView: self.leftJoystick];
+        [self slideOutAnimationView: self.rightJoystick];
+    }
     self.camera.isPerspective = !self.camera.isPerspective;
 }
 
@@ -539,6 +621,21 @@ enum {
     }
 }
 
+- (IBAction)toggleHalfLifeCam:(id)sender
+{
+    if(self.camera.isPerspective){
+        if(!isHalfLifeCamActive){
+            [self hideAllUIElements];
+            [self slideInAnimationView:self.rightJoystick];
+            [self slideInAnimationView:self.leftJoystick];
+        } else {
+            [self slideOutAnimationView:self.rightJoystick];
+            [self slideOutAnimationView:self.leftJoystick];
+        }
+        isHalfLifeCamActive = !isHalfLifeCamActive;
+    }
+}
+
 #pragma mark - Slider action methods
 - (IBAction)angleSliderChanged:(id)sender
 {
@@ -552,7 +649,7 @@ enum {
     [[Scene getInstance].renderingTree scaleBySliderSelectedNodes:scaleValue];
 }
 
-#pragma mark - Drag And Drop function
+#pragma mark - Gesture functions
 
 // Assign the view type (ex : PortalView) so that
 // we know what object to add next
@@ -560,62 +657,38 @@ enum {
 {
     if(view.tag > 0) {
         activeObjectTag = view.tag;
+        
+        if(activeObjectTag == LEFTTIPVIEW_TAG || activeObjectTag == RIGHTTIPVIEW_TAG){
+            currentTouchesMode = TOUCH_HALFLIFE_MODE;
+        }
     } else {
         NSLog(@"Invalid Tag"); 
     }
 }
 
 // Drag and drop objects on the table by using UIView
-- (void) dragAndDrop:(UIPanGestureRecognizer *) gesture
+- (void) panGestureAction:(UIPanGestureRecognizer *) gesture
 {
     CGPoint location = [gesture locationInView:self.view];
+
     if ([gesture state] == UIGestureRecognizerStateBegan) {
         
         // Drag started
         [self.view viewWithTag:activeObjectTag].center = location;
         [self slideOutAnimationView:self.ParametersView];
-        
+
     } else if ([gesture state] == UIGestureRecognizerStateChanged) {
         
         // Drag moved
         [self.view viewWithTag:activeObjectTag].center = location;
-        
+
     } else if ([gesture state] == UIGestureRecognizerStateEnded) {
         
         // Drag completed
         [self.view viewWithTag:activeObjectTag].center = location;
         [self.camera assignWorldPosition:location];
         
-        // Check if last touch location is legal
-        if([Scene checkIfAddingLocationInBounds:CGPointMake(self.camera.worldPosition.x, self.camera.worldPosition.y)]){
-            // Add a specific Node to the scene and replace the dragged view
-            //FIXME: Z positions can break the adding
-            if(activeObjectTag == PORTALVIEW_TAG) {
-                NodePortal *portal = [[[NodePortal alloc]init]autorelease];
-                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(self.camera.worldPosition.x,
-                                                                                                         self.camera.worldPosition.y,
-                                                                                                         1)];
-            } else if(activeObjectTag == BOOSTERVIEW_TAG) {
-                NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
-                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
-                                                                                                          self.camera.worldPosition.y,
-                                                                                                          2)];
-            } else if(activeObjectTag == MURETVIEW_TAG) {
-                NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
-                [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
-                                                                                                          self.camera.worldPosition.y,
-                                                                                                          1)];
-            } else if(activeObjectTag == PUCKVIEW_TAG) {
-                [[Scene getInstance].renderingTree addPuckToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
-                                                                                                 self.camera.worldPosition.y,
-                                                                                                 1)];
-                
-            } else if(activeObjectTag == POMMEAUVIEW_TAG) {
-                [[Scene getInstance].renderingTree addStickToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
-                                                                                                  self.camera.worldPosition.y,
-                                                                                                  1)];
-            }
-        }
+        [self addDragAndDropObject];
         
         //Finally, replace the views to their distinct origins
         if(activeObjectTag == PORTALVIEW_TAG) {
@@ -628,8 +701,43 @@ enum {
             [self.view viewWithTag:activeObjectTag].center =  self.PuckImageView.center;
         } else if(activeObjectTag == POMMEAUVIEW_TAG) {
             [self.view viewWithTag:activeObjectTag].center =  self.PommeauImageView.center;
+        } 
+    }
+}
+
+- (void) addDragAndDropObject
+{
+    // Check if last touch location is legal
+    if([Scene checkIfAddingLocationInBounds:CGPointMake(self.camera.worldPosition.x, self.camera.worldPosition.y)]){
+        // Add a specific Node to the scene and replace the dragged view
+        //FIXME: Z positions can break the adding
+        if(activeObjectTag == PORTALVIEW_TAG) {
+            NodePortal *portal = [[[NodePortal alloc]init]autorelease];
+            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(self.camera.worldPosition.x,
+                                                                                                     self.camera.worldPosition.y,
+                                                                                                     1)];
+        } else if(activeObjectTag == BOOSTERVIEW_TAG) {
+            NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
+            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
+                                                                                                      self.camera.worldPosition.y,
+                                                                                                      2)];
+        } else if(activeObjectTag == MURETVIEW_TAG) {
+            NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
+            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
+                                                                                                      self.camera.worldPosition.y,
+                                                                                                      1)];
+        } else if(activeObjectTag == PUCKVIEW_TAG) {
+            [[Scene getInstance].renderingTree addPuckToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
+                                                                                             self.camera.worldPosition.y,
+                                                                                             1)];
+            
+        } else if(activeObjectTag == POMMEAUVIEW_TAG) {
+            [[Scene getInstance].renderingTree addStickToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
+                                                                                              self.camera.worldPosition.y,
+                                                                                              1)];
         }
     }
+
 }
 
 #pragma mark - Core GL Methods
@@ -694,28 +802,36 @@ enum {
         [UIView animateWithDuration:0.1 delay: 0.0 options: UIViewAnimationCurveEaseOut
              animations:^{
                  view.center = CGPointMake(view.center.x, HAUTEUR_ECRAN + view.frame.size.height/2);
-                 
              }
              completion:nil];
     } else if(view.tag == TRANSFORMVIEW_TAG){
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
                              view.center = CGPointMake(TRANSFORMVIEW_INITIAL_POSITION, view.center.y);
-                             
                          }
                          completion:nil];
     } else if(view.tag == OBJECTSVIEW_TAG){
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
                              view.center = CGPointMake(OBJECTVIEW_INITIAL_POSITION, view.center.y);
-                             
                          }
                          completion:nil];
     } else if(view.tag == SETTINGSVIEW_TAG){
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
                              view.center = CGPointMake(1024 - view.frame.size.width/2, HAUTEUR_ECRAN - view.frame.size.height/2);
-                             
+                         }
+                         completion:nil];
+    } else if(view.tag == LJOYSTICKVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(-512,view.center.y);
+                         }
+                         completion:nil];
+    } else if(view.tag == RJOYSTICKVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(1024 + 512,view.center.y);
                          }
                          completion:nil];
     }
@@ -759,7 +875,28 @@ enum {
                              
                          }
                          completion:nil];
+    } else if(view.tag == LJOYSTICKVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(250,view.center.y);
+                         }
+                         completion:nil];
+    } else if(view.tag == RJOYSTICKVIEW_TAG){
+        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             view.center = CGPointMake(1024 - 250,view.center.y);
+                         }
+                         completion:nil];
     }
+}
+
+- (void) hideAllUIElements
+{
+    [self slideOutAnimationView:self.ParametersView];
+    [self slideOutAnimationView:self.LeftSlideView];
+    [self slideOutAnimationView:self.TransformView];
+    [self slideInAnimationView:self.SettingsView];
+    [self slideInAnimationView:self.CameraView];
 }
 
 - (void)SwipeLeftSideView:(UITapGestureRecognizer *)recognizer
@@ -841,21 +978,29 @@ enum {
     [pinchGesture release];
     
     // PanGesture recognizer for drag n drop
-    UIPanGestureRecognizer *dndPortal = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
-    UIPanGestureRecognizer *dndBooster = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
-    UIPanGestureRecognizer *dndMuret = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
-    UIPanGestureRecognizer *dndPuck = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
-    UIPanGestureRecognizer *dndPommeau = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDrop:)];
+    UIPanGestureRecognizer *dndPortal = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
+    UIPanGestureRecognizer *dndBooster = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
+    UIPanGestureRecognizer *dndMuret = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
+    UIPanGestureRecognizer *dndPuck = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
+    UIPanGestureRecognizer *dndPommeau = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
+    UIPanGestureRecognizer *dragLjoystick = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
+    UIPanGestureRecognizer *dragRjoystick = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
+
     [self.PortalView addGestureRecognizer:dndPortal];
     [self.BoosterView addGestureRecognizer:dndBooster];
     [self.MuretView addGestureRecognizer:dndMuret];
     [self.PuckView addGestureRecognizer:dndPuck];
     [self.PommeauView addGestureRecognizer:dndPommeau];
+    //[self.leftJoystickTip addGestureRecognizer:dragLjoystick];
+    //[self.rightJoystickTip addGestureRecognizer:dragRjoystick];
+
     [dndBooster release];
     [dndPortal release];
     [dndMuret release];
     [dndPuck release];
     [dndPommeau release];
+    [dragLjoystick release];
+    [dragRjoystick release];
 }
 
 - (void) prepareAdditionalViews
@@ -873,7 +1018,8 @@ enum {
     self.TransformView.center = CGPointMake(TRANSFORMVIEW_INITIAL_POSITION,self.TransformView.center.y);
     self.SettingsView.center = CGPointMake(1024 + self.SettingsView.frame.size.width,
                                          HAUTEUR_ECRAN + self.SettingsView.frame.size.height);
-
+    self.leftJoystick.center = CGPointMake(-512, 540);
+    self.rightJoystick.center = CGPointMake(1024 + 512, 540);
 }
 
 #pragma mark - Reset table utility
@@ -894,7 +1040,9 @@ enum {
 - (void) modifyUIParametersValues:(Node*)node 
 {
     if(![node.type isEqualToString:@"EDGE"]){
-        [self slideInAnimationView:self.ParametersView];
+        if(!isHalfLifeCamActive){ //FIXME: Slide not appropriate
+            [self slideInAnimationView:self.ParametersView];
+        }
     } else {
         [self slideOutAnimationView:self.ParametersView];
     }

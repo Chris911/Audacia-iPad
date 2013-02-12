@@ -72,6 +72,9 @@
 		A83C227B16BEC38F007AA035 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C227A16BEC38F007AA035 /* Particle.m */; };
 		A842302F16BF3A04007F97CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842302E16BF3A04007F97CB /* OpenAL.framework */; };
 		A842303216BF3A1A007F97CB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842303116BF3A1A007F97CB /* AudioToolbox.framework */; };
+		A854C67216CA8EEA00397E33 /* skybox.png in Resources */ = {isa = PBXBuildFile; fileRef = A854C67116CA8EEA00397E33 /* skybox.png */; };
+		A854C67516CA9E5B00397E33 /* joystickBase.png in Resources */ = {isa = PBXBuildFile; fileRef = A854C67316CA9E5B00397E33 /* joystickBase.png */; };
+		A854C67616CA9E5B00397E33 /* joystickTip.png in Resources */ = {isa = PBXBuildFile; fileRef = A854C67416CA9E5B00397E33 /* joystickTip.png */; };
 		A86C08B416C2A68200839C4B /* NodePuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6916AEF7C5006D1FEB /* NodePuck.m */; };
 		A889F22716B067E10008E534 /* booster_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22316B067E10008E534 /* booster_texture.png */; };
 		A889F22816B067E10008E534 /* pommeau_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22416B067E10008E534 /* pommeau_texture.png */; };
@@ -228,6 +231,9 @@
 		A83C227A16BEC38F007AA035 /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
 		A842302E16BF3A04007F97CB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		A842303116BF3A1A007F97CB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A854C67116CA8EEA00397E33 /* skybox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skybox.png; sourceTree = "<group>"; };
+		A854C67316CA9E5B00397E33 /* joystickBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickBase.png; path = Assets/UI/Images/joystickBase.png; sourceTree = "<group>"; };
+		A854C67416CA9E5B00397E33 /* joystickTip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickTip.png; path = Assets/UI/Images/joystickTip.png; sourceTree = "<group>"; };
 		A889F22316B067E10008E534 /* booster_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = booster_texture.png; path = AirHockeyApp/booster_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22416B067E10008E534 /* pommeau_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pommeau_texture.png; path = AirHockeyApp/pommeau_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22516B067E10008E534 /* portal_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = portal_texture.png; path = AirHockeyApp/portal_texture.png; sourceTree = SOURCE_ROOT; };
@@ -543,12 +549,12 @@
 		96378D941472C78200F543EA /* Controleurs */ = {
 			isa = PBXGroup;
 			children = (
-				A8CE920016C9BDBB001CCEBB /* LoginViewController.h */,
 				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
 				96378D951472C7CC00F543EA /* MenuViewController.h */,
 				A83AA9EB16A4D924003388F3 /* BetaViewController.h */,
 				04D9C3F416BCB217005C6197 /* CarouselTestView.h */,
 				A838B77916C2E88500050DDA /* MapsViewController.h */,
+				A8CE920016C9BDBB001CCEBB /* LoginViewController.h */,
 				96378D961472C7CC00F543EA /* MenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
 				A83AA9EC16A4D924003388F3 /* BetaViewController.m */,
@@ -654,6 +660,7 @@
 		A8A4639016C8189E008D173B /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A854C67116CA8EEA00397E33 /* skybox.png */,
 				A8A4639316C8234A008D173B /* border.png */,
 				A8A4639116C8189E008D173B /* table.png */,
 			);
@@ -684,6 +691,8 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A854C67316CA9E5B00397E33 /* joystickBase.png */,
+				A854C67416CA9E5B00397E33 /* joystickTip.png */,
 				A8CE920516C9BDF0001CCEBB /* AudaciaLogo.png */,
 				A8CE920616C9BDF0001CCEBB /* hockey-cup.png */,
 				A8CE920716C9BDF0001CCEBB /* hockey-helmet.png */,
@@ -918,6 +927,9 @@
 				A8CE921216C9BDF0001CCEBB /* login-ice.jpg in Resources */,
 				A8CE921316C9BDF0001CCEBB /* login-icon.png in Resources */,
 				A8CE921416C9BDF0001CCEBB /* login-top-view.png in Resources */,
+				A854C67216CA8EEA00397E33 /* skybox.png in Resources */,
+				A854C67516CA9E5B00397E33 /* joystickBase.png in Resources */,
+				A854C67616CA9E5B00397E33 /* joystickTip.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

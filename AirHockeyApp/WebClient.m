@@ -183,7 +183,7 @@
     [opq addOperation:requestOperation];
 }
 
-- (BOOL) validateLogin:(NSString *)username: (NSString *)password
+- (BOOL) validateLogin:(NSString*)username :(NSString*)password
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             @"login", @"action",

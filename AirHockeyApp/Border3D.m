@@ -136,7 +136,8 @@
 
     glVertexPointer(3, GL_FLOAT, 0, topVertices);
     glEnableClientState(GL_VERTEX_ARRAY);
-    
+    if(glGetError() != 0)
+        NSLog(@"%u",glGetError());
     glDrawArrays(GL_TRIANGLES, 0, 2*3);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);

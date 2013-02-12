@@ -28,6 +28,6 @@
 - (void) uploadMapData:(NSString*)mapName :(NSData *)xmlData :(UIImage*)mapImage;
 - (void) fetchAllMapsFromDatabase;
 - (void) getConfigPaths;
-- (void) fetchMapImageWithName:(Map*) map;
-- (BOOL) validateLogin:(NSString *)username: (NSString *)password;
+- (void) fetchMapImageWithName:(Map*)map;
+- (BOOL) validateLogin:(NSString*)username :(NSString*)password ;
 @end

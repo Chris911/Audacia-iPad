@@ -25,7 +25,7 @@
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
                 
-        [Texture2DUtil load2DTextureFromName:@"table"];
+        [Texture2DUtil load2DTextureFromName:@"skybox"];
         
         self.v1 = Vector3DMake(-size, size, -size);
         self.v2 = Vector3DMake(-size, -size, -size);
@@ -45,13 +45,13 @@
 - (void) render
 {
     glEnable(GL_TEXTURE_2D);
-    glDisable(GL_LIGHTING);
-//    [self renderBottom];
-//    [self renderSideA];
-//    [self renderSideB];
-//    [self renderSideC];
-//    [self renderSideD];
-    glEnable(GL_LIGHTING);
+    //glDisable(GL_LIGHTING);
+    [self renderBottom];
+    [self renderSideA];
+    [self renderSideB];
+    [self renderSideC];
+    [self renderSideD];
+    //glEnable(GL_LIGHTING);
     glDisable(GL_TEXTURE_2D);
 
 }
@@ -74,13 +74,13 @@
     };
     
     GLfloat botTex[] = {
-        0,1,
-        0,0,
-        1,0,
+        0.25, 0.75,
+        0.25, 0.5,
+        0.5,  0.5,
         
-        1,0,
-        1,1,
-        0,1
+        0.5, 0.5,
+        0.5, 0.75,
+        0.25, 0.75
     };
     
     glNormal3f(0, 0, 1);
@@ -91,7 +91,8 @@
     glBindTexture(GL_TEXTURE_2D, texture[0]);
     glTexCoordPointer(2, GL_FLOAT, 0, botTex);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    
+    if(glGetError() != 0)
+        NSLog(@"%u",glGetError());
     glDrawArrays(GL_TRIANGLES, 0, 2*3);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -116,13 +117,13 @@
     };
     
     GLfloat botTex[] = {
-        0,1,
-        0,0,
-        1,0,
+        0.5,  0.75,
+        0.5,  1,
+        0.25, 1,
         
-        1,0,
-        1,1,
-        0,1
+        0.25, 1,
+        0.25, 0.75,
+        0.5,  0.75,
     };
     
     glNormal3f(0, -1, 0);

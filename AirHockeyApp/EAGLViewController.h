@@ -59,6 +59,13 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (retain, nonatomic) IBOutlet UILabel *angleLable;
 
+// Joystick UI elements
+@property (retain, nonatomic) IBOutlet UIView *leftJoystick;
+@property (retain, nonatomic) IBOutlet UIView *rightJoystick;
+@property (retain, nonatomic) IBOutlet UIView *leftJoystickTip;
+@property (retain, nonatomic) IBOutlet UIView *rightJoystickTip;
+
+
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)setupView;
@@ -77,6 +84,7 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)togglePerspective:(id)sender;
 - (IBAction)angleSliderChanged:(id)sender;
 - (IBAction)sizeSliderChanged:(id)sender;
+- (IBAction)toggleHalfLifeCam:(id)sender;
 
 
 

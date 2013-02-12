@@ -10,6 +10,7 @@
 #import "AppDemoAppDelegate.h"
 #import "WebClient.h"
 #import "NetworkUtils.h"
+#import "Session.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define usernameTextBoxTag 0
@@ -105,22 +106,16 @@
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     
     if([NetworkUtils isNetworkAvailable]) {
-        if(self.usernameTextBox.text.length == 0)
-        {
+        if(self.usernameTextBox.text.length == 0) {
             self.errorLabel.text = @"Missing Username";
-        }
-        else if (self.passwordTextBox.text.length == 0)
-        {
+        } else if (self.passwordTextBox.text.length == 0){
             self.errorLabel.text = @"Missing Password";
-        }
-        else
-        {
-            if([delegate.webClient validateLogin:self.usernameTextBox.text :self.passwordTextBox.text])
-            {
+        } else {
+            if([delegate.webClient validateLogin:self.usernameTextBox.text :self.passwordTextBox.text]){
+                [Session getInstance].username = self.usernameTextBox.text;
                 [self dismissModalViewControllerAnimated:YES];
-            }
-            else
-            {
+            } else {
+                [Session getInstance].username = @"Anonymous";
                 self.errorLabel.text = @"Invalid account";
             }
         }
@@ -131,8 +126,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if(textField.tag == usernameTextBoxTag)
-    {
+    if(textField.tag == usernameTextBoxTag) {
         [self.passwordTextBox becomeFirstResponder];
     } else {
        //Do login

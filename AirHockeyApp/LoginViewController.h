@@ -20,6 +20,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *loginButton;
 @property (retain, nonatomic) IBOutlet UIButton *continueAnonButton;
 @property (retain, nonatomic) IBOutlet UILabel *teamAudacityLabel;
+@property (retain, nonatomic) IBOutlet UILabel *errorLabel;
 
 - (IBAction)pressedLoginButton:(id)sender;
 - (IBAction)pressedContinueAnonButton:(id)sender;

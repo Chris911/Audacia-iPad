@@ -7,6 +7,9 @@
 //
 
 #import "LoginViewController.h"
+#import "AppDemoAppDelegate.h"
+#import "WebClient.h"
+#import "NetworkUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define usernameTextBoxTag 0
@@ -97,8 +100,33 @@
     [self toggleConnectionView];
 }
 
-- (IBAction)pressedValidateButton:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+- (IBAction)pressedValidateButton:(id)sender
+{
+    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    
+    if([NetworkUtils isNetworkAvailable]) {
+        if(self.usernameTextBox.text.length == 0)
+        {
+            self.errorLabel.text = @"Missing Username";
+        }
+        else if (self.passwordTextBox.text.length == 0)
+        {
+            self.errorLabel.text = @"Missing Password";
+        }
+        else
+        {
+            if([delegate.webClient validateLogin:self.usernameTextBox.text :self.passwordTextBox.text])
+            {
+                [self dismissModalViewControllerAnimated:YES];
+            }
+            else
+            {
+                self.errorLabel.text = @"Invalid account";
+            }
+        }
+    } else { // Internet not connected, display error
+        [NetworkUtils showNetworkUnavailableAlert];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -123,6 +151,7 @@
     [_loginButton release];
     [_continueAnonButton release];
     [_teamAudacityLabel release];
+    [_errorLabel release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -136,6 +165,7 @@
     [self setLoginButton:nil];
     [self setContinueAnonButton:nil];
     [self setTeamAudacityLabel:nil];
+    [self setErrorLabel:nil];
     [super viewDidUnload];
 }
 

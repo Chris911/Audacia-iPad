@@ -9,6 +9,7 @@
 
 #import "WebClient.h"
 #import "UIImageView+AFNetworking.h"
+#import "Session.h"
 
 @implementation WebClient
 @synthesize AFClient;
@@ -180,6 +181,26 @@
     }];
     NSOperationQueue* opq = [[[NSOperationQueue alloc]init]autorelease];
     [opq addOperation:requestOperation];
+}
+
+- (BOOL) validateLogin:(NSString *)username: (NSString *)password
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"login", @"action",
+                            username, @"username",
+                            password, @"password",
+                            nil];
+    
+    [self.AFClient postPath:self.mapsAPIScript parameters:params
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Success [Login]: %@", operation.responseString);
+                [Session getInstance].isAuthenticated = YES;
+    }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error [Login]: %@", operation.responseString);
+    }];
+    
+    return [Session getInstance].isAuthenticated;
 }
 
 - (void) assignNewMaps:(NSMutableArray*)maps

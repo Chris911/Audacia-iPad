@@ -48,8 +48,8 @@
 - (void) zoomInFromRect:(CGPoint)begin :(CGPoint)end ;
 
 - (void) rotateEyeOnAxisXY;
-- (void) assignAnglesFromScreenPoints:(CGPoint)curPt :(CGPoint)prevPt;
-- (void) strafeCamera:(CGPoint)curPt :(CGPoint)prevPt;
+- (void) rotateCamera:(CGPoint)delta;
+- (void) strafeCamera:(CGPoint)delta;
 
 
 @end

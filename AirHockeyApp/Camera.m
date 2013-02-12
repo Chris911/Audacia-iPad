@@ -51,6 +51,10 @@
     self.eyePosition = Vector3DMake(0, 0, 100);
     self.up = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
     eyeToCenterDistance = self.eyePosition.z - centerPosition.z;
+
+    self.theta = 90;
+    self.phi = 90;
+    
     
     // Ortho attributes
     self.isPerspective = YES;
@@ -82,10 +86,6 @@
                  -1000, 1000);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-
-//        gluLookAt(self.eyePosition.x, self.eyePosition.y, self.eyePosition.z,
-//                  self.centerPosition.x, self.centerPosition.y, self.centerPosition.z,
-//                  self.up.x, self.up.y, self.up.z);
         
     } else { // Perspective Mode
     
@@ -95,6 +95,7 @@
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         
+        //[self rotateCamera:CGPointMake(0, 0)];
         [self assginCamPosition];
     }
 }
@@ -220,9 +221,9 @@
               self.up.x, self.up.y, self.up.z);
 }
 
-- (void) assignAnglesFromScreenPoints:(CGPoint)curPt :(CGPoint)prevPt
+- (void) rotateCamera:(CGPoint)delta
 {
-    CGPoint delta = CGPointMake((curPt.x - prevPt.x)/10, (curPt.y - prevPt.y)/10);
+    //CGPoint delta = CGPointMake((curPt.x - prevPt.x)/10, (curPt.y - prevPt.y)/10);
     self.theta = (self.theta + delta.x);
     self.phi = (self.phi + delta.y);
     [self rotateEyeOnAxisXY];
@@ -232,27 +233,21 @@
 - (void) rotateEyeOnAxisXY
 {
     if(self.phi < 1){
-        phi = 1;
+        self.phi = 1;
     }
     if(self.phi > 179){
-        phi = 179;
+        self.phi = 179;
     }
+    
+    //NSLog(@"Phi : %f, Theta : %f",self.phi,self.theta);
     
     float radTheta = (self.theta) * 3.1416/180;
     float radPhi = self.phi * 3.1416/180;
     
     self.centerPosition = Vector3DMake(self.eyePosition.x + (eyeToCenterDistance * cosf(radTheta) * sinf(radPhi)),
-                                       self.eyePosition.y + (eyeToCenterDistance * sinf(radTheta) * sinf(radPhi)),
-                                       self.eyePosition.z - (eyeToCenterDistance * cosf(radPhi)));
-    
-//    self.centerPosition = Vector3DMake(self.eyePosition.x + (eyeToCenterDistance * cosf(radTheta)*sinf(radPhi)),
-//                                       self.eyePosition.y + (eyeToCenterDistance * cosf(radTheta)) , 
-//                                       self.eyePosition.z);
-    
+                                       self.eyePosition.y - (eyeToCenterDistance * sinf(radTheta) * sinf(radPhi)),
+                                       self.eyePosition.z - (eyeToCenterDistance * cosf(radPhi)));    
     [self assignUpVector];
-//    NSLog(@"Eye: %f, %f, %f",self.eyePosition.x,self.eyePosition.y,self.eyePosition.z);
-//    NSLog(@"Cen: %f, %f, %f",self.centerPosition.x,self.centerPosition.y,self.centerPosition.z);
-//    NSLog(@"     T:%f, P:%f",self.theta,self.phi);
     
     // Assign new values to the camera (lookAt)
     [self assginCamPosition];
@@ -269,17 +264,13 @@
     Vector3DNormalize(&right);
     
     self.up = Vector3DCrossProduct(right, center);
-    
-//    NSLog(@"Eye: %f, %f, %f",self.eyePosition.x,self.eyePosition.y,self.eyePosition.z);
-//    NSLog(@"Cen: %f, %f, %f",self.centerPosition.x,self.centerPosition.y,self.centerPosition.z);
-//    NSLog(@"Up : %f, %f, %f",self.up.x,self.up.y,self.up.z);
 }
 
 
 // Move both the camera position (eye) and the point it is looking at (center) axis X and Z
-- (void) strafeCamera:(CGPoint)curPt :(CGPoint)prevPt
+- (void) strafeCamera:(CGPoint)delta
 {
-    CGPoint delta = CGPointMake((curPt.x - prevPt.x)/10, (curPt.y - prevPt.y)/10);
+    //CGPoint delta = CGPointMake((curPt.x - prevPt.x)/10, (curPt.y - prevPt.y)/10);
     
     self.centerPosition = Vector3DMake(self.centerPosition.x + delta.x, self.centerPosition.y, self.centerPosition.z + delta.y);
     self.eyePosition = Vector3DMake(self.eyePosition.x + delta.x, self.eyePosition.y, self.eyePosition.z + delta.y);

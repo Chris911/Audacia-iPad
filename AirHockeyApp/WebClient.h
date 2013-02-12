@@ -29,4 +29,5 @@
 - (void) fetchAllMapsFromDatabase;
 - (void) getConfigPaths;
 - (void) fetchMapImageWithName:(Map*) map;
+- (BOOL) validateLogin:(NSString *)username: (NSString *)password;
 @end

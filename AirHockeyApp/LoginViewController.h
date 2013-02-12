@@ -23,5 +23,6 @@
 
 - (IBAction)pressedLoginButton:(id)sender;
 - (IBAction)pressedContinueAnonButton:(id)sender;
+- (IBAction)pressedValidateButton:(id)sender;
 
 @end

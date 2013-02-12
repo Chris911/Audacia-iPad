@@ -18,6 +18,7 @@
 #import "NetworkUtils.h"
 #import "ElasticRect.h"
 #import "Particle.h"    
+#import "Skybox.h"
 
 #define kAlertNameMapTag 1
 
@@ -78,6 +79,8 @@ enum {
     
     NSMutableArray *particles;
     
+    Skybox* skybox;
+    
     Node *selectedNode;
 }
 
@@ -121,6 +124,9 @@ enum {
     
     // Create the elastic rectangle
     elasticRect = [[ElasticRect alloc]init];
+    
+    // Create the skybox
+    skybox = [[Skybox alloc]initWithSize:100.0f];
         
 //    for(int i = 0; i < 30; i++) {
 //        Particle *p = [[Particle alloc]init];
@@ -144,6 +150,7 @@ enum {
     [context release];
     
     [elasticRect release];
+    [skybox release];
     
     [_LeftSlideView release];
     [_CameraView release];
@@ -290,7 +297,7 @@ enum {
             currentTouchesMode = TOUCH_ELASTIC_MODE;
         } else {
         
-            // Correct touch position according to the camera position
+            // Correct touch position according to the camera position (ORTHO)
             [self.camera assignWorldPosition:positionCourante];
 
             // Detect touch events on the EAGLView (self.view)
@@ -316,11 +323,10 @@ enum {
                 } else {
                     NSLog(@"Touch did not select any node");
                     // TODO: Introduce camera movement here
-                    //[self.camera orthoTranslate:positionCourante:positionPrecedente];
                     [[Scene getInstance].renderingTree deselectAllNodes];
                     
+                    currentTouchesMode = TOUCH_CAMERA_MODE;
                     if(self.camera.isPerspective == NO){
-                        currentTouchesMode = TOUCH_CAMERA_MODE;
                         [self slideOutAnimationView:self.ParametersView];
                     }
                 }
@@ -387,7 +393,15 @@ enum {
             
         // User is dragging the screen.  Camera is thus moving
         } else if (currentTouchesMode == TOUCH_CAMERA_MODE){
-            [self.camera orthoTranslate:positionCourante:positionPrecedente];
+            
+            // Move camera in perspective mode
+            if(self.camera.isPerspective){
+                //[self.camera strafeCamera:positionCourante:positionPrecedente];
+                [self.camera assignAnglesFromScreenPoints:positionCourante:positionPrecedente];
+
+            } else {
+                [self.camera orthoTranslate:positionCourante:positionPrecedente];
+            }
             
         } else if (currentTouchesMode == TOUCH_ELASTIC_MODE) { // Elastic Rectangle mode
             elasticRect.endPosition = [self.camera convertToWorldPosition:positionCourante];
@@ -489,6 +503,7 @@ enum {
 
 - (IBAction)togglePerspective:(id)sender
 {
+    //[self.camera rotateEyeOnAxisXY:30 :30];
     self.camera.isPerspective = !self.camera.isPerspective;
 }
 
@@ -623,24 +638,22 @@ enum {
     // Load the scene objects
     [self loadScene];
     
-    // Prepare the GL View
-    glEnable(GL_DEPTH_TEST);
+    // Prepare the lights
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    GLfloat lightpos[] = {0, 0, 500.0, 0.0};
+    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+    
+    // Prepare the view and colors
+    glEnable(GL_DEPTH_TEST);
     glEnable(GL_COLOR_MATERIAL);
-    
 	glMatrixMode(GL_PROJECTION);
-    
-    //FIXME: Remove or change for lights
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-	CGRect rect = self.view.bounds;
-    
+	CGRect rect = self.view.bounds;    
     glViewport(0, 0, rect.size.width, rect.size.height);    
 	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity(); 
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	//glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     
 	glGetError(); // Clear error codes
 }
@@ -651,6 +664,9 @@ enum {
     
     // Set the camera either in ortho or perspective mode
     [self.camera setCamera];
+    
+    //Render the skybox
+    [skybox render];
     
     // Renders the whole rendring tree
     [[Scene getInstance].renderingTree render];
@@ -890,7 +906,7 @@ enum {
 
 - (void) hideOrShowParameters:(Node*)node
 {
-    if([node.type isEqualToString:@"POMMEAU"] || [node.type isEqualToString:@"PUCK"]){
+    if([node.type isEqualToString:@"POMMEAU"] || [node.type isEqualToString:@"PUCK"] || [Scene getInstance].renderingTree.multipleNodesSelected){
         // Hide some parameters if the selected nodes are Puck or Stick
         [self.sizeLabel setHidden:YES];
         [self.sizeSlider setHidden:YES];

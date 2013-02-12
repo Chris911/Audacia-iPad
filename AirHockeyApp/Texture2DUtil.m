@@ -16,7 +16,7 @@
     NSData *texData = [[NSData alloc] initWithContentsOfFile:path];
     UIImage *image = [[UIImage alloc] initWithData:texData];
     if (image == nil)
-    NSLog(@"Do real error checking here");
+        NSLog(@"Image not loaded");
 
     GLuint width = CGImageGetWidth(image.CGImage);
     GLuint height = CGImageGetHeight(image.CGImage);

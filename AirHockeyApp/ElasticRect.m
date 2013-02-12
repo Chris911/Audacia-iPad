@@ -43,6 +43,7 @@ GLfloat colors[] = {
 
 - (void) render
 {
+    glDisable(GL_LIGHTING);
     glPushMatrix();
     int zvalue = 4;
     GLfloat vertices[] = {
@@ -63,8 +64,8 @@ GLfloat colors[] = {
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
 
-    
     glPopMatrix();
+    glEnable(GL_LIGHTING);
 }
 
 @end

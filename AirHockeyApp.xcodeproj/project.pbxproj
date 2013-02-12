@@ -8,16 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0409924916B21087009DBE1D /* NetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0409924816B21087009DBE1D /* NetworkUtils.m */; };
-		0441968D16C98961001B15A9 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0441968C16C98961001B15A9 /* LoginViewController.xib */; };
-		0441969016C98A8E001B15A9 /* login-bottom-view.png in Resources */ = {isa = PBXBuildFile; fileRef = 0441968E16C98A8E001B15A9 /* login-bottom-view.png */; };
-		0441969116C98A8E001B15A9 /* login-ice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0441968F16C98A8E001B15A9 /* login-ice.jpg */; };
-		0441969316C98ADB001B15A9 /* login-top-view.png in Resources */ = {isa = PBXBuildFile; fileRef = 0441969216C98ADB001B15A9 /* login-top-view.png */; };
-		0441969716C98C05001B15A9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0441969616C98C05001B15A9 /* LoginViewController.m */; };
-		0441969B16C9A40E001B15A9 /* hockey-cup.png in Resources */ = {isa = PBXBuildFile; fileRef = 0441969816C9A40E001B15A9 /* hockey-cup.png */; };
-		0441969C16C9A40E001B15A9 /* hockey-helmet.png in Resources */ = {isa = PBXBuildFile; fileRef = 0441969916C9A40E001B15A9 /* hockey-helmet.png */; };
-		0441969D16C9A40E001B15A9 /* hockey-net.png in Resources */ = {isa = PBXBuildFile; fileRef = 0441969A16C9A40E001B15A9 /* hockey-net.png */; };
-		0441969F16C9A6F4001B15A9 /* AudaciaLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0441969E16C9A6F4001B15A9 /* AudaciaLogo.png */; };
-		044196A116C9AD22001B15A9 /* login-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 044196A016C9AD21001B15A9 /* login-icon.png */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
 		048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3516A4AFB9006A7082 /* RenderingTree.m */; };
@@ -92,6 +82,7 @@
 		A8A4638C16C7F990008D173B /* Texture2DUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4638B16C7F990008D173B /* Texture2DUtil.m */; };
 		A8A4639216C8189E008D173B /* table.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A4639116C8189E008D173B /* table.png */; };
 		A8A4639416C8234A008D173B /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A4639316C8234A008D173B /* border.png */; };
+		A8A4639816C88012008D173B /* Skybox.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4639716C88012008D173B /* Skybox.m */; };
 		A8BD086A169F871E00B7A95D /* SideBar.png in Resources */ = {isa = PBXBuildFile; fileRef = A8BD0869169F871E00B7A95D /* SideBar.png */; };
 		A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */; };
 		A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8BA169E025E008B29EF /* CameraImage1.png */; };
@@ -111,6 +102,16 @@
 		A8CC906116A6FD2D00CFD27D /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC905816A6FD2D00CFD27D /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A8CC906316A6FD8E00CFD27D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC906216A6FD8E00CFD27D /* SystemConfiguration.framework */; };
 		A8CC906516A6FD9D00CFD27D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC906416A6FD9D00CFD27D /* MobileCoreServices.framework */; };
+		A8CE920316C9BDBB001CCEBB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE920116C9BDBB001CCEBB /* LoginViewController.m */; };
+		A8CE920416C9BDBB001CCEBB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920216C9BDBB001CCEBB /* LoginViewController.xib */; };
+		A8CE920D16C9BDF0001CCEBB /* AudaciaLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920516C9BDF0001CCEBB /* AudaciaLogo.png */; };
+		A8CE920E16C9BDF0001CCEBB /* hockey-cup.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920616C9BDF0001CCEBB /* hockey-cup.png */; };
+		A8CE920F16C9BDF0001CCEBB /* hockey-helmet.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920716C9BDF0001CCEBB /* hockey-helmet.png */; };
+		A8CE921016C9BDF0001CCEBB /* hockey-net.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920816C9BDF0001CCEBB /* hockey-net.png */; };
+		A8CE921116C9BDF0001CCEBB /* login-bottom-view.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920916C9BDF0001CCEBB /* login-bottom-view.png */; };
+		A8CE921216C9BDF0001CCEBB /* login-ice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920A16C9BDF0001CCEBB /* login-ice.jpg */; };
+		A8CE921316C9BDF0001CCEBB /* login-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920B16C9BDF0001CCEBB /* login-icon.png */; };
+		A8CE921416C9BDF0001CCEBB /* login-top-view.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920C16C9BDF0001CCEBB /* login-top-view.png */; };
 		A8EBDE3916A70CF8002B2DD6 /* GluLookAt.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */; };
 		A8EBDE7616A711C1002B2DD6 /* GluPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7516A711C1002B2DD6 /* GluPerspective.m */; };
 		A8EBDE7A16A729CA002B2DD6 /* NodeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7916A729CA002B2DD6 /* NodeTable.m */; };
@@ -132,17 +133,6 @@
 /* Begin PBXFileReference section */
 		0409924716B21087009DBE1D /* NetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkUtils.h; sourceTree = "<group>"; };
 		0409924816B21087009DBE1D /* NetworkUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkUtils.m; sourceTree = "<group>"; };
-		0441968C16C98961001B15A9 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		0441968E16C98A8E001B15A9 /* login-bottom-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-bottom-view.png"; path = "Assets/UI/Images/login-bottom-view.png"; sourceTree = "<group>"; };
-		0441968F16C98A8E001B15A9 /* login-ice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "login-ice.jpg"; path = "Assets/UI/Images/login-ice.jpg"; sourceTree = "<group>"; };
-		0441969216C98ADB001B15A9 /* login-top-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-top-view.png"; path = "Assets/UI/Images/login-top-view.png"; sourceTree = "<group>"; };
-		0441969516C98C05001B15A9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		0441969616C98C05001B15A9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		0441969816C9A40E001B15A9 /* hockey-cup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hockey-cup.png"; path = "Assets/UI/Images/hockey-cup.png"; sourceTree = "<group>"; };
-		0441969916C9A40E001B15A9 /* hockey-helmet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hockey-helmet.png"; path = "Assets/UI/Images/hockey-helmet.png"; sourceTree = "<group>"; };
-		0441969A16C9A40E001B15A9 /* hockey-net.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hockey-net.png"; path = "Assets/UI/Images/hockey-net.png"; sourceTree = "<group>"; };
-		0441969E16C9A6F4001B15A9 /* AudaciaLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AudaciaLogo.png; path = Assets/UI/Images/AudaciaLogo.png; sourceTree = "<group>"; };
-		044196A016C9AD21001B15A9 /* login-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-icon.png"; path = "Assets/UI/Images/login-icon.png"; sourceTree = "<group>"; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		048C9D3216A4A8D9006A7082 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
@@ -250,6 +240,8 @@
 		A8A4638B16C7F990008D173B /* Texture2DUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Texture2DUtil.m; sourceTree = "<group>"; };
 		A8A4639116C8189E008D173B /* table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table.png; sourceTree = "<group>"; };
 		A8A4639316C8234A008D173B /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
+		A8A4639616C88012008D173B /* Skybox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skybox.h; sourceTree = "<group>"; };
+		A8A4639716C88012008D173B /* Skybox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skybox.m; sourceTree = "<group>"; };
 		A8BD0869169F871E00B7A95D /* SideBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar.png; path = Assets/UI/Images/SideBar.png; sourceTree = "<group>"; };
 		A8C459FB169DD985000B9586 /* AppDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDemoAppDelegate.h; sourceTree = "<group>"; };
 		A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDemoAppDelegate.m; sourceTree = "<group>"; };
@@ -283,6 +275,17 @@
 		A8CC905816A6FD2D00CFD27D /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		A8CC906216A6FD8E00CFD27D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A8CC906416A6FD9D00CFD27D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		A8CE920016C9BDBB001CCEBB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		A8CE920116C9BDBB001CCEBB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		A8CE920216C9BDBB001CCEBB /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		A8CE920516C9BDF0001CCEBB /* AudaciaLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AudaciaLogo.png; path = Assets/UI/Images/AudaciaLogo.png; sourceTree = "<group>"; };
+		A8CE920616C9BDF0001CCEBB /* hockey-cup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hockey-cup.png"; path = "Assets/UI/Images/hockey-cup.png"; sourceTree = "<group>"; };
+		A8CE920716C9BDF0001CCEBB /* hockey-helmet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hockey-helmet.png"; path = "Assets/UI/Images/hockey-helmet.png"; sourceTree = "<group>"; };
+		A8CE920816C9BDF0001CCEBB /* hockey-net.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hockey-net.png"; path = "Assets/UI/Images/hockey-net.png"; sourceTree = "<group>"; };
+		A8CE920916C9BDF0001CCEBB /* login-bottom-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-bottom-view.png"; path = "Assets/UI/Images/login-bottom-view.png"; sourceTree = "<group>"; };
+		A8CE920A16C9BDF0001CCEBB /* login-ice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "login-ice.jpg"; path = "Assets/UI/Images/login-ice.jpg"; sourceTree = "<group>"; };
+		A8CE920B16C9BDF0001CCEBB /* login-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-icon.png"; path = "Assets/UI/Images/login-icon.png"; sourceTree = "<group>"; };
+		A8CE920C16C9BDF0001CCEBB /* login-top-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-top-view.png"; path = "Assets/UI/Images/login-top-view.png"; sourceTree = "<group>"; };
 		A8EBDE3716A70CF8002B2DD6 /* GluLookAt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluLookAt.h; sourceTree = "<group>"; };
 		A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GluLookAt.m; sourceTree = "<group>"; };
 		A8EBDE7416A711C1002B2DD6 /* GluPerspective.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluPerspective.h; sourceTree = "<group>"; };
@@ -336,22 +339,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0441969416C98AED001B15A9 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				0441969816C9A40E001B15A9 /* hockey-cup.png */,
-				0441969916C9A40E001B15A9 /* hockey-helmet.png */,
-				0441969A16C9A40E001B15A9 /* hockey-net.png */,
-				0441969216C98ADB001B15A9 /* login-top-view.png */,
-				0441968E16C98A8E001B15A9 /* login-bottom-view.png */,
-				0441968F16C98A8E001B15A9 /* login-ice.jpg */,
-			);
-			name = Login;
-			sourceTree = "<group>";
-		};
 		044CD6C716B86E9700218CA1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A8A4639516C88006008D173B /* Skybox */,
 				A83C227516BEC079007AA035 /* Particles */,
 				A818E02116BAD7C600CA5823 /* Camera */,
 				044CD6C916B86EB000218CA1 /* Maps */,
@@ -552,18 +543,18 @@
 		96378D941472C78200F543EA /* Controleurs */ = {
 			isa = PBXGroup;
 			children = (
-				96378D951472C7CC00F543EA /* MenuViewController.h */,
+				A8CE920016C9BDBB001CCEBB /* LoginViewController.h */,
 				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
+				96378D951472C7CC00F543EA /* MenuViewController.h */,
 				A83AA9EB16A4D924003388F3 /* BetaViewController.h */,
 				04D9C3F416BCB217005C6197 /* CarouselTestView.h */,
 				A838B77916C2E88500050DDA /* MapsViewController.h */,
-				0441969516C98C05001B15A9 /* LoginViewController.h */,
 				96378D961472C7CC00F543EA /* MenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
 				A83AA9EC16A4D924003388F3 /* BetaViewController.m */,
 				04D9C3F516BCB217005C6197 /* CarouselTestView.m */,
 				A838B77A16C2E88500050DDA /* MapsViewController.m */,
-				0441969616C98C05001B15A9 /* LoginViewController.m */,
+				A8CE920116C9BDBB001CCEBB /* LoginViewController.m */,
 			);
 			name = Controleurs;
 			sourceTree = "<group>";
@@ -571,13 +562,13 @@
 		96378D981472C7F200F543EA /* Interface Builder */ = {
 			isa = PBXGroup;
 			children = (
+				A8CE920216C9BDBB001CCEBB /* LoginViewController.xib */,
 				A838B77B16C2E88500050DDA /* MapsViewController.xib */,
 				96378D8C1472C71200F543EA /* MainWindow.xib */,
 				A83AA9ED16A4D925003388F3 /* BetaViewController.xib */,
 				96378D991472C80A00F543EA /* MenuViewController.xib */,
 				969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */,
 				04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */,
-				0441968C16C98961001B15A9 /* LoginViewController.xib */,
 			);
 			name = "Interface Builder";
 			sourceTree = "<group>";
@@ -670,6 +661,15 @@
 			path = Assets/Textures;
 			sourceTree = "<group>";
 		};
+		A8A4639516C88006008D173B /* Skybox */ = {
+			isa = PBXGroup;
+			children = (
+				A8A4639616C88012008D173B /* Skybox.h */,
+				A8A4639716C88012008D173B /* Skybox.m */,
+			);
+			name = Skybox;
+			sourceTree = "<group>";
+		};
 		A8C5A8B0169DECD7008B29EF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,9 +684,14 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				044196A016C9AD21001B15A9 /* login-icon.png */,
-				0441969E16C9A6F4001B15A9 /* AudaciaLogo.png */,
-				0441969416C98AED001B15A9 /* Login */,
+				A8CE920516C9BDF0001CCEBB /* AudaciaLogo.png */,
+				A8CE920616C9BDF0001CCEBB /* hockey-cup.png */,
+				A8CE920716C9BDF0001CCEBB /* hockey-helmet.png */,
+				A8CE920816C9BDF0001CCEBB /* hockey-net.png */,
+				A8CE920916C9BDF0001CCEBB /* login-bottom-view.png */,
+				A8CE920A16C9BDF0001CCEBB /* login-ice.jpg */,
+				A8CE920B16C9BDF0001CCEBB /* login-icon.png */,
+				A8CE920C16C9BDF0001CCEBB /* login-top-view.png */,
 				04BDB84016C41A1300648B51 /* Stars */,
 				A8F13CB716B027F300CB5885 /* SettingsButton1.png */,
 				A8F13CB816B027F300CB5885 /* SettingsImage1.png */,
@@ -904,15 +909,15 @@
 				04BDB84D16C4255400648B51 /* Stars-0.png in Resources */,
 				A8A4639216C8189E008D173B /* table.png in Resources */,
 				A8A4639416C8234A008D173B /* border.png in Resources */,
-				0441968D16C98961001B15A9 /* LoginViewController.xib in Resources */,
-				0441969016C98A8E001B15A9 /* login-bottom-view.png in Resources */,
-				0441969116C98A8E001B15A9 /* login-ice.jpg in Resources */,
-				0441969316C98ADB001B15A9 /* login-top-view.png in Resources */,
-				0441969B16C9A40E001B15A9 /* hockey-cup.png in Resources */,
-				0441969C16C9A40E001B15A9 /* hockey-helmet.png in Resources */,
-				0441969D16C9A40E001B15A9 /* hockey-net.png in Resources */,
-				0441969F16C9A6F4001B15A9 /* AudaciaLogo.png in Resources */,
-				044196A116C9AD22001B15A9 /* login-icon.png in Resources */,
+				A8CE920416C9BDBB001CCEBB /* LoginViewController.xib in Resources */,
+				A8CE920D16C9BDF0001CCEBB /* AudaciaLogo.png in Resources */,
+				A8CE920E16C9BDF0001CCEBB /* hockey-cup.png in Resources */,
+				A8CE920F16C9BDF0001CCEBB /* hockey-helmet.png in Resources */,
+				A8CE921016C9BDF0001CCEBB /* hockey-net.png in Resources */,
+				A8CE921116C9BDF0001CCEBB /* login-bottom-view.png in Resources */,
+				A8CE921216C9BDF0001CCEBB /* login-ice.jpg in Resources */,
+				A8CE921316C9BDF0001CCEBB /* login-icon.png in Resources */,
+				A8CE921416C9BDF0001CCEBB /* login-top-view.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,7 +982,8 @@
 				A8EEE40E16BF3EDD00EA3FB0 /* AudioInterface.m in Sources */,
 				A838B77C16C2E88500050DDA /* MapsViewController.m in Sources */,
 				A8A4638C16C7F990008D173B /* Texture2DUtil.m in Sources */,
-				0441969716C98C05001B15A9 /* LoginViewController.m in Sources */,
+				A8A4639816C88012008D173B /* Skybox.m in Sources */,
+				A8CE920316C9BDBB001CCEBB /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,7 +41,15 @@
 
 - (void) viewDidLoad
 {
+    [super viewDidLoad];
     [self setUpView];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+            || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
 - (void) toggleConnectionView
@@ -89,6 +97,10 @@
     [self toggleConnectionView];
 }
 
+- (IBAction)pressedValidateButton:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField.tag == usernameTextBoxTag)
@@ -102,7 +114,6 @@
 
 - (void)dealloc {
     [_iceView release];
-    [_iceView release];
     [_topView release];
     [_bottomView release];
     [_loginBoxView release];
@@ -115,7 +126,6 @@
     [super dealloc];
 }
 - (void)viewDidUnload {
-    [self setIceView:nil];
     [self setIceView:nil];
     [self setTopView:nil];
     [self setBottomView:nil];

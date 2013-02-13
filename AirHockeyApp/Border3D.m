@@ -81,15 +81,15 @@
         NSLog(@"%u",glGetError());
     glDrawArrays(GL_TRIANGLES, 0, 2*3);
 
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
+    //glEnable(GL_CULL_FACE);
+    //glCullFace(GL_BACK);
     [self drawSideA];
     [self drawSideB];
     [self drawSideC];
     [self drawSideD];
     [self drawBottom];
-    glCullFace(GL_FRONT);
-    glDisable(GL_CULL_FACE);
+    //glCullFace(GL_FRONT);
+    //glDisable(GL_CULL_FACE);
 
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);

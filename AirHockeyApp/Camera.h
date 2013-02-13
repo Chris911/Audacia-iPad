@@ -47,9 +47,8 @@
 - (void) resetCamera;
 - (void) zoomInFromRect:(CGPoint)begin :(CGPoint)end ;
 
-- (void) rotateEyeOnAxisXY;
-- (void) rotateCamera:(CGPoint)delta;
-- (void) strafeCamera:(CGPoint)delta;
+- (void) perspectiveZoom:(float)delta;
+- (void) strafeXY:(CGPoint)delta;
 
 
 @end

@@ -15,10 +15,12 @@
 
 #define usernameTextBoxTag 0
 #define passwordTextBoxTag 1
+#define serverTextBoxTag   2
 
 @interface LoginViewController()
 {
     BOOL loginViewIsHidden;
+    BOOL loginViewIsOnTop;
 }
 
 @end
@@ -26,10 +28,9 @@
 @implementation LoginViewController
 - (void) setUpView
 {
-    self.usernameTextBox.delegate = self;
     self.usernameTextBox.tag = usernameTextBoxTag;
-    self.passwordTextBox.delegate = self;
     self.passwordTextBox.tag = passwordTextBoxTag;
+    self.serverTextBox.tag = serverTextBoxTag;
     
     [self.loginBoxView.layer setCornerRadius:20.0f];
     [self.loginBoxView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
@@ -41,6 +42,24 @@
     self.loginBoxView.userInteractionEnabled = NO;
     
     self.serverTextBox.text = @"kepler.step.polymtl.ca";
+    loginViewIsOnTop = NO;
+    
+    //Add observer for login event
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginEventFinished)
+                                             name:@"LoginEventFinish"
+                                             object:nil];
+    
+    //Add observers for keyboard
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(keyboardWillShow)
+                                             name: UIKeyboardWillShowNotification
+                                             object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(keyboardWillHide)
+                                             name: UIKeyboardWillHideNotification
+                                             object:nil];
 }
 
 - (void) viewDidLoad
@@ -103,6 +122,11 @@
 
 - (IBAction)pressedValidateButton:(id)sender
 {
+    [self initLoginEvent];
+}
+
+- (void) initLoginEvent
+{
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     
     if([NetworkUtils isNetworkAvailable]) {
@@ -111,18 +135,33 @@
         } else if (self.passwordTextBox.text.length == 0){
             self.errorLabel.text = @"Missing Password";
         } else {
-            if([delegate.webClient validateLogin:self.usernameTextBox.text :self.passwordTextBox.text]){
-                [Session getInstance].username = self.usernameTextBox.text;
-                [self dismissModalViewControllerAnimated:YES];
-            } else {
-                [Session getInstance].username = @"Anonymous";
-                self.errorLabel.text = @"Invalid account";
-            }
+            //Call the real login event here. Return is handled in loginEventFinished below
+            [self.hiddenView setHidden:NO];
+            [self.spinner setHidden:NO];
+            [self.spinner startAnimating];
+            [delegate.webClient validateLogin:self.usernameTextBox.text :self.passwordTextBox.text];
         }
     } else { // Internet not connected, display error
         [NetworkUtils showNetworkUnavailableAlert];
     }
 }
+
+- (void) loginEventFinished
+{
+    [self.hiddenView setHidden:YES];
+    [self.spinner setHidden:YES];
+    [self.spinner stopAnimating];
+    if([Session getInstance].isAuthenticated){
+        [Session getInstance].username = self.usernameTextBox.text;
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self dismissModalViewControllerAnimated:YES];
+    } else {
+        [Session getInstance].username = @"Anonymous";
+        self.errorLabel.text = @"Invalid account";
+    }
+}
+
+#pragma mark - TextField Delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -130,8 +169,30 @@
         [self.passwordTextBox becomeFirstResponder];
     } else {
        //Do login
+        [self initLoginEvent];
     }
     return YES;
+}
+
+- (void)keyboardWillShow
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.logoImage.center = CGPointMake(512, 50);
+                         self.topView.center = CGPointMake(512, -40);
+                         self.loginBoxView.center = CGPointMake(512, 250);
+                     }];
+
+}
+
+- (void)keyboardWillHide
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.logoImage.center = CGPointMake(512, 71);
+                         self.topView.center = CGPointMake(512, 200);
+                         self.loginBoxView.center = CGPointMake(512, 382);
+                     }];
 }
 
 - (void)dealloc {
@@ -146,6 +207,9 @@
     [_continueAnonButton release];
     [_teamAudacityLabel release];
     [_errorLabel release];
+    [_spinner release];
+    [_hiddenView release];
+    [_logoImage release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -160,6 +224,9 @@
     [self setContinueAnonButton:nil];
     [self setTeamAudacityLabel:nil];
     [self setErrorLabel:nil];
+    [self setSpinner:nil];
+    [self setHiddenView:nil];
+    [self setLogoImage:nil];
     [super viewDidUnload];
 }
 

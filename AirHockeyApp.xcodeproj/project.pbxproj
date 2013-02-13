@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0409924916B21087009DBE1D /* NetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0409924816B21087009DBE1D /* NetworkUtils.m */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
+		045AA82B16CBF93C00F82AB0 /* login-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 045AA82A16CBF93C00F82AB0 /* login-background.png */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
 		048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3516A4AFB9006A7082 /* RenderingTree.m */; };
 		048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3916A4BD8F006A7082 /* Scene.m */; };
@@ -138,6 +139,7 @@
 		0409924716B21087009DBE1D /* NetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkUtils.h; sourceTree = "<group>"; };
 		0409924816B21087009DBE1D /* NetworkUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkUtils.m; sourceTree = "<group>"; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		045AA82A16CBF93C00F82AB0 /* login-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-background.png"; path = "Assets/UI/Images/login-background.png"; sourceTree = "<group>"; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		048C9D3216A4A8D9006A7082 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		048C9D3416A4AFB9006A7082 /* RenderingTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingTree.h; sourceTree = "<group>"; };
@@ -693,6 +695,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				045AA82A16CBF93C00F82AB0 /* login-background.png */,
 				A8664A5816CB174A00CC99EC /* crosshair.png */,
 				A854C67316CA9E5B00397E33 /* joystickBase.png */,
 				A854C67416CA9E5B00397E33 /* joystickTip.png */,
@@ -934,6 +937,7 @@
 				A854C67516CA9E5B00397E33 /* joystickBase.png in Resources */,
 				A854C67616CA9E5B00397E33 /* joystickTip.png in Resources */,
 				A8664A5916CB174A00CC99EC /* crosshair.png in Resources */,
+				045AA82B16CBF93C00F82AB0 /* login-background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

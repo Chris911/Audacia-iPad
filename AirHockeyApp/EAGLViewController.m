@@ -351,13 +351,9 @@ enum {
                 
             // If a view other than EAGLView is touched
             } else {
-                if(isHalfLifeCamActive){
-                    [self handleFirstTouchOnView:touch.view];
-                } else {
-                    [[Scene getInstance].renderingTree deselectAllNodes];
-                    [self handleFirstTouchOnView:touch.view];
-                    currentTouchesMode = TOUCH_TRANSFORM_MODE;
-                }
+                [[Scene getInstance].renderingTree deselectAllNodes];
+                [self handleFirstTouchOnView:touch.view];
+                currentTouchesMode = TOUCH_TRANSFORM_MODE;
             }
         }
     }
@@ -418,7 +414,7 @@ enum {
             
             // Move camera in perspective mode
             if(self.camera.isPerspective){
-                //[self.camera strafeCamera:positionCourante:positionPrecedente];
+                [self panPerspectiveCamera:positionCourante:positionPrecedente];
 
             } else {
                 [self.camera orthoTranslate:positionCourante:positionPrecedente];
@@ -427,18 +423,7 @@ enum {
         } else if (currentTouchesMode == TOUCH_ELASTIC_MODE) { // Elastic Rectangle mode
             elasticRect.endPosition = [self.camera convertToWorldPosition:positionCourante];
             
-        } else if (currentTouchesMode == TOUCH_HALFLIFE_MODE) { // Half-Life camera mode
-            if(positionCourante.x < LARGEUR_ECRAN/2){
-                if(activeObjectTag == LEFTTIPVIEW_TAG){
-                    [self handleLeftJoystickMovement:touch]; //FIXME: HELP!!!!!!
-                }
-            } else {
-                if(activeObjectTag == RIGHTTIPVIEW_TAG){
-                    [self handleRightJoystickMovement:touch];
-                }
-            }
         }
-        
     }
 }
 
@@ -456,9 +441,6 @@ enum {
             [self slideInAnimationView:self.ParametersView];
         }
         [elasticRect reset];
-        
-    } else if(currentTouchesMode == TOUCH_HALFLIFE_MODE) {
-        [self replaceJoysticks];
     }
     selectedNode = nil; // invalidate pointer
 }
@@ -468,48 +450,49 @@ enum {
 // Left joystick movements, Camera strafe
 - (void) handleLeftJoystickMovement:(UITouch*)touch
 {
-    CGPoint location = [touch locationInView:self.leftJoystick];
+    //CGPoint location = [touch locationInView:self.leftJoystick];
     
     // Strafe cam
-    float radius = self.leftJoystick.frame.size.width/2;
-    CGPoint delta = CGPointMake((location.x - leftJoystickCenter.x)/20, (location.y - leftJoystickCenter.y)/20);
-    float distanceTipToCenter = (delta.x * delta.x) + (delta.y * delta.y);
-    
-    if( distanceTipToCenter <= radius){
-        [self.camera strafeCamera:delta];
-        [self.view viewWithTag:activeObjectTag].center = location;
-    } else {
-        float angle = atan2(delta.y, delta.x);
-        [self.view viewWithTag:activeObjectTag].center = CGPointMake(128 + radius * cosf(angle),128 + radius*sinf(angle));
-    }
+//    float radius = self.leftJoystick.frame.size.width/2;
+//    CGPoint delta = CGPointMake((location.x - leftJoystickCenter.x)/20, (location.y - leftJoystickCenter.y)/20);
+//    float distanceTipToCenter = (delta.x * delta.x) + (delta.y * delta.y);
+//    location = CGPointMake(leftJoystickCenter.x, location.y);
+//    
+//    if( distanceTipToCenter <= radius){
+//        [self.camera perspectiveZoom:delta];
+//        [self.view viewWithTag:activeObjectTag].center = location;
+//    } else {
+//        float angle = atan2(delta.y, delta.x);
+//        [self.view viewWithTag:activeObjectTag].center = CGPointMake(128 + radius * cosf(angle),128 + radius*sinf(angle));
+//    }
 }
 
 // Right joystick movements, Camera rotation
 - (void) handleRightJoystickMovement:(UITouch*)touch
 {
-    CGPoint location = [touch locationInView:self.rightJoystick];
-    
-    // Rotate cam
-    CGPoint delta = CGPointMake((location.x - rightJoystickCenter.x)/30, (location.y - rightJoystickCenter.y)/30);
-    float radius = self.rightJoystick.frame.size.width/2;
-    float distanceTipToCenter = (delta.x * delta.x) + (delta.y * delta.y);
-    
-    if( distanceTipToCenter <= radius){
-        [self.camera rotateCamera:delta];
-        [self.view viewWithTag:activeObjectTag].center = location;
-    } else {
-        float angle = atan2(delta.y, delta.x);
-        [self.view viewWithTag:activeObjectTag].center = CGPointMake(128 + radius * cosf(angle),128 + radius*sinf(angle));
-    }
+//    CGPoint location = [touch locationInView:self.rightJoystick];
+//    
+//    // Rotate cam
+//    CGPoint delta = CGPointMake((location.x - rightJoystickCenter.x)/30, (location.y - rightJoystickCenter.y)/30);
+//    float radius = self.rightJoystick.frame.size.width/2;
+//    float distanceTipToCenter = (delta.x * delta.x) + (delta.y * delta.y);
+//    
+//    if( distanceTipToCenter <= radius){
+//        [self.camera rotateCamera:delta];
+//        [self.view viewWithTag:activeObjectTag].center = location;
+//    } else {
+//        float angle = atan2(delta.y, delta.x);
+//        [self.view viewWithTag:activeObjectTag].center = CGPointMake(128 + radius * cosf(angle),128 + radius*sinf(angle));
+//    }
 }
 
 - (void) replaceJoysticks
 {
-    if(activeObjectTag == LEFTTIPVIEW_TAG) {
-        [self.view viewWithTag:activeObjectTag].center =  leftJoystickCenter;
-    } else if(activeObjectTag == RIGHTTIPVIEW_TAG) {
-        [self.view viewWithTag:activeObjectTag].center =  rightJoystickCenter;
-    }
+//    if(activeObjectTag == LEFTTIPVIEW_TAG) {
+//        [self.view viewWithTag:activeObjectTag].center =  leftJoystickCenter;
+//    } else if(activeObjectTag == RIGHTTIPVIEW_TAG) {
+//        [self.view viewWithTag:activeObjectTag].center =  rightJoystickCenter;
+//    }
 }
 
 #pragma mark - Button methods
@@ -939,7 +922,11 @@ enum {
 - (void) handlePinch:(UIGestureRecognizer *)sender 
 {
     CGFloat factor = [(UIPinchGestureRecognizer *)sender scale];
-    [self.camera orthoZoom:factor];
+    if(self.camera.isPerspective){
+        [self.camera perspectiveZoom:factor];
+    } else {
+        [self.camera orthoZoom:factor];
+    }
 }
 
 #pragma mark - Elements initialization
@@ -955,6 +942,13 @@ enum {
 - (void) prepareRecognizers
 {
     // SwipeGesture recognizers
+    
+    UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc]
+                                                       initWithTarget:self
+                                                       action:@selector(rotationDetected:)];
+    [rotationRecognizer setDelegate:self];
+    [self.view addGestureRecognizer:rotationRecognizer];
+    [rotationRecognizer release];
     
     // Placed on the LeftSideView
     UISwipeGestureRecognizer *SwipeLeftSideView = [[[UISwipeGestureRecognizer alloc]
@@ -986,6 +980,7 @@ enum {
     
     // PinchGesture recognizer
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    [pinchGesture setDelegate:self];
     [self.view addGestureRecognizer:pinchGesture];
     [pinchGesture release];
     
@@ -1013,6 +1008,15 @@ enum {
     [dndPommeau release];
     [dragLjoystick release];
     [dragRjoystick release];
+    
+    // Pan for camera, 2 fingers
+//    UIPanGestureRecognizer *panPerspectiveCamera = [[UIPanGestureRecognizer alloc]
+//                                                    initWithTarget:self
+//                                                    action:@selector(panGestureAction:)];
+//    panPerspectiveCamera.minimumNumberOfTouches = 2;
+//    [self.view addGestureRecognizer:panPerspectiveCamera];
+//    [panPerspectiveCamera release];
+
 }
 
 - (void) prepareAdditionalViews
@@ -1183,7 +1187,23 @@ enum {
 
 - (void) replaceView
 {
-    [self.camera replaceCamera];
+    if(self.camera.isPerspective){
+        [self.camera resetCamera];
+    } else {
+        [self.camera replaceCamera];
+    }
+}
+
+- (void) rotationDetected:(UIGestureRecognizer *)sender 
+{
+    CGFloat angle = [(UIRotationGestureRecognizer *)sender rotation];
+    self.camera.theta += angle*2;
+}
+
+- (void) panPerspectiveCamera:(CGPoint)location :(CGPoint)lastLocation
+{
+    CGPoint delta = CGPointMake(location.x - lastLocation.x, location.y - lastLocation.y);
+    [self.camera strafeXY:delta];
 }
 
 @end

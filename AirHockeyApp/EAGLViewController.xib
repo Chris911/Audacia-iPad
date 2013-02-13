@@ -175,7 +175,7 @@
 							<object class="IBUIButton" id="167721937">
 								<reference key="NSNextResponder" ref="909410144"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{56, 60}, {51, 44}}</string>
+								<string key="NSFrame">{{67, 52}, {51, 44}}</string>
 								<reference key="NSSuperview" ref="909410144"/>
 								<reference key="NSNextKeyView" ref="492512580"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -257,7 +257,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{944, 688}, {80, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -419,7 +418,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{16, 431}, {70, 70}}</string>
 								<reference key="NSSuperview" ref="585471049"/>
-								<reference key="NSNextKeyView" ref="909410144"/>
+								<reference key="NSNextKeyView" ref="352905090"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -760,7 +759,6 @@
 						<reference key="NSNextKeyView" ref="567395419"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="312815503"/>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<int key="IBUITag">600</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
@@ -812,9 +810,22 @@
 						<reference key="NSNextKeyView" ref="72171057"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="312815503"/>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<int key="IBUITag">700</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIImageView" id="352905090">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{487, 359}, {50, 50}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView" ref="909410144"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">crosshair.png</string>
+						</object>
 					</object>
 				</object>
 				<string key="NSFrameSize">{1024, 768}</string>
@@ -1031,6 +1042,14 @@
 					<int key="connectionID">140</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">crossHair</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="352905090"/>
+					</object>
+					<int key="connectionID">142</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">OpenCameraView:</string>
 						<reference key="source" ref="277509338"/>
@@ -1189,6 +1208,7 @@
 							<reference ref="868566068"/>
 							<reference ref="824011288"/>
 							<reference ref="669357839"/>
+							<reference ref="352905090"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">GLMainView</string>
@@ -1518,6 +1538,11 @@
 						<reference key="object" ref="579041427"/>
 						<reference key="parent" ref="1056230576"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">141</int>
+						<reference key="object" ref="352905090"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1547,6 +1572,7 @@
 					<string>135.IBPluginDependency</string>
 					<string>137.IBPluginDependency</string>
 					<string>139.IBPluginDependency</string>
+					<string>141.IBPluginDependency</string>
 					<string>17.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>21.IBPluginDependency</string>
@@ -1610,6 +1636,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1645,7 +1672,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">140</int>
+			<int key="maxID">142</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -1667,6 +1694,7 @@
 				<string>SettingsImage1.png</string>
 				<string>SideBar.png</string>
 				<string>SideBar2.png</string>
+				<string>crosshair.png</string>
 				<string>joystickBase.png</string>
 				<string>joystickTip.png</string>
 			</object>
@@ -1679,6 +1707,7 @@
 				<string>{360, 360}</string>
 				<string>{300, 768}</string>
 				<string>{300, 768}</string>
+				<string>{136, 136}</string>
 				<string>{256, 256}</string>
 				<string>{256, 256}</string>
 			</object>

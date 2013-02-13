@@ -45,6 +45,9 @@
 - (void) render
 {
     glEnable(GL_TEXTURE_2D);
+    glCullFace(GL_BACK);
+    glEnable(GL_CULL_FACE);
+
     //glDisable(GL_LIGHTING);
     [self renderBottom];
     [self renderSideA];
@@ -52,6 +55,8 @@
     [self renderSideC];
     [self renderSideD];
     //glEnable(GL_LIGHTING);
+    glDisable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);
     glDisable(GL_TEXTURE_2D);
 
 }
@@ -189,16 +194,6 @@
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
     glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
-    
-//    GLfloat botVertices[] = {
-//        self.v7.x,self.v7.y,self.v7.z,
-//        self.v3.x,self.v3.y,self.v3.z,
-//        self.v2.x,self.v2.y,self.v2.z,
-//        
-//        self.v2.x,self.v2.y,self.v2.z,
-//        self.v6.x,self.v6.y,self.v6.z,
-//        self.v7.x,self.v7.y,self.v7.z,
-//    };
     
     GLfloat botVertices[] = {
         self.v6.x,self.v6.y,self.v6.z,

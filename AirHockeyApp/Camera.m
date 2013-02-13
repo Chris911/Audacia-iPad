@@ -48,12 +48,12 @@
     self.currentPosition = Vector3DMake(0, 0, 0);
     
     self.centerPosition = Vector3DMake(0, 0, 0);
-    self.eyePosition = Vector3DMake(0, 0, 100);
+    self.eyePosition = Vector3DMake(0, -50, 100);
     self.up = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
     eyeToCenterDistance = self.eyePosition.z - centerPosition.z;
 
-    self.theta = 90;
-    self.phi = 90;
+    self.theta = 270;
+    self.phi = 5;
     
     
     // Ortho attributes
@@ -69,6 +69,7 @@
     self.windowWidth = LARGEUR_ECRAN;
     
     self.worldPosition = Vector3DMake(self.orthoCenter.x, self.orthoCenter.y,-1); //Z Ignored
+    [self rotateCamera:CGPointMake(0, 0)];
 }
 
 - (void) setCamera
@@ -223,29 +224,28 @@
 
 - (void) rotateCamera:(CGPoint)delta
 {
-    //CGPoint delta = CGPointMake((curPt.x - prevPt.x)/10, (curPt.y - prevPt.y)/10);
     self.theta = (self.theta + delta.x);
-    self.phi = (self.phi + delta.y);
+    self.phi = (self.phi - delta.y);
     [self rotateEyeOnAxisXY];
-    
 }
 
 - (void) rotateEyeOnAxisXY
 {
-    if(self.phi < 1){
-        self.phi = 1;
+    if(self.phi < 5){
+        self.phi = 5;
     }
     if(self.phi > 179){
         self.phi = 179;
     }
     
-    //NSLog(@"Phi : %f, Theta : %f",self.phi,self.theta);
-    
     float radTheta = (self.theta) * 3.1416/180;
     float radPhi = self.phi * 3.1416/180;
     
-    self.centerPosition = Vector3DMake(self.eyePosition.x + (eyeToCenterDistance * cosf(radTheta) * sinf(radPhi)),
-                                       self.eyePosition.y - (eyeToCenterDistance * sinf(radTheta) * sinf(radPhi)),
+    NSLog(@"Phi : %f, Theta : %f",self.phi,self.theta);
+    NSLog(@"X a : %f, Y   a : %f",cosf(radTheta) * sinf(radPhi),sinf(radTheta) * sinf(radPhi));
+
+    self.centerPosition = Vector3DMake(self.eyePosition.x - (eyeToCenterDistance * cosf(radTheta) * sinf(radPhi)),
+                                       self.eyePosition.y + (eyeToCenterDistance * sinf(radTheta) * sinf(radPhi)),
                                        self.eyePosition.z - (eyeToCenterDistance * cosf(radPhi)));    
     [self assignUpVector];
     
@@ -272,8 +272,8 @@
 {
     //CGPoint delta = CGPointMake((curPt.x - prevPt.x)/10, (curPt.y - prevPt.y)/10);
     
-    self.centerPosition = Vector3DMake(self.centerPosition.x + delta.x, self.centerPosition.y, self.centerPosition.z + delta.y);
-    self.eyePosition = Vector3DMake(self.eyePosition.x + delta.x, self.eyePosition.y, self.eyePosition.z + delta.y);
+    self.centerPosition = Vector3DMake(self.centerPosition.x + delta.x, self.centerPosition.y, self.centerPosition.z - delta.y);
+    self.eyePosition = Vector3DMake(self.eyePosition.x + delta.x, self.eyePosition.y, self.eyePosition.z - delta.y);
     eyeToCenterDistance = self.eyePosition.z - centerPosition.z;
 }
 

@@ -64,6 +64,7 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UIView *rightJoystick;
 @property (retain, nonatomic) IBOutlet UIView *leftJoystickTip;
 @property (retain, nonatomic) IBOutlet UIView *rightJoystickTip;
+@property (retain, nonatomic) IBOutlet UIImageView *crossHair;
 
 
 - (void)startAnimation;

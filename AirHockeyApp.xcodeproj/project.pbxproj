@@ -75,6 +75,7 @@
 		A854C67216CA8EEA00397E33 /* skybox.png in Resources */ = {isa = PBXBuildFile; fileRef = A854C67116CA8EEA00397E33 /* skybox.png */; };
 		A854C67516CA9E5B00397E33 /* joystickBase.png in Resources */ = {isa = PBXBuildFile; fileRef = A854C67316CA9E5B00397E33 /* joystickBase.png */; };
 		A854C67616CA9E5B00397E33 /* joystickTip.png in Resources */ = {isa = PBXBuildFile; fileRef = A854C67416CA9E5B00397E33 /* joystickTip.png */; };
+		A8664A5916CB174A00CC99EC /* crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = A8664A5816CB174A00CC99EC /* crosshair.png */; };
 		A86C08B416C2A68200839C4B /* NodePuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6916AEF7C5006D1FEB /* NodePuck.m */; };
 		A889F22716B067E10008E534 /* booster_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22316B067E10008E534 /* booster_texture.png */; };
 		A889F22816B067E10008E534 /* pommeau_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22416B067E10008E534 /* pommeau_texture.png */; };
@@ -234,6 +235,7 @@
 		A854C67116CA8EEA00397E33 /* skybox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skybox.png; sourceTree = "<group>"; };
 		A854C67316CA9E5B00397E33 /* joystickBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickBase.png; path = Assets/UI/Images/joystickBase.png; sourceTree = "<group>"; };
 		A854C67416CA9E5B00397E33 /* joystickTip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickTip.png; path = Assets/UI/Images/joystickTip.png; sourceTree = "<group>"; };
+		A8664A5816CB174A00CC99EC /* crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crosshair.png; path = Assets/UI/Images/crosshair.png; sourceTree = "<group>"; };
 		A889F22316B067E10008E534 /* booster_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = booster_texture.png; path = AirHockeyApp/booster_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22416B067E10008E534 /* pommeau_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pommeau_texture.png; path = AirHockeyApp/pommeau_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22516B067E10008E534 /* portal_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = portal_texture.png; path = AirHockeyApp/portal_texture.png; sourceTree = SOURCE_ROOT; };
@@ -691,6 +693,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A8664A5816CB174A00CC99EC /* crosshair.png */,
 				A854C67316CA9E5B00397E33 /* joystickBase.png */,
 				A854C67416CA9E5B00397E33 /* joystickTip.png */,
 				A8CE920516C9BDF0001CCEBB /* AudaciaLogo.png */,
@@ -930,6 +933,7 @@
 				A854C67216CA8EEA00397E33 /* skybox.png in Resources */,
 				A854C67516CA9E5B00397E33 /* joystickBase.png in Resources */,
 				A854C67616CA9E5B00397E33 /* joystickTip.png in Resources */,
+				A8664A5916CB174A00CC99EC /* crosshair.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

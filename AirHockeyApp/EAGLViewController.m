@@ -183,6 +183,7 @@ enum {
     [_rightJoystick release];
     [_leftJoystickTip release];
     [_rightJoystickTip release];
+    [_crossHair release];
     [super dealloc];
 }
 
@@ -236,6 +237,7 @@ enum {
     [self setRightJoystick:nil];
     [self setLeftJoystickTip:nil];
     [self setRightJoystickTip:nil];
+    [self setCrossHair:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -364,7 +366,7 @@ enum {
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for(UITouch* touch in [event allTouches]){        
-        NSLog(@"%i",[[event allTouches] count]);
+        //NSLog(@"%i",[[event allTouches] count]);
 
         CGPoint positionCourante = [touch locationInView:self.view];
         CGPoint positionPrecedente = [touch previousLocationInView:self.view];
@@ -427,9 +429,13 @@ enum {
             
         } else if (currentTouchesMode == TOUCH_HALFLIFE_MODE) { // Half-Life camera mode
             if(positionCourante.x < LARGEUR_ECRAN/2){
-                [self handleLeftJoystickMovement:touch]; //FIXME: HELP!!!!!!
+                if(activeObjectTag == LEFTTIPVIEW_TAG){
+                    [self handleLeftJoystickMovement:touch]; //FIXME: HELP!!!!!!
+                }
             } else {
-                [self handleRightJoystickMovement:touch];
+                if(activeObjectTag == RIGHTTIPVIEW_TAG){
+                    [self handleRightJoystickMovement:touch];
+                }
             }
         }
         
@@ -484,7 +490,7 @@ enum {
     CGPoint location = [touch locationInView:self.rightJoystick];
     
     // Rotate cam
-    CGPoint delta = CGPointMake((location.x - rightJoystickCenter.x)/20, (location.y - rightJoystickCenter.y)/20);
+    CGPoint delta = CGPointMake((location.x - rightJoystickCenter.x)/30, (location.y - rightJoystickCenter.y)/30);
     float radius = self.rightJoystick.frame.size.width/2;
     float distanceTipToCenter = (delta.x * delta.x) + (delta.y * delta.y);
     
@@ -776,8 +782,10 @@ enum {
     //Render the skybox
     [skybox render];
     
+    glEnable(GL_CULL_FACE);
     // Renders the whole rendring tree
     [[Scene getInstance].renderingTree render];
+    glDisable(GL_CULL_FACE);
     
     // Render the elastic rectangle if active
     if(elasticRect.isActive){
@@ -826,6 +834,8 @@ enum {
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
                              view.center = CGPointMake(-512,view.center.y);
+                             [self.crossHair setAlpha:0];
+
                          }
                          completion:nil];
     } else if(view.tag == RJOYSTICKVIEW_TAG){
@@ -879,6 +889,8 @@ enum {
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
                              view.center = CGPointMake(250,view.center.y);
+                             [self.crossHair setAlpha:1];
+
                          }
                          completion:nil];
     } else if(view.tag == RJOYSTICKVIEW_TAG){
@@ -1020,6 +1032,7 @@ enum {
                                          HAUTEUR_ECRAN + self.SettingsView.frame.size.height);
     self.leftJoystick.center = CGPointMake(-512, 540);
     self.rightJoystick.center = CGPointMake(1024 + 512, 540);
+    [self.crossHair setAlpha:0];
 }
 
 #pragma mark - Reset table utility

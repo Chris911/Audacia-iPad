@@ -195,9 +195,15 @@
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Success [Login]: %@", operation.responseString);
                 [Session getInstance].isAuthenticated = YES;
+                //Just because we can
+                [NSThread sleepForTimeInterval:1.0];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginEventFinish" object:nil];
     }
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error [Login]: %@", operation.responseString);
+                //Just because we can
+                [NSThread sleepForTimeInterval:1.0];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginEventFinish" object:nil];
     }];
     
     return [Session getInstance].isAuthenticated;

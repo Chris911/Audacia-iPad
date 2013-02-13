@@ -21,6 +21,9 @@
 @property (retain, nonatomic) IBOutlet UIButton *continueAnonButton;
 @property (retain, nonatomic) IBOutlet UILabel *teamAudacityLabel;
 @property (retain, nonatomic) IBOutlet UILabel *errorLabel;
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (retain, nonatomic) IBOutlet UIView *hiddenView;
+@property (retain, nonatomic) IBOutlet UIImageView *logoImage;
 
 - (IBAction)pressedLoginButton:(id)sender;
 - (IBAction)pressedContinueAnonButton:(id)sender;

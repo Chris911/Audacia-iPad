@@ -326,7 +326,7 @@
     [self load];
 }
 
-- (void) load
+- (void)load
 {
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     
@@ -343,7 +343,7 @@
     }
 }
 
-- (void) loadNewMaps
+- (void)loadNewMaps
 {
     // While a new maps array isn't ready in the MapContainer, block the background thread.
     while (![MapContainer getInstance].isMapsInfosLoaded) {}
@@ -380,7 +380,7 @@
 
 }
 
-- (void) fetchAllImages
+- (void)fetchAllImages
 {
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     for(Map* m in [MapContainer getInstance].maps){

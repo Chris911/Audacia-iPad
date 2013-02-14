@@ -59,14 +59,6 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (retain, nonatomic) IBOutlet UILabel *angleLable;
 
-// Joystick UI elements
-@property (retain, nonatomic) IBOutlet UIView *leftJoystick;
-@property (retain, nonatomic) IBOutlet UIView *rightJoystick;
-@property (retain, nonatomic) IBOutlet UIView *leftJoystickTip;
-@property (retain, nonatomic) IBOutlet UIView *rightJoystickTip;
-@property (retain, nonatomic) IBOutlet UIImageView *crossHair;
-
-
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)setupView;

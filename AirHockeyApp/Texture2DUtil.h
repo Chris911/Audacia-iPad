@@ -11,5 +11,6 @@
 @interface Texture2DUtil : NSObject
 
 + (void) load2DTextureFromName:(NSString*)name;
++ (void) load2DTextureFromNamePVRTC:(NSString*)name :(int)size;
 
 @end

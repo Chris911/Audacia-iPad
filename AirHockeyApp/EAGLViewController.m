@@ -4,7 +4,6 @@
 //  Master OpenGL container, inherited from EAGLView and and UIViewController
 
 #import <QuartzCore/QuartzCore.h>
-#import "AppDemoAppDelegate.h"
 
 #import "EAGLViewController.h"
 #import "EAGLView.h"
@@ -36,11 +35,6 @@ int const PARAMETERSVIEW_TAG    = 200;
 int const TRANSFORMVIEW_TAG     = 300;
 int const OBJECTSVIEW_TAG       = 400;
 int const SETTINGSVIEW_TAG      = 500;
-int const LJOYSTICKVIEW_TAG     = 600;
-int const RJOYSTICKVIEW_TAG     = 700;
-int const LEFTTIPVIEW_TAG       = 800;
-int const RIGHTTIPVIEW_TAG      = 900;
-
 
 // Drag and Drop views tags
 int const PORTALVIEW_TAG        = 10;
@@ -70,6 +64,7 @@ enum {
     BOOL anyNodeSelected;
     
     BOOL isHalfLifeCamActive;
+    BOOL isReadyToExit;
     
     // Defines the current transformation state (translate,rotation or scale)
     int  currentTransformState;
@@ -80,16 +75,12 @@ enum {
     // Defines the current touch moved mode (Transform, Camera or Elastic Rectangle)
     int currentTouchesMode;
     
-    // Elastic Rectangle
-    ElasticRect *elasticRect;
+      // Elastic Rectangle
+      ElasticRect *elasticRect;
     
-    NSMutableArray *particles;
+      Skybox* skybox;
     
-    Skybox* skybox;
-    
-    Node *selectedNode;
-    CGPoint leftJoystickCenter;
-    CGPoint rightJoystickCenter;
+      Node *selectedNode;
 }
 
 @property (nonatomic, retain) EAGLContext *context;
@@ -104,8 +95,9 @@ enum {
 
 #pragma mark - Lifecycle methods
 
-- (void)awakeFromNib
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    if(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]){
     EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
 
     if (!aContext)
@@ -127,13 +119,8 @@ enum {
     currentTouchesMode      = TOUCH_CAMERA_MODE;
     activeObjectTag         = -1;
     isHalfLifeCamActive     = NO;
+    isReadyToExit           = NO;
     
-    leftJoystickCenter = CGPointMake(self.leftJoystick.frame.size.width/2,
-                                      self.leftJoystick.frame.size.height/2);
-    
-    rightJoystickCenter = CGPointMake(self.rightJoystick.frame.size.width/2,
-                                      self.rightJoystick.frame.size.height/2);
- 
     // Create the camera
     self.camera = [[[Camera alloc]init]autorelease];
     
@@ -141,7 +128,9 @@ enum {
     elasticRect = [[ElasticRect alloc]init];
     
     // Create the skybox
-    skybox = [[Skybox alloc]initWithSize:400.0f];
+    skybox = [[Skybox alloc]initWithSize:150.0f];
+    }
+    return self;
 }
 
 - (void)dealloc
@@ -179,11 +168,6 @@ enum {
     [_angleSlider release];
     [_sizeLabel release];
     [_angleLable release];
-    [_leftJoystick release];
-    [_rightJoystick release];
-    [_leftJoystickTip release];
-    [_rightJoystickTip release];
-    [_crossHair release];
     [super dealloc];
 }
 
@@ -214,6 +198,11 @@ enum {
 
 - (void)viewDidUnload
 {
+//    skybox = nil;
+//    elasticRect = nil;
+//    selectedNode = nil;
+//    self.camera = nil;
+    
     [self setLeftSlideView:nil];
     [self setCameraView:nil];
     [self setParametersView:nil];
@@ -233,11 +222,6 @@ enum {
     [self setAngleSlider:nil];
     [self setSizeLabel:nil];
     [self setAngleLable:nil];
-    [self setLeftJoystick:nil];
-    [self setRightJoystick:nil];
-    [self setLeftJoystickTip:nil];
-    [self setRightJoystickTip:nil];
-    [self setCrossHair:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -445,56 +429,6 @@ enum {
     selectedNode = nil; // invalidate pointer
 }
 
-#pragma mark - Joystick methods
-
-// Left joystick movements, Camera strafe
-- (void) handleLeftJoystickMovement:(UITouch*)touch
-{
-    //CGPoint location = [touch locationInView:self.leftJoystick];
-    
-    // Strafe cam
-//    float radius = self.leftJoystick.frame.size.width/2;
-//    CGPoint delta = CGPointMake((location.x - leftJoystickCenter.x)/20, (location.y - leftJoystickCenter.y)/20);
-//    float distanceTipToCenter = (delta.x * delta.x) + (delta.y * delta.y);
-//    location = CGPointMake(leftJoystickCenter.x, location.y);
-//    
-//    if( distanceTipToCenter <= radius){
-//        [self.camera perspectiveZoom:delta];
-//        [self.view viewWithTag:activeObjectTag].center = location;
-//    } else {
-//        float angle = atan2(delta.y, delta.x);
-//        [self.view viewWithTag:activeObjectTag].center = CGPointMake(128 + radius * cosf(angle),128 + radius*sinf(angle));
-//    }
-}
-
-// Right joystick movements, Camera rotation
-- (void) handleRightJoystickMovement:(UITouch*)touch
-{
-//    CGPoint location = [touch locationInView:self.rightJoystick];
-//    
-//    // Rotate cam
-//    CGPoint delta = CGPointMake((location.x - rightJoystickCenter.x)/30, (location.y - rightJoystickCenter.y)/30);
-//    float radius = self.rightJoystick.frame.size.width/2;
-//    float distanceTipToCenter = (delta.x * delta.x) + (delta.y * delta.y);
-//    
-//    if( distanceTipToCenter <= radius){
-//        [self.camera rotateCamera:delta];
-//        [self.view viewWithTag:activeObjectTag].center = location;
-//    } else {
-//        float angle = atan2(delta.y, delta.x);
-//        [self.view viewWithTag:activeObjectTag].center = CGPointMake(128 + radius * cosf(angle),128 + radius*sinf(angle));
-//    }
-}
-
-- (void) replaceJoysticks
-{
-//    if(activeObjectTag == LEFTTIPVIEW_TAG) {
-//        [self.view viewWithTag:activeObjectTag].center =  leftJoystickCenter;
-//    } else if(activeObjectTag == RIGHTTIPVIEW_TAG) {
-//        [self.view viewWithTag:activeObjectTag].center =  rightJoystickCenter;
-//    }
-}
-
 #pragma mark - Button methods
 
 - (IBAction)OpenCameraView:(id)sender
@@ -572,8 +506,7 @@ enum {
 - (IBAction)togglePerspective:(id)sender
 {
     if(self.camera.isPerspective){
-        [self slideOutAnimationView: self.leftJoystick];
-        [self slideOutAnimationView: self.rightJoystick];
+
     }
     self.camera.isPerspective = !self.camera.isPerspective;
 }
@@ -584,8 +517,13 @@ enum {
     [self.camera resetCamera];
     [self resetTable];
     [self resetUI];
-    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    [delegate afficherMenu];
+    [self dismissModalViewControllerAnimated:NO];
+}
+- (void) waitForExit
+{
+    [NSThread sleepForTimeInterval:0.5];
+    isReadyToExit = YES;
+
 }
 
 - (IBAction)deleteItem:(id)sender
@@ -612,17 +550,6 @@ enum {
 
 - (IBAction)toggleHalfLifeCam:(id)sender
 {
-    if(self.camera.isPerspective){
-        if(!isHalfLifeCamActive){
-            [self hideAllUIElements];
-            [self slideInAnimationView:self.rightJoystick];
-            [self slideInAnimationView:self.leftJoystick];
-        } else {
-            [self slideOutAnimationView:self.rightJoystick];
-            [self slideOutAnimationView:self.leftJoystick];
-        }
-        isHalfLifeCamActive = !isHalfLifeCamActive;
-    }
 }
 
 #pragma mark - Slider action methods
@@ -646,10 +573,6 @@ enum {
 {
     if(view.tag > 0) {
         activeObjectTag = view.tag;
-        
-        if(activeObjectTag == LEFTTIPVIEW_TAG || activeObjectTag == RIGHTTIPVIEW_TAG){
-            currentTouchesMode = TOUCH_HALFLIFE_MODE;
-        }
     } else {
         NSLog(@"Invalid Tag"); 
     }
@@ -813,20 +736,6 @@ enum {
                              view.center = CGPointMake(1024 - view.frame.size.width/2, HAUTEUR_ECRAN - view.frame.size.height/2);
                          }
                          completion:nil];
-    } else if(view.tag == LJOYSTICKVIEW_TAG){
-        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             view.center = CGPointMake(-512,view.center.y);
-                             [self.crossHair setAlpha:0];
-
-                         }
-                         completion:nil];
-    } else if(view.tag == RJOYSTICKVIEW_TAG){
-        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             view.center = CGPointMake(1024 + 512,view.center.y);
-                         }
-                         completion:nil];
     }
 }
 
@@ -868,21 +777,7 @@ enum {
                              
                          }
                          completion:nil];
-    } else if(view.tag == LJOYSTICKVIEW_TAG){
-        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             view.center = CGPointMake(250,view.center.y);
-                             [self.crossHair setAlpha:1];
-
-                         }
-                         completion:nil];
-    } else if(view.tag == RJOYSTICKVIEW_TAG){
-        [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             view.center = CGPointMake(1024 - 250,view.center.y);
-                         }
-                         completion:nil];
-    }
+    } 
 }
 
 - (void) hideAllUIElements
@@ -990,33 +885,18 @@ enum {
     UIPanGestureRecognizer *dndMuret = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
     UIPanGestureRecognizer *dndPuck = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
     UIPanGestureRecognizer *dndPommeau = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
-    UIPanGestureRecognizer *dragLjoystick = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
-    UIPanGestureRecognizer *dragRjoystick = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
 
     [self.PortalView addGestureRecognizer:dndPortal];
     [self.BoosterView addGestureRecognizer:dndBooster];
     [self.MuretView addGestureRecognizer:dndMuret];
     [self.PuckView addGestureRecognizer:dndPuck];
     [self.PommeauView addGestureRecognizer:dndPommeau];
-    //[self.leftJoystickTip addGestureRecognizer:dragLjoystick];
-    //[self.rightJoystickTip addGestureRecognizer:dragRjoystick];
 
     [dndBooster release];
     [dndPortal release];
     [dndMuret release];
     [dndPuck release];
     [dndPommeau release];
-    [dragLjoystick release];
-    [dragRjoystick release];
-    
-    // Pan for camera, 2 fingers
-//    UIPanGestureRecognizer *panPerspectiveCamera = [[UIPanGestureRecognizer alloc]
-//                                                    initWithTarget:self
-//                                                    action:@selector(panGestureAction:)];
-//    panPerspectiveCamera.minimumNumberOfTouches = 2;
-//    [self.view addGestureRecognizer:panPerspectiveCamera];
-//    [panPerspectiveCamera release];
-
 }
 
 - (void) prepareAdditionalViews
@@ -1034,9 +914,6 @@ enum {
     self.TransformView.center = CGPointMake(TRANSFORMVIEW_INITIAL_POSITION,self.TransformView.center.y);
     self.SettingsView.center = CGPointMake(1024 + self.SettingsView.frame.size.width,
                                          HAUTEUR_ECRAN + self.SettingsView.frame.size.height);
-    self.leftJoystick.center = CGPointMake(-512, 540);
-    self.rightJoystick.center = CGPointMake(1024 + 512, 540);
-    [self.crossHair setAlpha:0];
 }
 
 #pragma mark - Reset table utility
@@ -1051,6 +928,7 @@ enum {
     currentTransformState = STATE_TRANSFORM_TRANSLATION;
     activeObjectTag = -1;
     [[Scene getInstance].renderingTree emptyRenderingTree];
+    [[Scene getInstance] release];
 }
 
 #pragma mark - Modify UI Elements

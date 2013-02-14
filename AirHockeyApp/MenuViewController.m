@@ -19,6 +19,8 @@
 {
     BOOL isConnectionViewVisible;
     BOOL isSoundEnabled;
+    
+    EAGLViewController *eagl;
 }
 
 @end
@@ -64,6 +66,11 @@
     }
     
     [MapContainer removeMapsInContainers];
+    
+    if(eagl.isViewLoaded){
+        [eagl release];
+        eagl = nil;
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -75,12 +82,15 @@
 
 - (IBAction)afficherVueAnimee
 {
-    if(!isConnectionViewVisible) {
-    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-        [delegate afficherVueAnimee];
-    } else {
-        [self toggleConnectionView];
-    }
+     eagl = [[EAGLViewController alloc]initWithNibName:@"EAGLViewController" bundle:nil];
+
+    [self presentModalViewController:eagl animated:NO];
+//    if(!isConnectionViewVisible) {
+//    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+//        [delegate afficherVueAnimee];
+//    } else {
+//        [self toggleConnectionView];
+//    }
 }
 
 - (IBAction)testCaseButtonPressed:(id)sender

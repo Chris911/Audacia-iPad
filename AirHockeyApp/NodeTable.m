@@ -60,9 +60,14 @@
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
     
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);
+    
     // Draw the top surface 
     [self drawTopSurface];
     
+    glCullFace(GL_BACK);
+    glDisable(GL_CULL_FACE);
     glDisable(GL_TEXTURE_2D);
 
     // Draw the borders

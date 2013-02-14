@@ -16,6 +16,7 @@
 
 - (void) afficherVueAnimee
 {
+    self.eaglViewController = nil;
     self.window.rootViewController = self.eaglViewController;
 }
 
@@ -34,7 +35,7 @@
     // Override point for customization after application launch.
     self.window.rootViewController = self.menuViewController;
     
-    self.webClient = [[WebClient alloc] initWithDefaultServer];
+    self.webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
     
     // Create a user session
     return YES;

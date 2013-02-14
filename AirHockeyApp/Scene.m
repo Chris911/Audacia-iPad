@@ -50,7 +50,7 @@ static Scene *scene = NULL;
     // Very important to add the edges AFTER the table
     // (inherited from Projet2 XML's structure)
     [table addEdgesToTree];
-    
+
     NodePuck* puck = [[[NodePuck alloc]init]autorelease];
     [scene.renderingTree addNodeToTreeWithInitialPosition:puck :Vector3DMake(0, 0, puck.position.z)];
     
@@ -92,9 +92,9 @@ static Scene *scene = NULL;
 
 - (void)dealloc
 {
-    self.renderingTree = nil;
     [renderingTree release];
     [scene release];
+    scene = nil;
     [super dealloc];
 }
 

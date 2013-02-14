@@ -4,7 +4,7 @@
 //
 //  Created by Sam DesRochers on 2013-02-10.
 //
-//
+//  Original post from : http://iphonedevelopment.blogspot.ca/2009/05/opengl-es-from-ground-up-part-6_25.html
 
 #import "Texture2DUtil.h"
 
@@ -34,6 +34,21 @@
 
     free(imageData);
     [image release];
+    [texData release];
+}
+
++ (void) load2DTextureFromNamePVRTC:(NSString*)name :(int)size;
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"pvrtc"];
+    NSData *texData = [[NSData alloc] initWithContentsOfFile:path];
+    
+    // This assumes that source PVRTC image is 4 bits per pixel and RGB not RGBA
+    // If you use the default settings in texturetool, e.g.:
+    //
+    //      texturetool -e PVRTC -o texture.pvrtc texture.png
+    //
+    // then this code should work fine for you.
+    glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG, size, size, 0, [texData length], [texData bytes]);
     [texData release];
 }
 

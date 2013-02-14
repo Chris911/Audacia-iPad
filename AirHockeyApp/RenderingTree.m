@@ -44,7 +44,7 @@
 
         // count of nodes before is lower than actual count
         if(countBeforeAdding < [tree count]){
-            NSLog(@"node of type : %@ added",node.type);
+            //NSLog(@"node of type : %@ added",node.type);
         } else {
             NSLog(@"error adding node of type : %@",node.type);
         }
@@ -428,7 +428,7 @@
 
 - (void) dealloc
 {
-    [self.tree release];
+    [tree release];
     [super dealloc];
 }
 @end

@@ -42,7 +42,7 @@
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
-        [Texture2DUtil load2DTextureFromName:@"table"];
+        [Texture2DUtil load2DTextureFromNamePVRTC:@"table" :512];
     }
     return self;
 }
@@ -206,16 +206,16 @@
     
     GLfloat topTextures[] = {
         //            * Table's surface *
-        0.5, 0.5,        //mid
-        0, 1,           //0
-        0.5, 1,         //1
-        1, 1,           //2
-        1, 0.5,         //4
+        0.5, 0.25,        //mid
+        0, 0.5,           //0
+        0.5, 0.5,         //1
+        1, 0.5,           //2
+        1, 0.25,         //4
         1, 0,           //7
         0.5, 0,         //6
         0,0,            //5
-        0,0.5,          //3
-        0,1             //0
+        0,0.25,          //3
+        0,0.5             //0
     };
     glNormal3f(0.0f, 0.0f, 1.0f);
     

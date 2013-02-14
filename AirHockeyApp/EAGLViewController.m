@@ -128,7 +128,7 @@ enum {
     elasticRect = [[ElasticRect alloc]init];
     
     // Create the skybox
-    skybox = [[Skybox alloc]initWithSize:150.0f];
+    skybox = [[Skybox alloc]initWithSize:350.0f];
     }
     return self;
 }
@@ -514,14 +514,16 @@ enum {
 - (IBAction)ExitProgram:(id)sender
 {
     [self stopAnimation];
-    [self.camera resetCamera];
-    [self resetTable];
-    [self resetUI];
+    [NSThread sleepForTimeInterval:0.5];
+    [self flushTable];
+    [NSThread sleepForTimeInterval:0.5];
+    //[self performSelectorInBackground:@selector(waitForExit) withObject:nil];
+    //while(!isReadyToExit){}
     [self dismissModalViewControllerAnimated:NO];
 }
 - (void) waitForExit
 {
-    [NSThread sleepForTimeInterval:0.5];
+    [NSThread sleepForTimeInterval:10];
     isReadyToExit = YES;
 
 }
@@ -923,7 +925,7 @@ enum {
     [self prepareAdditionalViews];
 }
 
-- (void) resetTable
+- (void) flushTable
 {
     currentTransformState = STATE_TRANSFORM_TRANSLATION;
     activeObjectTag = -1;

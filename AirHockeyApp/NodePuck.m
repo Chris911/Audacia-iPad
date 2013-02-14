@@ -21,7 +21,7 @@
 
         NSString *path = [[NSBundle mainBundle] pathForResource:@"puck" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];
-        Vertex3D position = Vertex3DMake(0, 0, 0.0);
+        Vertex3D position = Vertex3DMake(0, 0, 2.0);
         self.model = theObject;
         self.position = position;
         self.isCopyable = NO;

@@ -216,8 +216,27 @@
 
 - (void) strafeXY:(CGPoint)delta
 {
-    self.eyePosition = Vector3DMake(self.eyePosition.x + delta.x, self.eyePosition.y - delta.y/3, self.eyePosition.z);
-    self.centerPosition = Vector3DMake(self.centerPosition.x + delta.x, self.centerPosition.y - delta.y/3, self.centerPosition.z);
+    self.eyePosition = Vector3DMake(self.eyePosition.x + delta.x/3, self.eyePosition.y - delta.y/3, self.eyePosition.z);
+    self.centerPosition = Vector3DMake(self.centerPosition.x + delta.x/3, self.centerPosition.y - delta.y/3, self.centerPosition.z);
+    
+    int limit = 100;
+    if (self.eyePosition.x > limit/2) {
+        self.eyePosition = Vector3DMake(limit/2, self.eyePosition.y,self.eyePosition.z);
+        self.centerPosition = Vector3DMake(limit/2, self.centerPosition.y,self.centerPosition.z);
+    }
+    if (self.eyePosition.x < -limit/2) {
+        self.eyePosition = Vector3DMake( - limit/2, self.eyePosition.y,self.eyePosition.z);
+        self.centerPosition = Vector3DMake(- limit/2, self.centerPosition.y,self.centerPosition.z);
+    }
+//    if (self.centerPosition.y > limit) {
+//        self.eyePosition = Vector3DMake(self.eyePosition.x, self.eyePosition.y,self.eyePosition.z);
+//        self.centerPosition = Vector3DMake(self.centerPosition.x, limit,self.centerPosition.z);
+//    }
+//    if (self.eyePosition.y < -limit) {
+//        self.eyePosition = Vector3DMake( self.eyePosition.x, -limit,self.eyePosition.z);
+//        self.centerPosition = Vector3DMake(self.centerPosition.x, self.centerPosition,self.centerPosition.z);
+//    }
+    
     [self assignUpVector];
 
 }
@@ -229,6 +248,7 @@
     self.eyePosition = Vector3DMake(self.centerPosition.x + eyeToCenterDistance * cosf(radTheta) * sinf(radPhi),
                                     self.centerPosition.y + -eyeToCenterDistance * sinf(radTheta) * sinf(radPhi),
                                     self.centerPosition.z + eyeToCenterDistance  * cosf(radPhi));
+    
     [self assignUpVector];
 }
 
@@ -256,7 +276,6 @@
         self.eyePosition = Vector3DMake(self.eyePosition.x , self.eyePosition.y, self.eyePosition.z + (delta*2));
     }
     
-    NSLog(@"%f",self.eyePosition.z);
     if(eyeToCenterDistance < 50){
         eyeToCenterDistance = 50;
     } else if(eyeToCenterDistance > 200){

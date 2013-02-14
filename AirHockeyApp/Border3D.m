@@ -16,7 +16,6 @@
 
 @implementation Border3D
 
-
 - (id) initWithStartAndEndPoints:(Vector3D)startPt :(Vector3D)endPt
 {
     if((self = [super init])) {
@@ -29,6 +28,8 @@
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
         
         [Texture2DUtil load2DTextureFromName:@"border"];
+        //[Texture2DUtil load2DTextureFromNamePVRTC:@"border":64];
+
 
     }
     return self;

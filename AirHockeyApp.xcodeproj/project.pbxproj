@@ -83,7 +83,6 @@
 		A89FD22E16B949FB005383E4 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = A89FD22D16B949FB005383E4 /* Map.m */; };
 		A89FD23B16B96576005383E4 /* Border3D.m in Sources */ = {isa = PBXBuildFile; fileRef = A89FD23A16B96576005383E4 /* Border3D.m */; };
 		A8A4638C16C7F990008D173B /* Texture2DUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4638B16C7F990008D173B /* Texture2DUtil.m */; };
-		A8A4639216C8189E008D173B /* table.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A4639116C8189E008D173B /* table.png */; };
 		A8A4639416C8234A008D173B /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A4639316C8234A008D173B /* border.png */; };
 		A8A4639816C88012008D173B /* Skybox.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4639716C88012008D173B /* Skybox.m */; };
 		A8BD086A169F871E00B7A95D /* SideBar.png in Resources */ = {isa = PBXBuildFile; fileRef = A8BD0869169F871E00B7A95D /* SideBar.png */; };
@@ -127,6 +126,7 @@
 		A8EEE40E16BF3EDD00EA3FB0 /* AudioInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */; };
 		A8EEE41716BF43D700EA3FB0 /* technoloop.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */; };
 		A8EEE41916BF442800EA3FB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */; };
+		A8F0987816CD96F400280C71 /* table.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8F0987716CD96F400280C71 /* table.pvrtc */; };
 		A8F13CA916AF190E00CB5885 /* SideBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CA816AF190E00CB5885 /* SideBar2.png */; };
 		A8F13CB916B027F300CB5885 /* SettingsButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CB716B027F300CB5885 /* SettingsButton1.png */; };
 		A8F13CBA16B027F300CB5885 /* SettingsImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CB816B027F300CB5885 /* SettingsImage1.png */; };
@@ -243,7 +243,6 @@
 		A89FD23A16B96576005383E4 /* Border3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Border3D.m; sourceTree = "<group>"; };
 		A8A4638A16C7F990008D173B /* Texture2DUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture2DUtil.h; sourceTree = "<group>"; };
 		A8A4638B16C7F990008D173B /* Texture2DUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Texture2DUtil.m; sourceTree = "<group>"; };
-		A8A4639116C8189E008D173B /* table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table.png; sourceTree = "<group>"; };
 		A8A4639316C8234A008D173B /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
 		A8A4639616C88012008D173B /* Skybox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skybox.h; sourceTree = "<group>"; };
 		A8A4639716C88012008D173B /* Skybox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skybox.m; sourceTree = "<group>"; };
@@ -315,6 +314,7 @@
 		A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInterface.m; sourceTree = "<group>"; };
 		A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = technoloop.m4a; sourceTree = "<group>"; };
 		A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A8F0987716CD96F400280C71 /* table.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = table.pvrtc; sourceTree = "<group>"; };
 		A8F13CA816AF190E00CB5885 /* SideBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar2.png; path = Assets/UI/Images/SideBar2.png; sourceTree = "<group>"; };
 		A8F13CB716B027F300CB5885 /* SettingsButton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsButton1.png; path = Assets/UI/Images/SettingsButton1.png; sourceTree = "<group>"; };
 		A8F13CB816B027F300CB5885 /* SettingsImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsImage1.png; path = Assets/UI/Images/SettingsImage1.png; sourceTree = "<group>"; };
@@ -658,10 +658,10 @@
 		A8A4639016C8189E008D173B /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A8F0987716CD96F400280C71 /* table.pvrtc */,
 				A8664A5E16CC1AE700CC99EC /* border.pvrtc */,
 				A8664A5C16CC197800CC99EC /* skybox.pvrtc */,
 				A8A4639316C8234A008D173B /* border.png */,
-				A8A4639116C8189E008D173B /* table.png */,
 			);
 			name = Textures;
 			path = Assets/Textures;
@@ -691,9 +691,6 @@
 			isa = PBXGroup;
 			children = (
 				045AA82A16CBF93C00F82AB0 /* login-background.png */,
-				A8664A5816CB174A00CC99EC /* crosshair.png */,
-				A854C67316CA9E5B00397E33 /* joystickBase.png */,
-				A854C67416CA9E5B00397E33 /* joystickTip.png */,
 				A8CE920516C9BDF0001CCEBB /* AudaciaLogo.png */,
 				A8CE920616C9BDF0001CCEBB /* hockey-cup.png */,
 				A8CE920716C9BDF0001CCEBB /* hockey-helmet.png */,
@@ -915,7 +912,6 @@
 				04BDB84916C41A1300648B51 /* Stars-4.png in Resources */,
 				04BDB84A16C41A1300648B51 /* Stars-5.png in Resources */,
 				04BDB84D16C4255400648B51 /* Stars-0.png in Resources */,
-				A8A4639216C8189E008D173B /* table.png in Resources */,
 				A8A4639416C8234A008D173B /* border.png in Resources */,
 				A8CE920416C9BDBB001CCEBB /* LoginViewController.xib in Resources */,
 				A8CE920D16C9BDF0001CCEBB /* AudaciaLogo.png in Resources */,
@@ -929,6 +925,7 @@
 				045AA82B16CBF93C00F82AB0 /* login-background.png in Resources */,
 				A8664A5D16CC197800CC99EC /* skybox.pvrtc in Resources */,
 				A8664A5F16CC1AE700CC99EC /* border.pvrtc in Resources */,
+				A8F0987816CD96F400280C71 /* table.pvrtc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

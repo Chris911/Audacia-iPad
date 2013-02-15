@@ -82,9 +82,9 @@
 
 - (IBAction)afficherVueAnimee
 {
-     eagl = [[EAGLViewController alloc]initWithNibName:@"EAGLViewController" bundle:nil];
-
-    [self presentModalViewController:eagl animated:NO];
+    eagl = [[EAGLViewController alloc]initWithNibName:@"EAGLViewController" bundle:nil];
+    eagl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentModalViewController:eagl animated:YES];
 //    if(!isConnectionViewVisible) {
 //    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
 //        [delegate afficherVueAnimee];

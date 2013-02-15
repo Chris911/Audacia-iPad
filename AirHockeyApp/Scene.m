@@ -44,25 +44,26 @@ static Scene *scene = NULL;
 
 + (void) loadDefaultElements
 {
-    NodeTable* table = [[[NodeTable alloc]init]autorelease];
+
+    NodeTable* table = [[NodeTable alloc]init];
     [scene.renderingTree addNodeToTree:table];
-    
+
     // Very important to add the edges AFTER the table
     // (inherited from Projet2 XML's structure)
     [table addEdgesToTree];
 
     NodePuck* puck = [[[NodePuck alloc]init]autorelease];
     [scene.renderingTree addNodeToTreeWithInitialPosition:puck :Vector3DMake(0, 0, puck.position.z)];
-
+    
     NodePortal* portal = [[[NodePortal alloc]init]autorelease];
     [scene.renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(-20, -30, portal.position.z)];
-//
+    
 //    NodePommeau* pommeau1 = [[[NodePommeau alloc]init]autorelease];
 //    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau1 :Vector3DMake(-40, 0, pommeau1.position.z)];
 //    
 //    NodePommeau* pommeau2 = [[[NodePommeau alloc]init]autorelease];
 //    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau2 :Vector3DMake(40, 0, pommeau2.position.z)];
-//    
+    
     NodeBooster* booster = [[[NodeBooster alloc]init]autorelease];
     [scene.renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(20, 30, booster.position.z)];
 }

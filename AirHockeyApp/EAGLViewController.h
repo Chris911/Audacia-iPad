@@ -77,9 +77,5 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)togglePerspective:(id)sender;
 - (IBAction)angleSliderChanged:(id)sender;
 - (IBAction)sizeSliderChanged:(id)sender;
-- (IBAction)toggleHalfLifeCam:(id)sender;
-
-
-
 
 @end

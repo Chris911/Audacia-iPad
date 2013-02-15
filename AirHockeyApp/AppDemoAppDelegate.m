@@ -16,14 +16,11 @@
 
 - (void) afficherVueAnimee
 {
-    self.eaglViewController = nil;
     self.window.rootViewController = self.eaglViewController;
 }
 
 - (void) afficherMenu
-{
-    //[self.eaglViewController release];
-    
+{    
     [UIView transitionWithView:self.window duration:1.0 options:(UIViewAnimationOptionTransitionFlipFromBottom) animations:^{
         self.window.rootViewController = self.menuViewController;
     } completion:nil];

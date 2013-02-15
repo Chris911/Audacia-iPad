@@ -27,7 +27,7 @@
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         
-        [Texture2DUtil load2DTextureFromNamePVRTC:@"skybox":2048];
+        [Texture2DUtil load2DTextureFromNamePVRTC:@"table":512];
         
         self.v1 = Vector3DMake(-size, size, -size);
         self.v2 = Vector3DMake(-size, -size, -size);

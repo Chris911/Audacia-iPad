@@ -73,6 +73,7 @@
 		A83C227B16BEC38F007AA035 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C227A16BEC38F007AA035 /* Particle.m */; };
 		A842302F16BF3A04007F97CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842302E16BF3A04007F97CB /* OpenAL.framework */; };
 		A842303216BF3A1A007F97CB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842303116BF3A1A007F97CB /* AudioToolbox.framework */; };
+		A842463916CE80AD00A9F3B9 /* table.png in Resources */ = {isa = PBXBuildFile; fileRef = A842463816CE80AD00A9F3B9 /* table.png */; };
 		A8664A5D16CC197800CC99EC /* skybox.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8664A5C16CC197800CC99EC /* skybox.pvrtc */; };
 		A8664A5F16CC1AE700CC99EC /* border.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8664A5E16CC1AE700CC99EC /* border.pvrtc */; };
 		A86C08B416C2A68200839C4B /* NodePuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6916AEF7C5006D1FEB /* NodePuck.m */; };
@@ -231,6 +232,7 @@
 		A83C227A16BEC38F007AA035 /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
 		A842302E16BF3A04007F97CB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		A842303116BF3A1A007F97CB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A842463816CE80AD00A9F3B9 /* table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table.png; sourceTree = "<group>"; };
 		A8664A5C16CC197800CC99EC /* skybox.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = skybox.pvrtc; sourceTree = "<group>"; };
 		A8664A5E16CC1AE700CC99EC /* border.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = border.pvrtc; sourceTree = "<group>"; };
 		A889F22316B067E10008E534 /* booster_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = booster_texture.png; path = AirHockeyApp/booster_texture.png; sourceTree = SOURCE_ROOT; };
@@ -658,6 +660,7 @@
 		A8A4639016C8189E008D173B /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A842463816CE80AD00A9F3B9 /* table.png */,
 				A8F0987716CD96F400280C71 /* table.pvrtc */,
 				A8664A5E16CC1AE700CC99EC /* border.pvrtc */,
 				A8664A5C16CC197800CC99EC /* skybox.pvrtc */,
@@ -926,6 +929,7 @@
 				A8664A5D16CC197800CC99EC /* skybox.pvrtc in Resources */,
 				A8664A5F16CC1AE700CC99EC /* border.pvrtc in Resources */,
 				A8F0987816CD96F400280C71 /* table.pvrtc in Resources */,
+				A842463916CE80AD00A9F3B9 /* table.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

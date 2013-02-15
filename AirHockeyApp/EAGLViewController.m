@@ -27,7 +27,6 @@
 int const TOUCH_TRANSFORM_MODE  = 0;
 int const TOUCH_CAMERA_MODE     = 1;
 int const TOUCH_ELASTIC_MODE    = 2;
-int const TOUCH_HALFLIFE_MODE   = 3;
 
 // UI Views tags
 int const CAMERAVIEW_TAG        = 100;
@@ -63,7 +62,6 @@ enum {
     BOOL settingViewIsHidden;
     BOOL anyNodeSelected;
     
-    BOOL isHalfLifeCamActive;
     BOOL isReadyToExit;
     
     // Defines the current transformation state (translate,rotation or scale)
@@ -118,17 +116,16 @@ enum {
     currentTransformState   = STATE_TRANSFORM_TRANSLATION;
     currentTouchesMode      = TOUCH_CAMERA_MODE;
     activeObjectTag         = -1;
-    isHalfLifeCamActive     = NO;
     isReadyToExit           = NO;
     
     // Create the camera
-    self.camera = [[[Camera alloc]init]autorelease];
+    self.camera = [[Camera alloc]init];
     
     // Create the elastic rectangle
     elasticRect = [[ElasticRect alloc]init];
     
     // Create the skybox
-    skybox = [[Skybox alloc]initWithSize:350.0f];
+    skybox = [[Skybox alloc]initWithSize:150.0f];
     }
     return self;
 }
@@ -513,17 +510,17 @@ enum {
 
 - (IBAction)ExitProgram:(id)sender
 {
+    //self.camera = nil;
     [self stopAnimation];
-    [NSThread sleepForTimeInterval:0.5];
-    [self flushTable];
-    [NSThread sleepForTimeInterval:0.5];
-    //[self performSelectorInBackground:@selector(waitForExit) withObject:nil];
-    //while(!isReadyToExit){}
-    [self dismissModalViewControllerAnimated:NO];
+    [self.camera resetCamera];
+    [self resetTable];
+    [self resetUI];
+    self.camera = nil;
+    [self dismissModalViewControllerAnimated:YES];
 }
 - (void) waitForExit
 {
-    [NSThread sleepForTimeInterval:10];
+    [NSThread sleepForTimeInterval:0.5];
     isReadyToExit = YES;
 
 }
@@ -550,10 +547,6 @@ enum {
     }
 }
 
-- (IBAction)toggleHalfLifeCam:(id)sender
-{
-}
-
 #pragma mark - Slider action methods
 - (IBAction)angleSliderChanged:(id)sender
 {
@@ -565,93 +558,6 @@ enum {
 {
     float scaleValue = (self.sizeSlider.value * 3.5 ) + 0.5;
     [[Scene getInstance].renderingTree scaleBySliderSelectedNodes:scaleValue];
-}
-
-#pragma mark - Gesture functions
-
-// Assign the view type (ex : PortalView) so that
-// we know what object to add next
-- (void) handleFirstTouchOnView:(UIView*) view
-{
-    if(view.tag > 0) {
-        activeObjectTag = view.tag;
-    } else {
-        NSLog(@"Invalid Tag"); 
-    }
-}
-
-// Drag and drop objects on the table by using UIView
-- (void) panGestureAction:(UIPanGestureRecognizer *) gesture
-{
-    CGPoint location = [gesture locationInView:self.view];
-
-    if ([gesture state] == UIGestureRecognizerStateBegan) {
-        
-        // Drag started
-        [self.view viewWithTag:activeObjectTag].center = location;
-        [self slideOutAnimationView:self.ParametersView];
-
-    } else if ([gesture state] == UIGestureRecognizerStateChanged) {
-        
-        // Drag moved
-        [self.view viewWithTag:activeObjectTag].center = location;
-
-    } else if ([gesture state] == UIGestureRecognizerStateEnded) {
-        
-        // Drag completed
-        [self.view viewWithTag:activeObjectTag].center = location;
-        [self.camera assignWorldPosition:location];
-        
-        [self addDragAndDropObject];
-        
-        //Finally, replace the views to their distinct origins
-        if(activeObjectTag == PORTALVIEW_TAG) {
-            [self.view viewWithTag:activeObjectTag].center =  self.PortalImageView.center;
-        } else if(activeObjectTag == BOOSTERVIEW_TAG) {
-            [self.view viewWithTag:activeObjectTag].center =  self.BoosterImageView.center;
-        } else if(activeObjectTag == MURETVIEW_TAG) {
-            [self.view viewWithTag:activeObjectTag].center =  self.MuretImageView.center;
-        } else if(activeObjectTag == PUCKVIEW_TAG) {
-            [self.view viewWithTag:activeObjectTag].center =  self.PuckImageView.center;
-        } else if(activeObjectTag == POMMEAUVIEW_TAG) {
-            [self.view viewWithTag:activeObjectTag].center =  self.PommeauImageView.center;
-        } 
-    }
-}
-
-- (void) addDragAndDropObject
-{
-    // Check if last touch location is legal
-    if([Scene checkIfAddingLocationInBounds:CGPointMake(self.camera.worldPosition.x, self.camera.worldPosition.y)]){
-        // Add a specific Node to the scene and replace the dragged view
-        //FIXME: Z positions can break the adding
-        if(activeObjectTag == PORTALVIEW_TAG) {
-            NodePortal *portal = [[[NodePortal alloc]init]autorelease];
-            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(self.camera.worldPosition.x,
-                                                                                                     self.camera.worldPosition.y,
-                                                                                                     1)];
-        } else if(activeObjectTag == BOOSTERVIEW_TAG) {
-            NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
-            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
-                                                                                                      self.camera.worldPosition.y,
-                                                                                                      2)];
-        } else if(activeObjectTag == MURETVIEW_TAG) {
-            NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
-            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
-                                                                                                      self.camera.worldPosition.y,
-                                                                                                      1)];
-        } else if(activeObjectTag == PUCKVIEW_TAG) {
-            [[Scene getInstance].renderingTree addPuckToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
-                                                                                             self.camera.worldPosition.y,
-                                                                                             1)];
-            
-        } else if(activeObjectTag == POMMEAUVIEW_TAG) {
-            [[Scene getInstance].renderingTree addStickToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
-                                                                                              self.camera.worldPosition.y,
-                                                                                              1)];
-        }
-    }
-
 }
 
 #pragma mark - Core GL Methods
@@ -684,9 +590,9 @@ enum {
 {
     [(EAGLView *)self.view setFramebuffer];
     
-    // Set the camera either in ortho or perspective mode
+    // Set the camera either in ortho or perspective mode  
     [self.camera setCamera];
-    
+
     //Render the skybox
     [skybox render];
     
@@ -816,6 +722,7 @@ enum {
     [self slideInAnimationView:self.TransformView];    
 }
 
+#pragma mark - Gesture delegates functions
 - (void) handlePinch:(UIGestureRecognizer *)sender 
 {
     CGFloat factor = [(UIPinchGestureRecognizer *)sender scale];
@@ -823,6 +730,111 @@ enum {
         [self.camera perspectiveZoom:factor];
     } else {
         [self.camera orthoZoom:factor];
+    }
+}
+
+- (void) replaceView
+{
+    if(self.camera.isPerspective){
+        [self.camera resetCamera];
+    } else {
+        [self.camera replaceCamera];
+    }
+}
+
+- (void) rotationDetected:(UIGestureRecognizer *)sender
+{
+    CGFloat angle = [(UIRotationGestureRecognizer *)sender rotation];
+    self.camera.theta += angle*2;
+}
+
+- (void) panPerspectiveCamera:(CGPoint)location :(CGPoint)lastLocation
+{
+    CGPoint delta = CGPointMake(location.x - lastLocation.x, location.y - lastLocation.y);
+    [self.camera strafeXY:delta];
+}
+
+// Assign the view type (ex : PortalView) so that
+// we know what object to add next
+- (void) handleFirstTouchOnView:(UIView*) view
+{
+    if(view.tag > 0) {
+        activeObjectTag = view.tag;
+    } else {
+        NSLog(@"Invalid Tag");
+    }
+}
+
+// Drag and drop objects on the table by using UIView
+- (void) panGestureAction:(UIPanGestureRecognizer *) gesture
+{
+    CGPoint location = [gesture locationInView:self.view];
+    
+    if ([gesture state] == UIGestureRecognizerStateBegan) {
+        
+        // Drag started
+        [self.view viewWithTag:activeObjectTag].center = location;
+        [self slideOutAnimationView:self.ParametersView];
+        
+    } else if ([gesture state] == UIGestureRecognizerStateChanged) {
+        
+        // Drag moved
+        [self.view viewWithTag:activeObjectTag].center = location;
+        
+    } else if ([gesture state] == UIGestureRecognizerStateEnded) {
+        
+        // Drag completed
+        [self.view viewWithTag:activeObjectTag].center = location;
+        [self.camera assignWorldPosition:location];
+        
+        [self addDragAndDropObject];
+        
+        //Finally, replace the views to their distinct origins
+        if(activeObjectTag == PORTALVIEW_TAG) {
+            [self.view viewWithTag:activeObjectTag].center =  self.PortalImageView.center;
+        } else if(activeObjectTag == BOOSTERVIEW_TAG) {
+            [self.view viewWithTag:activeObjectTag].center =  self.BoosterImageView.center;
+        } else if(activeObjectTag == MURETVIEW_TAG) {
+            [self.view viewWithTag:activeObjectTag].center =  self.MuretImageView.center;
+        } else if(activeObjectTag == PUCKVIEW_TAG) {
+            [self.view viewWithTag:activeObjectTag].center =  self.PuckImageView.center;
+        } else if(activeObjectTag == POMMEAUVIEW_TAG) {
+            [self.view viewWithTag:activeObjectTag].center =  self.PommeauImageView.center;
+        }
+    }
+}
+
+- (void) addDragAndDropObject
+{
+    // Check if last touch location is legal
+    if([Scene checkIfAddingLocationInBounds:CGPointMake(self.camera.worldPosition.x, self.camera.worldPosition.y)]){
+        // Add a specific Node to the scene and replace the dragged view
+        //FIXME: Z positions can break the adding
+        if(activeObjectTag == PORTALVIEW_TAG) {
+            NodePortal *portal = [[[NodePortal alloc]init]autorelease];
+            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(self.camera.worldPosition.x,
+                                                                                                     self.camera.worldPosition.y,
+                                                                                                     1)];
+        } else if(activeObjectTag == BOOSTERVIEW_TAG) {
+            NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
+            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
+                                                                                                      self.camera.worldPosition.y,
+                                                                                                      2)];
+        } else if(activeObjectTag == MURETVIEW_TAG) {
+            NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
+            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
+                                                                                                      self.camera.worldPosition.y,
+                                                                                                      1)];
+        } else if(activeObjectTag == PUCKVIEW_TAG) {
+            [[Scene getInstance].renderingTree addPuckToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
+                                                                                             self.camera.worldPosition.y,
+                                                                                             1)];
+            
+        } else if(activeObjectTag == POMMEAUVIEW_TAG) {
+            [[Scene getInstance].renderingTree addStickToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
+                                                                                              self.camera.worldPosition.y,
+                                                                                              1)];
+        }
     }
 }
 
@@ -925,7 +937,7 @@ enum {
     [self prepareAdditionalViews];
 }
 
-- (void) flushTable
+- (void) resetTable
 {
     currentTransformState = STATE_TRANSFORM_TRANSLATION;
     activeObjectTag = -1;
@@ -937,9 +949,7 @@ enum {
 - (void) modifyUIParametersValues:(Node*)node 
 {
     if(![node.type isEqualToString:@"EDGE"]){
-        if(!isHalfLifeCamActive){ //FIXME: Slide not appropriate
-            [self slideInAnimationView:self.ParametersView];
-        }
+        [self slideInAnimationView:self.ParametersView];
     } else {
         [self slideOutAnimationView:self.ParametersView];
     }
@@ -1044,8 +1054,8 @@ enum {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Veuillez entrer le nom de la carte"
                                                       message:nil
                                                      delegate:self
-                                            cancelButtonTitle:@"Cancel"
-                                            otherButtonTitles:@"Upload", nil];
+                                            cancelButtonTitle:@"Upload"
+                                            otherButtonTitles:@"Cancel", nil];
     [message setAlertViewStyle:UIAlertViewStylePlainTextInput];
     message.tag = kAlertNameMapTag;
     [message show];
@@ -1055,35 +1065,18 @@ enum {
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == kAlertNameMapTag){
-        NSString *inputText = [[alertView textFieldAtIndex:0] text];
-        //TODO: Do some validation here
-        WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
-        NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
-        // Upload data to server
-        [webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
-        [webClient release];
+        if(buttonIndex == 0){
+            NSString *inputText = [[alertView textFieldAtIndex:0] text];
+            //TODO: Do some validation here
+            WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
+            NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
+            // Upload data to server
+            [webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
+            [webClient release];
+        } else if(buttonIndex == 1) {
+            NSLog(@"Action Canceled");
+        }
     }
-}
-
-- (void) replaceView
-{
-    if(self.camera.isPerspective){
-        [self.camera resetCamera];
-    } else {
-        [self.camera replaceCamera];
-    }
-}
-
-- (void) rotationDetected:(UIGestureRecognizer *)sender 
-{
-    CGFloat angle = [(UIRotationGestureRecognizer *)sender rotation];
-    self.camera.theta += angle*2;
-}
-
-- (void) panPerspectiveCamera:(CGPoint)location :(CGPoint)lastLocation
-{
-    CGPoint delta = CGPointMake(location.x - lastLocation.x, location.y - lastLocation.y);
-    [self.camera strafeXY:delta];
 }
 
 @end

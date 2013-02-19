@@ -8,6 +8,7 @@
 //  keep the gl objects positions unchanged.
 
 #import "Camera.h"
+#import <GLKit/GLKit.h>
 
 @implementation Camera
 
@@ -44,7 +45,7 @@
     self.centerPosition = Vector3DMake(0, 0, 0);
     self.eyePosition = Vector3DMake(0, 0, 0);
     self.up = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
-    eyeToCenterDistance = 220;
+    eyeToCenterDistance = 120;
     self.phi = 40;
     self.theta = 90;
     
@@ -364,33 +365,37 @@
     self.orthoCenter = CGPointMake(newXpos,newYpos);
 }
 
-- (void) getScreenCoorOfPoint:(CGPoint)touch
-{
-//    
-//    touch = [self convertFromScreenToWorld:touch];
-//    
-//    GLfloat     projMat[16];                                              // Where The 16 Doubles Of The Projection Matrix Are To Be Stored
-//    glGetFloatv(GL_PROJECTION_MATRIX, projMat);                           // Retrieve The Projection Matrix
-//    
-//    GLfloat homogenMat[] = {
-//        projMat[0] * touch.x + 0 + 0 + 0,
-//        projMat[5] * touch.y + 0 + 0 + 0,
-//        projMat[10] + 0 + 0 + 0,
-//        projMat[14] + 0 + 0 + 0,
-//    };
-//    
-//    float factor = (homogenMat[10]/homogenMat[14]);
-//    
-//    Vector3D newPos = Vector3DMake(homogenMat[0], homogenMat[1], homogenMat[2]);
-//    //glClearColor(1,1,1,1);
-//    //Byte pixelColour[4];
-//    //glReadPixels(touch.x -20 , touch.y - 20, 40, 40, GL_RGBA, GL_UNSIGNED_BYTE, &pixelColour);
-//    
+- (void) convertScreenToWorldProj:(CGPoint)touch
+{    
+    // Projection Matrix
+    GLfloat     projMat[16];                                              
+    glGetFloatv(GL_PROJECTION_MATRIX, projMat);
+    GLKMatrix4 pMat = GLKMatrix4MakeWithArray(projMat);
     
+    // ModelView Matrix
+    GLfloat     modelMat[16];
+    glGetFloatv(GL_MODELVIEW_MATRIX, modelMat);
+    GLKMatrix4 mMat = GLKMatrix4MakeWithArray(modelMat);
+    
+    GLKVector3 window_coord = GLKVector3Make(touch.x,touch.y, 0.0f);
+    bool result;
+    int viewport[4];
+    viewport[0] = 0.0f;
+    viewport[1] = 0.0f;
+    viewport[2] = 1024;
+    viewport[3] = 768;
+    touch.y = 768 - touch.y;
+    GLKVector3 near_pt = GLKMathUnproject(window_coord, mMat, pMat, &viewport[0], &result);
+    window_coord = GLKVector3Make(touch.x,touch.y, 1.0f);
+    GLKVector3 far_pt = GLKMathUnproject(window_coord, mMat, pMat, &viewport[0], &result);
+    float z_magnitude = fabs(far_pt.z-near_pt.z);
+    float near_pt_factor = fabs(near_pt.z)/z_magnitude;
+    float far_pt_factor = fabs(far_pt.z)/z_magnitude;
+    GLKVector3 final_pt = GLKVector3Add( GLKVector3MultiplyScalar(near_pt, far_pt_factor), GLKVector3MultiplyScalar(far_pt, near_pt_factor));
+    Vector3D final = Vector3DMake(final_pt.x, final_pt.y, 0);
+    NSLog(@"Px :%f, Py :%f, Pz :%f", final.x, final.y, final.z);
+    
+    self.worldPosition = Vector3DMake(final.x, final.y, 0); // Z ignored    
 }
-
-
-
-
 
 @end

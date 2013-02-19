@@ -49,7 +49,7 @@
 
 - (void) perspectiveZoom:(float)delta;
 - (void) strafeXY:(CGPoint)delta;
-- (void) getScreenCoorOfPoint:(CGPoint)_point3D;
+- (void) convertScreenToWorldProj:(CGPoint)_point3D;
 
 
 @end

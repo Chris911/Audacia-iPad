@@ -24,6 +24,8 @@
 @end
 
 @implementation NodeTable
+@synthesize CoeffFriction;
+@synthesize CoeffRebond;
 
 - (id) init
 {
@@ -31,9 +33,12 @@
         
         self.type = @"TABLE";
         self.isRemovable = NO;
-        
         self.isCopyable = NO;
         self.isScalable = NO;
+
+        self.CoeffRebond = 0.87f;
+        self.CoeffFriction = 1.0f;
+        
         [self initTableEdges];
         [self initColors];
         
@@ -233,6 +238,8 @@
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
+    if(glGetError() != 0)
+        NSLog(@"%u",glGetError());
     
     glDrawArrays(GL_TRIANGLE_FAN, 0, 2+NB_OF_TRIANGLES);
     glDisableClientState(GL_VERTEX_ARRAY);

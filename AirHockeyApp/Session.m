@@ -14,7 +14,7 @@
 @synthesize password;
 @synthesize isAuthenticated;
 
-NSString* DEFAULT_USERNAME = @"Anonymous";
+NSString* DEFAULT_USERNAME = @"Guest";
 
 static Session *session = NULL;
 

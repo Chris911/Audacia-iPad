@@ -12,12 +12,12 @@
 
 + (void) loadSounds
 {
-    [[SimpleAudioEngine sharedEngine] preloadEffect:@"pew-pew.wav"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"camera1.wav"];
 }
 
 + (void) playSound:(NSString*)name
 {
-    [[SimpleAudioEngine sharedEngine] playEffect:@"pew-pew.wav"];
+    [[SimpleAudioEngine sharedEngine] playEffect:name];
 }
 
 + (void) startBackgroundMusic

@@ -156,7 +156,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [self dismissModalViewControllerAnimated:YES];
     } else {
-        [Session getInstance].username = @"Anonymous";
+        [Session getInstance].username = @"Guest";
         self.errorLabel.text = @"Invalid account";
     }
 }

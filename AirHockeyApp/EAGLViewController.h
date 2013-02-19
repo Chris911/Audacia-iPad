@@ -56,8 +56,11 @@ extern float const HAUTEUR_FENETRE;
 // Parameters UI elements
 @property (retain, nonatomic) IBOutlet UISlider *sizeSlider;
 @property (retain, nonatomic) IBOutlet UISlider *angleSlider;
+@property (retain, nonatomic) IBOutlet UISlider *specialSlider;
 @property (retain, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (retain, nonatomic) IBOutlet UILabel *angleLable;
+@property (retain, nonatomic) IBOutlet UILabel *typeLabel;
+@property (retain, nonatomic) IBOutlet UILabel *specialLabel;
 
 - (void)startAnimation;
 - (void)stopAnimation;
@@ -77,5 +80,6 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)togglePerspective:(id)sender;
 - (IBAction)angleSliderChanged:(id)sender;
 - (IBAction)sizeSliderChanged:(id)sender;
+- (IBAction)specialSliderChanged:(id)sender;
 
 @end

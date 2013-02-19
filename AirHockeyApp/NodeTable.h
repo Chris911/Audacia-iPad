@@ -10,6 +10,8 @@
 #import "Border3D.h"
 
 @interface NodeTable : Node
+@property float CoeffFriction;
+@property float CoeffRebond;
 
 - (id) init;
 - (void) render;

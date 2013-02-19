@@ -20,16 +20,20 @@ const int TABLE_LIMIT_X                  = 75;
 const int TABLE_LIMIT_Y                  = 55;
 const int NB_OF_TRIANGLES                = 8;
 const int NB_OF_TABLE_EDGES              = 8;
-const GLfloat TABLE_HEIGHT                = 0;
+const GLfloat TABLE_HEIGHT               = 0;
 
-float const LARGEUR_FENETRE = 200;
-float const HAUTEUR_FENETRE = 150;
-int const LARGEUR_ECRAN = 1024;
-int const HAUTEUR_ECRAN = 768;
+float const LARGEUR_FENETRE              = 200;
+float const HAUTEUR_FENETRE              = 150;
+int const LARGEUR_ECRAN                  = 1024;
+int const HAUTEUR_ECRAN                  = 768;
 
 float lightAmbient[] = { 0.2f, 0.3f, 0.6f, 1.0f };
 float lightDiffuse[] = { 0.2f, 0.3f, 0.6f, 1.0f };
 float matAmbient[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 float matDiffuse[] = { 0.6f, 0.6f, 0.6f, 1.0f };
+float orangeColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+
+
+int GLOBAL_SIZE_OFFSET = 6;
 
 @end

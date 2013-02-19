@@ -27,7 +27,7 @@
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         
-        [Texture2DUtil load2DTextureFromNamePVRTC:@"table":512];
+        [Texture2DUtil load2DTextureFromNamePVRTC:@"skybox2":512];
         
         self.v1 = Vector3DMake(-size, size, -size);
         self.v2 = Vector3DMake(-size, -size, -size);
@@ -57,8 +57,8 @@ float angle = 0;
     [self renderBottom];
     [self renderSideA];
     [self renderSideB];
-    //[self renderSideC];
-    //[self renderSideD];
+    [self renderSideC];
+    [self renderSideD];
     //glEnable(GL_LIGHTING);
     glDisable(GL_CULL_FACE);
     glCullFace(GL_FRONT);
@@ -84,14 +84,24 @@ float angle = 0;
         self.v1.x,self.v1.y,self.v1.z,
     };
     
+//    GLfloat botTex[] = {
+//        0.25, 0.25,
+//        0.25, 0.50,
+//        0.50, 0.50,
+//        
+//        0.50, 0.50,
+//        0.50, 0.25,
+//        0.25, 0.25,
+//    };
+    
     GLfloat botTex[] = {
-        0.25, 0.25,
-        0.25, 0.50,
-        0.50, 0.50,
+        0, 0,
+        0, 1,
+        1, 1,
         
-        0.50, 0.50,
-        0.50, 0.25,
-        0.25, 0.25,
+        1, 1,
+        1, 0,
+        0, 0,
     };
     
     glNormal3f(0, 0, 1);
@@ -105,6 +115,7 @@ float angle = 0;
     
     if(glGetError() != 0)
         NSLog(@"%u",glGetError());
+    
     glDrawArrays(GL_TRIANGLES, 0, 2*3);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -128,14 +139,24 @@ float angle = 0;
         self.v5.x,self.v5.y,self.v5.z,
     };
     
+//    GLfloat sideATex[] = {
+//        0.25, 0,
+//        0.25, 0.25,
+//        0.50, 0.25,
+//        
+//        0.50, 0.25,
+//        0.50, 0,
+//        0.25, 0,
+//    };
+    
     GLfloat sideATex[] = {
-        0.25, 0,
-        0.25, 0.25,
-        0.50, 0.25,
+        0, 0,
+        0, 1,
+        1, 1,
         
-        0.50, 0.25,
-        0.50, 0,
-        0.25, 0,
+        1, 1,
+        1, 0,
+        0, 0,
     };
     
     glNormal3f(0, -1, 0);
@@ -146,6 +167,9 @@ float angle = 0;
     glBindTexture(GL_TEXTURE_2D, texture[0]);
     glTexCoordPointer(2, GL_FLOAT, 0, sideATex);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    
+    if(glGetError() != 0)
+        NSLog(@"%u",glGetError());
     
     glDrawArrays(GL_TRIANGLES, 0, 2*3);
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -170,14 +194,24 @@ float angle = 0;
         self.v4.x,self.v4.y,self.v4.z,
     };
     
+//    GLfloat botTex[] = {
+//        0.50, 0.25,
+//        0.50, 0.50,
+//        0.75, 0.50,
+//        
+//        0.75, 0.50,
+//        0.75, 0.25,
+//        0.50, 0.25,
+//    };
+    
     GLfloat botTex[] = {
-        0.50, 0.25,
-        0.50, 0.50,
-        0.75, 0.50,
+        0, 0,
+        0, 1,
+        1, 1,
         
-        0.75, 0.50,
-        0.75, 0.25,
-        0.50, 0.25,
+        1, 1,
+        1, 0,
+        0, 0,
     };
     
     glNormal3f(1, 0, 0);
@@ -188,6 +222,9 @@ float angle = 0;
     glBindTexture(GL_TEXTURE_2D, texture[0]);
     glTexCoordPointer(2, GL_FLOAT, 0, botTex);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    
+    if(glGetError() != 0)
+        NSLog(@"%u",glGetError());
     
     glDrawArrays(GL_TRIANGLES, 0, 2*3);
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -265,7 +302,7 @@ float angle = 0;
     };
     
     glNormal3f(1, 0, 0);
-    
+    //glCullFace(GL_FRONT);
     glVertexPointer(3, GL_FLOAT, 0, botVertices);
     glEnableClientState(GL_VERTEX_ARRAY);
     
@@ -273,9 +310,14 @@ float angle = 0;
     glTexCoordPointer(2, GL_FLOAT, 0, botTex);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     
+    if(glGetError() != 0)
+        NSLog(@"%u",glGetError());
+    
     glDrawArrays(GL_TRIANGLES, 0, 2*3);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    //glCullFace(GL_BACK);
+
     
 }
 

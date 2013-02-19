@@ -12,6 +12,7 @@
 @interface NodePortal : Node <NSCopying>
 
 @property (nonatomic, retain) OpenGLWaveFrontObject *model;
+@property (nonatomic) float Gravite;
 
 - (id) init;
 - (void) render;

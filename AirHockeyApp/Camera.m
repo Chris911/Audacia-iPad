@@ -44,7 +44,7 @@
     self.centerPosition = Vector3DMake(0, 0, 0);
     self.eyePosition = Vector3DMake(0, 0, 0);
     self.up = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
-    eyeToCenterDistance = 120;
+    eyeToCenterDistance = 220;
     self.phi = 40;
     self.theta = 90;
     
@@ -135,7 +135,6 @@
         }
     }
 }
-
 
 #pragma mark - Screen conversion
 
@@ -364,4 +363,34 @@
 
     self.orthoCenter = CGPointMake(newXpos,newYpos);
 }
+
+- (void) getScreenCoorOfPoint:(CGPoint)touch
+{
+//    
+//    touch = [self convertFromScreenToWorld:touch];
+//    
+//    GLfloat     projMat[16];                                              // Where The 16 Doubles Of The Projection Matrix Are To Be Stored
+//    glGetFloatv(GL_PROJECTION_MATRIX, projMat);                           // Retrieve The Projection Matrix
+//    
+//    GLfloat homogenMat[] = {
+//        projMat[0] * touch.x + 0 + 0 + 0,
+//        projMat[5] * touch.y + 0 + 0 + 0,
+//        projMat[10] + 0 + 0 + 0,
+//        projMat[14] + 0 + 0 + 0,
+//    };
+//    
+//    float factor = (homogenMat[10]/homogenMat[14]);
+//    
+//    Vector3D newPos = Vector3DMake(homogenMat[0], homogenMat[1], homogenMat[2]);
+//    //glClearColor(1,1,1,1);
+//    //Byte pixelColour[4];
+//    //glReadPixels(touch.x -20 , touch.y - 20, 40, 40, GL_RGBA, GL_UNSIGNED_BYTE, &pixelColour);
+//    
+    
+}
+
+
+
+
+
 @end

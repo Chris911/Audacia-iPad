@@ -12,6 +12,7 @@
 @interface NodeBooster : Node <NSCopying>
 
 @property (nonatomic, retain) OpenGLWaveFrontObject *model;
+@property (nonatomic) float Acceleration;
 
 - (id) init;
 - (void) render;

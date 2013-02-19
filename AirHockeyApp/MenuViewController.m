@@ -60,7 +60,7 @@
     self.UsernameLabel.text = [Session getInstance].username;
     
     // Setup and start sounds
-    //[AudioInterface loadSounds];
+    [AudioInterface loadSounds];
     if(isSoundEnabled){
         [AudioInterface startBackgroundMusic];
     }

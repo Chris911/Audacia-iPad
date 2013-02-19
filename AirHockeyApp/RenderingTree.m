@@ -61,43 +61,39 @@
 
 // Add a stick to the table while checking for constraints
 // on this game element
-- (void) addStickToTreeWithInitialPosition:(Vector3D)pos
+- (BOOL) addStickToTreeWithInitialPosition:(Vector3D)pos
 {
-    int stickCount = 0;
-    for(Node* node in self.tree) {
-        if([node.type isEqualToString:@"POMMEAU"]) {
-            stickCount ++;
-        }
-    }
+    BOOL isAddingLegal = NO;
+    int stickCount = [self getStickCount];
 
     // if there is 2 sticks on the table, don't add a new one
     if (stickCount < 2) {
         NodePommeau *pom = [[[NodePommeau alloc]init]autorelease];
         pom.position = pos;
         [tree addObject:pom];
+        isAddingLegal = YES;
     } else {
         NSLog(@"Table already has 2 sticks");
     }
+    return isAddingLegal;
 }
 
 // Add a puck to the table while checking for constraints
 // on this game element
-- (void) addPuckToTreeWithInitialPosition:(Vector3D)pos
+- (BOOL) addPuckToTreeWithInitialPosition:(Vector3D)pos
 {
-    int puckCount = 0;
-    for(Node* node in self.tree) {
-        if([node.type isEqualToString:@"PUCK"]) {
-            puckCount ++;
-        }
-    }
+    BOOL isAddingLegal = NO;
+    int puckCount = [self getPuckCount];
     
     if(puckCount == 0) {
         NodePuck *puck = [[[NodePuck alloc]init]autorelease];
         puck.position = pos;
         [tree addObject:puck];
+        isAddingLegal = YES;
     } else {
         NSLog(@"Table already has 1 puck");
     }
+    return  isAddingLegal;
 }
 
 #pragma mark - Selecting nodes
@@ -105,8 +101,6 @@
 // FIXME: only works in the default 2D Plane
 - (BOOL) selectNodeByPosition:(Vector3D) position
 {    
-    // The bigger the value, the easier it is to select an object
-    int offset = 8;
     
     // New selection pass, make sure
     // no other nodes are still selected
@@ -118,6 +112,8 @@
     {
         Node *node = [self.tree objectAtIndex:i];
         // bounding box check, FIXME: selection not optimal
+        int offset = GLOBAL_SIZE_OFFSET * node.scaleFactor;
+        
         if(node.position.x <= position.x + offset
            && node.position.x >= position.x - offset
            && node.position.y <= position.y + offset
@@ -425,7 +421,48 @@
     return nil;
 }
 
+- (Node*) getTable
+{
+    for(Node* node in self.tree) {
+        if([node.type isEqualToString:@"TABLE"]) {
+            return node;
+        }
+    }
+    return nil;
+}
 
+#pragma mark - Table validation functions
+- (int) getPuckCount
+{
+    int puckCount = 0;
+    for(Node* node in self.tree) {
+        if([node.type isEqualToString:@"PUCK"]) {
+            puckCount ++;
+        }
+    }
+    return puckCount;
+}
+
+- (int) getStickCount
+{
+    int stickCount = 0;
+    for(Node* node in self.tree) {
+        if([node.type isEqualToString:@"POMMEAU"]) {
+            stickCount ++;
+        }
+    }
+    return stickCount;
+}
+
+- (BOOL) isTableValid
+{
+    if([self getPuckCount] == 1 && [self getStickCount] == 2){
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - dealloc functions
 - (void) dealloc
 {
     [tree release];

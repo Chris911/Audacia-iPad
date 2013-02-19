@@ -62,11 +62,10 @@
 		969DDF8B1472E05400ED5DC8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */; };
 		969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
 		969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */; };
+		A8081D1316D2952600B39E8B /* camera1.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8081D1216D2952600B39E8B /* camera1.wav */; };
 		A812858116A0A53900C8EF6D /* ParametersImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A812858016A0A53900C8EF6D /* ParametersImage1.png */; };
 		A818E02516BAD7D900CA5823 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = A818E02416BAD7D900CA5823 /* Camera.m */; };
 		A831CEA716B7219800A30C39 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = A831CEA616B7219800A30C39 /* Session.m */; };
-		A838B77C16C2E88500050DDA /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A838B77A16C2E88500050DDA /* MapsViewController.m */; };
-		A838B77D16C2E88500050DDA /* MapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A838B77B16C2E88500050DDA /* MapsViewController.xib */; };
 		A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A83AA9EC16A4D924003388F3 /* BetaViewController.m */; };
 		A83AA9EF16A4D925003388F3 /* BetaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A83AA9ED16A4D925003388F3 /* BetaViewController.xib */; };
 		A83C226116BD94E2007AA035 /* ElasticRect.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C226016BD94E2007AA035 /* ElasticRect.m */; };
@@ -77,6 +76,7 @@
 		A8664A5D16CC197800CC99EC /* skybox.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8664A5C16CC197800CC99EC /* skybox.pvrtc */; };
 		A8664A5F16CC1AE700CC99EC /* border.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8664A5E16CC1AE700CC99EC /* border.pvrtc */; };
 		A86C08B416C2A68200839C4B /* NodePuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6916AEF7C5006D1FEB /* NodePuck.m */; };
+		A881432D16D04B5300291E1A /* skybox2.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A881432C16D04B5300291E1A /* skybox2.pvrtc */; };
 		A889F22716B067E10008E534 /* booster_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22316B067E10008E534 /* booster_texture.png */; };
 		A889F22816B067E10008E534 /* pommeau_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22416B067E10008E534 /* pommeau_texture.png */; };
 		A889F22916B067E10008E534 /* portal_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22516B067E10008E534 /* portal_texture.png */; };
@@ -215,14 +215,12 @@
 		969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLViewController.h; sourceTree = "<group>"; };
 		969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EAGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
+		A8081D1216D2952600B39E8B /* camera1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = camera1.wav; sourceTree = "<group>"; };
 		A812858016A0A53900C8EF6D /* ParametersImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ParametersImage1.png; path = Assets/UI/Images/ParametersImage1.png; sourceTree = "<group>"; };
 		A818E02316BAD7D900CA5823 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		A818E02416BAD7D900CA5823 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		A831CEA516B7219800A30C39 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		A831CEA616B7219800A30C39 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
-		A838B77916C2E88500050DDA /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapsViewController.h; sourceTree = "<group>"; };
-		A838B77A16C2E88500050DDA /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsViewController.m; sourceTree = "<group>"; };
-		A838B77B16C2E88500050DDA /* MapsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapsViewController.xib; sourceTree = "<group>"; };
 		A83AA9EB16A4D924003388F3 /* BetaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetaViewController.h; sourceTree = "<group>"; };
 		A83AA9EC16A4D924003388F3 /* BetaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetaViewController.m; sourceTree = "<group>"; };
 		A83AA9ED16A4D925003388F3 /* BetaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BetaViewController.xib; sourceTree = "<group>"; };
@@ -235,6 +233,7 @@
 		A842463816CE80AD00A9F3B9 /* table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table.png; sourceTree = "<group>"; };
 		A8664A5C16CC197800CC99EC /* skybox.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = skybox.pvrtc; sourceTree = "<group>"; };
 		A8664A5E16CC1AE700CC99EC /* border.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = border.pvrtc; sourceTree = "<group>"; };
+		A881432C16D04B5300291E1A /* skybox2.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = skybox2.pvrtc; sourceTree = "<group>"; };
 		A889F22316B067E10008E534 /* booster_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = booster_texture.png; path = AirHockeyApp/booster_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22416B067E10008E534 /* pommeau_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pommeau_texture.png; path = AirHockeyApp/pommeau_texture.png; sourceTree = SOURCE_ROOT; };
 		A889F22516B067E10008E534 /* portal_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = portal_texture.png; path = AirHockeyApp/portal_texture.png; sourceTree = SOURCE_ROOT; };
@@ -371,14 +370,14 @@
 			name = Maps;
 			sourceTree = "<group>";
 		};
-		048C9D2F16A4A873006A7082 /* Objects */ = {
+		048C9D2F16A4A873006A7082 /* Tree */ = {
 			isa = PBXGroup;
 			children = (
 				048C9D3416A4AFB9006A7082 /* RenderingTree.h */,
 				048C9D3516A4AFB9006A7082 /* RenderingTree.m */,
 				A8EBDE7716A729AB002B2DD6 /* Nodes */,
 			);
-			name = Objects;
+			name = Tree;
 			sourceTree = "<group>";
 		};
 		048C9D3716A4BCB7006A7082 /* Scene */ = {
@@ -521,7 +520,7 @@
 				A8EEE3FF16BF3C2400EA3FB0 /* Audio */,
 				044CD6C716B86E9700218CA1 /* Classes */,
 				048C9D3716A4BCB7006A7082 /* Scene */,
-				048C9D2F16A4A873006A7082 /* Objects */,
+				048C9D2F16A4A873006A7082 /* Tree */,
 				04DF182D16ACABE000339EDB /* Networking */,
 				968DACC11472ED46007D15A3 /* Utilitaires */,
 				969DDEDC1472CF6000ED5DC8 /* Vues */,
@@ -553,13 +552,11 @@
 				96378D951472C7CC00F543EA /* MenuViewController.h */,
 				A83AA9EB16A4D924003388F3 /* BetaViewController.h */,
 				04D9C3F416BCB217005C6197 /* CarouselTestView.h */,
-				A838B77916C2E88500050DDA /* MapsViewController.h */,
 				A8CE920016C9BDBB001CCEBB /* LoginViewController.h */,
 				96378D961472C7CC00F543EA /* MenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
 				A83AA9EC16A4D924003388F3 /* BetaViewController.m */,
 				04D9C3F516BCB217005C6197 /* CarouselTestView.m */,
-				A838B77A16C2E88500050DDA /* MapsViewController.m */,
 				A8CE920116C9BDBB001CCEBB /* LoginViewController.m */,
 			);
 			name = Controleurs;
@@ -569,7 +566,6 @@
 			isa = PBXGroup;
 			children = (
 				A8CE920216C9BDBB001CCEBB /* LoginViewController.xib */,
-				A838B77B16C2E88500050DDA /* MapsViewController.xib */,
 				96378D8C1472C71200F543EA /* MainWindow.xib */,
 				A83AA9ED16A4D925003388F3 /* BetaViewController.xib */,
 				96378D991472C80A00F543EA /* MenuViewController.xib */,
@@ -660,6 +656,7 @@
 		A8A4639016C8189E008D173B /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A881432C16D04B5300291E1A /* skybox2.pvrtc */,
 				A842463816CE80AD00A9F3B9 /* table.png */,
 				A8F0987716CD96F400280C71 /* table.pvrtc */,
 				A8664A5E16CC1AE700CC99EC /* border.pvrtc */,
@@ -818,6 +815,7 @@
 		A8EEE41516BF43D700EA3FB0 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				A8081D1216D2952600B39E8B /* camera1.wav */,
 				A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */,
 			);
 			name = Sounds;
@@ -908,7 +906,6 @@
 				A889F22A16B067E10008E534 /* pucktexture.png in Resources */,
 				04D9C3EB16BCB0A3005C6197 /* CarouselTestView.xib in Resources */,
 				A8EEE41716BF43D700EA3FB0 /* technoloop.m4a in Resources */,
-				A838B77D16C2E88500050DDA /* MapsViewController.xib in Resources */,
 				04BDB84616C41A1300648B51 /* Stars-1.png in Resources */,
 				04BDB84716C41A1300648B51 /* Stars-2.png in Resources */,
 				04BDB84816C41A1300648B51 /* Stars-3.png in Resources */,
@@ -930,6 +927,8 @@
 				A8664A5F16CC1AE700CC99EC /* border.pvrtc in Resources */,
 				A8F0987816CD96F400280C71 /* table.pvrtc in Resources */,
 				A842463916CE80AD00A9F3B9 /* table.png in Resources */,
+				A881432D16D04B5300291E1A /* skybox2.pvrtc in Resources */,
+				A8081D1316D2952600B39E8B /* camera1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -992,7 +991,6 @@
 				A8EEE40A16BF3CA900EA3FB0 /* CocosDenshion.m in Sources */,
 				A8EEE40B16BF3CA900EA3FB0 /* SimpleAudioEngine.m in Sources */,
 				A8EEE40E16BF3EDD00EA3FB0 /* AudioInterface.m in Sources */,
-				A838B77C16C2E88500050DDA /* MapsViewController.m in Sources */,
 				A8A4638C16C7F990008D173B /* Texture2DUtil.m in Sources */,
 				A8A4639816C88012008D173B /* Skybox.m in Sources */,
 				A8CE920316C9BDBB001CCEBB /* LoginViewController.m in Sources */,

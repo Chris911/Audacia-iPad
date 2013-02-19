@@ -12,6 +12,7 @@
 @interface NodePommeau : Node
 
 @property (nonatomic, retain) OpenGLWaveFrontObject *model;
+@property (nonatomic, retain) NSString* Camp;
 
 - (id) init;
 - (void) render;

@@ -7,6 +7,7 @@
 
 #import "EAGLViewController.h"
 #import "EAGLView.h"
+#import "AudioInterface.h"
 #import "Node.h"
 #import "NodeTable.h"
 #import "NodePortal.h"
@@ -19,7 +20,9 @@
 #import "Particle.h"    
 #import "Skybox.h"
 
-#define kAlertNameMapTag 1
+#define AlertNameMapTag     1
+#define AlertNameWarningTag 2
+
 
 // Global constants
 
@@ -126,6 +129,7 @@ enum {
     
     // Create the skybox
     skybox = [[Skybox alloc]initWithSize:150.0f];
+    
     }
     return self;
 }
@@ -145,6 +149,7 @@ enum {
     
     [elasticRect release];
     [skybox release];
+    [self.camera release];
     
     [_LeftSlideView release];
     [_CameraView release];
@@ -165,6 +170,9 @@ enum {
     [_angleSlider release];
     [_sizeLabel release];
     [_angleLable release];
+    [_typeLabel release];
+    [_specialLabel release];
+    [_specialSlider release];
     [super dealloc];
 }
 
@@ -195,10 +203,6 @@ enum {
 
 - (void)viewDidUnload
 {
-//    skybox = nil;
-//    elasticRect = nil;
-//    selectedNode = nil;
-//    self.camera = nil;
     
     [self setLeftSlideView:nil];
     [self setCameraView:nil];
@@ -219,6 +223,9 @@ enum {
     [self setAngleSlider:nil];
     [self setSizeLabel:nil];
     [self setAngleLable:nil];
+    [self setTypeLabel:nil];
+    [self setSpecialLabel:nil];
+    [self setSpecialSlider:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -286,6 +293,8 @@ enum {
 {
     for(UITouch* touch in [event allTouches]) {
         CGPoint positionCourante = [touch locationInView:self.view];
+        
+        [self.camera getScreenCoorOfPoint:positionCourante];
         
         // Elastic rectangle mode (Zoom or selection).  Bypass object transformations
         // or Drag and Drop modes.
@@ -423,7 +432,7 @@ enum {
         }
         [elasticRect reset];
     }
-    selectedNode = nil; // invalidate pointer
+    //selectedNode = nil; // invalidate pointer
 }
 
 #pragma mark - Button methods
@@ -433,8 +442,7 @@ enum {
     if(cameraViewIsHidden){
         [self slideOutAnimationView:self.CameraView];
         cameraViewIsHidden = NO;
-    }
-    else{
+    } else {
         [self slideInAnimationView:self.CameraView];
         cameraViewIsHidden = YES;
     }
@@ -442,6 +450,7 @@ enum {
 
 - (IBAction)toggleTranslateCamera:(id)sender
 {
+    [self flashAnimation];
     [self performSelectorInBackground:@selector(replaceView) withObject:nil];
 }
 
@@ -518,16 +527,18 @@ enum {
     self.camera = nil;
     [self dismissModalViewControllerAnimated:YES];
 }
-- (void) waitForExit
-{
-    [NSThread sleepForTimeInterval:0.5];
-    isReadyToExit = YES;
-
-}
 
 - (IBAction)deleteItem:(id)sender
 {
     [[Scene getInstance].renderingTree removeSelectedNodes];
+    int puckCount = [[Scene getInstance].renderingTree getPuckCount];
+    int stickCount = [[Scene getInstance].renderingTree getStickCount];
+    if(puckCount == 0){
+        [self.PuckView setHidden:NO];
+    }
+    if(stickCount != 2){
+        [self.PommeauView setHidden:NO];
+    }
     [self slideOutAnimationView:self.ParametersView];
 }
 
@@ -540,8 +551,12 @@ enum {
 {
     if([NetworkUtils isNetworkAvailable])
     {
-        [self performSelectorInBackground:@selector(replaceView) withObject:nil];
-        [self showNameMapAlert];
+        if([[Scene getInstance].renderingTree isTableValid]){
+            [self performSelectorInBackground:@selector(replaceView) withObject:nil];
+            [self showNameMapAlert];
+        } else {
+            [self showInvalidTableAlert];
+        }
     } else {
         [NetworkUtils showNetworkUnavailableAlert];
     }
@@ -558,6 +573,32 @@ enum {
 {
     float scaleValue = (self.sizeSlider.value * 3.5 ) + 0.5;
     [[Scene getInstance].renderingTree scaleBySliderSelectedNodes:scaleValue];
+}
+
+- (IBAction)specialSliderChanged:(id)sender
+{
+    // On a scale of 5
+    float value = (self.specialSlider.value * 5);
+    
+    NSString *message = @"";
+    if([selectedNode.type isEqualToString:@"PORTAL"]){
+        message = [@"Gravity Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f", value]];
+        value -= 2 + 0.1;
+        ((NodePortal*)selectedNode).Gravite = value;
+        
+    } else if([selectedNode.type isEqualToString:@"BOOSTER"]){
+        message = [@"Acceleration Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
+        value -= 2 + 0.1;
+        ((NodeBooster*)selectedNode).Acceleration = value;
+
+        
+    } else if([selectedNode.type isEqualToString:@"EDGE"]){
+        message = [@"Friction Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
+        value -= 2 + 0.1;
+        ((NodeTable*)[[Scene getInstance].renderingTree getTable]).CoeffFriction = value;
+
+    }
+    self.specialLabel.text = message;
 }
 
 #pragma mark - Core GL Methods
@@ -580,8 +621,7 @@ enum {
     glViewport(0, 0, rect.size.width, rect.size.height);    
 	glMatrixMode(GL_MODELVIEW);
 
-	glLoadIdentity(); 
-	//glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	glLoadIdentity();
     
 	glGetError(); // Clear error codes
 }
@@ -801,6 +841,15 @@ enum {
         } else if(activeObjectTag == POMMEAUVIEW_TAG) {
             [self.view viewWithTag:activeObjectTag].center =  self.PommeauImageView.center;
         }
+        
+        int jigga = [[Scene getInstance].renderingTree getStickCount];
+        if([[Scene getInstance].renderingTree getPuckCount] == 1){
+            [self.PuckView setHidden:YES];
+        }
+        if(jigga == 2){
+            [self.PommeauView setHidden:YES];
+        }
+        
     }
 }
 
@@ -827,13 +876,13 @@ enum {
                                                                                                       1)];
         } else if(activeObjectTag == PUCKVIEW_TAG) {
             [[Scene getInstance].renderingTree addPuckToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
-                                                                                             self.camera.worldPosition.y,
-                                                                                             1)];
+                                                                                                            self.camera.worldPosition.y,
+                                                                                                            1)];
             
         } else if(activeObjectTag == POMMEAUVIEW_TAG) {
             [[Scene getInstance].renderingTree addStickToTreeWithInitialPosition:Vector3DMake(self.camera.worldPosition.x,
-                                                                                              self.camera.worldPosition.y,
-                                                                                              1)];
+                                                                                                              self.camera.worldPosition.y,
+                                                                                                              1)];
         }
     }
 }
@@ -928,6 +977,13 @@ enum {
     self.TransformView.center = CGPointMake(TRANSFORMVIEW_INITIAL_POSITION,self.TransformView.center.y);
     self.SettingsView.center = CGPointMake(1024 + self.SettingsView.frame.size.width,
                                          HAUTEUR_ECRAN + self.SettingsView.frame.size.height);
+    self.typeLabel.text = @"";
+    self.specialLabel.text = @"";
+    [self.specialSlider setHidden:YES];
+    
+    [self.PuckView setHidden:YES]; //FIXME: This assumes we always have a puck in an initial map (True from loading a valid xml, maybe false for an empty starting table)
+    //[self.PommeauView setHidden:YES]; // This assumes we always have 2 sticks in an initial map (True from loading a valid xml, maybe false for an empty starting table)
+
 }
 
 #pragma mark - Reset table utility
@@ -948,11 +1004,19 @@ enum {
 #pragma mark - Modify UI Elements
 - (void) modifyUIParametersValues:(Node*)node 
 {
-    if(![node.type isEqualToString:@"EDGE"]){
-        [self slideInAnimationView:self.ParametersView];
-    } else {
-        [self slideOutAnimationView:self.ParametersView];
+    if(node != nil){
+        self.typeLabel.text = node.type;
+    } else{
+        self.typeLabel.text = @"";
     }
+    
+    [self slideInAnimationView:self.ParametersView];
+
+//    if(![node.type isEqualToString:@"EDGE"]){
+//        [self slideInAnimationView:self.ParametersView];
+//    } else {
+//        [self slideOutAnimationView:self.ParametersView];
+//    }
 
     [self hideOrShowParameters:node];
     self.sizeSlider.value = node.scaleFactor/4;
@@ -969,7 +1033,36 @@ enum {
     } else {
         [self.sizeLabel setHidden:NO];
         [self.sizeSlider setHidden:NO];
+        [self.specialSlider setHidden:NO];
     }
+    [self hideOrShowSpecialParameters:node];
+}
+
+// Show different modifiers for each object special parameter (ex: portal has Gravite, booster has Acceleration)
+- (void) hideOrShowSpecialParameters:(Node*)node
+{
+    NSString *message = @"";
+    float value = 0;
+    if([node.type isEqualToString:@"PORTAL"]){
+        value = ((NodePortal*)node).Gravite;
+        message = [@"Gravity Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f", value]];
+        self.specialSlider.value = value/5; // echelle de 5
+        
+    } else if([node.type isEqualToString:@"BOOSTER"]){
+        value = ((NodeBooster*)node).Acceleration;
+        message = [@"Acceleration Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
+        self.specialSlider.value = value/5; // echelle de 5
+        
+    } else if([node.type isEqualToString:@"PUCK"]){
+        [self.specialSlider setHidden:YES];
+        
+    } else if([node.type isEqualToString:@"EDGE"]){
+        value = ((NodeTable*)[[Scene getInstance].renderingTree getTable]).CoeffFriction;
+        message = [@"Friction Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
+        self.specialSlider.value = value/5; // echelle de 5
+    }
+    
+    self.specialLabel.text = message;
 }
 
 #pragma mark - Screenshot Utility
@@ -1051,25 +1144,42 @@ enum {
 #pragma mark - UIAlertViewDelegate
 - (void)showNameMapAlert
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Veuillez entrer le nom de la carte"
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Enter a Map title :"
                                                       message:nil
                                                      delegate:self
-                                            cancelButtonTitle:@"Upload"
+                                            cancelButtonTitle:@"Submit"
                                             otherButtonTitles:@"Cancel", nil];
     [message setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    message.tag = kAlertNameMapTag;
+    message.tag = AlertNameMapTag;
+    [message show];
+    [message release];
+}
+
+- (void)showInvalidTableAlert
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Incomplete Table"
+                                                      message:@"Please make sure the table has exactly two Sticks and one Puck before submitting"
+                                                     delegate:self
+                                            cancelButtonTitle:@"Dismiss"
+                                            otherButtonTitles:nil];
+    [message setAlertViewStyle:UIAlertViewStyleDefault];
+    message.tag = AlertNameWarningTag;
     [message show];
     [message release];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == kAlertNameMapTag){
+    if (alertView.tag == AlertNameMapTag){
         if(buttonIndex == 0){
             NSString *inputText = [[alertView textFieldAtIndex:0] text];
             //TODO: Do some validation here
             WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
             NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
+            
+            // Sound time
+            [self flashAnimation];
+        
             // Upload data to server
             [webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
             [webClient release];
@@ -1077,6 +1187,23 @@ enum {
             NSLog(@"Action Canceled");
         }
     }
+}
+
+- (void) flashAnimation
+{
+    UIView* flashView = [[UIView alloc]initWithFrame:(CGRectMake(0, 0, 1024, 768))];
+    flashView.backgroundColor = [UIColor whiteColor];
+    flashView.alpha = 1.0f;
+    [self.view addSubview:flashView];
+    [AudioInterface playSound:@"camera1.wav"];
+    
+    [UIView animateWithDuration:0.3 delay: 0.0 options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         flashView.alpha = 0;
+                         
+                     }
+                     completion:nil];
+    [flashView release];
 }
 
 @end

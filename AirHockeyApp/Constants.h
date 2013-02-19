@@ -37,5 +37,9 @@ extern float lightAmbient[];
 extern float lightDiffuse[];
 extern float matAmbient[];
 extern float matDiffuse[];
+extern float orangeColor[];
+
+extern int GLOBAL_SIZE_OFFSET;
+
 
 @end

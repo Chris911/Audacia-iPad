@@ -12,6 +12,7 @@
 @interface NodeMurret : Node <NSCopying>
 
 @property (nonatomic, retain) OpenGLWaveFrontObject *model;
+@property (nonatomic) float CoeffRebond;
 
 - (id) init;
 - (void) render;

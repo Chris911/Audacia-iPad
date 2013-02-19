@@ -108,6 +108,8 @@
         [self deselectAllNodes];
     }
     
+    NSLog(@"SELX: %f, SELY: %f",position.x, position.y);
+    
     for(int i = [self.tree count]-1; i > 0; i--) //FIXME: Inverted selection order, may cause problems but fixes table selection
     {
         Node *node = [self.tree objectAtIndex:i];

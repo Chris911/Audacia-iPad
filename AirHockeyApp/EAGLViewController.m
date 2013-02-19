@@ -294,7 +294,6 @@ enum {
     for(UITouch* touch in [event allTouches]) {
         CGPoint positionCourante = [touch locationInView:self.view];
         
-        [self.camera getScreenCoorOfPoint:positionCourante];
         
         // Elastic rectangle mode (Zoom or selection).  Bypass object transformations
         // or Drag and Drop modes.
@@ -305,8 +304,12 @@ enum {
             currentTouchesMode = TOUCH_ELASTIC_MODE;
         } else {
         
-            // Correct touch position according to the camera position (ORTHO)
-            [self.camera assignWorldPosition:positionCourante];
+            // Correct touch position according to the camera position (Ortho or Proj)
+            if(!self.camera.isPerspective){
+                [self.camera assignWorldPosition:positionCourante];
+            } else {
+                [self.camera convertScreenToWorldProj:positionCourante];
+            }
 
             // Detect touch events on the EAGLView (self.view)
             if(touch.view == self.view){
@@ -360,8 +363,12 @@ enum {
         // This allows to not interfer with the currentTransformState
         if(currentTouchesMode == TOUCH_TRANSFORM_MODE) {
             
-            // Place the world positions according to the current camera position
-            [self.camera assignWorldPosition:positionCourante];
+            // Place the world positions according to the current camera position (Ortho or Pesrpective)
+            if(!self.camera.isPerspective){
+                [self.camera assignWorldPosition:positionCourante];
+            } else {
+                [self.camera convertScreenToWorldProj:positionCourante];
+            }
             
             // Translation Mode ----------------------------------------------------------
             if(currentTransformState == STATE_TRANSFORM_TRANSLATION) {

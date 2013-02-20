@@ -12,8 +12,15 @@
 #import "MapContainer.h"
 #import "Map.h"
 #import "WebClient.h"
+#import "EAGLViewController.h"
+
+#define SWITCH_TYPE_SHEET 0
+#define EDIT_MAP_SHEET    1
 
 @interface CarouselTestView () <UIActionSheetDelegate>
+{
+    int currentIndex;
+}
 
 @property (nonatomic, assign) BOOL wrap;
 @property (nonatomic, retain) NSMutableArray *items;
@@ -43,6 +50,12 @@
                       @"Stars-4.png",[NSNumber numberWithInt:4],
                       @"Stars-5.png",[NSNumber numberWithInt:5],
                        nil];
+    
+    //Add observer for fetch map event
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fetchMapFinished)
+                                                 name:@"FetchMapEventFinished"
+                                               object:nil];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -249,16 +262,59 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex >= 0)
+    if(actionSheet.tag == SWITCH_TYPE_SHEET)
     {
-        //map button index to carousel type
-        iCarouselType type = buttonIndex;
-        
-        //carousel can smoothly animate between types
-        [UIView beginAnimations:nil context:nil];
-        carousel.type = type;
-        [UIView commitAnimations];
+        if (buttonIndex >= 0)
+        {
+            //map button index to carousel type
+            iCarouselType type = buttonIndex;
+            
+            //carousel can smoothly animate between types
+            [UIView beginAnimations:nil context:nil];
+            carousel.type = type;
+            [UIView commitAnimations];
+        }
+    } else if (actionSheet.tag == EDIT_MAP_SHEET)
+    {
+        if (buttonIndex == 0)
+        {
+            [self.loadingIndicator startAnimating];
+            [self.hiddenView setHidden:NO];
+            Map* map = [self.items objectAtIndex:currentIndex];
+            NSLog(@"[Carousel] Editing map");
+            AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+            [delegate.webClient fetchMapXML:map.name];
+        }
     }
+}
+
+- (void)fetchMapFinished
+{
+    [self.loadingIndicator stopAnimating];
+    [self.hiddenView setHidden:YES];
+    
+    // remove previous SHIT
+    for(int i = self.carousel.numberOfItems; i > 0; i--){
+        [self.carousel removeItemAtIndex:i animated:NO];
+    }
+    
+    [MapContainer getInstance].maps = nil;
+    EAGLViewController* glvc = [[[EAGLViewController alloc]init]autorelease];
+    [self presentModalViewController:glvc animated:NO];
+}
+
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+{
+    NSLog(@"[Carousel] Selected item at index: %i",index);
+    currentIndex = index;
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Would you like to edit this map?"
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Yes",@"No",nil];
+    sheet.tag = EDIT_MAP_SHEET;
+    [sheet showInView:self.view];
+    [sheet release];
 }
 
 - (CATransform3D)carousel:(iCarousel *)_carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform
@@ -307,11 +363,12 @@
                                          destructiveButtonTitle:nil
                                               otherButtonTitles:@"Linear", @"Rotary", @"Inverted Rotary", @"Cylinder", @"Inverted Cylinder", @"Wheel", @"Inverted Wheel", @"CoverFlow", @"CoverFlow2", @"Time Machine", @"Inverted Time Machine", @"Custom", nil];
     [sheet showInView:self.view];
+    sheet.tag = SWITCH_TYPE_SHEET;
     [sheet release];
 }
 
-- (IBAction)pressedBack:(id)sender {
-    
+- (IBAction)pressedBack:(id)sender
+{    
     // remove previous SHIT
     for(int i = self.carousel.numberOfItems; i > 0; i--){
         [self.carousel removeItemAtIndex:i animated:NO];

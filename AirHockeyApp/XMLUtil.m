@@ -9,6 +9,8 @@
 #import "XMLUtil.h"
 #import "Scene.h"
 #import "Node.h"
+#import "NodePortal.h"
+#import "NodeTable.h"
 
 @implementation XMLUtil
 
@@ -42,8 +44,18 @@
     
     // Parse the tree
     RenderingTree *renderingTree = [[[RenderingTree alloc] init] autorelease];
-    NSArray *tree = [doc.rootElement elementsForName:@"Tree"];
+    NSArray *tree = [doc.rootElement elementsForName:@"PointControle"];
     
+    for(GDataXMLElement *node in tree)
+    {
+        NSArray* pointsConrole = [node elementsForName:@"PointControle"];
+        for(GDataXMLElement *nodeControle in pointsConrole)
+        {
+            GDataXMLNode *xData = [nodeControle attributeForName:@"PositionX"];
+            
+            NSLog(@"%@",[xData stringValue]);
+        }
+    }
     for (GDataXMLElement *node in tree) {
     
         NSString *type;
@@ -95,6 +107,16 @@
         GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y]];
         GDataXMLElement *posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",node.position.z]];
         
+        if([node.xmlType isEqualToString:@"But"] &&
+           [node.xmlType isEqualToString:@"PointControle"])
+        {
+            GDataXMLElement *angleProperty = [GDataXMLNode attributeWithName:@"AngleFactor" stringValue:[NSString stringWithFormat:@"%f",node.angle]];
+            GDataXMLElement *scaleProperty = [GDataXMLNode attributeWithName:@"ScaleFactor" stringValue:[NSString stringWithFormat:@"%f",node.scaleFactor]];
+            
+            [nodeElement addAttribute:angleProperty];
+            [nodeElement addAttribute:scaleProperty];
+        }
+        
         // Add attribute to the current nodeElement
         [nodeElement addAttribute:posXProperty];
         [nodeElement addAttribute:posYProperty];
@@ -106,10 +128,32 @@
         }
         else if([node.xmlType isEqualToString:@"Portal"])
         {
+            GDataXMLElement *gravityProperty = [GDataXMLNode attributeWithName:@"Gravite" stringValue:[NSString stringWithFormat:@"%f",((NodePortal *)node).Gravite]];
+            [nodeElement addAttribute:gravityProperty];
+            
             [portalRoot addChild:nodeElement];
         }
         else if([node.xmlType isEqualToString:@"Pommeau"])
         {
+            // Fixme: The XML should be fixed in the game engine
+            GDataXMLElement *controlProperty = [GDataXMLNode attributeWithName:@"Control" stringValue:@"clavier"];
+            [nodeElement addAttribute:controlProperty];
+            
+            GDataXMLElement *campProperty = [GDataXMLNode attributeWithName:@"Camp" stringValue:@"droite"];
+            [nodeElement addAttribute:campProperty];
+            
+            GDataXMLElement *toucheHautProperty = [GDataXMLNode attributeWithName:@"ToucheHaut" stringValue:@"haut"];
+            [nodeElement addAttribute:toucheHautProperty];
+            
+            GDataXMLElement *toucheBasProperty = [GDataXMLNode attributeWithName:@"ToucheBas" stringValue:@"bas"];
+            [nodeElement addAttribute:toucheBasProperty];
+            
+            GDataXMLElement *toucheDroiteProperty = [GDataXMLNode attributeWithName:@"ToucheDroite" stringValue:@"droite"];
+            [nodeElement addAttribute:toucheDroiteProperty];
+            
+            GDataXMLElement *toucheGaucheProperty = [GDataXMLNode attributeWithName:@"ToucheGauche" stringValue:@"gauche"];
+            [nodeElement addAttribute:toucheGaucheProperty];
+            
             [pommeauRoot addChild:nodeElement];
         }
         else if([node.xmlType isEqualToString:@"Murret"])
@@ -118,6 +162,20 @@
         }
         else if([node.xmlType isEqualToString:@"Puck"])
         {
+            // Fixme: Again this should be fixed in the game engine
+            Node* table = [renderingTree getTable];
+            GDataXMLElement *frictionProperty = [GDataXMLNode attributeWithName:@"CoeffFriction" stringValue:[NSString stringWithFormat:@"%f",((NodeTable *)table).CoeffFriction]];
+            [nodeElement addAttribute:frictionProperty];
+            
+            GDataXMLElement *rebondProperty = [GDataXMLNode attributeWithName:@"CoeffRebond" stringValue:[NSString stringWithFormat:@"%f",((NodeTable *)table).CoeffRebond]];
+            [nodeElement addAttribute:rebondProperty];
+            
+            GDataXMLElement *zoneHProperty = [GDataXMLNode attributeWithName:@"HauteurZone" stringValue:@"140"];
+            [nodeElement addAttribute:zoneHProperty];
+            
+            GDataXMLElement *zoneLProperty = [GDataXMLNode attributeWithName:@"LargeurZone" stringValue:@"210"];
+            [nodeElement addAttribute:zoneLProperty];
+            
             [puckRoot addChild:nodeElement];
         }
         else if([node.xmlType isEqualToString:@"PointControle"])
@@ -126,6 +184,9 @@
         }
         else if([node.xmlType isEqualToString:@"But"])
         {
+            GDataXMLElement *facteurButProperty = [GDataXMLNode attributeWithName:@"FacteurBut" stringValue:@"1"];
+            [nodeElement addAttribute:facteurButProperty];
+            
             [butRoot addChild:nodeElement];
         }
     }

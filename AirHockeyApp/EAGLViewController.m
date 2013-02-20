@@ -7,6 +7,7 @@
 
 #import "EAGLViewController.h"
 #import "EAGLView.h"
+#import "AppDemoAppDelegate.h"
 #import "AudioInterface.h"
 #import "Node.h"
 #import "NodeTable.h"
@@ -904,9 +905,13 @@ enum {
 {
     // Initialize Scene and rendring tree
     [Scene getInstance];
-    [[Scene getInstance].renderingTree emptyRenderingTree];
-    [Scene loadDefaultElements];
-    
+    if([Scene getInstance].loadCustomTree == YES) {
+        [Scene getInstance].loadCustomTree = NO;
+    }
+    else {
+        [[Scene getInstance].renderingTree emptyRenderingTree];
+        [Scene loadDefaultElements];
+    }
 }
 
 - (void) prepareRecognizers
@@ -1186,15 +1191,15 @@ enum {
         if(buttonIndex == 0){
             NSString *inputText = [[alertView textFieldAtIndex:0] text];
             //TODO: Do some validation here
-            WebClient *webClient = [[WebClient alloc]initWithDefaultServer];
-            NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
             
+            NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
+            AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
             // Sound time
             [self flashAnimation];
         
             // Upload data to server
-            [webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
-            [webClient release];
+            [delegate.webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
+            //[delegate.webClient release];
         } else if(buttonIndex == 1) {
             NSLog(@"Action Canceled");
         }

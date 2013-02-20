@@ -9,7 +9,9 @@
 
 #import "WebClient.h"
 #import "UIImageView+AFNetworking.h"
+#import "AFGDataXMLRequestOperation.h"
 #import "Session.h"
+#import "XMLUtil.h"
 
 @implementation WebClient
 @synthesize AFClient;
@@ -79,7 +81,7 @@
     NSString *fileName = [mapName stringByAppendingString:@".jpg"];
     
     NSMutableURLRequest *request = [self.AFClient multipartFormRequestWithMethod:@"POST" path:self.mapsAPIScript parameters:@{@"action":@"uploadMap"} constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
+        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpg"];
     }];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -146,6 +148,25 @@
     NSOperationQueue* opq = [[[NSOperationQueue alloc]init]autorelease];
     [opq addOperation:operation];
 }
+
+
+- (void) fetchMapXML:(NSString *)mapName
+{
+    NSString* xmlPathz = [self.xmlPath stringByAppendingFormat:@"%@.xml",mapName];
+    AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:xmlPathz]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument)
+    {
+        NSLog(@"[XML] Downloaded map successfully");
+        [XMLUtil loadRenderingTreeFromGDataXMLDocument:XMLDocument];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchMapEventFinished" object:nil];
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, GDataXMLDocument *XMLDocument)
+    {
+        NSLog(@"[XML] Failed to download map");
+    }];
+    
+    [operation start];
+}
+
 
 - (void) getConfigPaths
 {

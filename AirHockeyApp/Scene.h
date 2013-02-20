@@ -12,6 +12,7 @@
 @interface Scene : NSObject
 
 @property (nonatomic,retain)RenderingTree* renderingTree;
+@property (nonatomic) BOOL loadCustomTree;
 
 + (Scene *)getInstance;
 + (void) loadDefaultElements;

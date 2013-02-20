@@ -22,8 +22,9 @@
 @property (retain,nonatomic) NSString* xmlPath;
 
 - (id) initWithDefaultServer;
-- (void) uploadMapData:(NSString*)mapName :(NSData *)xmlData :(UIImage*)mapImage;
+- (void) uploadMapData:(NSString *)mapName :(NSData *)xmlData :(UIImage*)mapImage;
 - (void) fetchAllMapsFromDatabase;
+- (void) fetchMapXML:(NSString *)mapName;
 - (void) getConfigPaths;
 - (void) fetchMapImageWithName:(Map*)map;
 - (BOOL) validateLogin:(NSString*)username :(NSString*)password ;

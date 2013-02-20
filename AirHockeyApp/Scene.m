@@ -19,6 +19,7 @@
 @implementation Scene
 
 @synthesize renderingTree;
+@synthesize loadCustomTree;
 
 static Scene *scene = NULL;
 
@@ -32,6 +33,7 @@ static Scene *scene = NULL;
         scene = [[Scene alloc]init];
         RenderingTree* tempTree = [[RenderingTree alloc]init];
         scene.renderingTree = tempTree;
+        scene.loadCustomTree = NO;
         [tempTree release];
     }
 }

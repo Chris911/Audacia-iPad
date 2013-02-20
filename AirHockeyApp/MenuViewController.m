@@ -13,7 +13,7 @@
 #import "Session.h" 
 #import "AudioInterface.h"
 #import "LoginViewController.h"
-
+#import "NewMenuViewController.h"
 
 @interface MenuViewController()
 {
@@ -161,6 +161,17 @@
     }
 }
 
+- (IBAction)newMenuButtonPressed:(id)sender
+{
+    if(!isConnectionViewVisible) {
+        NewMenuViewController* newmenu_vc = [[[NewMenuViewController alloc]init]autorelease];
+        newmenu_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:newmenu_vc animated:YES completion:nil];
+    } else {
+        [self toggleConnectionView];
+    }
+}
+
 // Show or hide the connection view
 - (void) toggleConnectionView
 {
@@ -205,4 +216,5 @@
     [self setConnectionView:nil];
     [super viewDidUnload];
 }
+
 @end

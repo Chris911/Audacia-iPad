@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0409924916B21087009DBE1D /* NetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0409924816B21087009DBE1D /* NetworkUtils.m */; };
+		041186E816CC9E510046B720 /* NewMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041186E716CC9E510046B720 /* NewMenuViewController.xib */; };
+		041186EB16CC9FC50046B720 /* Button-test.png in Resources */ = {isa = PBXBuildFile; fileRef = 041186EA16CC9FC50046B720 /* Button-test.png */; };
+		041186EE16CCA07D0046B720 /* NewMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041186ED16CCA07D0046B720 /* NewMenuViewController.m */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
 		045AA82B16CBF93C00F82AB0 /* login-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 045AA82A16CBF93C00F82AB0 /* login-background.png */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
@@ -136,6 +139,10 @@
 /* Begin PBXFileReference section */
 		0409924716B21087009DBE1D /* NetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkUtils.h; sourceTree = "<group>"; };
 		0409924816B21087009DBE1D /* NetworkUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkUtils.m; sourceTree = "<group>"; };
+		041186E716CC9E510046B720 /* NewMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewMenuViewController.xib; sourceTree = "<group>"; };
+		041186EA16CC9FC50046B720 /* Button-test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Button-test.png"; path = "Assets/UI/Images/Button-test.png"; sourceTree = "<group>"; };
+		041186EC16CCA07D0046B720 /* NewMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMenuViewController.h; sourceTree = "<group>"; };
+		041186ED16CCA07D0046B720 /* NewMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMenuViewController.m; sourceTree = "<group>"; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		045AA82A16CBF93C00F82AB0 /* login-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-background.png"; path = "Assets/UI/Images/login-background.png"; sourceTree = "<group>"; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
@@ -548,11 +555,13 @@
 		96378D941472C78200F543EA /* Controleurs */ = {
 			isa = PBXGroup;
 			children = (
+				041186EC16CCA07D0046B720 /* NewMenuViewController.h */,
 				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
 				96378D951472C7CC00F543EA /* MenuViewController.h */,
 				A83AA9EB16A4D924003388F3 /* BetaViewController.h */,
 				04D9C3F416BCB217005C6197 /* CarouselTestView.h */,
 				A8CE920016C9BDBB001CCEBB /* LoginViewController.h */,
+				041186ED16CCA07D0046B720 /* NewMenuViewController.m */,
 				96378D961472C7CC00F543EA /* MenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
 				A83AA9EC16A4D924003388F3 /* BetaViewController.m */,
@@ -571,6 +580,7 @@
 				96378D991472C80A00F543EA /* MenuViewController.xib */,
 				969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */,
 				04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */,
+				041186E716CC9E510046B720 /* NewMenuViewController.xib */,
 			);
 			name = "Interface Builder";
 			sourceTree = "<group>";
@@ -690,6 +700,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				041186EA16CC9FC50046B720 /* Button-test.png */,
 				045AA82A16CBF93C00F82AB0 /* login-background.png */,
 				A8CE920516C9BDF0001CCEBB /* AudaciaLogo.png */,
 				A8CE920616C9BDF0001CCEBB /* hockey-cup.png */,
@@ -929,6 +940,8 @@
 				A842463916CE80AD00A9F3B9 /* table.png in Resources */,
 				A881432D16D04B5300291E1A /* skybox2.pvrtc in Resources */,
 				A8081D1316D2952600B39E8B /* camera1.wav in Resources */,
+				041186E816CC9E510046B720 /* NewMenuViewController.xib in Resources */,
+				041186EB16CC9FC50046B720 /* Button-test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +1007,7 @@
 				A8A4638C16C7F990008D173B /* Texture2DUtil.m in Sources */,
 				A8A4639816C88012008D173B /* Skybox.m in Sources */,
 				A8CE920316C9BDBB001CCEBB /* LoginViewController.m in Sources */,
+				041186EE16CCA07D0046B720 /* NewMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

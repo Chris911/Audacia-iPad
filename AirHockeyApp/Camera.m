@@ -6,6 +6,7 @@
 //  Camera used to move around in the GL World
 //  Also serves as an touch point converter to
 //  keep the gl objects positions unchanged.
+//  Modified from AppDemo project
 
 #import "Camera.h"
 #import <GLKit/GLKit.h>
@@ -111,6 +112,21 @@
     GLfloat deltaY = (convertedNewPos.y - convertedLastPos.y)/2;
     
     self.orthoCenter = CGPointMake(self.orthoCenter.x+deltaX, self.orthoCenter.y+deltaY);
+    
+    // Bound check
+    if(self.orthoCenter.x > 50){
+        self.orthoCenter = CGPointMake(50, self.orthoCenter.y);
+    }
+    if(self.orthoCenter.y > 50){
+        self.orthoCenter = CGPointMake(self.orthoCenter.x, 50);
+    }
+    if(self.orthoCenter.x < -50){
+        self.orthoCenter = CGPointMake(-50, self.orthoCenter.y);
+    }
+    if(self.orthoCenter.y < -50){
+        self.orthoCenter = CGPointMake(self.orthoCenter.x, -50);
+    }
+    
     [self applyOrthoTransfromation];
 }
 
@@ -126,13 +142,13 @@
     // Important : 4 and 3 represents the screen ratio of the iPad (4:3 , 1024:768)
     if(factor > 1){ // zoom out, pinch out
         if(self.orthoWidth < LARGEUR_FENETRE + 100 && self.orthoHeight < HAUTEUR_FENETRE + 75){
-            self.orthoWidth += factor*4;
-            self.orthoHeight += factor*3;
+            self.orthoWidth -= factor*8;
+            self.orthoHeight -= factor*6;
         }
     } else { // Zoom in
         if(self.orthoWidth > LARGEUR_FENETRE - 100 && self.orthoHeight > HAUTEUR_FENETRE - 75){
-            self.orthoWidth -= factor*8;
-            self.orthoHeight -= factor*6;
+            self.orthoWidth += factor*4;
+            self.orthoHeight += factor*3;
         }
     }
 }
@@ -365,6 +381,9 @@
     self.orthoCenter = CGPointMake(newXpos,newYpos);
 }
 
+// Converts a touch point according to the current
+// ModelView matrix and projection matrix via an UnProject call
+// reference from : http://casualdistractiongames.wordpress.com/
 - (void) convertScreenToWorldProj:(CGPoint)touch
 {    
     // Projection Matrix
@@ -393,7 +412,6 @@
     float far_pt_factor = fabs(far_pt.z)/z_magnitude;
     GLKVector3 final_pt = GLKVector3Add( GLKVector3MultiplyScalar(near_pt, far_pt_factor), GLKVector3MultiplyScalar(far_pt, near_pt_factor));
     Vector3D final = Vector3DMake(final_pt.x, final_pt.y, 0);
-    NSLog(@"Px :%f, Py :%f, Pz :%f", final.x, final.y, final.z);
     
     self.worldPosition = Vector3DMake(final.x, final.y, 0); // Z ignored    
 }

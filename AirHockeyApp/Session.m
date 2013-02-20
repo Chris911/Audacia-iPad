@@ -26,9 +26,7 @@ static Session *session = NULL;
     {
         initialized = YES;
         session = [[Session alloc]init];
-        session.username = DEFAULT_USERNAME;
-        session.password = @"";
-        session.isAuthenticated = NO;
+        [self resetToDefault];
     }
 }
 
@@ -36,6 +34,18 @@ static Session *session = NULL;
 {
     [self initialize];
     return (session);
+}
+
++ (void) resetSession
+{
+    [self resetToDefault];
+}
+
++ (void) resetToDefault
+{
+    session.username = DEFAULT_USERNAME;
+    session.password = @"";
+    session.isAuthenticated = NO;
 }
 
 - (void) dealloc

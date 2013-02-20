@@ -97,21 +97,18 @@
 }
 
 #pragma mark - Selecting nodes
-// Select node using its position
-// FIXME: only works in the default 2D Plane
+// Select node using its position, true if any node selected
 - (BOOL) selectNodeByPosition:(Vector3D) position
-{    
-    
+{
     // New selection pass, make sure
     // no other nodes are still selected
     if(!self.multipleNodesSelected){
         [self deselectAllNodes];
     }
         
-    for(int i = [self.tree count]-1; i > 0; i--) //FIXME: Inverted selection order, may cause problems but fixes table selection
+    for(int i = [self.tree count]-1; i > 0; i--)
     {
         Node *node = [self.tree objectAtIndex:i];
-        // bounding box check, FIXME: selection not optimal
         int offset = GLOBAL_SIZE_OFFSET * node.scaleFactor;
         
         if(node.position.x <= position.x + offset
@@ -119,14 +116,11 @@
            && node.position.y <= position.y + offset
            && node.position.y >= position.y - offset) {
                 node.isSelected = YES;
-                NSLog(@"Selected Type:%@",node.type);
-                // FIXME: This only works for SINGLE OBJECT selection
                 return YES; 
         }
     }
     return NO;
 }
-
 
 // Multiple nodes selection, using a zone (the begin and end points of the elastic rect)
 - (BOOL) selectNodesByZone:(CGPoint)beginPoint :(CGPoint)endPoint

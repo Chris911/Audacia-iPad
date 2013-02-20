@@ -12,7 +12,11 @@
 @interface Particle : NSObject
 
 @property Vector3D position;
-@property BOOL isActive;
+@property Vector3D velocity;
+@property float alpha;
+@property float angle;
+
+- (id) initWithCenterPosition:(CGPoint)point;
 - (void)render;
 
 @end

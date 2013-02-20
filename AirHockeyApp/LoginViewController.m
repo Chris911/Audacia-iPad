@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "AppDemoAppDelegate.h"
+#import "NewMenuViewController.h"
 #import "WebClient.h"
 #import "NetworkUtils.h"
 #import "Session.h"
@@ -117,7 +118,7 @@
 
 - (IBAction)pressedContinueAnonButton:(id)sender
 {
-    [self toggleConnectionView];
+    [self transitionToMenu];
 }
 
 - (IBAction)pressedValidateButton:(id)sender
@@ -154,11 +155,18 @@
     if([Session getInstance].isAuthenticated){
         [Session getInstance].username = self.usernameTextBox.text;
         [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [self dismissModalViewControllerAnimated:YES];
+        [self transitionToMenu];
     } else {
         [Session getInstance].username = @"Guest";
         self.errorLabel.text = @"Invalid account";
     }
+}
+
+- (void) transitionToMenu
+{
+    NewMenuViewController* mv = [[[NewMenuViewController alloc]initWithNibName:@"NewMenuViewController" bundle:nil]autorelease];
+    mv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentModalViewController:mv animated:YES];
 }
 
 #pragma mark - TextField Delegate

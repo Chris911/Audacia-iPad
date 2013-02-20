@@ -66,11 +66,14 @@
 		969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
 		969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */; };
 		A8081D1316D2952600B39E8B /* camera1.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8081D1216D2952600B39E8B /* camera1.wav */; };
+		A8081D1E16D4605F00B39E8B /* gather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8081D1D16D4605F00B39E8B /* gather.ttf */; };
+		A8081D2916D50D7500B39E8B /* ParticlesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A8081D2816D50D7500B39E8B /* ParticlesContainer.m */; };
+		A8081D2D16D5622500B39E8B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8081D2B16D5622400B39E8B /* ProfileViewController.m */; };
+		A8081D2E16D5622500B39E8B /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8081D2C16D5622500B39E8B /* ProfileViewController.xib */; };
+		A8081D3016D564E600B39E8B /* anonymous-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8081D2F16D564E600B39E8B /* anonymous-icon.jpg */; };
 		A812858116A0A53900C8EF6D /* ParametersImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A812858016A0A53900C8EF6D /* ParametersImage1.png */; };
 		A818E02516BAD7D900CA5823 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = A818E02416BAD7D900CA5823 /* Camera.m */; };
 		A831CEA716B7219800A30C39 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = A831CEA616B7219800A30C39 /* Session.m */; };
-		A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A83AA9EC16A4D924003388F3 /* BetaViewController.m */; };
-		A83AA9EF16A4D925003388F3 /* BetaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A83AA9ED16A4D925003388F3 /* BetaViewController.xib */; };
 		A83C226116BD94E2007AA035 /* ElasticRect.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C226016BD94E2007AA035 /* ElasticRect.m */; };
 		A83C227B16BEC38F007AA035 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C227A16BEC38F007AA035 /* Particle.m */; };
 		A842302F16BF3A04007F97CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842302E16BF3A04007F97CB /* OpenAL.framework */; };
@@ -223,14 +226,18 @@
 		969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EAGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
 		A8081D1216D2952600B39E8B /* camera1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = camera1.wav; sourceTree = "<group>"; };
+		A8081D1D16D4605F00B39E8B /* gather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gather.ttf; sourceTree = "<group>"; };
+		A8081D2716D50D7500B39E8B /* ParticlesContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticlesContainer.h; sourceTree = "<group>"; };
+		A8081D2816D50D7500B39E8B /* ParticlesContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticlesContainer.m; sourceTree = "<group>"; };
+		A8081D2A16D5622400B39E8B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		A8081D2B16D5622400B39E8B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		A8081D2C16D5622500B39E8B /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		A8081D2F16D564E600B39E8B /* anonymous-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "anonymous-icon.jpg"; path = "Assets/UI/Images/anonymous-icon.jpg"; sourceTree = "<group>"; };
 		A812858016A0A53900C8EF6D /* ParametersImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ParametersImage1.png; path = Assets/UI/Images/ParametersImage1.png; sourceTree = "<group>"; };
 		A818E02316BAD7D900CA5823 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		A818E02416BAD7D900CA5823 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		A831CEA516B7219800A30C39 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		A831CEA616B7219800A30C39 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
-		A83AA9EB16A4D924003388F3 /* BetaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetaViewController.h; sourceTree = "<group>"; };
-		A83AA9EC16A4D924003388F3 /* BetaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetaViewController.m; sourceTree = "<group>"; };
-		A83AA9ED16A4D925003388F3 /* BetaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BetaViewController.xib; sourceTree = "<group>"; };
 		A83C225F16BD94E2007AA035 /* ElasticRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElasticRect.h; sourceTree = "<group>"; };
 		A83C226016BD94E2007AA035 /* ElasticRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElasticRect.m; sourceTree = "<group>"; };
 		A83C227716BEC08E007AA035 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
@@ -558,15 +565,15 @@
 				041186EC16CCA07D0046B720 /* NewMenuViewController.h */,
 				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
 				96378D951472C7CC00F543EA /* MenuViewController.h */,
-				A83AA9EB16A4D924003388F3 /* BetaViewController.h */,
 				04D9C3F416BCB217005C6197 /* CarouselTestView.h */,
 				A8CE920016C9BDBB001CCEBB /* LoginViewController.h */,
+				A8081D2A16D5622400B39E8B /* ProfileViewController.h */,
 				041186ED16CCA07D0046B720 /* NewMenuViewController.m */,
 				96378D961472C7CC00F543EA /* MenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
-				A83AA9EC16A4D924003388F3 /* BetaViewController.m */,
 				04D9C3F516BCB217005C6197 /* CarouselTestView.m */,
 				A8CE920116C9BDBB001CCEBB /* LoginViewController.m */,
+				A8081D2B16D5622400B39E8B /* ProfileViewController.m */,
 			);
 			name = Controleurs;
 			sourceTree = "<group>";
@@ -574,13 +581,13 @@
 		96378D981472C7F200F543EA /* Interface Builder */ = {
 			isa = PBXGroup;
 			children = (
-				A8CE920216C9BDBB001CCEBB /* LoginViewController.xib */,
 				96378D8C1472C71200F543EA /* MainWindow.xib */,
-				A83AA9ED16A4D925003388F3 /* BetaViewController.xib */,
+				A8CE920216C9BDBB001CCEBB /* LoginViewController.xib */,
 				96378D991472C80A00F543EA /* MenuViewController.xib */,
 				969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */,
 				04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */,
 				041186E716CC9E510046B720 /* NewMenuViewController.xib */,
+				A8081D2C16D5622500B39E8B /* ProfileViewController.xib */,
 			);
 			name = "Interface Builder";
 			sourceTree = "<group>";
@@ -618,6 +625,15 @@
 			name = Vues;
 			sourceTree = "<group>";
 		};
+		A8081D1416D45A3700B39E8B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A8081D1D16D4605F00B39E8B /* gather.ttf */,
+			);
+			name = Fonts;
+			path = Assets/Fonts;
+			sourceTree = "<group>";
+		};
 		A818E02116BAD7C600CA5823 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +666,8 @@
 			children = (
 				A83C227716BEC08E007AA035 /* Particle.h */,
 				A83C227A16BEC38F007AA035 /* Particle.m */,
+				A8081D2716D50D7500B39E8B /* ParticlesContainer.h */,
+				A8081D2816D50D7500B39E8B /* ParticlesContainer.m */,
 			);
 			name = Particles;
 			sourceTree = "<group>";
@@ -689,6 +707,7 @@
 		A8C5A8B0169DECD7008B29EF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A8081D1416D45A3700B39E8B /* Fonts */,
 				A8A4639016C8189E008D173B /* Textures */,
 				A8EEE41516BF43D700EA3FB0 /* Sounds */,
 				04A04E3316AEEED1006D1FEB /* Models */,
@@ -700,6 +719,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A8081D2F16D564E600B39E8B /* anonymous-icon.jpg */,
 				041186EA16CC9FC50046B720 /* Button-test.png */,
 				045AA82A16CBF93C00F82AB0 /* login-background.png */,
 				A8CE920516C9BDF0001CCEBB /* AudaciaLogo.png */,
@@ -891,7 +911,6 @@
 				A8C5A8C2169E39A5008B29EF /* CameraButton1.png in Resources */,
 				A8BD086A169F871E00B7A95D /* SideBar.png in Resources */,
 				A812858116A0A53900C8EF6D /* ParametersImage1.png in Resources */,
-				A83AA9EF16A4D925003388F3 /* BetaViewController.xib in Resources */,
 				A8F13CA916AF190E00CB5885 /* SideBar2.png in Resources */,
 				04F43C6316B038D00017756F /* booster.blend in Resources */,
 				04F43C6416B038D00017756F /* pommeau.blend in Resources */,
@@ -942,6 +961,9 @@
 				A8081D1316D2952600B39E8B /* camera1.wav in Resources */,
 				041186E816CC9E510046B720 /* NewMenuViewController.xib in Resources */,
 				041186EB16CC9FC50046B720 /* Button-test.png in Resources */,
+				A8081D1E16D4605F00B39E8B /* gather.ttf in Resources */,
+				A8081D2E16D5622500B39E8B /* ProfileViewController.xib in Resources */,
+				A8081D3016D564E600B39E8B /* anonymous-icon.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -965,7 +987,6 @@
 				048C9D3316A4A8D9006A7082 /* Node.m in Sources */,
 				048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */,
 				048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */,
-				A83AA9EE16A4D925003388F3 /* BetaViewController.m in Sources */,
 				A8CC902216A6E84100CFD27D /* GDataXMLNode.m in Sources */,
 				A8CC902716A6E95D00CFD27D /* XMLUtil.m in Sources */,
 				A8CC905916A6FD2D00CFD27D /* AFHTTPClient.m in Sources */,
@@ -1008,6 +1029,8 @@
 				A8A4639816C88012008D173B /* Skybox.m in Sources */,
 				A8CE920316C9BDBB001CCEBB /* LoginViewController.m in Sources */,
 				041186EE16CCA07D0046B720 /* NewMenuViewController.m in Sources */,
+				A8081D2916D50D7500B39E8B /* ParticlesContainer.m in Sources */,
+				A8081D2D16D5622500B39E8B /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

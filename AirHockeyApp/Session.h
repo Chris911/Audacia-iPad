@@ -15,5 +15,6 @@
 @property BOOL isAuthenticated;
 
 + (Session *) getInstance;
++ (void) resetSession;
 
 @end

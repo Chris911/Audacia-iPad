@@ -6,12 +6,14 @@
 #import "AppDemoAppDelegate.h"
 #import "MenuViewController.h"
 #import "EAGLViewController.h"
+#import "LoginViewController.h" 
 
 @implementation AppDemoAppDelegate
 
 @synthesize window = _window;
 @synthesize menuViewController = _menuViewController;
 @synthesize eaglViewController = _eaglViewController;
+@synthesize loginViewController = _loginViewController;
 @synthesize webClient;
 
 - (void) afficherVueAnimee
@@ -21,7 +23,7 @@
 
 - (void) afficherMenu
 {    
-    [UIView transitionWithView:self.window duration:1.0 options:(UIViewAnimationOptionTransitionFlipFromBottom) animations:^{
+    [UIView transitionWithView:self.window duration:1.0 options:(UIViewAnimationOptionTransitionCrossDissolve) animations:^{
         self.window.rootViewController = self.menuViewController;
     } completion:nil];
 }
@@ -30,7 +32,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    self.window.rootViewController = self.menuViewController;
+    self.window.rootViewController = self.loginViewController;
     
     self.webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
     

@@ -18,12 +18,11 @@
 #import "NodeMurret.h"
 #import "NetworkUtils.h"
 #import "ElasticRect.h"
-#import "Particle.h"    
+#import "ParticlesContainer.h"    
 #import "Skybox.h"
 
 #define AlertNameMapTag     1
 #define AlertNameWarningTag 2
-
 
 // Global constants
 
@@ -77,12 +76,15 @@ enum {
     // Defines the current touch moved mode (Transform, Camera or Elastic Rectangle)
     int currentTouchesMode;
     
-      // Elastic Rectangle
-      ElasticRect *elasticRect;
+    // Elastic Rectangle
+    ElasticRect *elasticRect;
     
-      Skybox* skybox;
+    Skybox* skybox;
     
-      Node *selectedNode;
+    Node *selectedNode;
+    
+    ParticlesContainer* particles;
+    
 }
 
 @property (nonatomic, retain) EAGLContext *context;
@@ -100,36 +102,36 @@ enum {
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]){
-    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+        EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
 
-    if (!aContext)
-        NSLog(@"Failed to create ES context");
-    else if (![EAGLContext setCurrentContext:aContext])
-        NSLog(@"Failed to set ES context current");
-    
-	self.context = aContext;
-	[aContext release];
-	
-    [(EAGLView *)self.view setContext:context];
-    [(EAGLView *)self.view setFramebuffer];
-    
-    animating = FALSE;
-    animationFrameInterval = 1;
-    self.displayLink = nil;
-    
-    currentTransformState   = STATE_TRANSFORM_TRANSLATION;
-    currentTouchesMode      = TOUCH_CAMERA_MODE;
-    activeObjectTag         = -1;
-    isReadyToExit           = NO;
-    
-    // Create the camera
-    self.camera = [[Camera alloc]init];
-    
-    // Create the elastic rectangle
-    elasticRect = [[ElasticRect alloc]init];
-    
-    // Create the skybox
-    skybox = [[Skybox alloc]initWithSize:150.0f];
+        if (!aContext)
+            NSLog(@"Failed to create ES context");
+        else if (![EAGLContext setCurrentContext:aContext])
+            NSLog(@"Failed to set ES context current");
+        
+        self.context = aContext;
+        [aContext release];
+        
+        [(EAGLView *)self.view setContext:context];
+        [(EAGLView *)self.view setFramebuffer];
+        
+        animating = FALSE;
+        animationFrameInterval = 1;
+        self.displayLink = nil;
+        
+        currentTransformState   = STATE_TRANSFORM_TRANSLATION;
+        currentTouchesMode      = TOUCH_CAMERA_MODE;
+        activeObjectTag         = -1;
+        isReadyToExit           = NO;
+        
+        // Create the camera
+        self.camera = [[Camera alloc]init];
+        
+        // Create the elastic rectangle
+        elasticRect = [[ElasticRect alloc]init];
+        
+        // Create the skybox
+        skybox = [[Skybox alloc]initWithSize:150.0f];
     
     }
     return self;
@@ -151,6 +153,7 @@ enum {
     [elasticRect release];
     [skybox release];
     [self.camera release];
+    [particles release];
     
     [_LeftSlideView release];
     [_CameraView release];
@@ -539,6 +542,9 @@ enum {
 - (IBAction)deleteItem:(id)sender
 {
     [[Scene getInstance].renderingTree removeSelectedNodes];
+    
+    particles = [[ParticlesContainer alloc]initWithNumberOfParticles:40:CGPointMake(self.camera.worldPosition.x, self.camera.worldPosition.y)];
+    
     int puckCount = [[Scene getInstance].renderingTree getPuckCount];
     int stickCount = [[Scene getInstance].renderingTree getStickCount];
     if(puckCount == 0){
@@ -548,6 +554,7 @@ enum {
         [self.PommeauView setHidden:NO];
     }
     [self slideOutAnimationView:self.ParametersView];
+    selectedNode = nil;
 }
 
 - (IBAction)copyItem:(id)sender
@@ -652,6 +659,10 @@ enum {
     // Render the elastic rectangle if active
     if(elasticRect.isActive){
         [elasticRect render];
+    }
+    
+    if(particles.isAlive){
+        [particles render];
     }
     
     [(EAGLView *)self.view presentFramebuffer];
@@ -855,11 +866,11 @@ enum {
             [self.view viewWithTag:activeObjectTag].center =  self.PommeauImageView.center;
         }
         
-        int jigga = [[Scene getInstance].renderingTree getStickCount];
+        int nbSticks = [[Scene getInstance].renderingTree getStickCount];
         if([[Scene getInstance].renderingTree getPuckCount] == 1){
             [self.PuckView setHidden:YES];
         }
-        if(jigga == 2){
+        if(nbSticks == 2){
             [self.PommeauView setHidden:YES];
         }
         
@@ -1000,6 +1011,13 @@ enum {
     
     [self.PuckView setHidden:YES]; //FIXME: This assumes we always have a puck in an initial map (True from loading a valid xml, maybe false for an empty starting table)
     //[self.PommeauView setHidden:YES]; // This assumes we always have 2 sticks in an initial map (True from loading a valid xml, maybe false for an empty starting table)
+    
+    // Custom Font on labels
+    UIFont *font = [UIFont fontWithName:@"Gather BRK" size:30];
+    [self.angleLable setFont:font];
+    [self.sizeLabel setFont:font];
+    [self.specialLabel setFont:font];
+    [self.typeLabel setFont:font];
 
 }
 
@@ -1062,12 +1080,12 @@ enum {
     float value = 0;
     if([node.type isEqualToString:@"PORTAL"]){
         value = ((NodePortal*)node).Gravite;
-        message = [@"Gravity Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f", value]];
+        message = [@"Gravity Factor " stringByAppendingString:[NSString stringWithFormat:@"%.01f", value]];
         self.specialSlider.value = value/5; // echelle de 5
         
     } else if([node.type isEqualToString:@"BOOSTER"]){
         value = ((NodeBooster*)node).Acceleration;
-        message = [@"Acceleration Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
+        message = [@"Acceleration Factor " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
         self.specialSlider.value = value/5; // echelle de 5
         
     } else if([node.type isEqualToString:@"PUCK"]){
@@ -1075,7 +1093,7 @@ enum {
         
     } else if([node.type isEqualToString:@"EDGE"]){
         value = ((NodeTable*)[[Scene getInstance].renderingTree getTable]).CoeffFriction;
-        message = [@"Friction Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
+        message = [@"Friction Factor " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
         self.specialSlider.value = value/5; // echelle de 5
     }
     
@@ -1206,6 +1224,7 @@ enum {
     }
 }
 
+#pragma mark - Eye Candy Animations
 - (void) flashAnimation
 {
     UIView* flashView = [[UIView alloc]initWithFrame:(CGRectMake(0, 0, 1024, 768))];

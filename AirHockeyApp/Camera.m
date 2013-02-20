@@ -302,83 +302,7 @@
 #pragma mark - Replace camera animation
 - (void) replaceCamera
 {
-    while(![self replaceCameraToOrigin:YES]) {
-        // Block while animating
-    }
-}
-
-- (BOOL) replaceCameraToOrigin:(BOOL)animated
-{
-    if(animated)
-    {
-        [self animateCameraBackToOrigin];
-
-        if(self.orthoCenter.x > -2 && self.orthoCenter.x < 2
-           && self.orthoCenter.y > -2 && self.orthoCenter.y < 2
-           && ((self.orthoWidth > LARGEUR_FENETRE - 4 && self.orthoWidth < LARGEUR_FENETRE + 4)
-           && (self.orthoHeight > HAUTEUR_FENETRE - 3 && self.orthoHeight < HAUTEUR_FENETRE + 3))){
-            
-            // Reset the coordinates
-            self.orthoCenter = CGPointMake(0, 0);
-            self.orthoWidth = LARGEUR_FENETRE;
-            self.orthoHeight = HAUTEUR_FENETRE;
-            
-            return YES; //Animation finished
-        }
-        return NO; // Animation not finished
-        
-    } else {
-        self.orthoCenter = CGPointMake(0, 0);
-    }
-    
-    return YES;
-}
-
-
-- (void) animateCameraBackToOrigin
-{
-    float xIncrement = 0.01f;
-    float yIncrement = 0.01f;
-    float zoomIncrementX = 0.03f;
-    float zoomIncrementY = 0.03f;
-
-    
-    float newXpos = 0;
-    float newYpos = 0;
-    float newZoomX = 0;
-    float newZoomY = 0;
-    
-    if(self.orthoCenter.x < 2){
-        newXpos = self.orthoCenter.x + xIncrement;
-    } else if(self.orthoCenter.x > 2){
-        newXpos = self.orthoCenter.x - xIncrement;
-    }
-    
-    if(self.orthoCenter.y < 2){
-        newYpos = self.orthoCenter.y + yIncrement;
-    } else if(self.orthoCenter.y > 2){
-        newYpos = self.orthoCenter.y - yIncrement;
-    }
-    
-    if(self.orthoWidth < LARGEUR_FENETRE - 4){
-        newZoomX = self.orthoWidth + zoomIncrementX;
-    } else if(self.orthoWidth > LARGEUR_FENETRE + 4){
-        newZoomX = self.orthoWidth - zoomIncrementX;
-    }
-    
-    if(self.orthoHeight < HAUTEUR_FENETRE - 3){
-        newZoomY = self.orthoHeight + zoomIncrementY;
-    } else if(self.orthoHeight > HAUTEUR_FENETRE + 3){
-        newZoomY = self.orthoHeight - zoomIncrementY;
-    }
-    
-    if(newZoomX != 0) {
-        self.orthoWidth = newZoomX;
-    } else if(newZoomY != 0) {
-        self.orthoHeight = newZoomY;
-    }
-
-    self.orthoCenter = CGPointMake(newXpos,newYpos);
+    self.orthoCenter = CGPointMake(0, 0);
 }
 
 // Converts a touch point according to the current
@@ -397,15 +321,21 @@
     GLKMatrix4 mMat = GLKMatrix4MakeWithArray(modelMat);
     
     GLKVector3 window_coord = GLKVector3Make(touch.x,touch.y, 0.0f);
+    
     bool result;
+    
     int viewport[4];
     viewport[0] = 0.0f;
     viewport[1] = 0.0f;
     viewport[2] = 1024;
     viewport[3] = 768;
     touch.y = 768 - touch.y;
+    
+    // Z Plane (far)
     GLKVector3 near_pt = GLKMathUnproject(window_coord, mMat, pMat, &viewport[0], &result);
     window_coord = GLKVector3Make(touch.x,touch.y, 1.0f);
+    
+    // Z Plane (near)
     GLKVector3 far_pt = GLKMathUnproject(window_coord, mMat, pMat, &viewport[0], &result);
     float z_magnitude = fabs(far_pt.z-near_pt.z);
     float near_pt_factor = fabs(near_pt.z)/z_magnitude;

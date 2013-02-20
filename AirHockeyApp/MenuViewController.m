@@ -6,7 +6,6 @@
 #import "MenuViewController.h"
 #import "EAGLViewController.h"
 #import "AppDemoAppDelegate.h"
-#import "BetaViewController.h"
 #import "CarouselTestView.h"
 #import "MapsViewController.h"
 #import "Scene.h"
@@ -95,13 +94,7 @@
 
 - (IBAction)testCaseButtonPressed:(id)sender
 {
-    if(!isConnectionViewVisible) {
-        BetaViewController* beta_vc = [[[BetaViewController alloc]init]autorelease];
-        beta_vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:beta_vc animated:YES];
-    } else {
-        [self toggleConnectionView];
-    }
+
 }
 
 - (IBAction)usernameChanged:(id)sender
@@ -128,7 +121,6 @@
     } else {
         [AudioInterface stopBackgroundMusic];
     }
-        
 }
 
 - (IBAction)showCarouselView:(id)sender

@@ -189,6 +189,42 @@
     } else if(edges[4].lastPosition.y != edges[4].position.y) {
         edges[3].position = Vector3DMake(-edges[4].position.x, edges[3].position.y, edges[3].position.z);
     }
+    
+    // Prevent weird shapes
+    int offset = 30;
+    if(edges[0].position.x > -offset){
+        edges[0].position = Vector3DMake(-offset, edges[0].position.y, edges[0].position.z);
+    }
+    
+    if(edges[0].position.y < offset){
+        edges[0].position = Vector3DMake(edges[0].position.x, offset, edges[0].position.z);
+    }
+    
+    if(edges[2].position.x < offset){
+        edges[2].position = Vector3DMake(offset, edges[2].position.y, edges[2].position.z);
+    }
+    
+    if(edges[2].position.y < offset){
+        edges[2].position = Vector3DMake(edges[2].position.x, offset, edges[2].position.z);
+    }
+    
+    if(edges[5].position.x > -offset){
+        edges[5].position = Vector3DMake(-offset, edges[5].position.y, edges[5].position.z);
+    }
+    
+    if(edges[5].position.y > -offset){
+        edges[5].position = Vector3DMake(edges[5].position.x, -offset, edges[5].position.z);
+    }
+    
+    if(edges[7].position.x < offset){
+        edges[7].position = Vector3DMake(offset, edges[7].position.y, edges[7].position.z);
+    }
+    
+    if(edges[7].position.y > -offset){
+        edges[7].position = Vector3DMake(edges[7].position.x, -offset, edges[7].position.z);
+    }
+    
+    
 }
 
 #pragma mark - OpenGL Drawing Statements

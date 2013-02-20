@@ -832,7 +832,12 @@ enum {
         
         // Drag completed
         [self.view viewWithTag:activeObjectTag].center = location;
-        [self.camera assignWorldPosition:location];
+        
+        if(!self.camera.isPerspective){
+            [self.camera assignWorldPosition:location];
+        } else {
+            [self.camera convertScreenToWorldProj:location];
+        }
         
         [self addDragAndDropObject];
         

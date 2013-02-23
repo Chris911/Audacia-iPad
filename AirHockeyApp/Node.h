@@ -14,7 +14,6 @@
 @interface Node : NSObject
 @property (nonatomic,retain) NSString* type;
 @property (nonatomic,retain) NSString* xmlType;
-@property (nonatomic,retain) NSString* hash;
 @property (nonatomic) Vector3D position;
 @property (nonatomic) float angle;
 @property (nonatomic) float scaleFactor;

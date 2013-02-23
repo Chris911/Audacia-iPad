@@ -61,6 +61,8 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UILabel *angleLable;
 @property (retain, nonatomic) IBOutlet UILabel *typeLabel;
 @property (retain, nonatomic) IBOutlet UILabel *specialLabel;
+@property (retain, nonatomic, getter=theCopyPropButton) IBOutlet UIButton *copyPropButton; // fix of reserved name
+@property (retain, nonatomic) IBOutlet UIButton *deleteButton;
 
 - (void)startAnimation;
 - (void)stopAnimation;

@@ -418,7 +418,7 @@
         //FIXME : Needs memory checking OR error handling, rapid refresh will crash
         self.items = [MapContainer getInstance].maps;
         
-        // remove previous SHIT
+        // remove previous 
         for(int i = self.carousel.numberOfItems; i > 0; i--){
             [self.carousel removeItemAtIndex:i animated:NO];
         }

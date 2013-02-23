@@ -340,6 +340,8 @@
 - (void) dealloc
 {
     [super dealloc];
+    [self.xmlType release];
+    [self.type release];
     for (int i = 0; i < 8; i++) {
         [borders[i] release];
     }

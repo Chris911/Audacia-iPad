@@ -33,6 +33,7 @@
     self.passwordTextBox.tag = passwordTextBoxTag;
     self.serverTextBox.tag = serverTextBoxTag;
     
+    self.loginBoxView.center = CGPointMake(512, 384);
     [self.loginBoxView.layer setCornerRadius:20.0f];
     [self.loginBoxView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
     [self.loginBoxView.layer setBorderWidth:1.5f];
@@ -164,6 +165,8 @@
 
 - (void) transitionToMenu
 {
+    [self setUpView];
+    
     NewMenuViewController* mv = [[[NewMenuViewController alloc]initWithNibName:@"NewMenuViewController" bundle:nil]autorelease];
     mv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentModalViewController:mv animated:YES];

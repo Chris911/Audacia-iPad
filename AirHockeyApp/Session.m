@@ -12,6 +12,7 @@
 
 @synthesize username;
 @synthesize password;
+@synthesize Camp;
 @synthesize isAuthenticated;
 
 NSString* DEFAULT_USERNAME = @"Guest";
@@ -46,6 +47,7 @@ static Session *session = NULL;
     session.username = DEFAULT_USERNAME;
     session.password = @"";
     session.isAuthenticated = NO;
+    session.Camp = @"none";
 }
 
 - (void) dealloc
@@ -54,6 +56,7 @@ static Session *session = NULL;
     [username release];
     [password release];
     [session release];
+    [Camp release];
 }
 
 @end

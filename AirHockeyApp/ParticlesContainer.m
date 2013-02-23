@@ -15,7 +15,7 @@
 {
     if((self = [super init])) {
         self.isAlive = YES;
-        self.particles = [[[NSMutableArray alloc]init]autorelease];
+        self.particles = [[NSMutableArray alloc]init];
         
         for (int i = 0; i < nb; i++) {
             Particle *p = [[Particle alloc]initWithCenterPosition:center];

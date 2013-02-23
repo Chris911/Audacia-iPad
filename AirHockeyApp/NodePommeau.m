@@ -103,6 +103,8 @@ float matDiffuse1[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 {
     [model release];
     [Camp release];
+    [self.xmlType release];
+    [self.type release];
     [super dealloc];
 }
 

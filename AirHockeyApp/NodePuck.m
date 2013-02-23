@@ -87,6 +87,8 @@
 - (void) dealloc
 {
     [model release];
+    [self.xmlType release];
+    [self.type release];
     [super dealloc];
 }
 @end

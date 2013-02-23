@@ -12,7 +12,6 @@
 
 @synthesize type;
 @synthesize xmlType;
-@synthesize hash;
 @synthesize angle;
 @synthesize position;
 @synthesize scaleFactor;
@@ -32,7 +31,6 @@ const float DEFAULT_ANGLE_VALUE = 0.0f;
 - (id) init
 {
     if((self = [super init])) {
-        self.hash = [self generateHash];
         
         self.scaleFactor        = DEFAULT_SCALE_VALUE;
         self.angle              = DEFAULT_ANGLE_VALUE;
@@ -88,18 +86,5 @@ const float DEFAULT_ANGLE_VALUE = 0.0f;
     }
 }
 
-- (NSString*) generateHash
-{
-    // TODO: Implement hash function using type and time
-    NSString* emptyString = @"";
-    return emptyString;
-}
 
-- (void) dealloc
-{
-    [super dealloc];
-    [xmlType release];
-    [type release];
-    [hash release];
-}
 @end

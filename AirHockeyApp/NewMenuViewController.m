@@ -14,6 +14,8 @@
 #import "AudioInterface.h"
 #import "LoginViewController.h"
 #import "ProfileViewController.h"
+#import "JoystickViewController.h"
+#import "LobbyViewController.h" 
 
 @interface NewMenuViewController()
 {
@@ -88,11 +90,14 @@
 {
     ProfileViewController* profile_vc = [[[ProfileViewController alloc]init]autorelease];
     profile_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentModalViewController:profile_vc animated:YES];}
+    [self presentModalViewController:profile_vc animated:YES];
+}
 
 - (IBAction)controlerModePressed:(id)sender
 {
-    // Controller goes here
+    LobbyViewController* lobby_vc = [[[LobbyViewController alloc]init]autorelease];
+    lobby_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentModalViewController:lobby_vc animated:YES];
 }
 
 - (IBAction)mapviewerModePressed:(id)sender

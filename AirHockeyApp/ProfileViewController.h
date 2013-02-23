@@ -11,6 +11,9 @@
 @interface ProfileViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UIView *backgroundView;
 @property (retain, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (retain, nonatomic) IBOutlet UIView *picBackgroundView;
+@property (retain, nonatomic) IBOutlet UIImageView *pictureImageView;
+@property (retain, nonatomic) IBOutlet UIView *statsView;
 - (IBAction)backPressed:(id)sender;
 
 @end

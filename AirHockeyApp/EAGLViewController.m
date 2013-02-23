@@ -177,6 +177,8 @@ enum {
     [_typeLabel release];
     [_specialLabel release];
     [_specialSlider release];
+    [_copyPropButton release];
+    [_deleteButton release];
     [super dealloc];
 }
 
@@ -230,6 +232,8 @@ enum {
     [self setTypeLabel:nil];
     [self setSpecialLabel:nil];
     [self setSpecialSlider:nil];
+    [self setCopyPropButton:nil];
+    [self setDeleteButton:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -1060,11 +1064,22 @@ enum {
 
 - (void) hideOrShowParameters:(Node*)node
 {
+    [self.copyPropButton setHidden:NO];
+    [self.deleteButton setHidden:NO];
+    [self.angleLable setHidden:NO];
+    [self.angleSlider setHidden:NO];
     if([node.type isEqualToString:@"POMMEAU"] || [node.type isEqualToString:@"PUCK"] || [Scene getInstance].renderingTree.multipleNodesSelected){
         // Hide some parameters if the selected nodes are Puck or Stick
         [self.sizeLabel setHidden:YES];
         [self.sizeSlider setHidden:YES];
         
+    } else if([node.type isEqualToString:@"EDGE"]){
+        [self.sizeLabel setHidden:YES];
+        [self.sizeSlider setHidden:YES];
+        [self.angleLable setHidden:YES];
+        [self.angleSlider setHidden:YES];
+        [self.copyPropButton setHidden:YES];
+        [self.deleteButton setHidden:YES];
     } else {
         [self.sizeLabel setHidden:NO];
         [self.sizeSlider setHidden:NO];

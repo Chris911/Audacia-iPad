@@ -34,13 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    [NSTimer scheduledTimerWithTimeInterval:4.0
-//                                     target:self
-//                                   selector:@selector(load)
-//                                   userInfo:nil
-//                                    repeats:YES];
-    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

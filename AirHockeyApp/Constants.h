@@ -41,5 +41,8 @@ extern float orangeColor[];
 
 extern int GLOBAL_SIZE_OFFSET;
 
+FOUNDATION_EXPORT NSString *const leftCamp;
+FOUNDATION_EXPORT NSString *const rightCamp;
+
 
 @end

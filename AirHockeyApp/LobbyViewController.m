@@ -3,7 +3,9 @@
 //  AirHockeyApp
 //
 //  Created by Sam DesRochers on 2013-02-22.
-//
+//  View used as a portal to pick your side in a
+//  currently active game, retrived from the server
+//  Transitions to the joystick view
 //
 
 #import "LobbyViewController.h"
@@ -13,9 +15,8 @@
 
 @interface LobbyViewController ()
 {
-    NSString* leftCamp;
-    NSString* rightCamp;
     int activeObjectTag;
+    BOOL sideSelected;
 }
 
 @end
@@ -32,9 +33,8 @@ const int HIDDEN_VIEW_TAG           = 400;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        leftCamp = @"Gauche";
-        rightCamp = @"Droite";
         activeObjectTag = -1;
+        sideSelected = NO;
     }
     return self;
 }
@@ -48,13 +48,6 @@ const int HIDDEN_VIEW_TAG           = 400;
 
 - (void) resetAllViews
 {
-    [self.backgroundView.layer setCornerRadius:20.0f];
-    [self.backgroundView.layer setBorderColor:[UIColor darkGrayColor].CGColor];
-    [self.backgroundView.layer setBorderWidth:1.5f];
-    [self.backgroundView.layer setShadowColor:[UIColor blackColor].CGColor];
-    [self.backgroundView.layer setShadowOpacity:0.8];
-    [self.backgroundView.layer setShadowRadius:3.0];
-    [self.backgroundView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
     
     [self.selectionView.layer setCornerRadius:20.0f];
     [self.selectionView.layer setBorderColor:[UIColor darkGrayColor].CGColor];
@@ -78,10 +71,17 @@ const int HIDDEN_VIEW_TAG           = 400;
     
     self.selectionView.alpha = 0.0f;
     
-    [self.hiddenView setHidden:YES];
     [self resetGameInfos];
+    
+    // Assign camp
+    [self selectCamp:[Session getInstance].Camp];
+    
+    // Launch the camp selection view
+    [self showCampSelectionView];
+
 }
 
+// Replace various view and labels and images related to the selection view (with game infos)
 - (void) resetGameInfos
 {
     self.leftProfilePic.image = [UIImage imageNamed:@"anonymous-icon.jpg"];
@@ -90,6 +90,7 @@ const int HIDDEN_VIEW_TAG           = 400;
     self.rightCampLabel.text = @"Blue Team";
     [self.hiddenLeftView setHidden:YES];
     [self.hiddenRightView setHidden:YES];
+    sideSelected = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,11 +99,16 @@ const int HIDDEN_VIEW_TAG           = 400;
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+            || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
+
 - (void)dealloc {
-    [_backgroundView release];
     [_selectionView release];
     [_leftProfilePic release];
-    [_hiddenView release];
     [_rightCampView release];
     [_leftCampView release];
     [_rightProfilePic release];
@@ -115,10 +121,8 @@ const int HIDDEN_VIEW_TAG           = 400;
 }
 
 - (void)viewDidUnload {
-    [self setBackgroundView:nil];
     [self setSelectionView:nil];
     [self setLeftProfilePic:nil];
-    [self setHiddenView:nil];
     [self setRightCampView:nil];
     [self setLeftCampView:nil];
     [self setRightProfilePic:nil];
@@ -137,22 +141,15 @@ const int HIDDEN_VIEW_TAG           = 400;
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)gameInProgressPressed:(id)sender
-{
-    [self showCampSelectionView];
-}
-
-- (IBAction)cancelPressed:(id)sender
-{
-    [self hideCampSelectionView];
-}
-
+// Connect (final step to transition to the joystick)
 - (IBAction)connectPressed:(id)sender
 {
     [self presentJoystick];
 }
 
 #pragma mark - Animation Methods
+
+// Transition to the joystick view
 - (void) presentJoystick
 {
     JoystickViewController* joystic_vc = [[[JoystickViewController alloc]init]autorelease];
@@ -166,8 +163,6 @@ const int HIDDEN_VIEW_TAG           = 400;
     [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                      animations:^{
                          self.selectionView.alpha = 1.0f;
-                         [self.hiddenView setHidden:NO];
-                         [self.connectButton setEnabled:NO];
                      }
                      completion:nil];
 }
@@ -177,8 +172,6 @@ const int HIDDEN_VIEW_TAG           = 400;
     [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                      animations:^{
                          self.selectionView.alpha = 0.0f;
-                         [self.hiddenView setHidden:YES];
-                         [self.connectButton setEnabled:NO];
                      }
                      completion:^ (BOOL finished) {
                          if (finished) {
@@ -186,51 +179,20 @@ const int HIDDEN_VIEW_TAG           = 400;
                          }}];
 }
 
-#pragma mark - Touches methods
-
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) selectCamp:(NSString*)camp
 {
-    for(UITouch* touch in touches){
-        [self handleFirstTouchOnView:touch.view];
-    }
-}
-
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    
-}
-
-// Detect the touched view by its tag
-- (void) handleFirstTouchOnView:(UIView*) view
-{
-    if(view.tag > 0) {
-        activeObjectTag = view.tag;
-    } else {
-        NSLog(@"Invalid Tag");
-    }
-    [self dispatchFirstTouch];
-}
-
-// Action on touched view
-- (void) dispatchFirstTouch
-{
-    if(activeObjectTag == HIDDEN_VIEW_TAG){
-        [self hideCampSelectionView];
-    } else if(activeObjectTag == LEFT_CAMP_VIEW_TAG){
-        [self.connectButton setEnabled:YES];
-        [Session getInstance].Camp = leftCamp;
+    if([camp isEqualToString:leftCamp]){
         self.leftCampLabel.text = [Session getInstance].username;
         self.leftProfilePic.image = [UIImage imageNamed:@"checkmark.png"];
         [self.hiddenRightView setHidden:NO];
-    
-    } else if(activeObjectTag == RIGHT_CAMP_VIEW_TAG){
-        [self.connectButton setEnabled:YES];
-        [Session getInstance].Camp = rightCamp;
+    }
+    else if([camp isEqualToString:rightCamp]){
         self.rightCampLabel.text = [Session getInstance].username;
         self.rightProfilePic.image = [UIImage imageNamed:@"checkmark.png"];
         [self.hiddenLeftView setHidden:NO];
+    } else {
+        NSLog(@"Error assigning camp");
     }
-    
-    activeObjectTag = -1;
 }
+
 @end

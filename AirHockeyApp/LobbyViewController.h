@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LobbyViewController : UIViewController
-@property (retain, nonatomic) IBOutlet UIView *backgroundView;
 @property (retain, nonatomic) IBOutlet UIView *selectionView;
-@property (retain, nonatomic) IBOutlet UIView *hiddenView;
 @property (retain, nonatomic) IBOutlet UIImageView *rightCampView;
 @property (retain, nonatomic) IBOutlet UIImageView *leftCampView;
 @property (retain, nonatomic) IBOutlet UIImageView *rightProfilePic;
@@ -23,8 +21,6 @@
 @property (retain, nonatomic) IBOutlet UIView *hiddenLeftView;
 
 - (IBAction)backPressed:(id)sender;
-- (IBAction)gameInProgressPressed:(id)sender;
-- (IBAction)cancelPressed:(id)sender;
 - (IBAction)connectPressed:(id)sender;
 
 

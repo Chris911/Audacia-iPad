@@ -36,4 +36,7 @@ float orangeColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
 
 int GLOBAL_SIZE_OFFSET = 6;
 
+NSString *const leftCamp = @"Gauche";
+NSString *const rightCamp = @"Droite";
+
 @end

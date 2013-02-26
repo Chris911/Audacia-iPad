@@ -3,7 +3,8 @@
 //  AirHockeyApp
 //
 //  Created by Sam DesRochers on 2013-02-21.
-//
+//  Allows end user to move his stick around.
+//  Yup, that sounds nasty
 //
 
 #import "JoystickViewController.h"
@@ -77,6 +78,13 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+            || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
+
 #pragma mark - Touches Methods
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -85,7 +93,7 @@
         self.joystickView.center = location;
         [self checkOutOfBounds:location];
         self.joystickView.alpha = 0.7f;
-        [self sendUdpPacket:location];
+        [self sendUdpPacket:[self convertFromScreenToWorld:location]];
     }
 }
 
@@ -95,6 +103,7 @@
         CGPoint location = [touch locationInView:self.view];
         self.joystickView.center = location;
         [self checkOutOfBounds:location];
+        [self sendUdpPacket:[self convertFromScreenToWorld:location]];
     }
 }
 
@@ -102,6 +111,19 @@
 {
     self.joystickView.alpha = 0.2f;
     self.joystickView.center = CGPointMake(512, 384);
+}
+
+// Takes a CGPoint from the screen (1024, 768) and
+// transforms it to a position for the game (100, 100)
+- (CGPoint) convertFromScreenToWorld:(CGPoint)touch
+{
+    float worldWidth = 200;
+    float worldHeight = 150;
+    float dx = ((touch.x/1024) * worldWidth) - worldWidth/2;
+    float dy = (((768 - touch.y)/768) * worldHeight) - worldHeight/2;
+    //NSLog(@"X: %f, Y: %f",dx,dy);
+    
+    return CGPointMake(dx, dy);
 }
 
 #pragma mark - Utility methods

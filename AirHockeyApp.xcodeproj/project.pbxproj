@@ -11,6 +11,9 @@
 		041186E816CC9E510046B720 /* NewMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041186E716CC9E510046B720 /* NewMenuViewController.xib */; };
 		041186EB16CC9FC50046B720 /* Button-test.png in Resources */ = {isa = PBXBuildFile; fileRef = 041186EA16CC9FC50046B720 /* Button-test.png */; };
 		041186EE16CCA07D0046B720 /* NewMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041186ED16CCA07D0046B720 /* NewMenuViewController.m */; };
+		0442AC3C16DD99C300CF6162 /* crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3916DD99C300CF6162 /* crosshair.png */; };
+		0442AC3D16DD99C300CF6162 /* joystickBase.png in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3A16DD99C300CF6162 /* joystickBase.png */; };
+		0442AC3E16DD99C300CF6162 /* joystickTip.png in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3B16DD99C300CF6162 /* joystickTip.png */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
 		045AA82B16CBF93C00F82AB0 /* login-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 045AA82A16CBF93C00F82AB0 /* login-background.png */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
@@ -65,11 +68,7 @@
 		969DDF8B1472E05400ED5DC8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */; };
 		969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
 		969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */; };
-		A802D74916D824330080222D /* LeftSide.png in Resources */ = {isa = PBXBuildFile; fileRef = A802D74716D824330080222D /* LeftSide.png */; };
-		A802D74A16D824330080222D /* RightSide.png in Resources */ = {isa = PBXBuildFile; fileRef = A802D74816D824330080222D /* RightSide.png */; };
-		A802D74C16D844330080222D /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = A802D74B16D844330080222D /* checkmark.png */; };
 		A8081D1316D2952600B39E8B /* camera1.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8081D1216D2952600B39E8B /* camera1.wav */; };
-		A8081D1E16D4605F00B39E8B /* gather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8081D1D16D4605F00B39E8B /* gather.ttf */; };
 		A8081D2916D50D7500B39E8B /* ParticlesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A8081D2816D50D7500B39E8B /* ParticlesContainer.m */; };
 		A8081D2D16D5622500B39E8B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8081D2B16D5622400B39E8B /* ProfileViewController.m */; };
 		A8081D2E16D5622500B39E8B /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8081D2C16D5622500B39E8B /* ProfileViewController.xib */; };
@@ -156,6 +155,9 @@
 		041186EA16CC9FC50046B720 /* Button-test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Button-test.png"; path = "Assets/UI/Images/Button-test.png"; sourceTree = "<group>"; };
 		041186EC16CCA07D0046B720 /* NewMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMenuViewController.h; sourceTree = "<group>"; };
 		041186ED16CCA07D0046B720 /* NewMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMenuViewController.m; sourceTree = "<group>"; };
+		0442AC3916DD99C300CF6162 /* crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crosshair.png; path = Assets/UI/Images/crosshair.png; sourceTree = SOURCE_ROOT; };
+		0442AC3A16DD99C300CF6162 /* joystickBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickBase.png; path = Assets/UI/Images/joystickBase.png; sourceTree = SOURCE_ROOT; };
+		0442AC3B16DD99C300CF6162 /* joystickTip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickTip.png; path = Assets/UI/Images/joystickTip.png; sourceTree = SOURCE_ROOT; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		045AA82A16CBF93C00F82AB0 /* login-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-background.png"; path = "Assets/UI/Images/login-background.png"; sourceTree = "<group>"; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
@@ -235,11 +237,7 @@
 		969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLViewController.h; sourceTree = "<group>"; };
 		969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EAGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
-		A802D74716D824330080222D /* LeftSide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LeftSide.png; sourceTree = "<group>"; };
-		A802D74816D824330080222D /* RightSide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RightSide.png; sourceTree = "<group>"; };
-		A802D74B16D844330080222D /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
 		A8081D1216D2952600B39E8B /* camera1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = camera1.wav; sourceTree = "<group>"; };
-		A8081D1D16D4605F00B39E8B /* gather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gather.ttf; sourceTree = "<group>"; };
 		A8081D2716D50D7500B39E8B /* ParticlesContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticlesContainer.h; sourceTree = "<group>"; };
 		A8081D2816D50D7500B39E8B /* ParticlesContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticlesContainer.m; sourceTree = "<group>"; };
 		A8081D2A16D5622400B39E8B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -662,9 +660,9 @@
 		A802D74616D824330080222D /* lobby */ = {
 			isa = PBXGroup;
 			children = (
-				A802D74B16D844330080222D /* checkmark.png */,
-				A802D74716D824330080222D /* LeftSide.png */,
-				A802D74816D824330080222D /* RightSide.png */,
+				0442AC3916DD99C300CF6162 /* crosshair.png */,
+				0442AC3A16DD99C300CF6162 /* joystickBase.png */,
+				0442AC3B16DD99C300CF6162 /* joystickTip.png */,
 			);
 			name = lobby;
 			path = Assets/UI/Images/lobby;
@@ -673,7 +671,6 @@
 		A8081D1416D45A3700B39E8B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				A8081D1D16D4605F00B39E8B /* gather.ttf */,
 			);
 			name = Fonts;
 			path = Assets/Fonts;
@@ -1019,14 +1016,13 @@
 				A8081D1316D2952600B39E8B /* camera1.wav in Resources */,
 				041186E816CC9E510046B720 /* NewMenuViewController.xib in Resources */,
 				041186EB16CC9FC50046B720 /* Button-test.png in Resources */,
-				A8081D1E16D4605F00B39E8B /* gather.ttf in Resources */,
 				A8081D2E16D5622500B39E8B /* ProfileViewController.xib in Resources */,
 				A8081D3016D564E600B39E8B /* anonymous-icon.jpg in Resources */,
 				A8081D3916D6B97400B39E8B /* JoystickViewController.xib in Resources */,
 				A8F072E516D7A97800FC933E /* LobbyViewController.xib in Resources */,
-				A802D74916D824330080222D /* LeftSide.png in Resources */,
-				A802D74A16D824330080222D /* RightSide.png in Resources */,
-				A802D74C16D844330080222D /* checkmark.png in Resources */,
+				0442AC3C16DD99C300CF6162 /* crosshair.png in Resources */,
+				0442AC3D16DD99C300CF6162 /* joystickBase.png in Resources */,
+				0442AC3E16DD99C300CF6162 /* joystickTip.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

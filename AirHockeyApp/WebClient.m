@@ -12,6 +12,8 @@
 #import "AFGDataXMLRequestOperation.h"
 #import "Session.h"
 #import "XMLUtil.h"
+#import "RenderingTree.h"
+#import "Scene.h"
 
 @implementation WebClient
 @synthesize AFClient;
@@ -156,7 +158,8 @@
     AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:xmlPathz]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument)
     {
         NSLog(@"[XML] Downloaded map successfully");
-        [XMLUtil loadRenderingTreeFromGDataXMLDocument:XMLDocument];
+        RenderingTree* tree = [XMLUtil loadRenderingTreeFromGDataXMLDocument:XMLDocument];
+        [Scene loadCustomTree:tree];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchMapEventFinished" object:nil];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, GDataXMLDocument *XMLDocument)

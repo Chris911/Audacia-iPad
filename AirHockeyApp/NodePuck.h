@@ -12,6 +12,8 @@
 @interface NodePuck : Node
 
 @property (nonatomic, retain) OpenGLWaveFrontObject *model;
+@property (nonatomic) float coeffFriction;
+@property (nonatomic) float coeffRebond;
 
 - (id) init;
 - (void) render;

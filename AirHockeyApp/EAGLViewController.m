@@ -657,6 +657,7 @@ enum {
     
     glEnable(GL_CULL_FACE);
     // Renders the whole rendring tree
+    RenderingTree* tree = [Scene getInstance].renderingTree;
     [[Scene getInstance].renderingTree render];
     glDisable(GL_CULL_FACE);
     
@@ -919,9 +920,8 @@ enum {
 - (void) loadScene
 {
     // Initialize Scene and rendring tree
-    [Scene getInstance];
-    if([Scene getInstance].loadCustomTree == YES) {
-        [Scene getInstance].loadCustomTree = NO;
+    if([Scene getInstance].loadingCustomTree == YES) {
+        [Scene getInstance].loadingCustomTree = NO;
     }
     else {
         [[Scene getInstance].renderingTree emptyRenderingTree];

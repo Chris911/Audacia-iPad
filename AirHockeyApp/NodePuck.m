@@ -10,7 +10,12 @@
 
 @implementation NodePuck
 
+const float DEFAULT_COEFF_REBOND = 0.87;
+const float DEFAULT_COEFF_FRICTION = 1.0;
+
 @synthesize model;
+@synthesize coeffFriction;
+@synthesize coeffRebond;
 
 - (id) init
 {
@@ -27,6 +32,8 @@
         self.isCopyable = NO;
         self.isScalable = NO;
         self.model.currentPosition = self.position;
+        self.coeffFriction = DEFAULT_COEFF_FRICTION;
+        self.coeffRebond = DEFAULT_COEFF_REBOND;
         [theObject release];
     }
     return self;

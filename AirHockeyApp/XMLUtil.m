@@ -10,7 +10,12 @@
 #import "Scene.h"
 #import "Node.h"
 #import "NodePortal.h"
+#import "NodeTableEdge.h"
+#import "NodePommeau.h"
+#import "NodePuck.h"
 #import "NodeTable.h"
+#import "NodeBooster.h"
+#import "NodeMurret.h"
 
 @implementation XMLUtil
 
@@ -32,52 +37,107 @@
     }
 }
 
-+ (RenderingTree *)loadRenderingTreeFromGDataXMLDocument:(GDataXMLDocument*)doc {
-    
-    // Get the XML file from path
-//    NSString *filePath = [self dataFilePath:name:FALSE];
-//    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
-//    NSError *error;
-//    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData
-//                                                           options:0 error:&error];
++ (RenderingTree *)loadRenderingTreeFromGDataXMLDocument:(GDataXMLDocument*)doc
+{
     if (doc == nil) { return nil; }
     
-    // Parse the tree
+    // Parse the tree (This part is awful)
     RenderingTree *renderingTree = [[[RenderingTree alloc] init] autorelease];
-    NSArray *tree = [doc.rootElement elementsForName:@"PointControle"];
     
-    for(GDataXMLElement *node in tree)
+    NodeTable* table = [[NodeTable alloc]init];
+    [renderingTree addNodeToTree:table];
+    
+    NSArray *pointControleRoot = [doc.rootElement elementsForName:@"PointControle"];
+    for(GDataXMLElement *node in pointControleRoot)
     {
         NSArray* pointsConrole = [node elementsForName:@"PointControle"];
+        int i=0;
         for(GDataXMLElement *nodeControle in pointsConrole)
         {
-            GDataXMLNode *xData = [nodeControle attributeForName:@"PositionX"];
-            
-            NSLog(@"%@",[xData stringValue]);
+            float posX = [[[nodeControle attributeForName:@"PositionX"] stringValue] floatValue];
+            float posY = [[[nodeControle attributeForName:@"PositionY"] stringValue] floatValue];
+            NodeTableEdge* nodeT = [[NodeTableEdge alloc]initWithCoordsAndIndex:posX :posY :i];
+            [renderingTree addNodeToTree:nodeT];
         }
     }
-    for (GDataXMLElement *node in tree) {
     
-        NSString *type;
-        
-        // Get the first element (Type)
-        NSArray *types = [node elementsForName:@"Type"];
-        if (types.count > 0) {
-            GDataXMLElement *firstType = (GDataXMLElement *) [types objectAtIndex:0];
-            type = firstType.stringValue;
-        } else continue;
-
-        // Create the current node with attributes
-        Node *node = [[[Node alloc] init]autorelease];
-        node.type = type;
-        
-        // Add the node to the tree
-        [renderingTree addNodeToTree:node];
-        
+    NSArray *boosterRoot = [doc.rootElement elementsForName:@"Booster"];
+    for(GDataXMLElement *node in boosterRoot)
+    {
+        NSArray* boosters = [node elementsForName:@"Booster"];
+        for(GDataXMLElement *realNode in boosters)
+        {
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posZ = [[[realNode attributeForName:@"PositionZ"] stringValue] floatValue];
+            NodeBooster* booster = [[[NodeBooster alloc]init]autorelease];
+            [renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(posX, posY, posZ)];
+        }
     }
     
-    // Print the XML tree
-    NSLog(@"%@", doc.rootElement);
+    NSArray *portalRoot = [doc.rootElement elementsForName:@"Portal"];
+    for(GDataXMLElement *node in portalRoot)
+    {
+        NSArray* portals = [node elementsForName:@"Portal"];
+        for(GDataXMLElement *realNode in portals)
+        {
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posZ = [[[realNode attributeForName:@"PositionZ"] stringValue] floatValue];
+            float gravite = [[[realNode attributeForName:@"Gravite"] stringValue] floatValue];
+            NodePortal* portal = [[[NodePortal alloc]init]autorelease];
+            portal.Gravite = gravite;
+            [renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(posX, posY, posZ)];
+        }
+    }
+    
+    NSArray *pommeauRoot = [doc.rootElement elementsForName:@"Pommeau"];
+    for(GDataXMLElement *node in pommeauRoot)
+    {
+        NSArray* pommeaux = [node elementsForName:@"Pommeau"];
+        for(GDataXMLElement *realNode in pommeaux)
+        {
+            //We don't really care about the other values on load
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posZ = [[[realNode attributeForName:@"PositionZ"] stringValue] floatValue];
+            NodePommeau* pommeau = [[[NodePommeau alloc]init]autorelease];
+            [renderingTree addNodeToTreeWithInitialPosition:pommeau :Vector3DMake(posX, posY, posZ)];
+        }
+    }
+    
+    NSArray *murretRoot = [doc.rootElement elementsForName:@"Murret"];
+    for(GDataXMLElement *node in murretRoot)
+    {
+        NSArray* murrets = [node elementsForName:@"Murret"];
+        for(GDataXMLElement *realNode in murrets)
+        {
+            //We don't really care about the other values on load
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posZ = [[[realNode attributeForName:@"PositionZ"] stringValue] floatValue];
+            NodeMurret* murret = [[[NodeMurret alloc]init]autorelease];
+            [renderingTree addNodeToTreeWithInitialPosition:murret :Vector3DMake(posX, posY, posZ)];
+        }
+    }
+    
+    NSArray *puckRoot = [doc.rootElement elementsForName:@"Puck"];
+    for(GDataXMLElement *node in puckRoot)
+    {
+        NSArray* pucks = [node elementsForName:@"Puck"];
+        for(GDataXMLElement *realNode in pucks)
+        {
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posZ = [[[realNode attributeForName:@"PositionZ"] stringValue] floatValue];
+            float coeffFriction = [[[realNode attributeForName:@"CoeffFriction"] stringValue] floatValue];
+            float coeffRebond = [[[realNode attributeForName:@"CoeffRebond"] stringValue] floatValue];
+            NodePuck* puck = [[[NodePuck alloc]init]autorelease];
+            puck.coeffRebond = coeffRebond;
+            puck.coeffFriction = coeffFriction;
+            [renderingTree addNodeToTreeWithInitialPosition:puck :Vector3DMake(posX, posY, posZ)];
+        }
+    }
     
     [doc release];
     return renderingTree;

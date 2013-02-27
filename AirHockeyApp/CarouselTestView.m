@@ -299,6 +299,7 @@
     }
     
     [MapContainer getInstance].maps = nil;
+    [Scene getInstance].loadingCustomTree = YES;
     EAGLViewController* glvc = [[[EAGLViewController alloc]init]autorelease];
     [self presentModalViewController:glvc animated:NO];
 }

@@ -18,6 +18,7 @@
 
 // Table's specific methods
 - (void) addEdgesToTree;
+- (void) initDefaultTableValues;
 - (void) initTableEdgesFromXML:(NSArray*)newEdges;
 
 @end

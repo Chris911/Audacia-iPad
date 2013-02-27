@@ -42,7 +42,7 @@
     if (doc == nil) { return nil; }
     
     // Parse the tree (This part is awful)
-    RenderingTree *renderingTree = [[[RenderingTree alloc] init] autorelease];
+    RenderingTree *renderingTree = [[RenderingTree alloc] init];
     
     NodeTable* table = [[[NodeTable alloc]init]autorelease];
     [renderingTree addNodeToTree:table];

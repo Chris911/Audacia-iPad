@@ -11,11 +11,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AsyncSocket.h" 
 #import "AsyncUdpSocket.h"
-
+#import "GCDAsyncSocket.h"
+#import "Session.h"
 @interface JoystickViewController ()
 {
     AsyncUdpSocket* updSocket;
     AsyncSocket* tcpSocket;
+    
+    GCDAsyncSocket *gcdsocket;
     NSString* host;
     UInt16 port;
 }
@@ -50,8 +53,9 @@
     // Socket
     updSocket = [[AsyncUdpSocket alloc]init];
     tcpSocket = [[AsyncSocket alloc]initWithDelegate:self];
-    host = @"127.0.0.1";
-    port = 5052;
+    gcdsocket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    host = @"132.207.156.227";
+    port = 5050;
     
     [self connect];
 }
@@ -101,16 +105,19 @@
 {
     for(UITouch* touch in touches){
         CGPoint location = [touch locationInView:self.view];
-        self.joystickView.center = location;
-        [self checkOutOfBounds:location];
-        [self sendUdpPacket:[self convertFromScreenToWorld:location]];
+        CGPoint lastLocation = [touch previousLocationInView:self.view];
+
+        if(location.x != lastLocation.x && location.y != lastLocation.y){
+            self.joystickView.center = location;
+            [self checkOutOfBounds:location];
+            [self sendUdpPacket:[self convertFromScreenToWorld:location]];
+        }
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     self.joystickView.alpha = 0.2f;
-    self.joystickView.center = CGPointMake(512, 384);
 }
 
 // Takes a CGPoint from the screen (1024, 768) and
@@ -148,11 +155,30 @@
 // Most methods acquired from or similar to :
 // https://github.com/twyatt/asyncsocket-example/blob/master/Classes/SocketTestViewController.m
 
+#include <netinet/tcp.h>
+#include <netinet/in.h>
 // Connect to server via TCP 
 - (void) connect
 {
     NSError* error;
-    [tcpSocket connectToHost:host onPort:port error:&error];
+    
+    [gcdsocket connectToHost:host onPort:port error:&error];
+    [gcdsocket performBlock:^{
+        int fd = [gcdsocket socketFD];
+        int on = 1;
+        if (setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, (char*)&on, sizeof(on)) == -1) {
+        }
+    }];    
+    
+    NSString* authentification = [authenPack_Head stringByAppendingString:[Session getInstance].username];
+    authentification = [authentification stringByAppendingString:authenPack_Separator];
+    authentification = [authentification stringByAppendingString:[Session getInstance].password];
+    authentification = [authentification stringByAppendingString:authenPack_Trail];
+
+    NSData* testString = [authentification dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // Send authentification packet
+    [gcdsocket writeData:testString withTimeout:-1 tag:-1];
 }
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
@@ -178,11 +204,17 @@
 
 - (void) sendUdpPacket:(CGPoint)location
 {
-    NSData *data;
-    NSString* test = @"Hello World";
-    data = [test dataUsingEncoding:NSUTF8StringEncoding];
-    //[updSocket sendData:data toHost:host port:port withTimeout:-1 tag:1];
-    [tcpSocket writeData:data withTimeout:-1 tag:1];
+    // Casted in int, BAD
+    NSString* x = [NSString stringWithFormat:@"%i",(int)location.x];
+    NSString* y = [NSString stringWithFormat:@"%i",(int)location.y];
+    
+    NSString* position = [positionPack_Head stringByAppendingString:x];
+    position = [position stringByAppendingString:positionPack_Separator];
+    position = [position stringByAppendingString:y];
+    position = [position stringByAppendingString:positionPack_Trail];
+    
+    NSData* testString = [position dataUsingEncoding:NSUTF8StringEncoding];
+    [gcdsocket writeData:testString withTimeout:-1 tag:1];
 }   
 
 @end

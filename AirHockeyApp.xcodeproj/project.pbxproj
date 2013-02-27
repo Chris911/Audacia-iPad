@@ -11,10 +11,6 @@
 		041186E816CC9E510046B720 /* NewMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041186E716CC9E510046B720 /* NewMenuViewController.xib */; };
 		041186EB16CC9FC50046B720 /* Button-test.png in Resources */ = {isa = PBXBuildFile; fileRef = 041186EA16CC9FC50046B720 /* Button-test.png */; };
 		041186EE16CCA07D0046B720 /* NewMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041186ED16CCA07D0046B720 /* NewMenuViewController.m */; };
-		0442AC3C16DD99C300CF6162 /* crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3916DD99C300CF6162 /* crosshair.png */; };
-		0442AC3D16DD99C300CF6162 /* joystickBase.png in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3A16DD99C300CF6162 /* joystickBase.png */; };
-		0442AC3E16DD99C300CF6162 /* joystickTip.png in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3B16DD99C300CF6162 /* joystickTip.png */; };
-		0442AC4016DE9ABD00CF6162 /* carousel-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3F16DE9ABD00CF6162 /* carousel-background.jpg */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
 		045AA82B16CBF93C00F82AB0 /* login-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 045AA82A16CBF93C00F82AB0 /* login-background.png */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
@@ -101,6 +97,12 @@
 		A8A4639416C8234A008D173B /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A4639316C8234A008D173B /* border.png */; };
 		A8A4639816C88012008D173B /* Skybox.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4639716C88012008D173B /* Skybox.m */; };
 		A8BD086A169F871E00B7A95D /* SideBar.png in Resources */ = {isa = PBXBuildFile; fileRef = A8BD0869169F871E00B7A95D /* SideBar.png */; };
+		A8C118E216DD5A69003FF8C5 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C118DF16DD5A68003FF8C5 /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A8C118E316DD5A69003FF8C5 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C118E116DD5A69003FF8C5 /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A8C118E516DD5BF6003FF8C5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C118E416DD5BF6003FF8C5 /* Security.framework */; };
+		A8C118E716DE425D003FF8C5 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C118E616DE425D003FF8C5 /* Twitter.framework */; };
+		A8C118EA16DE45E2003FF8C5 /* TwitterInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C118E916DE45E2003FF8C5 /* TwitterInterface.m */; };
+		A8C118EC16DEA3CC003FF8C5 /* carousel-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8C118EB16DEA3CC003FF8C5 /* carousel-background.jpg */; };
 		A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */; };
 		A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8BA169E025E008B29EF /* CameraImage1.png */; };
 		A8C5A8C2169E39A5008B29EF /* CameraButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8C1169E39A5008B29EF /* CameraButton1.png */; };
@@ -156,10 +158,6 @@
 		041186EA16CC9FC50046B720 /* Button-test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Button-test.png"; path = "Assets/UI/Images/Button-test.png"; sourceTree = "<group>"; };
 		041186EC16CCA07D0046B720 /* NewMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMenuViewController.h; sourceTree = "<group>"; };
 		041186ED16CCA07D0046B720 /* NewMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMenuViewController.m; sourceTree = "<group>"; };
-		0442AC3916DD99C300CF6162 /* crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crosshair.png; path = Assets/UI/Images/crosshair.png; sourceTree = SOURCE_ROOT; };
-		0442AC3A16DD99C300CF6162 /* joystickBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickBase.png; path = Assets/UI/Images/joystickBase.png; sourceTree = SOURCE_ROOT; };
-		0442AC3B16DD99C300CF6162 /* joystickTip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickTip.png; path = Assets/UI/Images/joystickTip.png; sourceTree = SOURCE_ROOT; };
-		0442AC3F16DE9ABD00CF6162 /* carousel-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "carousel-background.jpg"; path = "Assets/UI/Images/carousel-background.jpg"; sourceTree = "<group>"; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		045AA82A16CBF93C00F82AB0 /* login-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-background.png"; path = "Assets/UI/Images/login-background.png"; sourceTree = "<group>"; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
@@ -284,6 +282,15 @@
 		A8A4639616C88012008D173B /* Skybox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skybox.h; sourceTree = "<group>"; };
 		A8A4639716C88012008D173B /* Skybox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skybox.m; sourceTree = "<group>"; };
 		A8BD0869169F871E00B7A95D /* SideBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar.png; path = Assets/UI/Images/SideBar.png; sourceTree = "<group>"; };
+		A8C118DE16DD5A68003FF8C5 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		A8C118DF16DD5A68003FF8C5 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		A8C118E016DD5A68003FF8C5 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		A8C118E116DD5A69003FF8C5 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		A8C118E416DD5BF6003FF8C5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A8C118E616DE425D003FF8C5 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		A8C118E816DE45E2003FF8C5 /* TwitterInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterInterface.h; sourceTree = "<group>"; };
+		A8C118E916DE45E2003FF8C5 /* TwitterInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterInterface.m; sourceTree = "<group>"; };
+		A8C118EB16DEA3CC003FF8C5 /* carousel-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "carousel-background.jpg"; path = "Assets/UI/Images/carousel-background.jpg"; sourceTree = "<group>"; };
 		A8C459FB169DD985000B9586 /* AppDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDemoAppDelegate.h; sourceTree = "<group>"; };
 		A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDemoAppDelegate.m; sourceTree = "<group>"; };
 		A8C5A8BA169E025E008B29EF /* CameraImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CameraImage1.png; path = Assets/UI/Images/CameraImage1.png; sourceTree = "<group>"; };
@@ -365,6 +372,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8C118E716DE425D003FF8C5 /* Twitter.framework in Frameworks */,
+				A8C118E516DD5BF6003FF8C5 /* Security.framework in Frameworks */,
 				A8081D4816D6C4EF00B39E8B /* CFNetwork.framework in Frameworks */,
 				044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */,
 				A8EEE41916BF442800EA3FB0 /* AVFoundation.framework in Frameworks */,
@@ -481,6 +490,8 @@
 				04DF183016ACAC6400339EDB /* WebClient.m */,
 				0409924716B21087009DBE1D /* NetworkUtils.h */,
 				0409924816B21087009DBE1D /* NetworkUtils.m */,
+				A8C118E816DE45E2003FF8C5 /* TwitterInterface.h */,
+				A8C118E916DE45E2003FF8C5 /* TwitterInterface.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -539,6 +550,8 @@
 		96378D791472C71100F543EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A8C118E616DE425D003FF8C5 /* Twitter.framework */,
+				A8C118E416DD5BF6003FF8C5 /* Security.framework */,
 				A8081D4716D6C4EF00B39E8B /* CFNetwork.framework */,
 				A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */,
 				A842303116BF3A1A007F97CB /* AudioToolbox.framework */,
@@ -659,17 +672,6 @@
 			name = Vues;
 			sourceTree = "<group>";
 		};
-		A802D74616D824330080222D /* lobby */ = {
-			isa = PBXGroup;
-			children = (
-				0442AC3916DD99C300CF6162 /* crosshair.png */,
-				0442AC3A16DD99C300CF6162 /* joystickBase.png */,
-				0442AC3B16DD99C300CF6162 /* joystickTip.png */,
-			);
-			name = lobby;
-			path = Assets/UI/Images/lobby;
-			sourceTree = "<group>";
-		};
 		A8081D1416D45A3700B39E8B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,6 +683,10 @@
 		A8081D3A16D6C40400B39E8B /* Sockets */ = {
 			isa = PBXGroup;
 			children = (
+				A8C118DE16DD5A68003FF8C5 /* GCDAsyncSocket.h */,
+				A8C118DF16DD5A68003FF8C5 /* GCDAsyncSocket.m */,
+				A8C118E016DD5A68003FF8C5 /* GCDAsyncUdpSocket.h */,
+				A8C118E116DD5A69003FF8C5 /* GCDAsyncUdpSocket.m */,
 				A8081D4116D6C44000B39E8B /* AsyncSocket.h */,
 				A8081D4216D6C44000B39E8B /* AsyncSocket.m */,
 				A8081D4316D6C44000B39E8B /* AsyncUdpSocket.h */,
@@ -774,9 +780,8 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				A802D74616D824330080222D /* lobby */,
+				A8C118EB16DEA3CC003FF8C5 /* carousel-background.jpg */,
 				A8081D3116D5AFCD00B39E8B /* AudaciaIcon.png */,
-				0442AC3F16DE9ABD00CF6162 /* carousel-background.jpg */,
 				A8081D2F16D564E600B39E8B /* anonymous-icon.jpg */,
 				041186EA16CC9FC50046B720 /* Button-test.png */,
 				045AA82A16CBF93C00F82AB0 /* login-background.png */,
@@ -1023,10 +1028,7 @@
 				A8081D3016D564E600B39E8B /* anonymous-icon.jpg in Resources */,
 				A8081D3916D6B97400B39E8B /* JoystickViewController.xib in Resources */,
 				A8F072E516D7A97800FC933E /* LobbyViewController.xib in Resources */,
-				0442AC3C16DD99C300CF6162 /* crosshair.png in Resources */,
-				0442AC3D16DD99C300CF6162 /* joystickBase.png in Resources */,
-				0442AC3E16DD99C300CF6162 /* joystickTip.png in Resources */,
-				0442AC4016DE9ABD00CF6162 /* carousel-background.jpg in Resources */,
+				A8C118EC16DEA3CC003FF8C5 /* carousel-background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,6 +1100,9 @@
 				A8081D4516D6C44000B39E8B /* AsyncSocket.m in Sources */,
 				A8081D4616D6C44000B39E8B /* AsyncUdpSocket.m in Sources */,
 				A8F072E416D7A97800FC933E /* LobbyViewController.m in Sources */,
+				A8C118E216DD5A69003FF8C5 /* GCDAsyncSocket.m in Sources */,
+				A8C118E316DD5A69003FF8C5 /* GCDAsyncUdpSocket.m in Sources */,
+				A8C118EA16DE45E2003FF8C5 /* TwitterInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

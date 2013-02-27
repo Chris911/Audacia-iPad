@@ -16,21 +16,21 @@
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable) {
-        NSLog(@"NOT Connected to internet");
+        NSLog(@"[NetworkUtil] NOT Connected to internet");
     } else {
         available = YES;
-        NSLog(@"Connected to internet");
+        NSLog(@"[NetworkUtil] Connected to internet");
     }
     return available;
 }
 
 + (void)showNetworkUnavailableAlert
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Connexion Internet"
-                                                      message:@"Vous devez etre connecté a Internet pour utiliser cette fonctionnalité"
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Connection Warning"
+                                                      message:@"Please make sure you are connected to internet"
                                                      delegate:nil
                                             cancelButtonTitle:nil
-                                            otherButtonTitles:@"Ok", nil];
+                                            otherButtonTitles:@"OK", nil];
     [message show];
     [message release];
 }

@@ -13,6 +13,7 @@
 #import "JoystickViewController.h"
 #import "Session.h"
 
+
 @interface LobbyViewController ()
 {
     int activeObjectTag;
@@ -27,6 +28,8 @@ const int LEFT_CAMP_VIEW_TAG        = 300;
 const int HIDDEN_VIEW_TAG           = 400;
 
 @implementation LobbyViewController
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

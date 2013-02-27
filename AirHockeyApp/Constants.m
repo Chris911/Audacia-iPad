@@ -39,4 +39,12 @@ int GLOBAL_SIZE_OFFSET = 6;
 NSString *const leftCamp = @"Gauche";
 NSString *const rightCamp = @"Droite";
 
+NSString *const positionPack_Head = @"{\"Type\":\"gameloop\",\"SerializedStruct\":\"{\\\"Pos1\\\":";
+NSString *const positionPack_Separator = @",\\\"Pos2\\\":";
+NSString *const positionPack_Trail = @"}\"}\0";
+
+NSString *const authenPack_Head = @"{\"Type\":\"authentification\",\"SerializedStruct\":\"{\\\"Username\\\":\\\"";
+NSString *const authenPack_Separator = @"\\\",\\\"Password\\\":\\\"";
+NSString *const authenPack_Trail = @"\\\",\\\"UserId\\\":\\\"7bd9c930-f07b-4810-b36e-cc1390cc4e33\\\"}\"}";
+
 @end

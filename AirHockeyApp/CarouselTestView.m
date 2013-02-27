@@ -13,6 +13,7 @@
 #import "Map.h"
 #import "WebClient.h"
 #import "EAGLViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define SWITCH_TYPE_SHEET 0
 #define EDIT_MAP_SHEET    1
@@ -36,9 +37,6 @@
 
 - (void)setUp
 {
-    //View background
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"carousel-background.jpg"]];
-    
     //set up data
     wrap = YES;
     carousel.type = iCarouselTypeInvertedCylinder;
@@ -107,7 +105,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self load];
     carousel.type = iCarouselTypeInvertedCylinder;
+    
 }
 
 - (void)viewDidUnload
@@ -161,13 +161,6 @@
     {
         view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f, 384.0f)] autorelease];
         
-        /* Nice Shadow effects but seems to lag the whole view */
-//        [view.layer setBorderColor:[UIColor lightGrayColor].CGColor];
-//        [view.layer setBorderWidth:1.5f];
-//        [view.layer setShadowColor:[UIColor whiteColor].CGColor];
-//        [view.layer setShadowOpacity:0.6];
-//        [view.layer setShadowRadius:20.0];
-        
         CGRect frame = view.frame;
         frame.origin.y += 225;
         titleLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
@@ -182,18 +175,12 @@
         authorLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
         authorLabel.backgroundColor = [UIColor clearColor];
         authorLabel.textColor = [UIColor whiteColor];
+
         authorLabel.textAlignment = UITextAlignmentCenter;
         authorLabel.font = [authorLabel.font fontWithSize:20];
         authorLabel.tag = 2;
         [view addSubview:authorLabel];
         
-//        frame.origin.y += 30;
-//        ratingLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
-//        ratingLabel.backgroundColor = [UIColor clearColor];
-//        ratingLabel.textAlignment = UITextAlignmentCenter;
-//        ratingLabel.font = [ratingLabel.font fontWithSize:20];
-//        ratingLabel.tag = 3;
-//        [view addSubview:ratingLabel];
     }
     else
     {
@@ -208,11 +195,15 @@
     //views outside of the `if (view == nil) {...}` check otherwise
     //you'll get weird issues with carousel item content appearing
     //in the wrong place in the carousel
+    
     view.contentMode = UIViewContentModeScaleAspectFit;
     titleLabel.text = map.name;
-    authorLabel.text = [NSString stringWithFormat:@"Par: %@", map.authorName];
-    //ratingLabel.text = [NSString stringWithFormat:@"Rating: %i/5", map.rating];
-    //ratingLabel.text = [starsImageDict objectForKey:[NSNumber numberWithInt:map.rating]];
+    authorLabel.text = [NSString stringWithFormat:@"By: %@", map.authorName];
+    
+//    view.layer.cornerRadius = 15.0;
+//    view.layer.masksToBounds = YES;
+//    view.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    view.layer.borderWidth = 2.0;
     
     ratingImageView = [[[UIImageView alloc]initWithFrame:CGRectMake(198.5, 10, 115.0f, 20.0f)] autorelease];
     NSString* imagePath = [starsImageDict objectForKey:[NSNumber numberWithInt:map.rating]];
@@ -471,7 +462,7 @@
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     // End the context
     UIGraphicsEndImageContext();
-    
+
     view.image = newImage;
     
     [pool release];

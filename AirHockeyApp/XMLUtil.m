@@ -44,9 +44,10 @@
     // Parse the tree (This part is awful)
     RenderingTree *renderingTree = [[[RenderingTree alloc] init] autorelease];
     
-    NodeTable* table = [[NodeTable alloc]init];
+    NodeTable* table = [[[NodeTable alloc]init]autorelease];
     [renderingTree addNodeToTree:table];
     
+    NSMutableArray* newEdges = [[NSMutableArray alloc]init];
     NSArray *pointControleRoot = [doc.rootElement elementsForName:@"PointControle"];
     for(GDataXMLElement *node in pointControleRoot)
     {
@@ -57,9 +58,11 @@
             float posX = [[[nodeControle attributeForName:@"PositionX"] stringValue] floatValue];
             float posY = [[[nodeControle attributeForName:@"PositionY"] stringValue] floatValue];
             NodeTableEdge* nodeT = [[NodeTableEdge alloc]initWithCoordsAndIndex:posX :posY :i];
+            [newEdges addObject:nodeT];
             [renderingTree addNodeToTree:nodeT];
         }
     }
+    [table initTableEdgesFromXML:newEdges];
     
     NSArray *boosterRoot = [doc.rootElement elementsForName:@"Booster"];
     for(GDataXMLElement *node in boosterRoot)

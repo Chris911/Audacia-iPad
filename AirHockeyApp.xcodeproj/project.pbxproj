@@ -14,6 +14,7 @@
 		0442AC3C16DD99C300CF6162 /* crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3916DD99C300CF6162 /* crosshair.png */; };
 		0442AC3D16DD99C300CF6162 /* joystickBase.png in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3A16DD99C300CF6162 /* joystickBase.png */; };
 		0442AC3E16DD99C300CF6162 /* joystickTip.png in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3B16DD99C300CF6162 /* joystickTip.png */; };
+		0442AC4016DE9ABD00CF6162 /* carousel-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0442AC3F16DE9ABD00CF6162 /* carousel-background.jpg */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
 		045AA82B16CBF93C00F82AB0 /* login-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 045AA82A16CBF93C00F82AB0 /* login-background.png */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
@@ -158,6 +159,7 @@
 		0442AC3916DD99C300CF6162 /* crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crosshair.png; path = Assets/UI/Images/crosshair.png; sourceTree = SOURCE_ROOT; };
 		0442AC3A16DD99C300CF6162 /* joystickBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickBase.png; path = Assets/UI/Images/joystickBase.png; sourceTree = SOURCE_ROOT; };
 		0442AC3B16DD99C300CF6162 /* joystickTip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickTip.png; path = Assets/UI/Images/joystickTip.png; sourceTree = SOURCE_ROOT; };
+		0442AC3F16DE9ABD00CF6162 /* carousel-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "carousel-background.jpg"; path = "Assets/UI/Images/carousel-background.jpg"; sourceTree = "<group>"; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		045AA82A16CBF93C00F82AB0 /* login-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-background.png"; path = "Assets/UI/Images/login-background.png"; sourceTree = "<group>"; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 			children = (
 				A802D74616D824330080222D /* lobby */,
 				A8081D3116D5AFCD00B39E8B /* AudaciaIcon.png */,
+				0442AC3F16DE9ABD00CF6162 /* carousel-background.jpg */,
 				A8081D2F16D564E600B39E8B /* anonymous-icon.jpg */,
 				041186EA16CC9FC50046B720 /* Button-test.png */,
 				045AA82A16CBF93C00F82AB0 /* login-background.png */,
@@ -1023,6 +1026,7 @@
 				0442AC3C16DD99C300CF6162 /* crosshair.png in Resources */,
 				0442AC3D16DD99C300CF6162 /* joystickBase.png in Resources */,
 				0442AC3E16DD99C300CF6162 /* joystickTip.png in Resources */,
+				0442AC4016DE9ABD00CF6162 /* carousel-background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

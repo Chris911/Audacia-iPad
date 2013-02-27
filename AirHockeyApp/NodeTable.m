@@ -130,11 +130,44 @@
     edges[7] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:   initialX    :-initialY  :7]autorelease];
     
     // Initialize the zone limits
+    [self initTableLimits];
+    
+    // Initialize the 3D borders
+    [self initTable3DBorders];
+
+}
+
+- (void) initTableEdgesFromXML:(NSArray*)newEdges
+{
+    if([newEdges count] != 8)
+    {
+        //This should not happen and if it does the table will be invalid
+        NSLog(@"ERROR: Invalid number of edges in table");
+        return;
+    }
+    
+    for(int i=0; i<[newEdges count]; i++)
+    {
+        edges[i] = newEdges[i];
+    }
+    
+    // Initialize the zone limits
+    [self initTableLimits];
+    
+    // Initialize the 3D borders
+    [self initTable3DBorders];
+}
+
+- (void) initTableLimits
+{
     limits[0] = CGPointMake(-TABLE_LIMIT_X, TABLE_LIMIT_Y);
     limits[1] = CGPointMake(-TABLE_LIMIT_X, -TABLE_LIMIT_Y);
     limits[2] = CGPointMake(TABLE_LIMIT_X, -TABLE_LIMIT_Y);
     limits[3] = CGPointMake(TABLE_LIMIT_X, TABLE_LIMIT_Y);
-    
+}
+
+- (void) initTable3DBorders
+{
     borders[0] = [[Border3D alloc]initWithStartAndEndPoints:edges[0].position :edges[1].position];
     borders[1] = [[Border3D alloc]initWithStartAndEndPoints:edges[1].position :edges[2].position];
     borders[2] = [[Border3D alloc]initWithStartAndEndPoints:edges[2].position :edges[4].position];
@@ -143,7 +176,6 @@
     borders[5] = [[Border3D alloc]initWithStartAndEndPoints:edges[5].position :edges[6].position];
     borders[6] = [[Border3D alloc]initWithStartAndEndPoints:edges[3].position :edges[5].position];
     borders[7] = [[Border3D alloc]initWithStartAndEndPoints:edges[0].position :edges[3].position];
-
 }
 
 #pragma mark - Pseudo Update Functions

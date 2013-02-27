@@ -36,6 +36,9 @@
 
 - (void)setUp
 {
+    //View background
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"carousel-background.jpg"]];
+    
     //set up data
     wrap = YES;
     carousel.type = iCarouselTypeInvertedCylinder;
@@ -157,12 +160,19 @@
     if (view == nil)
     {
         view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f, 384.0f)] autorelease];
-        //view.contentMode = UIViewContentModeScaleAspectFit;
-        //view.contentMode = UIViewContentModeCenter;
+        
+        /* Nice Shadow effects but seems to lag the whole view */
+//        [view.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+//        [view.layer setBorderWidth:1.5f];
+//        [view.layer setShadowColor:[UIColor whiteColor].CGColor];
+//        [view.layer setShadowOpacity:0.6];
+//        [view.layer setShadowRadius:20.0];
+        
         CGRect frame = view.frame;
         frame.origin.y += 225;
         titleLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
         titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = UITextAlignmentCenter;
         titleLabel.font = [titleLabel.font fontWithSize:40];
         titleLabel.tag = 1;
@@ -171,6 +181,7 @@
         frame.origin.y += 35;
         authorLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
         authorLabel.backgroundColor = [UIColor clearColor];
+        authorLabel.textColor = [UIColor whiteColor];
         authorLabel.textAlignment = UITextAlignmentCenter;
         authorLabel.font = [authorLabel.font fontWithSize:20];
         authorLabel.tag = 2;

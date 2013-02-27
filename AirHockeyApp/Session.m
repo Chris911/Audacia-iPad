@@ -16,6 +16,8 @@
 @synthesize isAuthenticated;
 
 NSString* DEFAULT_USERNAME = @"Simon";
+NSString* DEFAULT_PASSWORD = @"1";
+
 
 static Session *session = NULL;
 
@@ -45,7 +47,7 @@ static Session *session = NULL;
 + (void) resetToDefault
 {
     session.username = DEFAULT_USERNAME;
-    session.password = @"";
+    session.password = DEFAULT_PASSWORD;
     session.isAuthenticated = YES;
     session.Camp = leftCamp;
 }

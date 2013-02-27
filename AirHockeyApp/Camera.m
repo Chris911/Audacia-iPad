@@ -142,13 +142,13 @@
     // Important : 4 and 3 represents the screen ratio of the iPad (4:3 , 1024:768)
     if(factor > 1){ // zoom out, pinch out
         if(self.orthoWidth < LARGEUR_FENETRE + 100 && self.orthoHeight < HAUTEUR_FENETRE + 75){
-            self.orthoWidth -= factor*8;
-            self.orthoHeight -= factor*6;
+            self.orthoWidth += factor*4;
+            self.orthoHeight += factor*3;
         }
     } else { // Zoom in
         if(self.orthoWidth > LARGEUR_FENETRE - 100 && self.orthoHeight > HAUTEUR_FENETRE - 75){
-            self.orthoWidth += factor*4;
-            self.orthoHeight += factor*3;
+            self.orthoWidth -= factor*8;
+            self.orthoHeight -= factor*6;
         }
     }
 }
@@ -235,15 +235,14 @@
     self.eyePosition = Vector3DMake(self.eyePosition.x + delta.x/3, self.eyePosition.y - delta.y/3, self.eyePosition.z);
     self.centerPosition = Vector3DMake(self.centerPosition.x + delta.x/3, self.centerPosition.y - delta.y/3, self.centerPosition.z);
     
-    int limit = 100;
-    if (self.eyePosition.x > limit/2) {
-        self.eyePosition = Vector3DMake(limit/2, self.eyePosition.y,self.eyePosition.z);
-        self.centerPosition = Vector3DMake(limit/2, self.centerPosition.y,self.centerPosition.z);
-    }
-    if (self.eyePosition.x < -limit/2) {
-        self.eyePosition = Vector3DMake( - limit/2, self.eyePosition.y,self.eyePosition.z);
-        self.centerPosition = Vector3DMake(- limit/2, self.centerPosition.y,self.centerPosition.z);
-    }
+//    if (self.eyePosition.x > limit/2) {
+//        self.eyePosition = Vector3DMake(limit/2, self.eyePosition.y,self.eyePosition.z);
+//        self.centerPosition = Vector3DMake(limit/2, self.centerPosition.y,self.centerPosition.z);
+//    }
+//    if (self.eyePosition.x < -limit/2) {
+//        self.eyePosition = Vector3DMake( - limit/2, self.eyePosition.y,self.eyePosition.z);
+//        self.centerPosition = Vector3DMake(- limit/2, self.centerPosition.y,self.centerPosition.z);
+//    }
 //    if (self.centerPosition.y > limit) {
 //        self.eyePosition = Vector3DMake(self.eyePosition.x, self.eyePosition.y,self.eyePosition.z);
 //        self.centerPosition = Vector3DMake(self.centerPosition.x, limit,self.centerPosition.z);

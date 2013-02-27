@@ -799,10 +799,11 @@ enum {
 
 - (void) replaceView
 {
-    if(self.camera.isPerspective){
+    if(!self.camera.isPerspective){
         [self.camera resetCamera];
+        self.camera.isPerspective = NO;
     } else {
-        [self.camera replaceCamera];
+        [self.camera resetCamera];
     }
 }
 

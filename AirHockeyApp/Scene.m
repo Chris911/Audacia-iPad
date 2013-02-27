@@ -47,8 +47,9 @@ static Scene *scene = NULL;
 + (void) loadDefaultElements
 {
     NodeTable* table = [[NodeTable alloc]init];
+    [table initDefaultTableValues];
     [scene.renderingTree addNodeToTree:table];
-
+    
     // Very important to add the edges AFTER the table
     // (inherited from Projet2 XML's structure)
     [table addEdgesToTree];

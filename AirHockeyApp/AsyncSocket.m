@@ -2010,6 +2010,25 @@ Failed:
  * Called when read or write streams open.
  * When the socket is connected and both streams are open, consider the AsyncSocket instance to be ready.
 **/
+
+
+#import <arpa/inet.h>		// for IPPROTO_TCP
+#include <netinet/tcp.h>	// for TCP_NODELAY
+- (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
+{          
+      // Add exactly the following code to disable Nagling:
+      CFSocketRef cfsock = [sock getCFSocket];
+      CFSocketNativeHandle rawsock = CFSocketGetNative(cfsock);
+      int flag = 1;
+      int result = setsockopt(rawsock, IPPROTO_TCP, TCP_NODELAY,
+                              (char *)&flag, sizeof(int));
+      if (result != 0)
+          NSLog(@"Could Not Disable Nagle...");
+            else
+        NSLog(@"Nagle Is Disabled.");
+    
+}
+
 - (void)doStreamOpen
 {
 	if ((theFlags & kDidCompleteOpenForRead) && (theFlags & kDidCompleteOpenForWrite))

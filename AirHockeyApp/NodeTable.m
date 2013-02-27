@@ -32,15 +32,13 @@
     if((self = [super init])) {
         
         self.type = @"TABLE";
+        self.xmlType = @"table";
         self.isRemovable = NO;
         self.isCopyable = NO;
         self.isScalable = NO;
 
         self.CoeffRebond = 0.87f;
         self.CoeffFriction = 1.0f;
-        
-        [self initTableEdges];
-        [self initColors];
         
         glGenTextures(1, &texture[0]);
         glBindTexture(GL_TEXTURE_2D, texture[0]);
@@ -50,6 +48,12 @@
         [Texture2DUtil load2DTextureFromNamePVRTC:@"table" :512];
     }
     return self;
+}
+
+- (void) initDefaultTableValues
+{
+    [self initTableEdges];
+    [self initColors];
 }
 
 // Render the table, edges, and borders (close to a composite pattern)
@@ -139,6 +143,7 @@
 
 - (void) initTableEdgesFromXML:(NSArray*)newEdges
 {
+    [self initColors];
     if([newEdges count] != 8)
     {
         //This should not happen and if it does the table will be invalid
@@ -372,8 +377,8 @@
 - (void) dealloc
 {
     [super dealloc];
-    [self.xmlType release];
-    [self.type release];
+    //[self.xmlType release];
+    //[self.type release];
     for (int i = 0; i < 8; i++) {
         [borders[i] release];
     }

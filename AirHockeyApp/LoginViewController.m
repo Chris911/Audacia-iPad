@@ -155,6 +155,7 @@
     [self.spinner stopAnimating];
     if([Session getInstance].isAuthenticated){
         [Session getInstance].username = self.usernameTextBox.text;
+        [Session getInstance].password = self.passwordTextBox.text;
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [self transitionToMenu];
     } else {

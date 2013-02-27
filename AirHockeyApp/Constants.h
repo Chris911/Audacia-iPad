@@ -44,5 +44,15 @@ extern int GLOBAL_SIZE_OFFSET;
 FOUNDATION_EXPORT NSString *const leftCamp;
 FOUNDATION_EXPORT NSString *const rightCamp;
 
+FOUNDATION_EXPORT NSString *const positionPack_Head;
+FOUNDATION_EXPORT NSString *const positionPack_Separator;
+FOUNDATION_EXPORT NSString *const positionPack_Trail;
+
+FOUNDATION_EXPORT NSString *const authenPack_Head;
+FOUNDATION_EXPORT NSString *const authenPack_Separator;
+FOUNDATION_EXPORT NSString *const authenPack_Trail;
+
+
+
 
 @end

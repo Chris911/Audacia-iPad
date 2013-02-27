@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <QuartzCore/QuartzCore.h>
 @interface NewMenuViewController : UIViewController
+@property (retain, nonatomic) IBOutlet UILabel *twitterLabel;
+@property (retain, nonatomic) IBOutlet UIView *twitterBackgroundView;
+@property (retain, nonatomic) IBOutlet UILabel *twitterLabel2;
+
 - (IBAction)editionModePressed:(id)sender;
 - (IBAction)profileModePressed:(id)sender;
 - (IBAction)controlerModePressed:(id)sender;

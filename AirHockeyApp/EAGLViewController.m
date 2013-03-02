@@ -132,7 +132,19 @@ enum {
         
         // Create the skybox
         skybox = [[Skybox alloc]initWithSize:150.0f];
-    
+        
+        // Icon images
+        self.PortalView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-portal.png"]];
+        self.BoosterView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-booster.png"]];
+        self.MuretView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-murret.png"]];
+        self.PuckView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-puck.png"]];
+        self.PommeauView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-maillet.png"]];
+        
+        self.PortalImageView.hidden = YES;
+        self.BoosterImageView.hidden = YES;
+        self.MuretImageView.hidden = YES;
+        self.PuckImageView.hidden = YES;
+        self.PommeauImageView.hidden = YES;
     }
     return self;
 }

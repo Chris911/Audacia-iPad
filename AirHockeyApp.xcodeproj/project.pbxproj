@@ -54,8 +54,6 @@
 		96378D851472C71200F543EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96378D831472C71200F543EA /* InfoPlist.strings */; };
 		96378D871472C71200F543EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D861472C71200F543EA /* main.m */; };
 		96378D8E1472C71200F543EA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D8C1472C71200F543EA /* MainWindow.xib */; };
-		96378D971472C7CC00F543EA /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D961472C7CC00F543EA /* MenuViewController.m */; };
-		96378D9A1472C80A00F543EA /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96378D991472C80A00F543EA /* MenuViewController.xib */; };
 		968DACCC1472EDA4007D15A3 /* OpenGLTexture3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		968DACCD1472EDA4007D15A3 /* OpenGLWaveFrontGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC71472EDA4007D15A3 /* OpenGLWaveFrontGroup.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		968DACCE1472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC91472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -103,6 +101,7 @@
 		A8C118E716DE425D003FF8C5 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C118E616DE425D003FF8C5 /* Twitter.framework */; };
 		A8C118EA16DE45E2003FF8C5 /* TwitterInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C118E916DE45E2003FF8C5 /* TwitterInterface.m */; };
 		A8C118EC16DEA3CC003FF8C5 /* carousel-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8C118EB16DEA3CC003FF8C5 /* carousel-background.jpg */; };
+		A8C118F216E1493C003FF8C5 /* twitterbg.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C118F116E1493C003FF8C5 /* twitterbg.png */; };
 		A8C459FD169DD985000B9586 /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */; };
 		A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8BA169E025E008B29EF /* CameraImage1.png */; };
 		A8C5A8C2169E39A5008B29EF /* CameraButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C5A8C1169E39A5008B29EF /* CameraButton1.png */; };
@@ -218,9 +217,6 @@
 		96378D861472C71200F543EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		96378D881472C71200F543EA /* AirHockeyApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirHockeyApp-Prefix.pch"; sourceTree = "<group>"; };
 		96378D8D1472C71200F543EA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		96378D951472C7CC00F543EA /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		96378D961472C7CC00F543EA /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		96378D991472C80A00F543EA /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		968DACC31472EDA4007D15A3 /* OpenGLTexture3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLTexture3D.h; sourceTree = "<group>"; };
 		968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLTexture3D.m; sourceTree = "<group>"; };
 		968DACC51472EDA4007D15A3 /* OpenGLWaveFrontCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLWaveFrontCommon.h; sourceTree = "<group>"; };
@@ -291,6 +287,7 @@
 		A8C118E816DE45E2003FF8C5 /* TwitterInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterInterface.h; sourceTree = "<group>"; };
 		A8C118E916DE45E2003FF8C5 /* TwitterInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterInterface.m; sourceTree = "<group>"; };
 		A8C118EB16DEA3CC003FF8C5 /* carousel-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "carousel-background.jpg"; path = "Assets/UI/Images/carousel-background.jpg"; sourceTree = "<group>"; };
+		A8C118F116E1493C003FF8C5 /* twitterbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitterbg.png; path = Assets/UI/Images/twitterbg.png; sourceTree = "<group>"; };
 		A8C459FB169DD985000B9586 /* AppDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDemoAppDelegate.h; sourceTree = "<group>"; };
 		A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDemoAppDelegate.m; sourceTree = "<group>"; };
 		A8C5A8BA169E025E008B29EF /* CameraImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CameraImage1.png; path = Assets/UI/Images/CameraImage1.png; sourceTree = "<group>"; };
@@ -605,14 +602,12 @@
 			children = (
 				041186EC16CCA07D0046B720 /* NewMenuViewController.h */,
 				969DDF8D1472E15900ED5DC8 /* EAGLViewController.h */,
-				96378D951472C7CC00F543EA /* MenuViewController.h */,
 				04D9C3F416BCB217005C6197 /* CarouselTestView.h */,
 				A8CE920016C9BDBB001CCEBB /* LoginViewController.h */,
 				A8081D2A16D5622400B39E8B /* ProfileViewController.h */,
 				A8081D3516D6B97400B39E8B /* JoystickViewController.h */,
 				A8F072E116D7A97800FC933E /* LobbyViewController.h */,
 				041186ED16CCA07D0046B720 /* NewMenuViewController.m */,
-				96378D961472C7CC00F543EA /* MenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
 				04D9C3F516BCB217005C6197 /* CarouselTestView.m */,
 				A8CE920116C9BDBB001CCEBB /* LoginViewController.m */,
@@ -628,7 +623,6 @@
 			children = (
 				96378D8C1472C71200F543EA /* MainWindow.xib */,
 				A8CE920216C9BDBB001CCEBB /* LoginViewController.xib */,
-				96378D991472C80A00F543EA /* MenuViewController.xib */,
 				969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */,
 				04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */,
 				041186E716CC9E510046B720 /* NewMenuViewController.xib */,
@@ -780,6 +774,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A8C118F116E1493C003FF8C5 /* twitterbg.png */,
 				A8C118EB16DEA3CC003FF8C5 /* carousel-background.jpg */,
 				A8081D3116D5AFCD00B39E8B /* AudaciaIcon.png */,
 				A8081D2F16D564E600B39E8B /* anonymous-icon.jpg */,
@@ -968,7 +963,6 @@
 			files = (
 				96378D851472C71200F543EA /* InfoPlist.strings in Resources */,
 				96378D8E1472C71200F543EA /* MainWindow.xib in Resources */,
-				96378D9A1472C80A00F543EA /* MenuViewController.xib in Resources */,
 				969DDF911472E15900ED5DC8 /* EAGLViewController.xib in Resources */,
 				A8C5A8BB169E025E008B29EF /* CameraImage1.png in Resources */,
 				A8C5A8C2169E39A5008B29EF /* CameraButton1.png in Resources */,
@@ -1029,6 +1023,7 @@
 				A8081D3916D6B97400B39E8B /* JoystickViewController.xib in Resources */,
 				A8F072E516D7A97800FC933E /* LobbyViewController.xib in Resources */,
 				A8C118EC16DEA3CC003FF8C5 /* carousel-background.jpg in Resources */,
+				A8C118F216E1493C003FF8C5 /* twitterbg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,7 +1036,6 @@
 			files = (
 				A86C08B416C2A68200839C4B /* NodePuck.m in Sources */,
 				96378D871472C71200F543EA /* main.m in Sources */,
-				96378D971472C7CC00F543EA /* MenuViewController.m in Sources */,
 				969DDEE01472CF8C00ED5DC8 /* EAGLView.m in Sources */,
 				969DDF901472E15900ED5DC8 /* EAGLViewController.m in Sources */,
 				968DACCC1472EDA4007D15A3 /* OpenGLTexture3D.m in Sources */,

@@ -26,6 +26,8 @@
     BOOL isFeedActive;
     
     int tweetIndex;
+    int tweetCount;
+    NSTimer* fetchTimer;
     NSTimer* twitterTimer;
     
     EAGLViewController *eagl;
@@ -50,14 +52,6 @@
 {
     [super viewDidLoad];
     
-    [self.twitterBackgroundView.layer setCornerRadius:15.0f];
-    [self.twitterBackgroundView.layer setBorderColor:[UIColor darkGrayColor].CGColor];
-    [self.twitterBackgroundView.layer setBorderWidth:2.5f];
-    [self.twitterBackgroundView.layer setShadowColor:[UIColor blackColor].CGColor];
-    [self.twitterBackgroundView.layer setShadowOpacity:0.8];
-    [self.twitterBackgroundView.layer setShadowRadius:1.0];
-    [self.twitterBackgroundView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
-    
     // Sound is disabled on load
     isSoundEnabled = NO;
 }
@@ -66,11 +60,19 @@
 {
     [super viewWillAppear:animated];
     
-    // Start twitter fetching 
+    // Start twitter fetching  that will occur every 15 seconds
     if([NetworkUtils isNetworkAvailable]){
         tweetIndex = 0;
+        tweetCount = 0;
         isFeedActive = YES;
-        [self fetchTweets];
+        fetchTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                                        target:self
+                                                      selector:@selector(fetchTweets)
+                                                      userInfo:nil
+                                                       repeats:YES];
+        [fetchTimer fire];
+    } else {
+        [self.twitterBackgroundView setHidden:YES];
     }
     
     // Setup and start sounds
@@ -104,7 +106,7 @@
 #pragma mark - Button pressed methods
 - (IBAction)editionModePressed:(id)sender
 {
-    [twitterTimer invalidate];
+    [self flushTimers];
     eagl = [[EAGLViewController alloc]initWithNibName:@"EAGLViewController" bundle:nil];
     eagl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentModalViewController:eagl animated:YES];
@@ -112,7 +114,7 @@
 
 - (IBAction)profileModePressed:(id)sender
 {
-    [twitterTimer invalidate];
+    [self flushTimers];
     ProfileViewController* profile_vc = [[[ProfileViewController alloc]init]autorelease];
     profile_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentModalViewController:profile_vc animated:YES];
@@ -120,7 +122,7 @@
 
 - (IBAction)controlerModePressed:(id)sender
 {
-    [twitterTimer invalidate];
+    [self flushTimers];
     LobbyViewController* lobby_vc = [[[LobbyViewController alloc]init]autorelease];
     lobby_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentModalViewController:lobby_vc animated:YES];
@@ -128,7 +130,7 @@
 
 - (IBAction)mapviewerModePressed:(id)sender
 {
-    [twitterTimer invalidate];
+    [self flushTimers];
     CarouselTestView* carousel_vc = [[[CarouselTestView alloc]init]autorelease];
     carousel_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentModalViewController:carousel_vc animated:YES];
@@ -155,17 +157,30 @@
 #pragma mark - Twitter actions
 - (void) fetchTweets
 {
-    self.tweets = [TwitterInterface fetchTweets];
-    if(self.tweets == nil){
-        NSLog(@"Error loading Tweets occured");
+    NSArray* tempTweets = [TwitterInterface fetchTweets];
+    if(tempTweets != nil){
+        self.tweets = tempTweets;
+        [self.twitterBackgroundView setHidden:NO];
     } else {
-        twitterTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
-                                                  target:self
-                                                selector:@selector(displayActiveTweet)
-                                                userInfo:nil
-                                                 repeats:YES];
-        [twitterTimer fire];
+        [self.twitterBackgroundView setHidden:YES];
     }
+    
+    // Check if new tweets
+    if(tweetCount != [self.tweets count]){
+        if(self.tweets == nil){
+            NSLog(@"Error loading Tweets occured");
+        } else {
+            [twitterTimer invalidate];
+            tweetCount = [self.tweets count];
+            twitterTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
+                                                      target:self
+                                                    selector:@selector(displayActiveTweet)
+                                                    userInfo:nil
+                                                     repeats:YES];
+            [twitterTimer fire];
+        }
+    }
+    
 }
 
 // Each X seconds, a new tweet will be displayed with a crossfade animation
@@ -193,12 +208,11 @@
             twitterString = [twitterString stringByAppendingString:text];
         }
         @catch (NSException *exception) {
-            NSLog(@"%@",exception);
             twitterString = [tweet objectForKey:@"text"];
         }
         
         // Animation
-        [UIView animateWithDuration:0.6 delay: 0.0 options: UIViewAnimationCurveLinear
+        [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveLinear
                          animations:^{
                              if(self.twitterLabel.alpha == 1){
                                  self.twitterLabel.alpha = 0.0f;
@@ -245,6 +259,15 @@
 //        [alertView show];
 //    }
 }
+
+- (void) flushTimers
+{
+    [fetchTimer invalidate];
+    [twitterTimer invalidate];
+    twitterTimer = nil;
+    fetchTimer = nil;
+}
+
 - (void)dealloc {
     [self.tweets release];
     [_twitterLabel release];

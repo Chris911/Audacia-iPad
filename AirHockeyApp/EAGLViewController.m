@@ -657,7 +657,7 @@ enum {
     
     glEnable(GL_CULL_FACE);
     // Renders the whole rendring tree
-    RenderingTree* tree = [Scene getInstance].renderingTree;
+    //RenderingTree* tree = [Scene getInstance].renderingTree;
     [[Scene getInstance].renderingTree render];
     glDisable(GL_CULL_FACE);
     

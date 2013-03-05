@@ -42,7 +42,7 @@
     if (doc == nil) { return nil; }
     
     // Parse the tree (This part is awful)
-    RenderingTree *renderingTree = [[RenderingTree alloc] init];
+    RenderingTree *renderingTree = [[[RenderingTree alloc] init]autorelease];
     
     NodeTable* table = [[[NodeTable alloc]init]autorelease];
     [renderingTree addNodeToTree:table];
@@ -57,7 +57,7 @@
         {
             float posX = [[[nodeControle attributeForName:@"PositionX"] stringValue] floatValue];
             float posY = [[[nodeControle attributeForName:@"PositionY"] stringValue] floatValue];
-            NodeTableEdge* nodeT = [[NodeTableEdge alloc]initWithCoordsAndIndex:posX :posY :i];
+            NodeTableEdge* nodeT = [[NodeTableEdge alloc]initWithCoordsAndIndex:posX :posY :i++];
             [newEdges addObject:nodeT];
             [renderingTree addNodeToTree:nodeT];
         }
@@ -73,7 +73,11 @@
             float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
             float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
             float posZ = [[[realNode attributeForName:@"PositionZ"] stringValue] floatValue];
+            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
+            float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
             NodeBooster* booster = [[[NodeBooster alloc]init]autorelease];
+            booster.scaleFactor = scaleFactor;
+            booster.angle = angleFactor;
             [renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(posX, posY, posZ)];
         }
     }
@@ -87,8 +91,12 @@
             float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
             float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
             float posZ = [[[realNode attributeForName:@"PositionZ"] stringValue] floatValue];
+            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
+            float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
             float gravite = [[[realNode attributeForName:@"Gravite"] stringValue] floatValue];
             NodePortal* portal = [[[NodePortal alloc]init]autorelease];
+            portal.scaleFactor = scaleFactor;
+            portal.angle = angleFactor;
             portal.Gravite = gravite;
             [renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(posX, posY, posZ)];
         }
@@ -119,7 +127,11 @@
             float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
             float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
             float posZ = [[[realNode attributeForName:@"PositionZ"] stringValue] floatValue];
+            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
+            float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
             NodeMurret* murret = [[[NodeMurret alloc]init]autorelease];
+            murret.scaleFactor = scaleFactor;
+            murret.angle = angleFactor;
             [renderingTree addNodeToTreeWithInitialPosition:murret :Vector3DMake(posX, posY, posZ)];
         }
     }
@@ -170,8 +182,8 @@
         GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y]];
         GDataXMLElement *posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",node.position.z]];
         
-        if([node.xmlType isEqualToString:@"But"] &&
-           [node.xmlType isEqualToString:@"PointControle"])
+        if(!([node.xmlType isEqualToString:@"But"] ||
+           [node.xmlType isEqualToString:@"PointControle"]))
         {
             GDataXMLElement *angleProperty = [GDataXMLNode attributeWithName:@"AngleFactor" stringValue:[NSString stringWithFormat:@"%f",node.angle]];
             GDataXMLElement *scaleProperty = [GDataXMLNode attributeWithName:@"ScaleFactor" stringValue:[NSString stringWithFormat:@"%f",node.scaleFactor]];

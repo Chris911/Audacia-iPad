@@ -9,6 +9,7 @@
 
 #import "Scene.h"
 #import "RenderingTree.h"
+#import "XMLUtil.h"
 
 #import "NodeTable.h"   
 #import "NodeBooster.h"
@@ -20,6 +21,7 @@
 
 @synthesize renderingTree;
 @synthesize loadingCustomTree;
+@synthesize treeDoc;
 
 static Scene *scene = NULL;
 
@@ -74,6 +76,12 @@ static Scene *scene = NULL;
 + (void) loadCustomTree:(RenderingTree*) tree
 {
     scene.renderingTree = tree;
+}
+
+// Reload tree when loading a custom tree from XML. Mainly for textures
++ (void) loadTreeFromXMLDoc
+{
+    scene.renderingTree = [XMLUtil loadRenderingTreeFromGDataXMLDocument:scene.treeDoc];
 }
 
 // Replaces elements out of the zone limits, defined in the Constants.h file

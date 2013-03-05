@@ -912,8 +912,8 @@ enum {
                                                                                                       self.camera.worldPosition.y,
                                                                                                       2)];
         } else if(activeObjectTag == MURETVIEW_TAG) {
-            NodeBooster *booster = [[[NodeBooster alloc]init]autorelease];
-            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(self.camera.worldPosition.x,
+            NodeMurret *muret = [[[NodeMurret alloc]init]autorelease];
+            [[Scene getInstance].renderingTree addNodeToTreeWithInitialPosition:muret :Vector3DMake(self.camera.worldPosition.x,
                                                                                                       self.camera.worldPosition.y,
                                                                                                       1)];
         } else if(activeObjectTag == PUCKVIEW_TAG) {
@@ -934,6 +934,7 @@ enum {
 {
     // Initialize Scene and rendring tree
     if([Scene getInstance].loadingCustomTree == YES) {
+        [Scene loadTreeFromXMLDoc];
         [Scene getInstance].loadingCustomTree = NO;
     }
     else {

@@ -11,6 +11,9 @@
 		041186E816CC9E510046B720 /* NewMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041186E716CC9E510046B720 /* NewMenuViewController.xib */; };
 		041186EB16CC9FC50046B720 /* Button-test.png in Resources */ = {isa = PBXBuildFile; fileRef = 041186EA16CC9FC50046B720 /* Button-test.png */; };
 		041186EE16CCA07D0046B720 /* NewMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041186ED16CCA07D0046B720 /* NewMenuViewController.m */; };
+		04385DC016E67E590067DB06 /* murret.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 04385DBE16E67E590067DB06 /* murret.mtl */; };
+		04385DC116E67E590067DB06 /* murret.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04385DBF16E67E590067DB06 /* murret.obj */; };
+		04385DC416E67E780067DB06 /* murret_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 04385DC316E67E780067DB06 /* murret_texture.png */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
 		0451B1F516E2A3080079BFF1 /* icon-booster.png in Resources */ = {isa = PBXBuildFile; fileRef = 0451B1F016E2A3080079BFF1 /* icon-booster.png */; };
 		0451B1F616E2A3080079BFF1 /* icon-maillet.png in Resources */ = {isa = PBXBuildFile; fileRef = 0451B1F116E2A3080079BFF1 /* icon-maillet.png */; };
@@ -166,6 +169,9 @@
 		041186EA16CC9FC50046B720 /* Button-test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Button-test.png"; path = "Assets/UI/Images/Button-test.png"; sourceTree = "<group>"; };
 		041186EC16CCA07D0046B720 /* NewMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMenuViewController.h; sourceTree = "<group>"; };
 		041186ED16CCA07D0046B720 /* NewMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMenuViewController.m; sourceTree = "<group>"; };
+		04385DBE16E67E590067DB06 /* murret.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = murret.mtl; sourceTree = "<group>"; };
+		04385DBF16E67E590067DB06 /* murret.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = murret.obj; sourceTree = "<group>"; };
+		04385DC316E67E780067DB06 /* murret_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = murret_texture.png; path = AirHockeyApp/murret_texture.png; sourceTree = SOURCE_ROOT; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		0451B1F016E2A3080079BFF1 /* icon-booster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-booster.png"; path = "Assets/UI/Images/icon-booster.png"; sourceTree = "<group>"; };
 		0451B1F116E2A3080079BFF1 /* icon-maillet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-maillet.png"; path = "Assets/UI/Images/icon-maillet.png"; sourceTree = "<group>"; };
@@ -456,17 +462,19 @@
 		04A04E3316AEEED1006D1FEB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04F43C5E16B038D00017756F /* Texture */,
+				04F43C5716B038D00017756F /* PSD */,
 				04F43C4C16B038D00017756F /* Blend */,
+				04385DBE16E67E590067DB06 /* murret.mtl */,
+				04385DBF16E67E590067DB06 /* murret.obj */,
 				04F43C5116B038D00017756F /* booster.mtl */,
 				04F43C5216B038D00017756F /* booster.obj */,
 				04F43C5316B038D00017756F /* pommeau.mtl */,
 				04F43C5416B038D00017756F /* pommeau.obj */,
 				04F43C5516B038D00017756F /* portal.mtl */,
 				04F43C5616B038D00017756F /* portal.obj */,
-				04F43C5716B038D00017756F /* PSD */,
 				04F43C5C16B038D00017756F /* puck.mtl */,
 				04F43C5D16B038D00017756F /* puck.obj */,
-				04F43C5E16B038D00017756F /* Texture */,
 			);
 			name = Models;
 			path = Assets/Models;
@@ -536,6 +544,7 @@
 		04F43C5E16B038D00017756F /* Texture */ = {
 			isa = PBXGroup;
 			children = (
+				04385DC316E67E780067DB06 /* murret_texture.png */,
 				A889F22316B067E10008E534 /* booster_texture.png */,
 				A889F22416B067E10008E534 /* pommeau_texture.png */,
 				A889F22516B067E10008E534 /* portal_texture.png */,
@@ -803,7 +812,6 @@
 				0451B1F216E2A3080079BFF1 /* icon-murret.png */,
 				0451B1F316E2A3080079BFF1 /* icon-portal.png */,
 				0451B1F416E2A3080079BFF1 /* icon-puck.png */,
-				A802D74616D824330080222D /* lobby */,
 				A8081D3116D5AFCD00B39E8B /* AudaciaIcon.png */,
 				A8081D2F16D564E600B39E8B /* anonymous-icon.jpg */,
 				041186EA16CC9FC50046B720 /* Button-test.png */,
@@ -1052,10 +1060,6 @@
 				A8F072E516D7A97800FC933E /* LobbyViewController.xib in Resources */,
 				A8C118EC16DEA3CC003FF8C5 /* carousel-background.jpg in Resources */,
 				A8C118F216E1493C003FF8C5 /* twitterbg.png in Resources */,
-				0442AC3C16DD99C300CF6162 /* crosshair.png in Resources */,
-				0442AC3D16DD99C300CF6162 /* joystickBase.png in Resources */,
-				0442AC3E16DD99C300CF6162 /* joystickTip.png in Resources */,
-				0442AC4016DE9ABD00CF6162 /* carousel-background.jpg in Resources */,
 				0451B1F516E2A3080079BFF1 /* icon-booster.png in Resources */,
 				0451B1F616E2A3080079BFF1 /* icon-maillet.png in Resources */,
 				0451B1F716E2A3080079BFF1 /* icon-murret.png in Resources */,
@@ -1065,6 +1069,9 @@
 				0451B1FE16E2AFE50079BFF1 /* icon-rotate.png in Resources */,
 				0451B20116E2B81D0079BFF1 /* icon-selection-elastique.png in Resources */,
 				0451B20216E2B81D0079BFF1 /* icon-zoom-elastique.png in Resources */,
+				04385DC016E67E590067DB06 /* murret.mtl in Resources */,
+				04385DC116E67E590067DB06 /* murret.obj in Resources */,
+				04385DC416E67E780067DB06 /* murret_texture.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

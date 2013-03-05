@@ -158,8 +158,9 @@
     AFGDataXMLRequestOperation *operation = [AFGDataXMLRequestOperation XMLDocumentRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:xmlPathz]] success:^(NSURLRequest *request, NSHTTPURLResponse *response, GDataXMLDocument *XMLDocument)
     {
         NSLog(@"[XML] Downloaded map successfully");
-        RenderingTree* tree = [XMLUtil loadRenderingTreeFromGDataXMLDocument:XMLDocument];
-        [Scene loadCustomTree:tree];
+        //RenderingTree* tree = [XMLUtil loadRenderingTreeFromGDataXMLDocument:XMLDocument];
+        //[Scene loadCustomTree:tree];
+        [Scene getInstance].treeDoc = XMLDocument;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchMapEventFinished" object:nil];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, GDataXMLDocument *XMLDocument)

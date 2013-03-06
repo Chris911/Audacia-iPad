@@ -18,7 +18,7 @@
         self.particles = [[NSMutableArray alloc]init];
         
         for (int i = 0; i < nb; i++) {
-            Particle *p = [[Particle alloc]initWithCenterPosition:center];
+            Particle *p = [[[Particle alloc]initWithCenterPosition:center]autorelease];
             [self.particles addObject:p];
         }
         

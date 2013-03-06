@@ -80,6 +80,8 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    NSLog(@"At Carousel");
+
     [self dismissModalViewControllerAnimated:YES];
     [MapContainer getInstance].maps = nil;
 }
@@ -102,12 +104,11 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-- (void)viewDidLoad
+- (void) viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewWillAppear:animated];
     [self load];
     carousel.type = iCarouselTypeInvertedCylinder;
-    
 }
 
 - (void)viewDidUnload
@@ -120,8 +121,9 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return YES;
-}
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+            || interfaceOrientation == UIInterfaceOrientationLandscapeRight);}
 
 - (IBAction)insertItem
 {
@@ -160,6 +162,14 @@
     if (view == nil)
     {
         view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 512.0f, 384.0f)] autorelease];
+        
+/* Nice Shadow effects but seems to lag the whole view */
+        [view.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+        [view.layer setBorderWidth:1.5f];
+        [view.layer setCornerRadius:15];
+//        [view.layer setShadowColor:[UIColor whiteColor].CGColor];
+//        [view.layer setShadowOpacity:0.6];
+//        [view.layer setShadowRadius:20.0];
         
         CGRect frame = view.frame;
         frame.origin.y += 225;
@@ -379,6 +389,7 @@
     
     [MapContainer getInstance].maps = nil;
     //[[MapContainer getInstance] release];
+    self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self dismissModalViewControllerAnimated:YES];
 }
 

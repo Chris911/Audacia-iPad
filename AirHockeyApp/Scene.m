@@ -48,7 +48,7 @@ static Scene *scene = NULL;
 
 + (void) loadDefaultElements
 {
-    NodeTable* table = [[NodeTable alloc]init];
+    NodeTable* table = [[[NodeTable alloc]init]autorelease];
     [table initDefaultTableValues];
     [scene.renderingTree addNodeToTree:table];
     

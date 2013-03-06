@@ -46,7 +46,7 @@
     self.centerPosition = Vector3DMake(0, 0, 0);
     self.eyePosition = Vector3DMake(0, 0, 0);
     self.up = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
-    eyeToCenterDistance = 120;
+    eyeToCenterDistance = 140;
     self.phi = 40;
     self.theta = 90;
     
@@ -309,8 +309,14 @@
 // reference from : http://casualdistractiongames.wordpress.com/
 - (void) convertScreenToWorldProj:(CGPoint)touch
 {    
+    Vector3D final = [self unproject:touch];
+    self.worldPosition = Vector3DMake(final.x, final.y, 0); // Z ignored    
+}
+
+- (Vector3D) unproject:(CGPoint)touch
+{
     // Projection Matrix
-    GLfloat     projMat[16];                                              
+    GLfloat     projMat[16];
     glGetFloatv(GL_PROJECTION_MATRIX, projMat);
     GLKMatrix4 pMat = GLKMatrix4MakeWithArray(projMat);
     
@@ -341,8 +347,7 @@
     float far_pt_factor = fabs(far_pt.z)/z_magnitude;
     GLKVector3 final_pt = GLKVector3Add( GLKVector3MultiplyScalar(near_pt, far_pt_factor), GLKVector3MultiplyScalar(far_pt, near_pt_factor));
     Vector3D final = Vector3DMake(final_pt.x, final_pt.y, 0);
-    
-    self.worldPosition = Vector3DMake(final.x, final.y, 0); // Z ignored    
+    return final;
 }
 
 @end

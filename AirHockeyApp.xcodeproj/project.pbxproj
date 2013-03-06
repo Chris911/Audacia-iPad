@@ -88,6 +88,7 @@
 		A812858116A0A53900C8EF6D /* ParametersImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = A812858016A0A53900C8EF6D /* ParametersImage1.png */; };
 		A818E02516BAD7D900CA5823 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = A818E02416BAD7D900CA5823 /* Camera.m */; };
 		A831CEA716B7219800A30C39 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = A831CEA616B7219800A30C39 /* Session.m */; };
+		A83BC89D16E39E5E0074DDC6 /* AudaciaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A83BC89C16E39E5E0074DDC6 /* AudaciaIcon.png */; };
 		A83C226116BD94E2007AA035 /* ElasticRect.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C226016BD94E2007AA035 /* ElasticRect.m */; };
 		A83C227B16BEC38F007AA035 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C227A16BEC38F007AA035 /* Particle.m */; };
 		A842302F16BF3A04007F97CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842302E16BF3A04007F97CB /* OpenAL.framework */; };
@@ -278,6 +279,7 @@
 		A818E02416BAD7D900CA5823 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		A831CEA516B7219800A30C39 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		A831CEA616B7219800A30C39 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		A83BC89C16E39E5E0074DDC6 /* AudaciaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AudaciaIcon.png; sourceTree = "<group>"; };
 		A83C225F16BD94E2007AA035 /* ElasticRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElasticRect.h; sourceTree = "<group>"; };
 		A83C226016BD94E2007AA035 /* ElasticRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElasticRect.m; sourceTree = "<group>"; };
 		A83C227716BEC08E007AA035 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
@@ -801,6 +803,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A83BC89C16E39E5E0074DDC6 /* AudaciaIcon.png */,
 				A8C118F116E1493C003FF8C5 /* twitterbg.png */,
 				A8C118EB16DEA3CC003FF8C5 /* carousel-background.jpg */,
 				0451B1FF16E2B81D0079BFF1 /* icon-selection-elastique.png */,
@@ -1072,6 +1075,7 @@
 				04385DC016E67E590067DB06 /* murret.mtl in Resources */,
 				04385DC116E67E590067DB06 /* murret.obj in Resources */,
 				04385DC416E67E780067DB06 /* murret_texture.png in Resources */,
+				A83BC89D16E39E5E0074DDC6 /* AudaciaIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

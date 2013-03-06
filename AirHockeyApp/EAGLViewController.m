@@ -134,17 +134,17 @@ enum {
         skybox = [[Skybox alloc]initWithSize:150.0f];
         
         // Icon images
-        self.PortalView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-portal.png"]];
-        self.BoosterView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-booster.png"]];
-        self.MuretView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-murret.png"]];
-        self.PuckView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-puck.png"]];
-        self.PommeauView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-maillet.png"]];
+        self.PortalView.backgroundColor     = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-portal.png"]];
+        self.BoosterView.backgroundColor    = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-booster.png"]];
+        self.MuretView.backgroundColor      = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-murret.png"]];
+        self.PuckView.backgroundColor       = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-puck.png"]];
+        self.PommeauView.backgroundColor    = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-maillet.png"]];
         
-        self.PortalImageView.hidden = YES;
-        self.BoosterImageView.hidden = YES;
-        self.MuretImageView.hidden = YES;
-        self.PuckImageView.hidden = YES;
-        self.PommeauImageView.hidden = YES;
+        self.PortalImageView.hidden         = YES;
+        self.BoosterImageView.hidden        = YES;
+        self.MuretImageView.hidden          = YES;
+        self.PuckImageView.hidden           = YES;
+        self.PommeauImageView.hidden        = YES;
     }
     return self;
 }
@@ -164,7 +164,7 @@ enum {
     
     [elasticRect release];
     [skybox release];
-    [self.camera release];
+    //[self.camera release];
     [particles release];
     
     [_LeftSlideView release];
@@ -186,7 +186,6 @@ enum {
     [_angleSlider release];
     [_sizeLabel release];
     [_angleLable release];
-    [_typeLabel release];
     [_specialLabel release];
     [_specialSlider release];
     [_copyPropButton release];
@@ -241,7 +240,6 @@ enum {
     [self setAngleSlider:nil];
     [self setSizeLabel:nil];
     [self setAngleLable:nil];
-    [self setTypeLabel:nil];
     [self setSpecialLabel:nil];
     [self setSpecialSlider:nil];
     [self setCopyPropButton:nil];
@@ -946,7 +944,6 @@ enum {
 - (void) prepareRecognizers
 {
     // SwipeGesture recognizers
-    
     UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc]
                                                        initWithTarget:self
                                                        action:@selector(rotationDetected:)];
@@ -1023,19 +1020,11 @@ enum {
     self.TransformView.center = CGPointMake(TRANSFORMVIEW_INITIAL_POSITION,self.TransformView.center.y);
     self.SettingsView.center = CGPointMake(1024 + self.SettingsView.frame.size.width,
                                          HAUTEUR_ECRAN + self.SettingsView.frame.size.height);
-    self.typeLabel.text = @"";
     self.specialLabel.text = @"";
     [self.specialSlider setHidden:YES];
     
     [self.PuckView setHidden:YES]; //FIXME: This assumes we always have a puck in an initial map (True from loading a valid xml, maybe false for an empty starting table)
     //[self.PommeauView setHidden:YES]; // This assumes we always have 2 sticks in an initial map (True from loading a valid xml, maybe false for an empty starting table)
-    
-    // Custom Font on labels
-    UIFont *font = [UIFont fontWithName:@"Gather BRK" size:30];
-    [self.angleLable setFont:font];
-    [self.sizeLabel setFont:font];
-    [self.specialLabel setFont:font];
-    [self.typeLabel setFont:font];
 
 }
 
@@ -1051,25 +1040,13 @@ enum {
     currentTransformState = STATE_TRANSFORM_TRANSLATION;
     activeObjectTag = -1;
     [[Scene getInstance].renderingTree emptyRenderingTree];
-    [[Scene getInstance] release];
+    //[[Scene getInstance] release];
 }
 
 #pragma mark - Modify UI Elements
 - (void) modifyUIParametersValues:(Node*)node 
 {
-    if(node != nil){
-        self.typeLabel.text = node.type;
-    } else{
-        self.typeLabel.text = @"";
-    }
-    
     [self slideInAnimationView:self.ParametersView];
-
-//    if(![node.type isEqualToString:@"EDGE"]){
-//        [self slideInAnimationView:self.ParametersView];
-//    } else {
-//        [self slideOutAnimationView:self.ParametersView];
-//    }
 
     [self hideOrShowParameters:node];
     self.sizeSlider.value = node.scaleFactor/4;
@@ -1082,6 +1059,7 @@ enum {
     [self.deleteButton setHidden:NO];
     [self.angleLable setHidden:NO];
     [self.angleSlider setHidden:NO];
+    [self.specialSlider setHidden:NO];
     if([node.type isEqualToString:@"POMMEAU"] || [node.type isEqualToString:@"PUCK"] || [Scene getInstance].renderingTree.multipleNodesSelected){
         // Hide some parameters if the selected nodes are Puck or Stick
         [self.sizeLabel setHidden:YES];

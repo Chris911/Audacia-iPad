@@ -65,7 +65,7 @@
         tweetIndex = 0;
         tweetCount = 0;
         isFeedActive = YES;
-        fetchTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
+        fetchTimer = [NSTimer scheduledTimerWithTimeInterval:30.0
                                                         target:self
                                                       selector:@selector(fetchTweets)
                                                       userInfo:nil
@@ -93,6 +93,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    NSLog(@"At NewMenuView");
     // Dispose of any resources that can be recreated.
 }
 
@@ -162,7 +163,7 @@
         self.tweets = tempTweets;
         [self.twitterBackgroundView setHidden:NO];
     } else {
-        [self.twitterBackgroundView setHidden:YES];
+        //[self.twitterBackgroundView setHidden:YES];
     }
     
     // Check if new tweets
@@ -266,10 +267,12 @@
     [twitterTimer invalidate];
     twitterTimer = nil;
     fetchTimer = nil;
+    //[self.tweets release];
+    //self.tweets = nil;
 }
 
 - (void)dealloc {
-    [self.tweets release];
+    //[self.tweets release];
     [_twitterLabel release];
     [_twitterBackgroundView release];
     [_twitterLabel2 release];

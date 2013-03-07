@@ -20,4 +20,5 @@
 - (IBAction)logoutPressed:(id)sender;
 - (IBAction)soundPressed:(id)sender;
 
+@property (retain, nonatomic) IBOutlet UIButton *loginButton;
 @end

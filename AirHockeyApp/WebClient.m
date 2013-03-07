@@ -19,6 +19,7 @@
 @synthesize AFClient;
 @synthesize server;
 @synthesize mapsAPIScript;
+@synthesize profileAPIScript;
 @synthesize xmlPath;
 @synthesize imagePath;
 
@@ -27,6 +28,7 @@
     if((self = [super init])) {
         self.server = @"http://kepler.step.polymtl.ca/";
         self.mapsAPIScript = @"/projet3/scripts/MapsAPI.php";
+        self.profileAPIScript = @"/projet3/scripts/ProfileAPI.php";
         NSURL *url = [NSURL URLWithString:self.server];
         AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
         self.AFClient = httpClient;
@@ -98,6 +100,27 @@
     [operation start];
 }
 
+// Could use some refactoring here (single function for image upload)
+- (void) uploadProfilePicture:(UIImage*)image :(NSString*)username
+{
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+    NSString *fileName = [username stringByAppendingString:@".jpg"];
+    
+    NSMutableURLRequest *request = [self.AFClient multipartFormRequestWithMethod:@"POST" path:self.profileAPIScript parameters:@{@"action":@"uploadProfileImage"} constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpg"];
+    }];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation  setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success [Profile Image]: %@", operation.responseString);
+    }
+                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                          NSLog(@"Error [Map Image]: %@",  operation.responseString);
+                                      }
+     ];
+    
+    [operation start];
+}
 
 - (void) fetchAllMapsFromDatabase
 {

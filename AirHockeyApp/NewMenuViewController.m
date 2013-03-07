@@ -19,6 +19,8 @@
 #import "TwitterInterface.h"
 #import "NetworkUtils.h"
 
+#define notLoggedInErrorTag 0
+
 @interface NewMenuViewController()
 {
     BOOL isConnectionViewVisible;
@@ -37,6 +39,8 @@
 @end
 
 @implementation NewMenuViewController
+
+@synthesize loginButton;
 
 #pragma mark - View lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -88,6 +92,12 @@
         [eagl release];
         eagl = nil;
     }
+    
+    // Set login button text according to session state
+    NSString* loginState = [NSString stringWithFormat:@"%@",
+                            [Session getInstance].isAuthenticated ? @"Logout" : @" Login"];
+    
+    [loginButton setTitle:loginState forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,18 +125,32 @@
 
 - (IBAction)profileModePressed:(id)sender
 {
-    [self flushTimers];
-    ProfileViewController* profile_vc = [[[ProfileViewController alloc]init]autorelease];
-    profile_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentModalViewController:profile_vc animated:YES];
+    if([Session getInstance].isAuthenticated)
+    {
+        [self flushTimers];
+        ProfileViewController* profile_vc = [[[ProfileViewController alloc]init]autorelease];
+        profile_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentModalViewController:profile_vc animated:YES];
+    }
+    else
+    {
+        [self showNotLoggedInError];
+    }
 }
 
 - (IBAction)controlerModePressed:(id)sender
 {
-    [self flushTimers];
-    LobbyViewController* lobby_vc = [[[LobbyViewController alloc]init]autorelease];
-    lobby_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentModalViewController:lobby_vc animated:YES];
+    if([Session getInstance].isAuthenticated)
+    {
+        [self flushTimers];
+        LobbyViewController* lobby_vc = [[[LobbyViewController alloc]init]autorelease];
+        lobby_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentModalViewController:lobby_vc animated:YES];
+    }
+    else
+    {
+        [self showNotLoggedInError];
+    }
 }
 
 - (IBAction)mapviewerModePressed:(id)sender
@@ -182,6 +206,20 @@
         }
     }
     
+}
+
+
+- (void)showNotLoggedInError
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Login Error"
+                                                      message:@"This feature is only available to registered users"
+                                                     delegate:self
+                                            cancelButtonTitle:@"Dismiss"
+                                            otherButtonTitles:nil];
+    [message setAlertViewStyle:UIAlertViewStyleDefault];
+    message.tag = notLoggedInErrorTag;
+    [message show];
+    [message release];
 }
 
 // Each X seconds, a new tweet will be displayed with a crossfade animation
@@ -276,12 +314,14 @@
     [_twitterLabel release];
     [_twitterBackgroundView release];
     [_twitterLabel2 release];
+    [loginButton release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setTwitterLabel:nil];
     [self setTwitterBackgroundView:nil];
     [self setTwitterLabel2:nil];
+    [self setLoginButton:nil];
     [super viewDidUnload];
 }
 @end

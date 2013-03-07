@@ -9,6 +9,8 @@
 #import "ProfileViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Session.h"
+#import "AppDemoAppDelegate.h"
+#import "WebClient.h"
 
 @interface ProfileViewController ()
 
@@ -112,15 +114,12 @@
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
     cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    // Displays a control that allows the user to choose picture or
-    // movie capture, if both are available:
-    cameraUI.mediaTypes =
-    [UIImagePickerController availableMediaTypesForSourceType:
-     UIImagePickerControllerSourceTypeCamera];
+    // Use front facing camera
+    cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceFront;
     
     // Hides the controls for moving & scaling pictures, or for
     // trimming movies. To instead show the controls, use YES.
-    cameraUI.allowsEditing = NO;
+    cameraUI.allowsEditing = YES;
     
     cameraUI.delegate = delegate;
     
@@ -158,8 +157,13 @@
         }
         
         // Save the new image (original or edited) to the Camera Roll
-        //UIImageWriteToSavedPhotosAlbum (imageToSave, nil, nil , nil);
+        // UIImageWriteToSavedPhotosAlbum (imageToSave, nil, nil , nil);
         self.pictureImageView.image = imageToSave;
+        
+        // Upload image to server
+        AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+        [delegate.webClient uploadProfilePicture:imageToSave :[Session getInstance].username];
+
     }
         
     [[picker parentViewController] dismissModalViewControllerAnimated: YES];

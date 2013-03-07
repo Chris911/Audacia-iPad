@@ -27,6 +27,7 @@
 @end
 
 @implementation LoginViewController
+
 - (void) setUpView
 {
     self.usernameTextBox.tag = usernameTextBoxTag;
@@ -44,7 +45,9 @@
     self.loginBoxView.userInteractionEnabled = NO;
     
     self.serverTextBox.text = @"kepler.step.polymtl.ca";
-    loginViewIsOnTop = NO;
+    self.usernameTextBox.text = @"";
+    self.passwordTextBox.text = @"";
+    self.errorLabel.text = @"";
     
     //Add observer for login event
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -67,6 +70,12 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    loginViewIsHidden = YES;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self setUpView];
 }
 
@@ -79,7 +88,7 @@
 
 - (void) toggleConnectionView
 {
-    if(!loginViewIsHidden) {
+    if(loginViewIsHidden) {
         [UIView animateWithDuration:0.5
                          animations:^{
                              self.loginButton.alpha = 0.0f;
@@ -166,7 +175,8 @@
 
 - (void) transitionToMenu
 {
-    [self setUpView];
+    if(!loginViewIsHidden)
+        [self toggleConnectionView];
     
     NewMenuViewController* mv = [[[NewMenuViewController alloc]initWithNibName:@"NewMenuViewController" bundle:nil]autorelease];
     mv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

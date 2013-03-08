@@ -158,7 +158,6 @@
             
             if(![node.type isEqualToString:@"EDGE"] && ![node.type isEqualToString:@"TABLE"]){
                 node.isSelected = YES;
-                NSLog(@"Selected Type:%@",node.type);
                 nodeWasSelected = YES;
             }
             self.multipleNodesSelected = YES;
@@ -184,12 +183,9 @@
     int nbNodes = [self.tree count];
     for(int i = nbNodes-1; i > 0; i--)
     {
-        NSLog(@"Count bef:%i",[self.tree count]);
-
         Node *node = [self.tree objectAtIndex:i];
         if(node.isSelected && node.isRemovable) {
             [self.tree removeObject:node];
-            NSLog(@"Count aft:%i",[self.tree count]);
         }
     }
     return YES;

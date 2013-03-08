@@ -64,6 +64,8 @@
 {
     [super viewWillAppear:animated];
     
+    [self prepareAdditionalView];
+    
     // Start twitter fetching  that will occur every 15 seconds
     if([NetworkUtils isNetworkAvailable]){
         tweetIndex = 0;
@@ -140,17 +142,7 @@
 
 - (IBAction)controlerModePressed:(id)sender
 {
-    if([Session getInstance].isAuthenticated)
-    {
-        [self flushTimers];
-        LobbyViewController* lobby_vc = [[[LobbyViewController alloc]init]autorelease];
-        lobby_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentModalViewController:lobby_vc animated:YES];
-    }
-    else
-    {
-        [self showNotLoggedInError];
-    }
+    [self slideControllerViewIn];
 }
 
 - (IBAction)mapviewerModePressed:(id)sender
@@ -177,6 +169,26 @@
     } else {
         [AudioInterface stopBackgroundMusic];
     }
+}
+
+- (IBAction)joystickButtonPressed:(id)sender
+{
+    if([Session getInstance].isAuthenticated)
+    {
+        [self flushTimers];
+        LobbyViewController* lobby_vc = [[[LobbyViewController alloc]init]autorelease];
+        lobby_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentModalViewController:lobby_vc animated:YES];
+    }
+    else
+    {
+        [self showNotLoggedInError];
+    }
+}
+
+- (IBAction)cancelButtonPressed:(id)sender
+{
+    [self slideControllerViewOut];
 }
 
 #pragma mark - Twitter actions
@@ -271,6 +283,27 @@
     }
 }
 
+#pragma UI preparation methods
+- (void) prepareAdditionalView
+{
+    self.infoTextView.backgroundColor = [UIColor clearColor];
+    [self.joystickButton setEnabled:NO];
+
+    [self.controllerViewBackgroundImage.layer setMasksToBounds:YES];
+    [self.controllerViewBackgroundImage.layer setCornerRadius:20.0f];
+
+    [self.controllerView.layer setCornerRadius:20.0f];
+    [self.controllerView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.controllerView.layer setBorderWidth:1.5f];
+    [self.controllerView.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.controllerView.layer setShadowOpacity:0.8];
+    [self.controllerView.layer setShadowRadius:3.0];
+    [self.controllerView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+    
+    self.controllerView.center = CGPointMake(1024 + self.controllerView.frame.size.width/2, 384);
+}
+
+#pragma mark - Animation methods
 - (void) animateTweetLabel
 {
     while(YES){
@@ -279,26 +312,26 @@
     }
 }
 
-- (void) postTweet
+- (void) slideControllerViewIn
 {
-//    if ([TWTweetComposeViewController canSendTweet]) {
-//        TWTweetComposeViewController *tweetSheet =
-//        [[TWTweetComposeViewController alloc] init];
-//        [tweetSheet setInitialText:
-//         @"Tweeting from iOS 5 By Tutorials! :)"];
-//	    [self presentModalViewController:tweetSheet animated:YES];
-//        
-//    } else {
-//        UIAlertView *alertView = [[UIAlertView alloc]
-//                                  initWithTitle:@"Sorry"
-//                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
-//                                  delegate:self
-//                                  cancelButtonTitle:@"OK"
-//                                  otherButtonTitles:nil];
-//        [alertView show];
-//    }
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.controllerView.center = CGPointMake(512, 384);
+                         [self.spinner startAnimating];
+                     }];
 }
 
+- (void) slideControllerViewOut
+{
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.controllerView.center = CGPointMake(1024 + self.controllerView.frame.size.width/2, 384);
+                         [self.spinner stopAnimating];
+                     }];
+}
+
+
+#pragma mark - Deallocation methods
 - (void) flushTimers
 {
     [fetchTimer invalidate];
@@ -315,6 +348,12 @@
     [_twitterBackgroundView release];
     [_twitterLabel2 release];
     [loginButton release];
+    [_controllerView release];
+    [_infoTextView release];
+    [_connexionStatusLabel release];
+    [_joystickButton release];
+    [_controllerViewBackgroundImage release];
+    [_spinner release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -322,6 +361,13 @@
     [self setTwitterBackgroundView:nil];
     [self setTwitterLabel2:nil];
     [self setLoginButton:nil];
+    [self setControllerView:nil];
+    [self setInfoTextView:nil];
+    [self setConnexionStatusLabel:nil];
+    [self setJoystickButton:nil];
+    [self setControllerViewBackgroundImage:nil];
+    [self setSpinner:nil];
     [super viewDidUnload];
 }
+
 @end

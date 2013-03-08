@@ -50,6 +50,11 @@
     return self;
 }
 
+- (void) loadTextures
+{
+
+}
+
 - (void) initDefaultTableValues
 {
     [self initTableEdges];

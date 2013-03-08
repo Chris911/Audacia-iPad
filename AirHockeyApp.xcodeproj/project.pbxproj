@@ -143,6 +143,7 @@
 		A8CE921216C9BDF0001CCEBB /* login-ice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920A16C9BDF0001CCEBB /* login-ice.jpg */; };
 		A8CE921316C9BDF0001CCEBB /* login-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920B16C9BDF0001CCEBB /* login-icon.png */; };
 		A8CE921416C9BDF0001CCEBB /* login-top-view.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920C16C9BDF0001CCEBB /* login-top-view.png */; };
+		A8D9888016E8F6D60072E6CF /* SideBar3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */; };
 		A8EBDE3916A70CF8002B2DD6 /* GluLookAt.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */; };
 		A8EBDE7616A711C1002B2DD6 /* GluPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7516A711C1002B2DD6 /* GluPerspective.m */; };
 		A8EBDE7A16A729CA002B2DD6 /* NodeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7916A729CA002B2DD6 /* NodeTable.m */; };
@@ -155,8 +156,6 @@
 		A8EEE40E16BF3EDD00EA3FB0 /* AudioInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */; };
 		A8EEE41716BF43D700EA3FB0 /* technoloop.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */; };
 		A8EEE41916BF442800EA3FB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */; };
-		A8F072E416D7A97800FC933E /* LobbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F072E216D7A97800FC933E /* LobbyViewController.m */; };
-		A8F072E516D7A97800FC933E /* LobbyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8F072E316D7A97800FC933E /* LobbyViewController.xib */; };
 		A8F0987816CD96F400280C71 /* table.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8F0987716CD96F400280C71 /* table.pvrtc */; };
 		A8F13CA916AF190E00CB5885 /* SideBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CA816AF190E00CB5885 /* SideBar2.png */; };
 		A8F13CB916B027F300CB5885 /* SettingsButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CB716B027F300CB5885 /* SettingsButton1.png */; };
@@ -357,6 +356,7 @@
 		A8CE920A16C9BDF0001CCEBB /* login-ice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "login-ice.jpg"; path = "Assets/UI/Images/login-ice.jpg"; sourceTree = "<group>"; };
 		A8CE920B16C9BDF0001CCEBB /* login-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-icon.png"; path = "Assets/UI/Images/login-icon.png"; sourceTree = "<group>"; };
 		A8CE920C16C9BDF0001CCEBB /* login-top-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-top-view.png"; path = "Assets/UI/Images/login-top-view.png"; sourceTree = "<group>"; };
+		A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SideBar3.jpg; path = Assets/UI/Images/SideBar3.jpg; sourceTree = "<group>"; };
 		A8EBDE3716A70CF8002B2DD6 /* GluLookAt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluLookAt.h; sourceTree = "<group>"; };
 		A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GluLookAt.m; sourceTree = "<group>"; };
 		A8EBDE7416A711C1002B2DD6 /* GluPerspective.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluPerspective.h; sourceTree = "<group>"; };
@@ -381,9 +381,6 @@
 		A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInterface.m; sourceTree = "<group>"; };
 		A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = technoloop.m4a; sourceTree = "<group>"; };
 		A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		A8F072E116D7A97800FC933E /* LobbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobbyViewController.h; sourceTree = "<group>"; };
-		A8F072E216D7A97800FC933E /* LobbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobbyViewController.m; sourceTree = "<group>"; };
-		A8F072E316D7A97800FC933E /* LobbyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LobbyViewController.xib; sourceTree = "<group>"; };
 		A8F0987716CD96F400280C71 /* table.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = table.pvrtc; sourceTree = "<group>"; };
 		A8F13CA816AF190E00CB5885 /* SideBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar2.png; path = Assets/UI/Images/SideBar2.png; sourceTree = "<group>"; };
 		A8F13CB716B027F300CB5885 /* SettingsButton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsButton1.png; path = Assets/UI/Images/SettingsButton1.png; sourceTree = "<group>"; };
@@ -635,14 +632,12 @@
 				A8CE920016C9BDBB001CCEBB /* LoginViewController.h */,
 				A8081D2A16D5622400B39E8B /* ProfileViewController.h */,
 				A8081D3516D6B97400B39E8B /* JoystickViewController.h */,
-				A8F072E116D7A97800FC933E /* LobbyViewController.h */,
 				041186ED16CCA07D0046B720 /* NewMenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
 				04D9C3F516BCB217005C6197 /* CarouselTestView.m */,
 				A8CE920116C9BDBB001CCEBB /* LoginViewController.m */,
 				A8081D2B16D5622400B39E8B /* ProfileViewController.m */,
 				A8081D3616D6B97400B39E8B /* JoystickViewController.m */,
-				A8F072E216D7A97800FC933E /* LobbyViewController.m */,
 			);
 			name = Controleurs;
 			sourceTree = "<group>";
@@ -657,7 +652,6 @@
 				041186E716CC9E510046B720 /* NewMenuViewController.xib */,
 				A8081D2C16D5622500B39E8B /* ProfileViewController.xib */,
 				A8081D3716D6B97400B39E8B /* JoystickViewController.xib */,
-				A8F072E316D7A97800FC933E /* LobbyViewController.xib */,
 			);
 			name = "Interface Builder";
 			sourceTree = "<group>";
@@ -831,6 +825,7 @@
 				A8F13CB716B027F300CB5885 /* SettingsButton1.png */,
 				A8F13CB816B027F300CB5885 /* SettingsImage1.png */,
 				A8F13CA816AF190E00CB5885 /* SideBar2.png */,
+				A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */,
 				A812858016A0A53900C8EF6D /* ParametersImage1.png */,
 				A8BD0869169F871E00B7A95D /* SideBar.png */,
 				A8C5A8C1169E39A5008B29EF /* CameraButton1.png */,
@@ -1060,7 +1055,6 @@
 				A8081D2E16D5622500B39E8B /* ProfileViewController.xib in Resources */,
 				A8081D3016D564E600B39E8B /* anonymous-icon.jpg in Resources */,
 				A8081D3916D6B97400B39E8B /* JoystickViewController.xib in Resources */,
-				A8F072E516D7A97800FC933E /* LobbyViewController.xib in Resources */,
 				A8C118EC16DEA3CC003FF8C5 /* carousel-background.jpg in Resources */,
 				A8C118F216E1493C003FF8C5 /* twitterbg.png in Resources */,
 				0451B1F516E2A3080079BFF1 /* icon-booster.png in Resources */,
@@ -1076,6 +1070,7 @@
 				04385DC116E67E590067DB06 /* murret.obj in Resources */,
 				04385DC416E67E780067DB06 /* murret_texture.png in Resources */,
 				A83BC89D16E39E5E0074DDC6 /* AudaciaIcon.png in Resources */,
+				A8D9888016E8F6D60072E6CF /* SideBar3.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,7 +1140,6 @@
 				A8081D3816D6B97400B39E8B /* JoystickViewController.m in Sources */,
 				A8081D4516D6C44000B39E8B /* AsyncSocket.m in Sources */,
 				A8081D4616D6C44000B39E8B /* AsyncUdpSocket.m in Sources */,
-				A8F072E416D7A97800FC933E /* LobbyViewController.m in Sources */,
 				A8C118E216DD5A69003FF8C5 /* GCDAsyncSocket.m in Sources */,
 				A8C118E316DD5A69003FF8C5 /* GCDAsyncUdpSocket.m in Sources */,
 				A8C118EA16DE45E2003FF8C5 /* TwitterInterface.m in Sources */,

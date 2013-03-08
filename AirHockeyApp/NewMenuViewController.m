@@ -15,7 +15,6 @@
 #import "LoginViewController.h"
 #import "ProfileViewController.h"
 #import "JoystickViewController.h"
-#import "LobbyViewController.h"
 #import "TwitterInterface.h"
 #import "NetworkUtils.h"
 
@@ -176,9 +175,9 @@
     if([Session getInstance].isAuthenticated)
     {
         [self flushTimers];
-        LobbyViewController* lobby_vc = [[[LobbyViewController alloc]init]autorelease];
-        lobby_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentModalViewController:lobby_vc animated:YES];
+        JoystickViewController* joystick_vc = [[[JoystickViewController alloc]init]autorelease];
+        joystick_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentModalViewController:joystick_vc animated:YES];
     }
     else
     {

@@ -125,8 +125,8 @@
      5-----6------7
      */
     
-    int initialX = 54;
-    int initialY = 36;
+    int initialX = 60;
+    int initialY = 45;
     
     // Initialize all of the 8 table edges
     edges[0] = [[[NodeTableEdge alloc]initWithCoordsAndIndex:   -initialX   :initialY   :0]autorelease];

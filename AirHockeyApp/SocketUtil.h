@@ -18,5 +18,6 @@
 + (SocketUtil *) getInstance;
 - (void) connectToServer;
 - (void) sendPositionPacketToServer:(CGPoint)point;
+- (void) getReadData:(NSData*)data;
 
 @end

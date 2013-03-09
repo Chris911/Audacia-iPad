@@ -109,8 +109,6 @@
 		A8A4639416C8234A008D173B /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A4639316C8234A008D173B /* border.png */; };
 		A8A4639816C88012008D173B /* Skybox.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4639716C88012008D173B /* Skybox.m */; };
 		A8BD086A169F871E00B7A95D /* SideBar.png in Resources */ = {isa = PBXBuildFile; fileRef = A8BD0869169F871E00B7A95D /* SideBar.png */; };
-		A8C118E216DD5A69003FF8C5 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C118DF16DD5A68003FF8C5 /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		A8C118E316DD5A69003FF8C5 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C118E116DD5A69003FF8C5 /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A8C118E516DD5BF6003FF8C5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C118E416DD5BF6003FF8C5 /* Security.framework */; };
 		A8C118E716DE425D003FF8C5 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C118E616DE425D003FF8C5 /* Twitter.framework */; };
 		A8C118EA16DE45E2003FF8C5 /* TwitterInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C118E916DE45E2003FF8C5 /* TwitterInterface.m */; };
@@ -306,10 +304,6 @@
 		A8A4639616C88012008D173B /* Skybox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skybox.h; sourceTree = "<group>"; };
 		A8A4639716C88012008D173B /* Skybox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skybox.m; sourceTree = "<group>"; };
 		A8BD0869169F871E00B7A95D /* SideBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar.png; path = Assets/UI/Images/SideBar.png; sourceTree = "<group>"; };
-		A8C118DE16DD5A68003FF8C5 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
-		A8C118DF16DD5A68003FF8C5 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
-		A8C118E016DD5A68003FF8C5 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
-		A8C118E116DD5A69003FF8C5 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		A8C118E416DD5BF6003FF8C5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A8C118E616DE425D003FF8C5 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		A8C118E816DE45E2003FF8C5 /* TwitterInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterInterface.h; sourceTree = "<group>"; };
@@ -705,10 +699,6 @@
 		A8081D3A16D6C40400B39E8B /* Sockets */ = {
 			isa = PBXGroup;
 			children = (
-				A8C118DE16DD5A68003FF8C5 /* GCDAsyncSocket.h */,
-				A8C118DF16DD5A68003FF8C5 /* GCDAsyncSocket.m */,
-				A8C118E016DD5A68003FF8C5 /* GCDAsyncUdpSocket.h */,
-				A8C118E116DD5A69003FF8C5 /* GCDAsyncUdpSocket.m */,
 				A8081D4116D6C44000B39E8B /* AsyncSocket.h */,
 				A8081D4216D6C44000B39E8B /* AsyncSocket.m */,
 				A8081D4316D6C44000B39E8B /* AsyncUdpSocket.h */,
@@ -1145,8 +1135,6 @@
 				A8081D3816D6B97400B39E8B /* JoystickViewController.m in Sources */,
 				A8081D4516D6C44000B39E8B /* AsyncSocket.m in Sources */,
 				A8081D4616D6C44000B39E8B /* AsyncUdpSocket.m in Sources */,
-				A8C118E216DD5A69003FF8C5 /* GCDAsyncSocket.m in Sources */,
-				A8C118E316DD5A69003FF8C5 /* GCDAsyncUdpSocket.m in Sources */,
 				A8C118EA16DE45E2003FF8C5 /* TwitterInterface.m in Sources */,
 				A8A22AEC16EB94000082BD95 /* SocketUtil.m in Sources */,
 			);

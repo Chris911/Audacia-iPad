@@ -11,6 +11,7 @@
 @interface NodeTableEdge : Node
 @property (nonatomic) Vector3D lastPosition;
 @property (nonatomic) int index;
+@property float goalSize;
 
 // Constuctor with coordinates
 - (id) initWithCoordsAndIndex:(float)x :(float)y :(int)index;

@@ -14,6 +14,7 @@
 
 static SocketUtil* socketUtil = NULL;
 
+// Singleton class
 + (SocketUtil *) getInstance
 {
     [self initialize];
@@ -31,12 +32,14 @@ static SocketUtil* socketUtil = NULL;
     }
 }
 
+// Try and connect to the game server. If it fails, will throw an error in the approriate callback of this Class
 - (void) connectToServer
 {
     NSError *error;
     [socketUtil.tcpSocket connectToHost:socketUtil.address onPort:socketUtil.port error:&error];
 }
 
+// Validation with the game server so the player can send data
 + (void) validateUser
 {
     NSString* authentification = [authenPack_Head stringByAppendingString:[Session getInstance].username];
@@ -50,9 +53,10 @@ static SocketUtil* socketUtil = NULL;
     [socketUtil.tcpSocket writeData:validation withTimeout:-1 tag:1];
     
     // Wait for answer from server (5 seconds)
-    //[socketUtil.tcpSocket readDataToData:[AsyncSocket CRLFData] withTimeout:-1 tag:1];
+    [socketUtil.tcpSocket readDataWithTimeout:-1 tag:1];
 }
 
+// Using a CGPoint, converts it to a NSData packet which is then sent to the game server
 - (void) sendPositionPacketToServer:(CGPoint)point
 {
     // Casted in int, BAD
@@ -69,7 +73,6 @@ static SocketUtil* socketUtil = NULL;
 }
 
 #pragma mark - Callbacks
-
 + (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
 	NSLog(@"Disconnecting. Error: %@", [err localizedDescription]);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FailConnectedToGameServer" object:nil];
@@ -96,7 +99,14 @@ static SocketUtil* socketUtil = NULL;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ConnectedToGameServer" object:nil];
 }
 
--(void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag
+//-(void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag
+//{
+//    NSString* newStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+//    NSLog(@"didReadData : %@", newStr);
+//}
+
+// Custom did read data "callback", f***you asyncsocket
+- (void) getReadData:(NSData*)data
 {
     NSString* newStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
     NSLog(@"didReadData : %@", newStr);

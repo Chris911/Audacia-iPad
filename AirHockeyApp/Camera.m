@@ -46,7 +46,7 @@
     self.centerPosition = Vector3DMake(0, 0, 0);
     self.eyePosition = Vector3DMake(0, 0, 0);
     self.up = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
-    eyeToCenterDistance = 140;
+    eyeToCenterDistance = 160;
     self.phi = 40;
     self.theta = 90;
     

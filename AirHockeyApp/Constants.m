@@ -16,8 +16,8 @@ const int STATE_TRANSFORM_SCALE          = 3;
 const int OBJECTVIEW_INITIAL_POSITION    = -26;
 const int TRANSFORMVIEW_INITIAL_POSITION = 1050;
 
-const int TABLE_LIMIT_X                  = 75;
-const int TABLE_LIMIT_Y                  = 55;
+const int TABLE_LIMIT_X                  = 85;
+const int TABLE_LIMIT_Y                  = 65;
 const int NB_OF_TRIANGLES                = 8;
 const int NB_OF_TABLE_EDGES              = 8;
 const GLfloat TABLE_HEIGHT               = 0;

@@ -373,7 +373,6 @@ enum {
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for(UITouch* touch in [event allTouches]){        
-        //NSLog(@"%i",[[event allTouches] count]);
 
         CGPoint positionCourante = [touch locationInView:self.view];
         CGPoint positionPrecedente = [touch previousLocationInView:self.view];

@@ -13,6 +13,7 @@
 #endif
 
 #import "AsyncSocket.h"
+#import "SocketUtil.h"
 #import <sys/socket.h>
 #import <netinet/in.h>
 #import <arpa/inet.h>
@@ -3776,6 +3777,8 @@ Failed:
 		[theCurrentRead->buffer setLength:theCurrentRead->bytesDone];
 		
 		result = theCurrentRead->buffer;
+        NSString* newStr = [NSString stringWithUTF8String:[result bytes]];
+        NSLog(@"%@",newStr);
 	}
 	else
 	{
@@ -3798,6 +3801,10 @@ Failed:
 		result = [NSData dataWithBytesNoCopy:buffer length:theCurrentRead->bytesDone freeWhenDone:NO];
 	}
 	
+    if(result != nil){
+        [[SocketUtil getInstance] getReadData:result];
+    }
+    
 	if([theDelegate respondsToSelector:@selector(onSocket:didReadData:withTag:)])
 	{
 		[theDelegate onSocket:self didReadData:result withTag:theCurrentRead->tag];

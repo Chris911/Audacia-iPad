@@ -9,21 +9,8 @@
 
 #import "JoystickViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "AsyncSocket.h" 
-#import "AsyncUdpSocket.h"
-#import "GCDAsyncSocket.h"
+#import "SocketUtil.h"  
 #import "Session.h"
-@interface JoystickViewController ()
-{
-    AsyncUdpSocket* updSocket;
-    AsyncSocket* tcpSocket;
-    
-    GCDAsyncSocket *gcdsocket;
-    NSString* host;
-    UInt16 port;
-}
-
-@end
 
 @implementation JoystickViewController
 
@@ -49,15 +36,6 @@
     [self.joystickView.layer setShadowOpacity:0.8];
     [self.joystickView.layer setShadowRadius:3.0];
     [self.joystickView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
-    
-    // Socket
-    updSocket = [[AsyncUdpSocket alloc]init];
-    tcpSocket = [[AsyncSocket alloc]initWithDelegate:self];
-    gcdsocket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-    host = @"132.207.156.227";
-    port = 5050;
-    
-    [self connect];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,7 +46,6 @@
 
 - (void)dealloc {
     [_joystickView release];
-    [updSocket release];
     [super dealloc];
 }
 
@@ -97,7 +74,7 @@
         self.joystickView.center = location;
         [self checkOutOfBounds:location];
         self.joystickView.alpha = 0.7f;
-        [self sendUdpPacket:[self convertFromScreenToWorld:location]];
+        [[SocketUtil getInstance] sendPositionPacketToServer:[self convertFromScreenToWorld:location]];
     }
 }
 
@@ -110,7 +87,7 @@
         if(location.x != lastLocation.x && location.y != lastLocation.y){
             self.joystickView.center = location;
             [self checkOutOfBounds:location];
-            [self sendUdpPacket:[self convertFromScreenToWorld:location]];
+            [[SocketUtil getInstance] sendPositionPacketToServer:[self convertFromScreenToWorld:location]];
         }
     }
 }
@@ -152,69 +129,33 @@
 }
 
 #pragma mark - Socket methods
-// Most methods acquired from or similar to :
-// https://github.com/twyatt/asyncsocket-example/blob/master/Classes/SocketTestViewController.m
-
-#include <netinet/tcp.h>
-#include <netinet/in.h>
-// Connect to server via TCP 
-- (void) connect
-{
-    NSError* error;
-    
-    [gcdsocket connectToHost:host onPort:port error:&error];
-    [gcdsocket performBlock:^{
-        int fd = [gcdsocket socketFD];
-        int on = 1;
-        if (setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, (char*)&on, sizeof(on)) == -1) {
-        }
-    }];    
-    
-    NSString* authentification = [authenPack_Head stringByAppendingString:[Session getInstance].username];
-    authentification = [authentification stringByAppendingString:authenPack_Separator];
-    authentification = [authentification stringByAppendingString:[Session getInstance].password];
-    authentification = [authentification stringByAppendingString:authenPack_Trail];
-
-    NSData* testString = [authentification dataUsingEncoding:NSUTF8StringEncoding];
-    
-    // Send authentification packet
-    [gcdsocket writeData:testString withTimeout:-1 tag:-1];
-}
-
-- (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
-	NSLog(@"Disconnecting. Error: %@", [err localizedDescription]);
-}
-
-- (void)onSocketDidDisconnect:(AsyncSocket *)sock {
-	NSLog(@"Disconnected.");
-    
-	[tcpSocket setDelegate:nil];
-	[tcpSocket release];
-	tcpSocket = nil;
-}
-
-- (BOOL)onSocketWillConnect:(AsyncSocket *)sock {
-	NSLog(@"onSocketWillConnect:");
-	return YES;
-}
-
-- (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host_ port:(UInt16)port_ {
-	NSLog(@"Connected To %@:%i.", host_, port_);
-}
-
-- (void) sendUdpPacket:(CGPoint)location
-{
-    // Casted in int, BAD
-    NSString* x = [NSString stringWithFormat:@"%i",(int)location.x];
-    NSString* y = [NSString stringWithFormat:@"%i",(int)location.y];
-    
-    NSString* position = [positionPack_Head stringByAppendingString:x];
-    position = [position stringByAppendingString:positionPack_Separator];
-    position = [position stringByAppendingString:y];
-    position = [position stringByAppendingString:positionPack_Trail];
-    
-    NSData* testString = [position dataUsingEncoding:NSUTF8StringEncoding];
-    [gcdsocket writeData:testString withTimeout:-1 tag:1];
-}   
+//// Most methods acquired from or similar to :
+//// https://github.com/twyatt/asyncsocket-example/blob/master/Classes/SocketTestViewController.m
+//
+//#include <netinet/tcp.h>
+//#include <netinet/in.h>
+//// Connect to server via TCP 
+//- (void) connect
+//{
+//    NSError* error;
+//    
+//    [gcdsocket connectToHost:host onPort:port error:&error];
+//    [gcdsocket performBlock:^{
+//        int fd = [gcdsocket socketFD];
+//        int on = 1;
+//        if (setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, (char*)&on, sizeof(on)) == -1) {
+//        }
+//    }];    
+//    
+//    NSString* authentification = [authenPack_Head stringByAppendingString:[Session getInstance].username];
+//    authentification = [authentification stringByAppendingString:authenPack_Separator];
+//    authentification = [authentification stringByAppendingString:[Session getInstance].password];
+//    authentification = [authentification stringByAppendingString:authenPack_Trail];
+//
+//    NSData* testString = [authentification dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    // Send authentification packet
+//    [gcdsocket writeData:testString withTimeout:-1 tag:-1];
+//}
 
 @end

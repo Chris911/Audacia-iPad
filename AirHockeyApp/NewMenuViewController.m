@@ -17,6 +17,7 @@
 #import "JoystickViewController.h"
 #import "TwitterInterface.h"
 #import "NetworkUtils.h"
+#import "SocketUtil.h"
 
 #define notLoggedInErrorTag 0
 
@@ -57,6 +58,18 @@
     
     // Sound is disabled on load
     isSoundEnabled = NO;
+    
+    //Add observer for Connected to game server event
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(successConnectingToGameServer)
+                                                 name:@"ConnectedToGameServer"
+                                               object:nil];
+    
+    //Add observer for Game server Connexion error
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(failureConnectingToGameServer)
+                                                 name:@"FailConnectedToGameServer"
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -141,6 +154,10 @@
 
 - (IBAction)controlerModePressed:(id)sender
 {
+    // Attempt to connect to server
+    [self  connectToGameSever];
+    
+    // Pop controller view in
     [self slideControllerViewIn];
 }
 
@@ -154,6 +171,9 @@
 
 - (IBAction)logoutPressed:(id)sender
 {
+    if([[SocketUtil getInstance].tcpSocket isConnected]){
+        [[SocketUtil getInstance].tcpSocket disconnect];
+    }
     [Session resetSession];
     isFeedActive = NO;
     self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -300,6 +320,16 @@
     [self.controllerView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
     
     self.controllerView.center = CGPointMake(1024 + self.controllerView.frame.size.width/2, 384);
+    
+    if(![[SocketUtil getInstance].tcpSocket isConnected]){
+        [self.spinner startAnimating];
+        self.connexionStatusLabel.text = @"Connecting to server...";
+        [self.joystickButton setEnabled:NO];
+    } else {
+        [self.spinner stopAnimating];
+        self.connexionStatusLabel.text = @"Connexion established!";
+        [self.joystickButton setEnabled:YES];
+    }
 }
 
 #pragma mark - Animation methods
@@ -316,7 +346,6 @@
     [UIView animateWithDuration:0.3
                      animations:^{
                          self.controllerView.center = CGPointMake(512, 384);
-                         [self.spinner startAnimating];
                      }];
 }
 
@@ -325,8 +354,29 @@
     [UIView animateWithDuration:0.3
                      animations:^{
                          self.controllerView.center = CGPointMake(1024 + self.controllerView.frame.size.width/2, 384);
-                         [self.spinner stopAnimating];
                      }];
+}
+
+#pragma mark - Socket methods
+- (void) connectToGameSever
+{
+    // Connect to the game server
+    if(![[SocketUtil getInstance].tcpSocket isConnected]){
+        [[SocketUtil getInstance] connectToServer];
+    }
+}
+
+- (void) successConnectingToGameServer
+{
+    [self.spinner stopAnimating];
+    self.connexionStatusLabel.text = @"Connexion established!";
+    [self.joystickButton setEnabled:YES];
+}
+
+- (void) failureConnectingToGameServer
+{
+    [self.spinner stopAnimating];
+    self.connexionStatusLabel.text = @"Connexion error";
 }
 
 

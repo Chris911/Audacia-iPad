@@ -104,6 +104,7 @@
 		A889F22A16B067E10008E534 /* pucktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A889F22616B067E10008E534 /* pucktexture.png */; };
 		A89FD22E16B949FB005383E4 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = A89FD22D16B949FB005383E4 /* Map.m */; };
 		A89FD23B16B96576005383E4 /* Border3D.m in Sources */ = {isa = PBXBuildFile; fileRef = A89FD23A16B96576005383E4 /* Border3D.m */; };
+		A8A22AEC16EB94000082BD95 /* SocketUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A22AEB16EB94000082BD95 /* SocketUtil.m */; };
 		A8A4638C16C7F990008D173B /* Texture2DUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4638B16C7F990008D173B /* Texture2DUtil.m */; };
 		A8A4639416C8234A008D173B /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A4639316C8234A008D173B /* border.png */; };
 		A8A4639816C88012008D173B /* Skybox.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4639716C88012008D173B /* Skybox.m */; };
@@ -297,6 +298,8 @@
 		A89FD22D16B949FB005383E4 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		A89FD23916B96576005383E4 /* Border3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Border3D.h; sourceTree = "<group>"; };
 		A89FD23A16B96576005383E4 /* Border3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Border3D.m; sourceTree = "<group>"; };
+		A8A22AEA16EB94000082BD95 /* SocketUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketUtil.h; sourceTree = "<group>"; };
+		A8A22AEB16EB94000082BD95 /* SocketUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketUtil.m; sourceTree = "<group>"; };
 		A8A4638A16C7F990008D173B /* Texture2DUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture2DUtil.h; sourceTree = "<group>"; };
 		A8A4638B16C7F990008D173B /* Texture2DUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Texture2DUtil.m; sourceTree = "<group>"; };
 		A8A4639316C8234A008D173B /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
@@ -514,6 +517,8 @@
 				0409924816B21087009DBE1D /* NetworkUtils.m */,
 				A8C118E816DE45E2003FF8C5 /* TwitterInterface.h */,
 				A8C118E916DE45E2003FF8C5 /* TwitterInterface.m */,
+				A8A22AEA16EB94000082BD95 /* SocketUtil.h */,
+				A8A22AEB16EB94000082BD95 /* SocketUtil.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -1143,6 +1148,7 @@
 				A8C118E216DD5A69003FF8C5 /* GCDAsyncSocket.m in Sources */,
 				A8C118E316DD5A69003FF8C5 /* GCDAsyncUdpSocket.m in Sources */,
 				A8C118EA16DE45E2003FF8C5 /* TwitterInterface.m in Sources */,
+				A8A22AEC16EB94000082BD95 /* SocketUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

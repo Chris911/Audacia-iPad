@@ -28,7 +28,6 @@ static Scene *scene = NULL;
 // Singleton of a rendering tree
 + (void)initialize
 {
-    //static BOOL initialized = NO;
     if(scene == nil)
     {
         //initialized = YES;

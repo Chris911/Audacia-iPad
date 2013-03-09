@@ -50,7 +50,7 @@
 							<object class="IBUIImageView" id="47810377">
 								<reference key="NSNextResponder" ref="39156743"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{160, 160}</string>
+								<string key="NSFrameSize">{170, 170}</string>
 								<reference key="NSSuperview" ref="39156743"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="181947498"/>
@@ -59,7 +59,7 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">SettingsImage1.png</string>
+									<string key="NSResourceName">settingsView.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="768808206">
@@ -122,7 +122,7 @@
 								<reference key="IBUIFont" ref="74513827"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{874, 619}, {150, 150}}</string>
+						<string key="NSFrame">{{864, 615}, {160, 160}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="47810377"/>
@@ -147,18 +147,19 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="88289242"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<reference key="IBUIBackgroundColor" ref="312815503"/>
 								<float key="IBUIAlpha">0.80000001192092896</float>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">CameraImage1.png</string>
+									<string key="NSResourceName">cameraView.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="88289242">
 								<reference key="NSNextResponder" ref="909410144"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{5, 20}, {54, 44}}</string>
+								<string key="NSFrame">{{8, 20}, {54, 44}}</string>
 								<reference key="NSSuperview" ref="909410144"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="167721937"/>
@@ -181,7 +182,7 @@
 							<object class="IBUIButton" id="167721937">
 								<reference key="NSNextResponder" ref="909410144"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{98, 97}, {51, 44}}</string>
+								<string key="NSFrame">{{89, 97}, {51, 44}}</string>
 								<reference key="NSSuperview" ref="909410144"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="964176458"/>
@@ -202,7 +203,7 @@
 								<reference key="IBUIFont" ref="74513827"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{0, 608}, {160, 160}}</string>
+						<string key="NSFrame">{{-2, 609}, {160, 160}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="173839497"/>
@@ -1198,9 +1199,9 @@
 						<reference key="object" ref="909410144"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="173839497"/>
 							<reference ref="88289242"/>
 							<reference ref="167721937"/>
+							<reference ref="173839497"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">CameraView</string>
@@ -1285,8 +1286,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="768808206"/>
-							<reference ref="47810377"/>
 							<reference ref="181947498"/>
+							<reference ref="47810377"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">SettingsView</string>
@@ -1898,30 +1899,30 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>CameraButton1.png</string>
-				<string>CameraImage1.png</string>
 				<string>SettingsButton1.png</string>
-				<string>SettingsImage1.png</string>
 				<string>SideBar.png</string>
 				<string>SideBar2.png</string>
 				<string>SideBar3.jpg</string>
+				<string>cameraView.png</string>
 				<string>icon-resize.png</string>
 				<string>icon-rotate.png</string>
 				<string>icon-selection-elastique.png</string>
 				<string>icon-zoom-elastique.png</string>
+				<string>settingsView.png</string>
 			</object>
 			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{128, 128}</string>
-				<string>{360, 360}</string>
 				<string>{128, 128}</string>
-				<string>{360, 360}</string>
 				<string>{300, 798}</string>
 				<string>{300, 798}</string>
 				<string>{670, 90}</string>
+				<string>{160, 160}</string>
 				<string>{88, 88}</string>
 				<string>{88, 88}</string>
 				<string>{88, 88}</string>
 				<string>{88, 88}</string>
+				<string>{160, 160}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

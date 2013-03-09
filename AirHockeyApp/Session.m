@@ -18,7 +18,6 @@
 NSString* DEFAULT_USERNAME = @"Guest";
 NSString* DEFAULT_PASSWORD = @"";
 
-
 static Session *session = NULL;
 
 // Singleton of a rendering tree

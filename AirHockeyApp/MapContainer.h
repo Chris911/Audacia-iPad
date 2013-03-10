@@ -21,7 +21,7 @@
 @property (nonatomic, retain) NSMutableArray* maps;
 
 + (MapContainer *)getInstance;
-+ (void) assignNewMaps:(NSMutableArray*)newMaps;
++ (void) assignNewMaps:(NSArray*)newMaps;
 + (BOOL) removeMapsInContainers;
 + (BOOL) allMapImagesLoaded;
 

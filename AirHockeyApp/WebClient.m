@@ -14,6 +14,7 @@
 #import "XMLUtil.h"
 #import "RenderingTree.h"
 #import "Scene.h"
+#import "ProfileViewController.h"
 
 @implementation WebClient
 @synthesize AFClient;
@@ -22,6 +23,7 @@
 @synthesize profileAPIScript;
 @synthesize xmlPath;
 @synthesize imagePath;
+@synthesize profileImagePath;
 
 - (id) initWithDefaultServer
 {
@@ -128,43 +130,11 @@
                                                        path:self.mapsAPIScript
                                                        parameters:@{@"action":@"fetchAllMaps"}];
     
-    NSMutableArray *allMaps = [[[NSMutableArray alloc]init]autorelease];
-    
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         while(self.imagePath == 0){
         }
-        NSArray *mapIdArray = [JSON valueForKeyPath:@"mapId"];
-        NSArray *nameArray = [JSON valueForKeyPath:@"name"];
-        NSArray *authorNameArray = [JSON valueForKey:@"authorName"];
-        NSArray *dateAddedArray = [JSON valueForKeyPath:@"dateAdded"];
-        NSArray *ratingArray = [JSON valueForKeyPath:@"rating"];
-        NSArray *privateArray = [JSON valueForKeyPath:@"private"];
         
-        for(int i=0; i < [mapIdArray count]; i++) {
-
-            // Convert from string to int or we obtain a weird pointe value
-            NSString *mapIdString = [NSString stringWithFormat:@"%@",mapIdArray[i]];
-            int mapIdInt = [mapIdString intValue];
-            
-            NSString *ratingString = [NSString stringWithFormat:@"%@",ratingArray[i]];
-            int ratingInt = [ratingString intValue];
-            
-            NSString *privateString = [NSString stringWithFormat:@"%@",privateArray[i]];
-            int privateInt = [privateString intValue];
-            
-            Map *map = [[[Map alloc]initWithMapData:mapIdInt
-                                                   :[nameArray objectAtIndex:i]
-                                                   :[authorNameArray objectAtIndex:i]
-                                                   :[dateAddedArray objectAtIndex:i]
-                                                   :ratingInt
-                                                   :privateInt]autorelease];
-
-            //Map *map = [[[Map alloc]initWithMapData:0 :@"NOLEAKS":@"t":@"t":0 :YES]autorelease];
-            
-            //[self fetchMapImageWithName:map];
-            [allMaps addObject:map];
-        }
-        [self assignNewMaps:allMaps];
+        [self assignNewMaps:[self mapsJsonToArray:JSON]];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Error: %@", error);
@@ -174,6 +144,69 @@
     [opq addOperation:operation];
 }
 
+
+- (void) fetchMapsByUser:(NSString *)username :(ProfileViewController *)view
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"fetchUsersMaps", @"action",
+                            username, @"username",
+                            nil];
+    
+    NSMutableURLRequest *request = [self.AFClient requestWithMethod:@"POST"
+                                                               path:self.mapsAPIScript
+                                                         parameters:params];
+    
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        //NSLog(@"Success [Fetch Profile]: %@", operation.responseString);
+        
+        [view assignUsersMaps:[self mapsJsonToArray:JSON]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FecthingProfileFinished" object:nil];
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"Error [Fetch Profile]: %@", error);
+    }];
+    
+    NSOperationQueue* opq = [[[NSOperationQueue alloc]init]autorelease];
+    [opq addOperation:operation];
+}
+
+- (NSArray*) mapsJsonToArray:(id)JSON
+{
+    NSMutableArray *allMaps = [[[NSMutableArray alloc]init]autorelease];
+    
+    NSArray *mapIdArray = [JSON valueForKeyPath:@"mapId"];
+    NSArray *nameArray = [JSON valueForKeyPath:@"name"];
+    NSArray *authorNameArray = [JSON valueForKey:@"authorName"];
+    NSArray *dateAddedArray = [JSON valueForKeyPath:@"dateAdded"];
+    NSArray *ratingArray = [JSON valueForKeyPath:@"rating"];
+    NSArray *privateArray = [JSON valueForKeyPath:@"private"];
+    
+    for(int i=0; i < [mapIdArray count]; i++) {
+        // Convert from string to int or we obtain a weird pointe value
+        NSString *mapIdString = [NSString stringWithFormat:@"%@",mapIdArray[i]];
+        int mapIdInt = [mapIdString intValue];
+        
+        NSString *ratingString = [NSString stringWithFormat:@"%@",ratingArray[i]];
+        int ratingInt = [ratingString intValue];
+        
+        NSString *privateString = [NSString stringWithFormat:@"%@",privateArray[i]];
+        int privateInt = [privateString intValue];
+        
+        Map *map = [[[Map alloc]initWithMapData:mapIdInt
+                                               :[nameArray objectAtIndex:i]
+                                               :[authorNameArray objectAtIndex:i]
+                                               :[dateAddedArray objectAtIndex:i]
+                                               :ratingInt
+                                               :privateInt]autorelease];
+        
+        //Map *map = [[[Map alloc]initWithMapData:0 :@"NOLEAKS":@"t":@"t":0 :YES]autorelease];
+        
+        //[self fetchMapImageWithName:map];
+        [allMaps addObject:map];
+    }
+    return allMaps;
+}
 
 - (void) fetchMapXML:(NSString *)mapName
 {
@@ -204,9 +237,11 @@
         NSString *basePath  = [JSON valueForKeyPath:@"BASE_PATH"];
         NSString *xmlPath1   = [JSON valueForKeyPath:@"XML_PATH"];
         NSString *imagePath1 = [JSON valueForKeyPath:@"MAP_IMAGE_PATH"];
+        NSString *profileImagePath1 = [JSON valueForKeyPath:@"PROFILE_PIC_PATH"];
         
         self.xmlPath = [basePath stringByAppendingString:xmlPath1];
         self.imagePath = [basePath stringByAppendingString:imagePath1];
+        self.profileImagePath = [basePath stringByAppendingString:profileImagePath1];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Error: %@", error);
@@ -226,7 +261,23 @@
     AFImageRequestOperation *requestOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image)
     {
         map.image = image;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchingImageFinished" object:nil];
     }];
+    NSOperationQueue* opq = [[[NSOperationQueue alloc]init]autorelease];
+    [opq addOperation:requestOperation];
+}
+
+- (void) fetchProfilePicture:(NSString*) username :(ProfileViewController*)view
+{
+    NSString* imageName = [username stringByAppendingString:@".jpg"];
+    NSURL *url = [NSURL URLWithString:[self.profileImagePath stringByAppendingString:imageName]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    
+    AFImageRequestOperation *requestOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image)
+     {
+         [view assignProfileImage:image];
+     }];
     NSOperationQueue* opq = [[[NSOperationQueue alloc]init]autorelease];
     [opq addOperation:requestOperation];
 }
@@ -257,7 +308,7 @@
     return [Session getInstance].isAuthenticated;
 }
 
-- (void) assignNewMaps:(NSMutableArray*)maps
+- (void) assignNewMaps:(NSArray*)maps
 {
     [MapContainer getInstance];
     [MapContainer assignNewMaps:maps];

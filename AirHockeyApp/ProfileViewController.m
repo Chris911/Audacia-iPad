@@ -11,12 +11,18 @@
 #import "Session.h"
 #import "AppDemoAppDelegate.h"
 #import "WebClient.h"
+#import "ProfileMapsTableCell.h"
 
 @interface ProfileViewController ()
 
 @end
 
 @implementation ProfileViewController
+{
+    NSArray* mapsTableData;
+}
+
+@synthesize starsImageDict;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +36,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Initialize dictionnary
+    self.starsImageDict = [[NSDictionary alloc]initWithObjectsAndKeys:
+                      @"Stars-1.png",[NSNumber numberWithInt:0],
+                      @"Stars-1.png",[NSNumber numberWithInt:1],
+                      @"Stars-2.png",[NSNumber numberWithInt:2],
+                      @"Stars-3.png",[NSNumber numberWithInt:3],
+                      @"Stars-4.png",[NSNumber numberWithInt:4],
+                      @"Stars-5.png",[NSNumber numberWithInt:5],
+                      nil];
+    
+    //Add observer for fetch map event
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(fetchProfileFinished)
+                                          name:@"FecthingProfileFinished"
+                                          object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(reloadTableData)
+                                          name:@"FetchingImageFinished"
+                                          object:nil];
+    self.hiddenView.hidden = NO;
+    self.spinner.hidden = NO;
+    [self.spinner startAnimating];
+    
+    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.webClient fetchMapsByUser:[Session getInstance].username :self];
+    [delegate.webClient fetchProfilePicture:[Session getInstance].username :self];
     
     [self.backgroundView.layer setCornerRadius:20.0f];
     [self.backgroundView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
@@ -56,7 +89,10 @@
 //    [self.statsView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
     
     self.usernameLabel.text = [Session getInstance].username;
-    // Do any additional setup after loading the view from its nib.
+    
+    //mapsTableData = [[NSArray alloc]init];
+    
+    //mapsTableData = [[NSArray alloc]initWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,6 +107,9 @@
     [_picBackgroundView release];
     [_pictureImageView release];
     [_statsView release];
+    [_mapsTableView release];
+    [_hiddenView release];
+    [_spinner release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -79,6 +118,9 @@
     [self setPicBackgroundView:nil];
     [self setPictureImageView:nil];
     [self setStatsView:nil];
+    [self setMapsTableView:nil];
+    [self setHiddenView:nil];
+    [self setSpinner:nil];
     [super viewDidUnload];
 }
 
@@ -98,6 +140,42 @@
 {
     [self startCameraControllerFromViewController: self
                                     usingDelegate: self];
+}
+
+- (void) assignUsersMaps:(NSArray*)maps
+{
+    mapsTableData = [[NSArray alloc] initWithArray:maps];
+}
+
+- (void) assignProfileImage:(UIImage*)image
+{
+    self.pictureImageView.image = image;
+}
+
+- (void) fetchProfileFinished
+{
+    [self fetchAllImages];
+}
+
+- (void) fetchAllImages
+{
+    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    for(Map* m in mapsTableData){
+        [delegate.webClient fetchMapImageWithName:m];
+    }
+}
+
+- (void) reloadTableData
+{
+    [self.mapsTableView reloadData];
+    [self stopAnimation];
+}
+
+- (void) stopAnimation
+{
+    self.hiddenView.hidden = YES;
+    [self.spinner stopAnimating];
+    self.spinner.hidden = YES;
 }
 
 - (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
@@ -178,4 +256,55 @@
     [picker release];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [mapsTableData count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *simpleTableIdentifier = @"ProfileMapsTableCell";
+    
+    ProfileMapsTableCell *cell = (ProfileMapsTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProfileMapsTableCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    if([mapsTableData count]>0)
+    {
+        Map* map = [mapsTableData objectAtIndex:indexPath.row];
+        cell.mapNameLabel.text = map.name;
+        cell.lastModifiedLabel.text = map.timeStamp;
+        NSString* imagePath = [starsImageDict objectForKey:[NSNumber numberWithInt:map.rating]];
+        cell.ratingImageView.image = [UIImage imageNamed:imagePath];
+        [self useImage:map.image :cell.mapImageView];
+    }
+    return cell;
+}
+
+- (void)useImage:(UIImage *)image :(UIImageView *) view
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Create a graphics image context
+    CGSize newSize = CGSizeMake(128, 96);
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    view.image = newImage;
+    
+    [pool release];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 105;
+}
 @end

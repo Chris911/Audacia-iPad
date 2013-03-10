@@ -13,6 +13,7 @@
 @property (nonatomic,retain) NSString* username;
 @property (nonatomic,retain) NSString* password;
 @property (nonatomic,retain) NSString* Camp;
+@property (nonatomic,retain) UIImage*  profileImage;
 @property BOOL isAuthenticated;
 
 + (Session *) getInstance;

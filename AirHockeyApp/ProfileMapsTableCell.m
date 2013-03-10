@@ -36,6 +36,7 @@
     [mapNameLabel release];
     [ratingImageView release];
     [lastModifiedLabel release];
+    [_deleteImageView release];
     [super dealloc];
 }
 @end

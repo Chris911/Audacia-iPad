@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ProfileViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,
-                                                    UITableViewDelegate, UITableViewDataSource>
+                                                    UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate,
+                                                    UIGestureRecognizerDelegate>
 
 @property (retain, nonatomic) IBOutlet UIView *backgroundView;
 @property (retain, nonatomic) IBOutlet UILabel *usernameLabel;

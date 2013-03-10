@@ -16,5 +16,6 @@
 @property (retain, nonatomic) IBOutlet UILabel *mapNameLabel;
 @property (retain, nonatomic) IBOutlet UILabel *lastModifiedLabel;
 
+@property (retain, nonatomic) IBOutlet UIImageView *deleteImageView;
 
 @end

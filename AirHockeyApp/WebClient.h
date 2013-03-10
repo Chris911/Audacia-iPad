@@ -30,6 +30,7 @@
 - (void) fetchAllMapsFromDatabase;
 - (void) fetchMapsByUser:(NSString *)username :(ProfileViewController *)view;
 - (void) fetchProfilePicture:(NSString*) username :(ProfileViewController*)view;
+- (void) deleteMap:(NSString*)username :(NSString*)mapName;
 - (void) fetchMapXML:(NSString *)mapName;
 - (void) getConfigPaths;
 - (void) fetchMapImageWithName:(Map*)map;

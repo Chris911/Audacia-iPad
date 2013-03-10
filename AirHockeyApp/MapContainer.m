@@ -39,11 +39,11 @@ static MapContainer *mapContainer = NULL;
 // Switch the current maps set with the one fetched from
 // the webclient.  Set isMapsLoaded to YES so the UI know
 // this task is finished.
-+ (void) assignNewMaps:(NSMutableArray*)newMaps
++ (void) assignNewMaps:(NSArray*)newMaps
 {
     if(newMaps != nil){
         [mapContainer.maps removeAllObjects];
-        mapContainer.maps = newMaps;
+        mapContainer.maps = [NSMutableArray arrayWithArray:newMaps];
         mapContainer.isMapsInfosLoaded = YES;
     }
 }

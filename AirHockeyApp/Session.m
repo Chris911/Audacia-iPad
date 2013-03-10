@@ -14,6 +14,7 @@
 @synthesize password;
 @synthesize Camp;
 @synthesize isAuthenticated;
+@synthesize profileImage;
 
 NSString* DEFAULT_USERNAME = @"Guest";
 NSString* DEFAULT_PASSWORD = @"";
@@ -49,6 +50,7 @@ static Session *session = NULL;
     session.password = DEFAULT_PASSWORD;
     session.isAuthenticated = NO;
     session.Camp = leftCamp;
+    session.profileImage = [UIImage imageNamed:@"anonymous-icon.jpg"];
 }
 
 - (void) dealloc

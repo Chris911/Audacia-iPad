@@ -25,6 +25,8 @@
 		0451B20116E2B81D0079BFF1 /* icon-selection-elastique.png in Resources */ = {isa = PBXBuildFile; fileRef = 0451B1FF16E2B81D0079BFF1 /* icon-selection-elastique.png */; };
 		0451B20216E2B81D0079BFF1 /* icon-zoom-elastique.png in Resources */ = {isa = PBXBuildFile; fileRef = 0451B20016E2B81D0079BFF1 /* icon-zoom-elastique.png */; };
 		045AA82B16CBF93C00F82AB0 /* login-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 045AA82A16CBF93C00F82AB0 /* login-background.png */; };
+		046514F016EC440500CBED0F /* ProfileMapsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046514EF16EC440500CBED0F /* ProfileMapsTableCell.xib */; };
+		046514F416EC47EA00CBED0F /* ProfileMapsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046514F316EC47EA00CBED0F /* ProfileMapsTableCell.m */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
 		048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3516A4AFB9006A7082 /* RenderingTree.m */; };
 		048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3916A4BD8F006A7082 /* Scene.m */; };
@@ -181,6 +183,9 @@
 		0451B1FF16E2B81D0079BFF1 /* icon-selection-elastique.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-selection-elastique.png"; path = "Assets/UI/Images/icon-selection-elastique.png"; sourceTree = "<group>"; };
 		0451B20016E2B81D0079BFF1 /* icon-zoom-elastique.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-zoom-elastique.png"; path = "Assets/UI/Images/icon-zoom-elastique.png"; sourceTree = "<group>"; };
 		045AA82A16CBF93C00F82AB0 /* login-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-background.png"; path = "Assets/UI/Images/login-background.png"; sourceTree = "<group>"; };
+		046514EF16EC440500CBED0F /* ProfileMapsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileMapsTableCell.xib; sourceTree = "<group>"; };
+		046514F216EC47EA00CBED0F /* ProfileMapsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileMapsTableCell.h; sourceTree = "<group>"; };
+		046514F316EC47EA00CBED0F /* ProfileMapsTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileMapsTableCell.m; sourceTree = "<group>"; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		048C9D3216A4A8D9006A7082 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		048C9D3416A4AFB9006A7082 /* RenderingTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingTree.h; sourceTree = "<group>"; };
@@ -434,6 +439,15 @@
 			name = Maps;
 			sourceTree = "<group>";
 		};
+		046514F116EC47C800CBED0F /* Custom Classes */ = {
+			isa = PBXGroup;
+			children = (
+				046514F216EC47EA00CBED0F /* ProfileMapsTableCell.h */,
+				046514F316EC47EA00CBED0F /* ProfileMapsTableCell.m */,
+			);
+			name = "Custom Classes";
+			sourceTree = "<group>";
+		};
 		048C9D2F16A4A873006A7082 /* Tree */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +656,7 @@
 		96378D981472C7F200F543EA /* Interface Builder */ = {
 			isa = PBXGroup;
 			children = (
+				046514F116EC47C800CBED0F /* Custom Classes */,
 				96378D8C1472C71200F543EA /* MainWindow.xib */,
 				A8CE920216C9BDBB001CCEBB /* LoginViewController.xib */,
 				969DDF8F1472E15900ED5DC8 /* EAGLViewController.xib */,
@@ -649,6 +664,7 @@
 				041186E716CC9E510046B720 /* NewMenuViewController.xib */,
 				A8081D2C16D5622500B39E8B /* ProfileViewController.xib */,
 				A8081D3716D6B97400B39E8B /* JoystickViewController.xib */,
+				046514EF16EC440500CBED0F /* ProfileMapsTableCell.xib */,
 			);
 			name = "Interface Builder";
 			sourceTree = "<group>";
@@ -1062,6 +1078,7 @@
 				A8D9888016E8F6D60072E6CF /* SideBar3.jpg in Resources */,
 				A8758D3A16EBF8EA00AB3A3E /* cameraView.png in Resources */,
 				A8758D3B16EBF8EA00AB3A3E /* settingsView.png in Resources */,
+				046514F016EC440500CBED0F /* ProfileMapsTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,6 +1150,7 @@
 				A8081D4616D6C44000B39E8B /* AsyncUdpSocket.m in Sources */,
 				A8C118EA16DE45E2003FF8C5 /* TwitterInterface.m in Sources */,
 				A8A22AEC16EB94000082BD95 /* SocketUtil.m in Sources */,
+				046514F416EC47EA00CBED0F /* ProfileMapsTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

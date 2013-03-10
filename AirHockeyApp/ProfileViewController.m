@@ -11,7 +11,12 @@
 #import "Session.h"
 #import "AppDemoAppDelegate.h"
 #import "WebClient.h"
+#import "Scene.h"
+#import "EAGLViewController.h"
 #import "ProfileMapsTableCell.h"
+
+#define EDIT_MAP_SHEET 0
+#define DELETE_MAP_SHEET 1
 
 @interface ProfileViewController ()
 
@@ -20,9 +25,15 @@
 @implementation ProfileViewController
 {
     NSArray* mapsTableData;
+    int currentIndex;
+    int currentIndexPath;
+    BOOL deleteState;
 }
 
 @synthesize starsImageDict;
+
+#pragma mark Setup
+#pragma mark -
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,16 +49,16 @@
     [super viewDidLoad];
     
     //Initialize dictionnary
-    self.starsImageDict = [[NSDictionary alloc]initWithObjectsAndKeys:
+    self.starsImageDict = [[[NSDictionary alloc]initWithObjectsAndKeys:
                       @"Stars-1.png",[NSNumber numberWithInt:0],
                       @"Stars-1.png",[NSNumber numberWithInt:1],
                       @"Stars-2.png",[NSNumber numberWithInt:2],
                       @"Stars-3.png",[NSNumber numberWithInt:3],
                       @"Stars-4.png",[NSNumber numberWithInt:4],
                       @"Stars-5.png",[NSNumber numberWithInt:5],
-                      nil];
+                      nil]autorelease];
     
-    //Add observer for fetch map event
+    //Add observer for fetch profile events
     [[NSNotificationCenter defaultCenter] addObserver:self
                                           selector:@selector(fetchProfileFinished)
                                           name:@"FecthingProfileFinished"
@@ -56,9 +67,16 @@
                                           selector:@selector(reloadTableData)
                                           name:@"FetchingImageFinished"
                                           object:nil];
-    self.hiddenView.hidden = NO;
-    self.spinner.hidden = NO;
-    [self.spinner startAnimating];
+    //Add observer for fetch map event
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(fetchMapFinished)
+                                          name:@"FetchMapEventFinished"
+                                          object:nil];
+    [self startAnimation];
+    
+    [self setupLongPressGesture];
+    
+    deleteState = NO;
     
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     [delegate.webClient fetchMapsByUser:[Session getInstance].username :self];
@@ -89,10 +107,6 @@
 //    [self.statsView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
     
     self.usernameLabel.text = [Session getInstance].username;
-    
-    //mapsTableData = [[NSArray alloc]init];
-    
-    //mapsTableData = [[NSArray alloc]initWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,6 +124,7 @@
     [_mapsTableView release];
     [_hiddenView release];
     [_spinner release];
+    [mapsTableData release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -142,6 +157,19 @@
                                     usingDelegate: self];
 }
 
+- (void)setupLongPressGesture
+{
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 1.5; //seconds
+    lpgr.delegate = self;
+    [self.mapsTableView addGestureRecognizer:lpgr];
+    [lpgr release];
+}
+
+#pragma mark Fetching info and image
+#pragma mark -
+
 - (void) assignUsersMaps:(NSArray*)maps
 {
     mapsTableData = [[NSArray alloc] initWithArray:maps];
@@ -171,12 +199,22 @@
     [self stopAnimation];
 }
 
+- (void) startAnimation
+{
+    self.hiddenView.hidden = NO;
+    [self.spinner startAnimating];
+    self.spinner.hidden = NO;
+}
+
 - (void) stopAnimation
 {
     self.hiddenView.hidden = YES;
     [self.spinner stopAnimating];
     self.spinner.hidden = YES;
 }
+
+#pragma mark Camera / UIImagePicker
+#pragma mark -
 
 - (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
                                    usingDelegate: (id <UIImagePickerControllerDelegate,
@@ -256,6 +294,9 @@
     [picker release];
 }
 
+#pragma mark TableView / Your Maps
+#pragma mark -
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [mapsTableData count];
@@ -279,8 +320,117 @@
         NSString* imagePath = [starsImageDict objectForKey:[NSNumber numberWithInt:map.rating]];
         cell.ratingImageView.image = [UIImage imageNamed:imagePath];
         [self useImage:map.image :cell.mapImageView];
+        deleteState ? (cell.deleteImageView.hidden = NO) : (cell.deleteImageView.hidden = YES);
+        if(deleteState)
+        {
+            CABasicAnimation* anim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+            [anim setToValue:[NSNumber numberWithFloat:0.0f]];
+            [anim setFromValue:[NSNumber numberWithDouble:M_PI/16]]; // rotation angle
+            [anim setDuration:0.1];
+            [anim setRepeatCount:NSUIntegerMax];
+            [anim setAutoreverses:YES];
+            [cell.deleteImageView.layer addAnimation:anim forKey:@"iconShake"];
+        }
     }
     return cell;
+}
+
+
+// Short press
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    currentIndex = [indexPath row];
+    currentIndexPath = indexPath;
+    if(deleteState)
+    {
+        NSLog(@"[Profile] Deleting item at index: %i",currentIndex);
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Warning: You are about to permanently delete this map."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                             destructiveButtonTitle:@"Delete"
+                                                  otherButtonTitles:@"Cancel",nil];
+        sheet.tag = DELETE_MAP_SHEET;
+        [sheet showInView:self.view];
+        [sheet release];
+    }
+    else // Edit
+    {
+        NSLog(@"[Profile] Selected item at index: %i",currentIndex);
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Would you like to edit this map?"
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                             destructiveButtonTitle:nil
+                                                  otherButtonTitles:@"Yes",@"No",nil];
+        sheet.tag = EDIT_MAP_SHEET;
+        [sheet showInView:self.view];
+        [sheet release];
+    }
+}
+
+// Long press
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    [self reloadTableData];
+    CGPoint p = [gestureRecognizer locationInView:self.mapsTableView];
+    
+    NSIndexPath *indexPath = [self.mapsTableView indexPathForRowAtPoint:p];
+    if (indexPath == nil)
+    {
+        NSLog(@"long press on table view but not on a row");
+        deleteState = NO;
+        [self reloadTableData];
+    }
+    else
+    {
+        NSLog(@"long press on table view at row %d", indexPath.row);
+        deleteState = YES;
+        [self reloadTableData];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == EDIT_MAP_SHEET)
+    {
+        if (buttonIndex == 0) // Edit Map
+        {
+            [self startAnimation];
+            Map* map = [mapsTableData objectAtIndex:currentIndex];
+            NSLog(@"[Profile] Editing map");
+            AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+            [delegate.webClient fetchMapXML:map.name];
+        }
+    }
+    else if(actionSheet.tag == DELETE_MAP_SHEET)
+    {
+        if(buttonIndex == 0) // Delete Map
+        {
+            Map* map = [mapsTableData objectAtIndex:currentIndex];
+            NSLog(@"[Profile] Deleting map");
+            // Remove from database
+            AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+            [delegate.webClient deleteMap:[Session getInstance].username :map.name];
+            
+            // Remove from datasource
+            NSMutableArray* tempArray = [NSMutableArray arrayWithArray:mapsTableData];
+            [tempArray removeObjectAtIndex:currentIndex];
+            mapsTableData = [[NSArray alloc]initWithArray:tempArray];
+            // Remove from view
+            //[self.mapsTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:currentIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self reloadTableData];
+        }
+    }
+}
+
+- (void)fetchMapFinished
+{
+    [self stopAnimation];
+    
+    [MapContainer getInstance].maps = nil;
+    [Scene getInstance].loadingCustomTree = YES;
+    EAGLViewController* glvc = [[[EAGLViewController alloc]init]autorelease];
+    [self presentModalViewController:glvc animated:NO];
 }
 
 - (void)useImage:(UIImage *)image :(UIImageView *) view

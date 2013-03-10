@@ -308,6 +308,23 @@
     return [Session getInstance].isAuthenticated;
 }
 
+- (void) deleteMap:(NSString*)username :(NSString*)mapName
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"deleteMap", @"action",
+                            username, @"username",
+                            mapName, @"mapName",
+                            nil];
+    
+    [self.AFClient postPath:self.mapsAPIScript parameters:params
+        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Success [Delete Map]: %@", operation.responseString);
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error [Delete Map]: %@", operation.responseString);
+        }];
+}
+
 - (void) assignNewMaps:(NSArray*)maps
 {
     [MapContainer getInstance];

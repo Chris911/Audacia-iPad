@@ -27,6 +27,7 @@
 		045AA82B16CBF93C00F82AB0 /* login-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 045AA82A16CBF93C00F82AB0 /* login-background.png */; };
 		046514F016EC440500CBED0F /* ProfileMapsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046514EF16EC440500CBED0F /* ProfileMapsTableCell.xib */; };
 		046514F416EC47EA00CBED0F /* ProfileMapsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046514F316EC47EA00CBED0F /* ProfileMapsTableCell.m */; };
+		046514F616ED1E7D00CBED0F /* icon-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 046514F516ED1E7D00CBED0F /* icon-delete.png */; };
 		048C9D3316A4A8D9006A7082 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
 		048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3516A4AFB9006A7082 /* RenderingTree.m */; };
 		048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3916A4BD8F006A7082 /* Scene.m */; };
@@ -186,6 +187,7 @@
 		046514EF16EC440500CBED0F /* ProfileMapsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileMapsTableCell.xib; sourceTree = "<group>"; };
 		046514F216EC47EA00CBED0F /* ProfileMapsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileMapsTableCell.h; sourceTree = "<group>"; };
 		046514F316EC47EA00CBED0F /* ProfileMapsTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileMapsTableCell.m; sourceTree = "<group>"; };
+		046514F516ED1E7D00CBED0F /* icon-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-delete.png"; path = "Assets/UI/Images/icon-delete.png"; sourceTree = "<group>"; };
 		048C9D3116A4A8D9006A7082 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		048C9D3216A4A8D9006A7082 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		048C9D3416A4AFB9006A7082 /* RenderingTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingTree.h; sourceTree = "<group>"; };
@@ -806,6 +808,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				046514F516ED1E7D00CBED0F /* icon-delete.png */,
 				A8758D3816EBF8EA00AB3A3E /* cameraView.png */,
 				A8758D3916EBF8EA00AB3A3E /* settingsView.png */,
 				A83BC89C16E39E5E0074DDC6 /* AudaciaIcon.png */,
@@ -1079,6 +1082,7 @@
 				A8758D3A16EBF8EA00AB3A3E /* cameraView.png in Resources */,
 				A8758D3B16EBF8EA00AB3A3E /* settingsView.png in Resources */,
 				046514F016EC440500CBED0F /* ProfileMapsTableCell.xib in Resources */,
+				046514F616ED1E7D00CBED0F /* icon-delete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

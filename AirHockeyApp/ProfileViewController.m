@@ -77,6 +77,7 @@
     [self setupLongPressGesture];
     
     deleteState = NO;
+    [self toggleDoneEditingButton];
     
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     [delegate.webClient fetchMapsByUser:[Session getInstance].username :self];
@@ -125,6 +126,7 @@
     [_hiddenView release];
     [_spinner release];
     [mapsTableData release];
+    [_doneDeletingButton release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -136,6 +138,7 @@
     [self setMapsTableView:nil];
     [self setHiddenView:nil];
     [self setSpinner:nil];
+    [self setDoneDeletingButton:nil];
     [super viewDidUnload];
 }
 
@@ -385,6 +388,7 @@
     {
         NSLog(@"long press on table view at row %d", indexPath.row);
         deleteState = YES;
+        [self toggleDoneEditingButton];
         [self reloadTableData];
     }
 }
@@ -457,4 +461,26 @@
 {
     return 105;
 }
+
+#pragma mark Edit Button
+#pragma mark -
+
+- (IBAction)pressedDoneEditingButton:(id)sender
+{
+    deleteState = NO;
+    [self reloadTableData];
+    [self toggleDoneEditingButton];
+}
+
+- (void) toggleDoneEditingButton
+{
+    // Animation
+    [UIView animateWithDuration:0.4 delay: 0.0 options: UIViewAnimationCurveLinear
+                     animations:^{
+                         deleteState ? (self.doneDeletingButton.alpha = 1.0f) : (self.doneDeletingButton.alpha = 0);
+                     }
+                     completion:nil
+     ];
+}
+
 @end

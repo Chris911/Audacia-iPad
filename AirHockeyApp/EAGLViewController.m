@@ -140,11 +140,16 @@ enum {
         self.PuckView.backgroundColor       = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-puck.png"]];
         self.PommeauView.backgroundColor    = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-maillet.png"]];
         
-        self.PortalImageView.hidden         = YES;
-        self.BoosterImageView.hidden        = YES;
-        self.MuretImageView.hidden          = YES;
-        self.PuckImageView.hidden           = YES;
-        self.PommeauImageView.hidden        = YES;
+        self.PortalImageView.backgroundColor     = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-portal.png"]];
+        self.PortalImageView.alpha = 0.3f;
+        self.BoosterImageView.backgroundColor    = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-booster.png"]];
+        self.BoosterImageView.alpha = 0.3f;
+        self.MuretImageView.backgroundColor      = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-murret.png"]];
+        self.MuretImageView.alpha = 0.3f;
+        self.PuckImageView.backgroundColor       = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-puck.png"]];
+        self.PuckImageView.alpha = 0.3f;
+        self.PommeauImageView.backgroundColor    = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-maillet.png"]];
+        self.PommeauImageView.alpha = 0.3f;
     }
     return self;
 }

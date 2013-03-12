@@ -25,6 +25,8 @@
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (retain, nonatomic) NSDictionary *starsImageDict;
 
+@property (retain, nonatomic) IBOutlet UIButton *doneDeletingButton;
+- (IBAction)pressedDoneEditingButton:(id)sender;
 
 - (void) assignUsersMaps:(NSArray*)maps;
 - (void) assignProfileImage:(UIImage*)image;

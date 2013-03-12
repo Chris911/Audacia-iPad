@@ -6,12 +6,12 @@
 #import "AppDemoAppDelegate.h"
 #import "MenuViewController.h"
 #import "EAGLViewController.h"
-#import "LoginViewController.h" 
+#import "LoginViewController.h"
+#import "NetworkUtils.h"
 
 @implementation AppDemoAppDelegate
 
 @synthesize window = _window;
-@synthesize menuViewController = _menuViewController;
 @synthesize eaglViewController = _eaglViewController;
 @synthesize loginViewController = _loginViewController;
 @synthesize webClient;
@@ -23,9 +23,9 @@
 
 - (void) afficherMenu
 {    
-    [UIView transitionWithView:self.window duration:1.0 options:(UIViewAnimationOptionTransitionCrossDissolve) animations:^{
-        self.window.rootViewController = self.menuViewController;
-    } completion:nil];
+//    [UIView transitionWithView:self.window duration:1.0 options:(UIViewAnimationOptionTransitionCrossDissolve) animations:^{
+//        self.window.rootViewController = self.menuViewController;
+//    } completion:nil];
 }
 
 
@@ -34,9 +34,12 @@
     // Override point for customization after application launch.
     self.window.rootViewController = self.loginViewController;
     
-    self.webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
-    
-    // Create a user session
+    if([NetworkUtils isNetworkAvailable]){
+       self.webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
+    } else {
+        [NetworkUtils showNetworkUnavailableAlert];
+    }
+
     return YES;
 }
 
@@ -68,6 +71,9 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    if(self.webClient == nil && [NetworkUtils isNetworkAvailable]){
+        self.webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -82,7 +88,6 @@
 - (void)dealloc
 {
     [_window release];
-    [_menuViewController release];
     [_eaglViewController release];
     [webClient release];
     [super dealloc];

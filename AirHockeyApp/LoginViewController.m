@@ -123,12 +123,27 @@
 
 - (IBAction)pressedLoginButton:(id)sender
 {
+    if([NetworkUtils isNetworkAvailable]) {
     [self toggleConnectionView];
+    } else {
+        [NetworkUtils showNetworkUnavailableAlert];
+    }
 }
 
 - (IBAction)pressedContinueAnonButton:(id)sender
 {
-    [self transitionToMenu];
+    if([NetworkUtils isNetworkAvailable]){
+        
+        AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+        // Check if the webClient is properly created
+        if(delegate.webClient == nil){
+            delegate.webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
+        }
+        // switch to menu
+        [self transitionToMenu];
+    } else {
+        [NetworkUtils showNetworkUnavailableAlert];
+    }
 }
 
 - (IBAction)pressedValidateButton:(id)sender
@@ -139,21 +154,21 @@
 - (void) initLoginEvent
 {
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    // Check if the webClient is properly created
+    if(delegate.webClient == nil){
+        delegate.webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
+    }
     
-    if([NetworkUtils isNetworkAvailable]) {
-        if(self.usernameTextBox.text.length == 0) {
-            self.errorLabel.text = @"Missing Username";
-        } else if (self.passwordTextBox.text.length == 0){
-            self.errorLabel.text = @"Missing Password";
-        } else {
-            //Call the real login event here. Return is handled in loginEventFinished below
-            [self.hiddenView setHidden:NO];
-            [self.spinner setHidden:NO];
-            [self.spinner startAnimating];
-            [delegate.webClient validateLogin:self.usernameTextBox.text :self.passwordTextBox.text];
-        }
-    } else { // Internet not connected, display error
-        [NetworkUtils showNetworkUnavailableAlert];
+    if(self.usernameTextBox.text.length == 0) {
+        self.errorLabel.text = @"Missing Username";
+    } else if (self.passwordTextBox.text.length == 0){
+        self.errorLabel.text = @"Missing Password";
+    } else {
+        //Call the real login event here. Return is handled in loginEventFinished below
+        [self.hiddenView setHidden:NO];
+        [self.spinner setHidden:NO];
+        [self.spinner startAnimating];
+        [delegate.webClient validateLogin:self.usernameTextBox.text :self.passwordTextBox.text];
     }
 }
 

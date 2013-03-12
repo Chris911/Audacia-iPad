@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">11G63</string>
+		<string key="IBDocument.SystemVersion">12C3012</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1138.51</string>
-		<string key="IBDocument.HIToolboxVersion">569.00</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">2083</string>
@@ -50,7 +50,7 @@
 							<object class="IBUIImageView" id="47810377">
 								<reference key="NSNextResponder" ref="39156743"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{170, 170}</string>
+								<string key="NSFrameSize">{165, 160}</string>
 								<reference key="NSSuperview" ref="39156743"/>
 								<reference key="NSNextKeyView" ref="181947498"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -64,7 +64,7 @@
 							<object class="IBUIButton" id="768808206">
 								<reference key="NSNextResponder" ref="39156743"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 101}, {44, 40}}</string>
+								<string key="NSFrame">{{25, 105}, {44, 40}}</string>
 								<reference key="NSSuperview" ref="39156743"/>
 								<reference key="NSNextKeyView" ref="54416756"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -99,7 +99,7 @@
 							<object class="IBUIButton" id="181947498">
 								<reference key="NSNextResponder" ref="39156743"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{87, 20}, {56, 44}}</string>
+								<string key="NSFrame">{{89, 27}, {56, 44}}</string>
 								<reference key="NSSuperview" ref="39156743"/>
 								<reference key="NSNextKeyView" ref="768808206"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -119,7 +119,7 @@
 								<reference key="IBUIFont" ref="74513827"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{864, 615}, {160, 160}}</string>
+						<string key="NSFrame">{{862, 615}, {165, 160}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="47810377"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -127,6 +127,7 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
+						<float key="IBUIAlpha">0.89999997615814209</float>
 						<int key="IBUITag">500</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
@@ -138,7 +139,7 @@
 							<object class="IBUIImageView" id="173839497">
 								<reference key="NSNextResponder" ref="909410144"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{160, 160}</string>
+								<string key="NSFrameSize">{166, 160}</string>
 								<reference key="NSSuperview" ref="909410144"/>
 								<reference key="NSNextKeyView" ref="88289242"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -154,7 +155,7 @@
 							<object class="IBUIButton" id="88289242">
 								<reference key="NSNextResponder" ref="909410144"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{8, 20}, {54, 44}}</string>
+								<string key="NSFrame">{{20, 20}, {54, 44}}</string>
 								<reference key="NSSuperview" ref="909410144"/>
 								<reference key="NSNextKeyView" ref="167721937"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -176,9 +177,9 @@
 							<object class="IBUIButton" id="167721937">
 								<reference key="NSNextResponder" ref="909410144"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{89, 97}, {51, 44}}</string>
+								<string key="NSFrame">{{95, 97}, {51, 44}}</string>
 								<reference key="NSSuperview" ref="909410144"/>
-								<reference key="NSNextKeyView" ref="964176458"/>
+								<reference key="NSNextKeyView" ref="585471049"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -196,7 +197,7 @@
 								<reference key="IBUIFont" ref="74513827"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{-2, 609}, {160, 160}}</string>
+						<string key="NSFrame">{{-1.5, 609}, {166, 160}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="173839497"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -209,7 +210,7 @@
 					<object class="IBUIButton" id="277509338">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 689}, {80, 80}}</string>
+						<string key="NSFrame">{{0, 688}, {80, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="868566068"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -234,8 +235,9 @@
 					<object class="IBUIButton" id="54416756">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{944, 688}, {80, 80}}</string>
+						<string key="NSFrame">{{945, 689}, {80, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -327,7 +329,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{16, 486}, {70, 70}}</string>
 								<reference key="NSSuperview" ref="585471049"/>
-								<reference key="NSNextKeyView" ref="909410144"/>
+								<reference key="NSNextKeyView" ref="964176458"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="653186191"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -606,7 +608,7 @@
 								<float key="IBUIValue">0.5</float>
 							</object>
 						</object>
-						<string key="NSFrame">{{177.5, 678}, {670, 90}}</string>
+						<string key="NSFrame">{{177, 678}, {670, 90}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="725265486"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -751,7 +753,7 @@
 				</object>
 				<string key="NSFrameSize">{1024, 768}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="585471049"/>
+				<reference key="NSNextKeyView" ref="909410144"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -1115,10 +1117,10 @@
 							<reference ref="277509338"/>
 							<reference ref="585471049"/>
 							<reference ref="964176458"/>
-							<reference ref="39156743"/>
 							<reference ref="909410144"/>
 							<reference ref="54416756"/>
 							<reference ref="868566068"/>
+							<reference ref="39156743"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">GLMainView</string>
@@ -1245,8 +1247,8 @@
 						<reference key="object" ref="39156743"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="768808206"/>
 							<reference ref="181947498"/>
+							<reference ref="768808206"/>
 							<reference ref="47810377"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
@@ -1328,12 +1330,6 @@
 						<reference key="parent" ref="868566068"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">62</int>
-						<reference key="object" ref="54416756"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">SettingsButton - Button</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">109</int>
 						<reference key="object" ref="167721937"/>
 						<reference key="parent" ref="909410144"/>
@@ -1405,6 +1401,12 @@
 						<reference key="object" ref="41592745"/>
 						<reference key="parent" ref="585471049"/>
 						<string key="objectName">Pommeau Image</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">62</int>
+						<reference key="object" ref="54416756"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">SettingsButton - Button</string>
 					</object>
 				</object>
 			</object>
@@ -1523,7 +1525,329 @@
 			<nil key="sourceID"/>
 			<int key="maxID">158</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">EAGLView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/EAGLView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">EAGLViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ExitProgram:</string>
+							<string>OpenCameraView:</string>
+							<string>angleSliderChanged:</string>
+							<string>copyItem:</string>
+							<string>deleteItem:</string>
+							<string>sizeSliderChanged:</string>
+							<string>specialSliderChanged:</string>
+							<string>toggleElasticSelection:</string>
+							<string>toggleElasticZoom:</string>
+							<string>togglePerspective:</string>
+							<string>toggleScreenshotButton:</string>
+							<string>toggleSettingsView:</string>
+							<string>toggleTransformRotation:</string>
+							<string>toggleTransformScale:</string>
+							<string>toggleTranslateCamera:</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ExitProgram:</string>
+							<string>OpenCameraView:</string>
+							<string>angleSliderChanged:</string>
+							<string>copyItem:</string>
+							<string>deleteItem:</string>
+							<string>sizeSliderChanged:</string>
+							<string>specialSliderChanged:</string>
+							<string>toggleElasticSelection:</string>
+							<string>toggleElasticZoom:</string>
+							<string>togglePerspective:</string>
+							<string>toggleScreenshotButton:</string>
+							<string>toggleSettingsView:</string>
+							<string>toggleTransformRotation:</string>
+							<string>toggleTransformScale:</string>
+							<string>toggleTranslateCamera:</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">ExitProgram:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">OpenCameraView:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">angleSliderChanged:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">copyItem:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">deleteItem:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">sizeSliderChanged:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">specialSliderChanged:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleElasticSelection:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleElasticZoom:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">togglePerspective:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleScreenshotButton:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleSettingsView:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleTransformRotation:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleTransformScale:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleTranslateCamera:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>BoosterImageView</string>
+							<string>BoosterView</string>
+							<string>CameraView</string>
+							<string>LeftSlideView</string>
+							<string>MuretImageView</string>
+							<string>MuretView</string>
+							<string>ParametersView</string>
+							<string>PommeauImageView</string>
+							<string>PommeauView</string>
+							<string>PortalImageView</string>
+							<string>PortalView</string>
+							<string>PuckImageView</string>
+							<string>PuckView</string>
+							<string>SettingsView</string>
+							<string>TransformView</string>
+							<string>angleLable</string>
+							<string>angleSlider</string>
+							<string>copyPropButton</string>
+							<string>deleteButton</string>
+							<string>sizeLabel</string>
+							<string>sizeSlider</string>
+							<string>specialLabel</string>
+							<string>specialSlider</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIImageView</string>
+							<string>UIView</string>
+							<string>UIView</string>
+							<string>UIView</string>
+							<string>UIImageView</string>
+							<string>UIView</string>
+							<string>UIView</string>
+							<string>UIImageView</string>
+							<string>UIView</string>
+							<string>UIView</string>
+							<string>UIView</string>
+							<string>UIImageView</string>
+							<string>UIView</string>
+							<string>UIView</string>
+							<string>UIView</string>
+							<string>UILabel</string>
+							<string>UISlider</string>
+							<string>UIButton</string>
+							<string>UIButton</string>
+							<string>UILabel</string>
+							<string>UISlider</string>
+							<string>UILabel</string>
+							<string>UISlider</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>BoosterImageView</string>
+							<string>BoosterView</string>
+							<string>CameraView</string>
+							<string>LeftSlideView</string>
+							<string>MuretImageView</string>
+							<string>MuretView</string>
+							<string>ParametersView</string>
+							<string>PommeauImageView</string>
+							<string>PommeauView</string>
+							<string>PortalImageView</string>
+							<string>PortalView</string>
+							<string>PuckImageView</string>
+							<string>PuckView</string>
+							<string>SettingsView</string>
+							<string>TransformView</string>
+							<string>angleLable</string>
+							<string>angleSlider</string>
+							<string>copyPropButton</string>
+							<string>deleteButton</string>
+							<string>sizeLabel</string>
+							<string>sizeSlider</string>
+							<string>specialLabel</string>
+							<string>specialSlider</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">BoosterImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">BoosterView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">CameraView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">LeftSlideView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">MuretImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">MuretView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">ParametersView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">PommeauImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">PommeauView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">PortalImageView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">PortalView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">PuckImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">PuckView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">SettingsView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">TransformView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">angleLable</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">angleSlider</string>
+								<string key="candidateClassName">UISlider</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">copyPropButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">deleteButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">sizeLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">sizeSlider</string>
+								<string key="candidateClassName">UISlider</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">specialLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">specialSlider</string>
+								<string key="candidateClassName">UISlider</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/EAGLViewController.h</string>
+					</object>
+				</object>
+			</object>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">

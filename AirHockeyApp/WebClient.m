@@ -50,6 +50,7 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             @"addMapToDatabase", @"action",
                             mapName, @"mapName",
+                            [Session getInstance].username, @"username",
                             nil];
 
     [self.AFClient postPath:self.mapsAPIScript parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

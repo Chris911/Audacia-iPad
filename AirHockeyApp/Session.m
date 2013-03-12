@@ -16,8 +16,8 @@
 @synthesize isAuthenticated;
 @synthesize profileImage;
 
-NSString* DEFAULT_USERNAME = @"Guest";
-NSString* DEFAULT_PASSWORD = @"";
+NSString* DEFAULT_USERNAME = @"Chris";
+NSString* DEFAULT_PASSWORD = @"11";
 
 static Session *session = NULL;
 
@@ -48,7 +48,7 @@ static Session *session = NULL;
 {
     session.username = DEFAULT_USERNAME;
     session.password = DEFAULT_PASSWORD;
-    session.isAuthenticated = NO;
+    session.isAuthenticated = YES;
     session.Camp = leftCamp;
     session.profileImage = [UIImage imageNamed:@"anonymous-icon.jpg"];
 }

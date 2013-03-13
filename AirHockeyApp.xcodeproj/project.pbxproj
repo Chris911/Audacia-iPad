@@ -63,6 +63,7 @@
 		04F43C7016B038D00017756F /* puck.psd in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C5B16B038D00017756F /* puck.psd */; };
 		04F43C7116B038D00017756F /* puck.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C5C16B038D00017756F /* puck.mtl */; };
 		04F43C7216B038D00017756F /* puck.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C5D16B038D00017756F /* puck.obj */; };
+		04FA20AF16F0C993000C3E1E /* take-picture-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 04FA20AE16F0C993000C3E1E /* take-picture-button.png */; };
 		96378D7B1472C71100F543EA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7A1472C71100F543EA /* UIKit.framework */; };
 		96378D7D1472C71100F543EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7C1472C71100F543EA /* Foundation.framework */; };
 		96378D7F1472C71100F543EA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7E1472C71100F543EA /* CoreGraphics.framework */; };
@@ -237,6 +238,7 @@
 		04F43C5B16B038D00017756F /* puck.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = puck.psd; sourceTree = "<group>"; };
 		04F43C5C16B038D00017756F /* puck.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = puck.mtl; sourceTree = "<group>"; };
 		04F43C5D16B038D00017756F /* puck.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = puck.obj; sourceTree = "<group>"; };
+		04FA20AE16F0C993000C3E1E /* take-picture-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "take-picture-button.png"; path = "Assets/UI/Images/take-picture-button.png"; sourceTree = "<group>"; };
 		96378D761472C71100F543EA /* AirHockeyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirHockeyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96378D7A1472C71100F543EA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		96378D7C1472C71100F543EA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -808,6 +810,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				04FA20AE16F0C993000C3E1E /* take-picture-button.png */,
 				046514F516ED1E7D00CBED0F /* icon-delete.png */,
 				A8758D3816EBF8EA00AB3A3E /* cameraView.png */,
 				A8758D3916EBF8EA00AB3A3E /* settingsView.png */,
@@ -1083,6 +1086,7 @@
 				A8758D3B16EBF8EA00AB3A3E /* settingsView.png in Resources */,
 				046514F016EC440500CBED0F /* ProfileMapsTableCell.xib in Resources */,
 				046514F616ED1E7D00CBED0F /* icon-delete.png in Resources */,
+				04FA20AF16F0C993000C3E1E /* take-picture-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

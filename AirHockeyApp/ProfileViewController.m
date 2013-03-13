@@ -76,6 +76,8 @@
     
     [self setupLongPressGesture];
     
+    //[self drawLine];
+    
     deleteState = NO;
     [self toggleDoneEditingButton];
     
@@ -168,6 +170,14 @@
     lpgr.delegate = self;
     [self.mapsTableView addGestureRecognizer:lpgr];
     [lpgr release];
+}
+
+- (void)drawLine
+{
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(40, 475, 264, 2)];
+    lineView.backgroundColor = [UIColor blackColor];
+    [self.backgroundView addSubview:lineView];
+    [lineView release];
 }
 
 #pragma mark Fetching info and image

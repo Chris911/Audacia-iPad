@@ -10,6 +10,7 @@
 #import "NodeTable.h"
 #import "NodePommeau.h"
 #import "NodePuck.h"
+#import "NodeTableEdge.h"
 
 @implementation RenderingTree
 
@@ -300,6 +301,15 @@
             } else if(node.scaleFactor <= 0.5) {
                 node.scaleFactor = 0.5f;
             }
+        } else if([node.type isEqualToString:@"EDGE"]){ // Goals Edges
+            if(((NodeTableEdge*)node).index == 3 || ((NodeTableEdge*)node).index == 4){
+                ((NodeTableEdge*)node).goalSize += deltaScale/30;
+                if(node.scaleFactor >= 4) {
+                    node.scaleFactor = 4;
+                } else if(node.scaleFactor <= 0.5) {
+                    node.scaleFactor = 0.5f;
+                }
+            }
         }
     }
 }
@@ -385,11 +395,9 @@
 {
     BOOL anyNodeHit = NO;
     int offset = 8;
-    for(int i = [self.tree count]-1; i > 0; i--) //FIXME: Inverted selection order, may cause problems but fixes table selection
-    {
+    for(int i = [self.tree count]-1; i > 0; i--){
         
         Node *node = [self.tree objectAtIndex:i];
-        // bounding box check, FIXME: selection not optimal
         if(node.position.x <= click.x + offset
            && node.position.x >= click.x - offset
            && node.position.y <= click.y + offset

@@ -166,7 +166,7 @@
 									<object class="IBUILabel" id="1001765108">
 										<reference key="NSNextResponder" ref="127066166"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{6, 3}, {95, 38}}</string>
+										<string key="NSFrame">{{5, 4}, {95, 38}}</string>
 										<reference key="NSSuperview" ref="127066166"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="705521207"/>
@@ -198,7 +198,7 @@
 										<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 									</object>
 								</array>
-								<string key="NSFrame">{{27, 441}, {276, 176}}</string>
+								<string key="NSFrame">{{27, 446}, {276, 171}}</string>
 								<reference key="NSSuperview" ref="492252615"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1001765108"/>
@@ -209,7 +209,7 @@
 							<object class="IBUILabel" id="450554243">
 								<reference key="NSNextResponder" ref="492252615"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{159, 58}, {530, 38}}</string>
+								<string key="NSFrame">{{315, 53}, {261, 38}}</string>
 								<reference key="NSSuperview" ref="492252615"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="608807464"/>
@@ -223,7 +223,6 @@
 								<reference key="IBUITextColor" ref="807864972"/>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<int key="IBUITextAlignment">1</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="735041031">
 									<string key="name">STHeitiTC-Medium</string>
 									<string key="family">Heiti TC</string>
@@ -240,7 +239,7 @@
 							<object class="IBUILabel" id="1059521717">
 								<reference key="NSNextResponder" ref="492252615"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{27, 58}, {208, 38}}</string>
+								<string key="NSFrame">{{27, 53}, {208, 38}}</string>
 								<reference key="NSSuperview" ref="492252615"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="450554243"/>
@@ -288,7 +287,7 @@
 									<object class="IBUITableView" id="936189946">
 										<reference key="NSNextResponder" ref="705521207"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrame">{{5, 5}, {525, 503}}</string>
+										<string key="NSFrame">{{7, 5}, {538, 503}}</string>
 										<reference key="NSSuperview" ref="705521207"/>
 										<reference key="NSWindow"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -302,7 +301,7 @@
 										<int key="IBUISeparatorStyle">1</int>
 										<object class="NSColor" key="IBUISeparatorColor">
 											<int key="NSColorSpace">1</int>
-											<bytes key="NSRGB">MC40MDAwMDAwMDYgMC40MDAwMDAwMDYgMC40MDAwMDAwMDYAA</bytes>
+											<bytes key="NSRGB">MC41MDE5NjA4MTQgMC41MDE5NjA4MTQgMC41MDE5NjA4MTQAA</bytes>
 										</object>
 										<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 										<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
@@ -311,7 +310,7 @@
 										<float key="IBUISectionFooterHeight">22</float>
 									</object>
 								</array>
-								<string key="NSFrame">{{330, 104}, {538, 513}}</string>
+								<string key="NSFrame">{{315, 104}, {553, 513}}</string>
 								<reference key="NSSuperview" ref="492252615"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="936189946"/>
@@ -320,7 +319,7 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
 						</array>
-						<string key="NSFrame">{{62, 78.5}, {900, 637}}</string>
+						<string key="NSFrame">{{62, 78}, {900, 637}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1059521717"/>
@@ -520,43 +519,9 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">28</int>
-						<reference key="object" ref="492252615"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="608807464"/>
-							<reference ref="450554243"/>
-							<reference ref="140935843"/>
-							<reference ref="1059521717"/>
-							<reference ref="127066166"/>
-							<reference ref="705521207"/>
-						</array>
-						<reference key="parent" ref="766721923"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">79</int>
-						<reference key="object" ref="140935843"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="81899029"/>
-							<reference ref="49908602"/>
-						</array>
-						<reference key="parent" ref="492252615"/>
-						<string key="objectName">PicBackgroundView</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">80</int>
 						<reference key="object" ref="898245550"/>
 						<reference key="parent" ref="766721923"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">49</int>
-						<reference key="object" ref="81899029"/>
-						<reference key="parent" ref="140935843"/>
-						<string key="objectName">ProfileImage</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">90</int>
-						<reference key="object" ref="49908602"/>
-						<reference key="parent" ref="140935843"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">107</int>
@@ -579,19 +544,17 @@
 						<reference key="parent" ref="766721923"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">112</int>
-						<reference key="object" ref="608807464"/>
-						<reference key="parent" ref="492252615"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">78</int>
-						<reference key="object" ref="1059521717"/>
-						<reference key="parent" ref="492252615"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">77</int>
-						<reference key="object" ref="450554243"/>
-						<reference key="parent" ref="492252615"/>
+						<int key="objectID">28</int>
+						<reference key="object" ref="492252615"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="608807464"/>
+							<reference ref="450554243"/>
+							<reference ref="140935843"/>
+							<reference ref="1059521717"/>
+							<reference ref="705521207"/>
+							<reference ref="127066166"/>
+						</array>
+						<reference key="parent" ref="766721923"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">123</int>
@@ -619,6 +582,42 @@
 						<int key="objectID">100</int>
 						<reference key="object" ref="936189946"/>
 						<reference key="parent" ref="705521207"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">78</int>
+						<reference key="object" ref="1059521717"/>
+						<reference key="parent" ref="492252615"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">79</int>
+						<reference key="object" ref="140935843"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="81899029"/>
+							<reference ref="49908602"/>
+						</array>
+						<reference key="parent" ref="492252615"/>
+						<string key="objectName">PicBackgroundView</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">90</int>
+						<reference key="object" ref="49908602"/>
+						<reference key="parent" ref="140935843"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">49</int>
+						<reference key="object" ref="81899029"/>
+						<reference key="parent" ref="140935843"/>
+						<string key="objectName">ProfileImage</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">77</int>
+						<reference key="object" ref="450554243"/>
+						<reference key="parent" ref="492252615"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">112</int>
+						<reference key="object" ref="608807464"/>
+						<reference key="parent" ref="492252615"/>
 					</object>
 				</array>
 			</object>

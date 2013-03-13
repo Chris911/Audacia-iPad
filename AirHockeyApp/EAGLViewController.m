@@ -151,7 +151,7 @@ enum {
         self.PommeauImageView.backgroundColor    = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-maillet.png"]];
         self.PommeauImageView.alpha = 0.3f;
         
-        [self.blockingViewSelect setHidden:YES];
+        [self.blockingViewSelect setHidden:NO];
         [self.copyPropButton setEnabled:NO];
         [self.deleteButton setEnabled:NO];
     }
@@ -368,13 +368,13 @@ enum {
                     
                 } else {
                     NSLog(@"Touch did not select any node");
-                    // TODO: Introduce camera movement here
                     [[Scene getInstance].renderingTree deselectAllNodes];
                     
                     currentTouchesMode = TOUCH_CAMERA_MODE;
-                    //if(self.camera.isPerspective == NO){
-                        [self slideOutAnimationView:self.ParametersView];
-                    //}
+                    [self slideOutAnimationView:self.ParametersView];
+                    [self.copyPropButton setEnabled:NO];
+                    [self.deleteButton setEnabled:NO];
+                    selectedNode = nil;
                 }
                 
             // If a view other than EAGLView is touched
@@ -551,6 +551,7 @@ enum {
 
 }
 
+// put selected buttons in highlight state according to currentTransformState or elasticRect.isActive
 - (void)highlightCurrentState
 {
     [self.scaleButton setHighlighted:NO];
@@ -570,10 +571,14 @@ enum {
 
 - (IBAction)togglePerspective:(id)sender
 {
-    if(self.camera.isPerspective){
-
-    }
     self.camera.isPerspective = !self.camera.isPerspective;
+    if(self.camera.isPerspective){
+        [self.rectSelectionButton setEnabled:NO];
+        [self.blockingViewSelect setHidden:NO];
+    } else {
+        [self.rectSelectionButton setEnabled:YES];
+        [self.blockingViewSelect setHidden:YES];
+    }
 }
 
 - (IBAction)ExitProgram:(id)sender
@@ -926,6 +931,9 @@ enum {
             [self.PommeauView setHidden:YES];
         }
         
+        // Reset in translation mode
+        currentTransformState = STATE_TRANSFORM_TRANSLATION;
+        [self performSelector:@selector(highlightCurrentState) withObject:nil afterDelay:0];
     }
 }
 

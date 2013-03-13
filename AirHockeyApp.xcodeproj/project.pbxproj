@@ -147,6 +147,8 @@
 		A8CE921316C9BDF0001CCEBB /* login-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920B16C9BDF0001CCEBB /* login-icon.png */; };
 		A8CE921416C9BDF0001CCEBB /* login-top-view.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920C16C9BDF0001CCEBB /* login-top-view.png */; };
 		A8D9888016E8F6D60072E6CF /* SideBar3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */; };
+		A8EB15F616F1225000E83855 /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = A8EB15F416F1225000E83855 /* cube.mtl */; };
+		A8EB15F716F1225000E83855 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = A8EB15F516F1225000E83855 /* cube.obj */; };
 		A8EBDE3916A70CF8002B2DD6 /* GluLookAt.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */; };
 		A8EBDE7616A711C1002B2DD6 /* GluPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7516A711C1002B2DD6 /* GluPerspective.m */; };
 		A8EBDE7A16A729CA002B2DD6 /* NodeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7916A729CA002B2DD6 /* NodeTable.m */; };
@@ -362,6 +364,8 @@
 		A8CE920B16C9BDF0001CCEBB /* login-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-icon.png"; path = "Assets/UI/Images/login-icon.png"; sourceTree = "<group>"; };
 		A8CE920C16C9BDF0001CCEBB /* login-top-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-top-view.png"; path = "Assets/UI/Images/login-top-view.png"; sourceTree = "<group>"; };
 		A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SideBar3.jpg; path = Assets/UI/Images/SideBar3.jpg; sourceTree = "<group>"; };
+		A8EB15F416F1225000E83855 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.mtl; path = AirHockeyApp/cube.mtl; sourceTree = SOURCE_ROOT; };
+		A8EB15F516F1225000E83855 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = AirHockeyApp/cube.obj; sourceTree = SOURCE_ROOT; };
 		A8EBDE3716A70CF8002B2DD6 /* GluLookAt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluLookAt.h; sourceTree = "<group>"; };
 		A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GluLookAt.m; sourceTree = "<group>"; };
 		A8EBDE7416A711C1002B2DD6 /* GluPerspective.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluPerspective.h; sourceTree = "<group>"; };
@@ -477,6 +481,8 @@
 				04F43C5E16B038D00017756F /* Texture */,
 				04F43C5716B038D00017756F /* PSD */,
 				04F43C4C16B038D00017756F /* Blend */,
+				A8EB15F416F1225000E83855 /* cube.mtl */,
+				A8EB15F516F1225000E83855 /* cube.obj */,
 				04385DBE16E67E590067DB06 /* murret.mtl */,
 				04385DBF16E67E590067DB06 /* murret.obj */,
 				04F43C5116B038D00017756F /* booster.mtl */,
@@ -1087,6 +1093,8 @@
 				046514F016EC440500CBED0F /* ProfileMapsTableCell.xib in Resources */,
 				046514F616ED1E7D00CBED0F /* icon-delete.png in Resources */,
 				04FA20AF16F0C993000C3E1E /* take-picture-button.png in Resources */,
+				A8EB15F616F1225000E83855 /* cube.mtl in Resources */,
+				A8EB15F716F1225000E83855 /* cube.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

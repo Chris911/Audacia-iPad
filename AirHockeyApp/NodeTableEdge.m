@@ -18,6 +18,7 @@ const int NODE_1_AND_6_LIMIT_Y = 25;
 const int NODE_3_AND_4_LIMIT_X = 50;
 
 GLfloat edgeColor[NB_OF_TRIANGLE*3*4];
+GLfloat selectedEdgeColor[NB_OF_TRIANGLE*3*4];
 GLfloat nodeHeight = 5.2;
 
 - (id) initWithCoordsAndIndex:(float)x :(float)y :(int)index
@@ -55,7 +56,6 @@ GLfloat nodeHeight = 5.2;
     }
     glEnable(GL_LIGHTING);
 
-    
     self.lastPosition = self.position;
 }
 
@@ -67,6 +67,13 @@ GLfloat nodeHeight = 5.2;
         edgeColor[i+1] = 0.4f;
         edgeColor[i+2] = 0.4f;
         edgeColor[i+3] = 1;
+    }
+    
+    for (int i = 0; i < NB_OF_TRIANGLE*3*4; i += 4) {
+        selectedEdgeColor[i] = 1;
+        selectedEdgeColor[i+1] = 1;
+        selectedEdgeColor[i+2] = 0.4f;
+        selectedEdgeColor[i+3] = 1;
     }
 }
 
@@ -160,8 +167,11 @@ GLfloat nodeHeight = 5.2;
     glPushMatrix();
     
     glVertexPointer(3, GL_FLOAT, 0, vertices);
-    glColorPointer(4, GL_FLOAT, 0, edgeColor);
-    
+    if(!self.isSelected){
+        glColorPointer(4, GL_FLOAT, 0, edgeColor);
+    } else {
+        glColorPointer(4, GL_FLOAT, 0, selectedEdgeColor);
+    }
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
     
@@ -218,7 +228,7 @@ GLfloat nodeHeight = 5.2;
     
     glDisable(GL_TEXTURE_2D);
     glPushMatrix();
-    
+        
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(4, GL_FLOAT, 0, redColor);
 
@@ -282,7 +292,7 @@ GLfloat nodeHeight = 5.2;
     
     glDisable(GL_TEXTURE_2D);
     glPushMatrix();
-    
+        
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(4, GL_FLOAT, 0, blueColor);
 

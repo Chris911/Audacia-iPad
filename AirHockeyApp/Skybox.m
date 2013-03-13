@@ -47,8 +47,8 @@ float angle = 0;
 - (void) render
 {
     glPushMatrix();
-    angle += 0.02;
-    glRotatef(angle, 0, 0, 1);
+    //angle += 0.02;
+    //glRotatef(angle, 0, 0, 1);
     glEnable(GL_TEXTURE_2D);
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);

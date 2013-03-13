@@ -62,6 +62,10 @@ extern float const HAUTEUR_FENETRE;
 @property (retain, nonatomic) IBOutlet UILabel *specialLabel;
 @property (retain, nonatomic, getter=theCopyPropButton) IBOutlet UIButton *copyPropButton; // fix of reserved name
 @property (retain, nonatomic) IBOutlet UIButton *deleteButton;
+@property (retain, nonatomic) IBOutlet UIButton *rotationButton;
+@property (retain, nonatomic) IBOutlet UIButton *scaleButton;
+@property (retain, nonatomic) IBOutlet UIButton *rectSelectionButton;
+@property (retain, nonatomic) IBOutlet UIView *blockingViewSelect;
 
 - (void)startAnimation;
 - (void)stopAnimation;
@@ -77,7 +81,6 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)ExitProgram:(id)sender;
 - (IBAction)deleteItem:(id)sender;
 - (IBAction)copyItem:(id)sender;
-- (IBAction)toggleElasticZoom:(id)sender;
 - (IBAction)togglePerspective:(id)sender;
 - (IBAction)angleSliderChanged:(id)sender;
 - (IBAction)sizeSliderChanged:(id)sender;

@@ -102,6 +102,8 @@
     self.worldPosition = Vector3DMake(cg_worldPos.x + self.orthoCenter.x, cg_worldPos.y + self.orthoCenter.y, -1); // ignore Z
 }
 
+#pragma mark - Ortho methods
+
 // Translate position when in ortho mode
 - (void) orthoTranslate:(CGPoint)newPosition :(CGPoint)lastPosition
 {
@@ -111,7 +113,7 @@
     GLfloat deltaX = (convertedNewPos.x - convertedLastPos.x)/2;
     GLfloat deltaY = (convertedNewPos.y - convertedLastPos.y)/2;
     
-    self.orthoCenter = CGPointMake(self.orthoCenter.x+deltaX, self.orthoCenter.y+deltaY);
+    self.orthoCenter = CGPointMake(self.orthoCenter.x - deltaX, self.orthoCenter.y - deltaY);
     
     // Bound check
     if(self.orthoCenter.x > 50){
@@ -141,14 +143,14 @@
 {
     // Important : 4 and 3 represents the screen ratio of the iPad (4:3 , 1024:768)
     if(factor > 1){ // zoom out, pinch out
-        if(self.orthoWidth < LARGEUR_FENETRE + 100 && self.orthoHeight < HAUTEUR_FENETRE + 75){
-            self.orthoWidth += factor*4;
-            self.orthoHeight += factor*3;
+        if(self.orthoWidth > LARGEUR_FENETRE - 100 && self.orthoHeight > HAUTEUR_FENETRE - 75){
+            self.orthoWidth -= factor*4;
+            self.orthoHeight -= factor*3;
         }
     } else { // Zoom in
-        if(self.orthoWidth > LARGEUR_FENETRE - 100 && self.orthoHeight > HAUTEUR_FENETRE - 75){
-            self.orthoWidth -= factor*8;
-            self.orthoHeight -= factor*6;
+        if(self.orthoWidth < LARGEUR_FENETRE + 100 && self.orthoHeight < HAUTEUR_FENETRE + 75){
+            self.orthoWidth += factor*8;
+            self.orthoHeight += factor*6;
         }
     }
 }
@@ -235,22 +237,23 @@
     self.eyePosition = Vector3DMake(self.eyePosition.x + delta.x/3, self.eyePosition.y - delta.y/3, self.eyePosition.z);
     self.centerPosition = Vector3DMake(self.centerPosition.x + delta.x/3, self.centerPosition.y - delta.y/3, self.centerPosition.z);
     
-//    if (self.eyePosition.x > limit/2) {
-//        self.eyePosition = Vector3DMake(limit/2, self.eyePosition.y,self.eyePosition.z);
-//        self.centerPosition = Vector3DMake(limit/2, self.centerPosition.y,self.centerPosition.z);
-//    }
-//    if (self.eyePosition.x < -limit/2) {
-//        self.eyePosition = Vector3DMake( - limit/2, self.eyePosition.y,self.eyePosition.z);
-//        self.centerPosition = Vector3DMake(- limit/2, self.centerPosition.y,self.centerPosition.z);
-//    }
-//    if (self.centerPosition.y > limit) {
-//        self.eyePosition = Vector3DMake(self.eyePosition.x, self.eyePosition.y,self.eyePosition.z);
-//        self.centerPosition = Vector3DMake(self.centerPosition.x, limit,self.centerPosition.z);
-//    }
-//    if (self.eyePosition.y < -limit) {
-//        self.eyePosition = Vector3DMake( self.eyePosition.x, -limit,self.eyePosition.z);
-//        self.centerPosition = Vector3DMake(self.centerPosition.x, self.centerPosition,self.centerPosition.z);
-//    }
+    int limit = 200;
+    if (self.eyePosition.x > limit/2) {
+        self.eyePosition = Vector3DMake(limit/2, self.eyePosition.y,self.eyePosition.z);
+        self.centerPosition = Vector3DMake(limit/2, self.centerPosition.y,self.centerPosition.z);
+    }
+    if (self.eyePosition.x < -limit/2) {
+        self.eyePosition = Vector3DMake( - limit/2, self.eyePosition.y,self.eyePosition.z);
+        self.centerPosition = Vector3DMake(- limit/2, self.centerPosition.y,self.centerPosition.z);
+    }
+    if (self.centerPosition.y > limit) {
+        self.eyePosition = Vector3DMake(self.eyePosition.x, self.eyePosition.y,self.eyePosition.z);
+        self.centerPosition = Vector3DMake(self.centerPosition.x, limit,self.centerPosition.z);
+    }
+    if (self.centerPosition.y < -limit/5) {
+        self.eyePosition = Vector3DMake( self.eyePosition.x, self.eyePosition.y ,self.eyePosition.z);
+        self.centerPosition = Vector3DMake(self.centerPosition.x, -limit/5,self.centerPosition.z);
+    }
     
     [self assignUpVector];
 

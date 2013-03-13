@@ -150,6 +150,10 @@ enum {
         self.PuckImageView.alpha = 0.3f;
         self.PommeauImageView.backgroundColor    = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-maillet.png"]];
         self.PommeauImageView.alpha = 0.3f;
+        
+        [self.blockingViewSelect setHidden:YES];
+        [self.copyPropButton setEnabled:NO];
+        [self.deleteButton setEnabled:NO];
     }
     return self;
 }
@@ -195,6 +199,10 @@ enum {
     [_specialSlider release];
     [_copyPropButton release];
     [_deleteButton release];
+    [_rotationButton release];
+    [_scaleButton release];
+    [_rectSelectionButton release];
+    [_blockingViewSelect release];
     [super dealloc];
 }
 
@@ -249,6 +257,10 @@ enum {
     [self setSpecialSlider:nil];
     [self setCopyPropButton:nil];
     [self setDeleteButton:nil];
+    [self setRotationButton:nil];
+    [self setScaleButton:nil];
+    [self setRectSelectionButton:nil];
+    [self setBlockingViewSelect:nil];
 	[super viewDidUnload];
 	
     if (program) {
@@ -404,7 +416,7 @@ enum {
                 } else { 
                     [[Scene getInstance].renderingTree translateSingleNode:
                      CGPointMake(self.camera.worldPosition.x,self.camera.worldPosition.y)];
-                    [self modifyUIParametersValues:selectedNode];
+                    //[self modifyUIParametersValues:selectedNode];
                 }
             
             // Rotation Mode ------------------------------------------------------------
@@ -460,6 +472,14 @@ enum {
             [self slideInAnimationView:self.ParametersView];
         }
         [elasticRect reset];
+        [self performSelector:@selector(highlightCurrentState) withObject:nil afterDelay:0];
+    }
+    if(selectedNode != nil && ![selectedNode.type isEqualToString:@"EDGE"] && ![selectedNode.type isEqualToString:@"PUCK"]){
+        [self.copyPropButton setEnabled:YES];
+        [self.deleteButton setEnabled:YES];
+    } else {
+        [self.copyPropButton setEnabled:NO];
+        [self.deleteButton setEnabled:NO];
     }
     //selectedNode = nil; // invalidate pointer
 }
@@ -492,6 +512,7 @@ enum {
     } else {
         currentTransformState = STATE_TRANSFORM_TRANSLATION;
     }
+    [self performSelector:@selector(highlightCurrentState) withObject:nil afterDelay:0];
 }
 
 // If the current transform state is translation, switch to scale
@@ -503,6 +524,7 @@ enum {
     } else {
         currentTransformState = STATE_TRANSFORM_TRANSLATION;
     }
+    [self performSelector:@selector(highlightCurrentState) withObject:nil afterDelay:0];
 }
 
 - (IBAction)toggleSettingsView:(id)sender
@@ -525,16 +547,24 @@ enum {
         elasticRect.isSelectionMode = YES;
         elasticRect.isActive = YES;
     }
+    [self performSelector:@selector(highlightCurrentState) withObject:nil afterDelay:0];
+
 }
 
-- (IBAction)toggleElasticZoom:(id)sender
+- (void)highlightCurrentState
 {
-    if(elasticRect.isActive == YES){
-        elasticRect.isActive = NO;
+    [self.scaleButton setHighlighted:NO];
+    [self.rotationButton setHighlighted:NO];
+    [self.rectSelectionButton setHighlighted:NO];
+    
+    if(elasticRect.isActive){
+        [self.rectSelectionButton setHighlighted:YES];
     } else {
-        [elasticRect reset];
-        elasticRect.isSelectionMode = NO;
-        elasticRect.isActive = YES;
+        if (currentTransformState == STATE_TRANSFORM_ROTATION) {
+            [self.rotationButton setHighlighted:YES];
+        } else if (currentTransformState == STATE_TRANSFORM_SCALE){
+            [self.scaleButton setHighlighted:YES];
+        }
     }
 }
 
@@ -573,6 +603,7 @@ enum {
     }
     [self slideOutAnimationView:self.ParametersView];
     selectedNode = nil;
+    [self.deleteButton setEnabled:NO];
 }
 
 - (IBAction)copyItem:(id)sender
@@ -784,10 +815,11 @@ enum {
 {
     // When closing the transform view, return to translation mode
     currentTransformState = STATE_TRANSFORM_TRANSLATION;
+    [self.copyPropButton setEnabled:NO];
+    [self.deleteButton setEnabled:NO];
     [Scene getInstance].renderingTree.multipleNodesSelected = NO;
     [elasticRect reset];
     [self slideOutAnimationView:self.TransformView];
-
 }
 
 - (void)SwipeTransformView_Main:(UITapGestureRecognizer *)recognizer
@@ -837,7 +869,7 @@ enum {
 // we know what object to add next
 - (void) handleFirstTouchOnView:(UIView*) view
 {
-    if(view.tag > 0) {
+    if(view.tag > 0 && view.tag < 100) {
         activeObjectTag = view.tag;
     } else {
         NSLog(@"Invalid Tag");
@@ -948,12 +980,12 @@ enum {
 - (void) prepareRecognizers
 {
     // SwipeGesture recognizers
-    UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc]
-                                                       initWithTarget:self
-                                                       action:@selector(rotationDetected:)];
-    [rotationRecognizer setDelegate:self];
-    [self.view addGestureRecognizer:rotationRecognizer];
-    [rotationRecognizer release];
+//    UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc]
+//                                                       initWithTarget:self
+//                                                       action:@selector(rotationDetected:)];
+//    [rotationRecognizer setDelegate:self];
+//    [self.view addGestureRecognizer:rotationRecognizer];
+//    [rotationRecognizer release];
     
     // Placed on the LeftSideView
     UISwipeGestureRecognizer *SwipeLeftSideView = [[[UISwipeGestureRecognizer alloc]
@@ -1050,7 +1082,9 @@ enum {
 #pragma mark - Modify UI Elements
 - (void) modifyUIParametersValues:(Node*)node 
 {
-    [self slideInAnimationView:self.ParametersView];
+    if(![selectedNode.type isEqualToString:@"PUCK"] && ![selectedNode.type isEqualToString:@"POMMEAU"] && ![selectedNode.type isEqualToString:@"EDGE"]){
+        [self slideInAnimationView:self.ParametersView];
+    }
 
     [self hideOrShowParameters:node];
     self.sizeSlider.value = node.scaleFactor/4;
@@ -1064,10 +1098,9 @@ enum {
     [self.angleLable setHidden:NO];
     [self.angleSlider setHidden:NO];
     [self.specialSlider setHidden:NO];
-    if([node.type isEqualToString:@"POMMEAU"] || [node.type isEqualToString:@"PUCK"] || [Scene getInstance].renderingTree.multipleNodesSelected){
-        // Hide some parameters if the selected nodes are Puck or Stick
-        [self.sizeLabel setHidden:YES];
-        [self.sizeSlider setHidden:YES];
+    if([node.type isEqualToString:@"POMMEAU"] || [node.type isEqualToString:@"PUCK"] || [node.type isEqualToString:@"EDGE"] || [Scene getInstance].renderingTree.multipleNodesSelected){
+        // Hide parameters view
+        [self slideOutAnimationView:self.ParametersView];
         
     } else if([node.type isEqualToString:@"EDGE"]){
         [self.sizeLabel setHidden:YES];

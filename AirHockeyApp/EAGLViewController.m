@@ -474,9 +474,15 @@ enum {
         [elasticRect reset];
         [self performSelector:@selector(highlightCurrentState) withObject:nil afterDelay:0];
     }
-    if(selectedNode != nil && ![selectedNode.type isEqualToString:@"EDGE"] && ![selectedNode.type isEqualToString:@"PUCK"]){
-        [self.copyPropButton setEnabled:YES];
+    if([selectedNode.type isEqualToString:@"PUCK"]){
+        [self.copyPropButton setEnabled:NO];
         [self.deleteButton setEnabled:YES];
+    } else if(selectedNode != nil && ![selectedNode.type isEqualToString:@"EDGE"]){
+        [self.deleteButton setEnabled:YES];
+        [self.copyPropButton setEnabled:YES];
+    } else if([Scene getInstance].renderingTree.multipleNodesSelected){
+        [self.deleteButton setEnabled:YES];
+        [self.copyPropButton setEnabled:YES];
     } else {
         [self.copyPropButton setEnabled:NO];
         [self.deleteButton setEnabled:NO];
@@ -1106,6 +1112,7 @@ enum {
     [self.angleLable setHidden:NO];
     [self.angleSlider setHidden:NO];
     [self.specialSlider setHidden:NO];
+    
     if([node.type isEqualToString:@"POMMEAU"] || [node.type isEqualToString:@"PUCK"] || [node.type isEqualToString:@"EDGE"] || [Scene getInstance].renderingTree.multipleNodesSelected){
         // Hide parameters view
         [self slideOutAnimationView:self.ParametersView];

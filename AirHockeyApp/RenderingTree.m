@@ -301,16 +301,17 @@
             } else if(node.scaleFactor <= 0.5) {
                 node.scaleFactor = 0.5f;
             }
-        } else if([node.type isEqualToString:@"EDGE"]){ // Goals Edges
-            if(((NodeTableEdge*)node).index == 3 || ((NodeTableEdge*)node).index == 4){
-                ((NodeTableEdge*)node).goalSize += deltaScale/30;
-                if(node.scaleFactor >= 4) {
-                    node.scaleFactor = 4;
-                } else if(node.scaleFactor <= 0.5) {
-                    node.scaleFactor = 0.5f;
-                }
-            }
         }
+//        else if([node.type isEqualToString:@"EDGE"]){ // Goals Edges
+//            if(((NodeTableEdge*)node).index == 3 || ((NodeTableEdge*)node).index == 4){
+//                ((NodeTableEdge*)node).goalSize += deltaScale/30;
+//                if(node.scaleFactor >= 4) {
+//                    node.scaleFactor = 4;
+//                } else if(node.scaleFactor <= 0.5) {
+//                    node.scaleFactor = 0.5f;
+//                }
+//            }
+//        }
     }
 }
 

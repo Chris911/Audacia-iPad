@@ -27,7 +27,9 @@
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         
-        [Texture2DUtil load2DTextureFromNamePVRTC:@"skybox2":512];
+        //[Texture2DUtil load2DTextureFromNamePVRTC:@"skybox2":512];
+        [Texture2DUtil load2DTextureFromName:@"skybox1"];
+
         
         self.v1 = Vector3DMake(-size, size, -size);
         self.v2 = Vector3DMake(-size, -size, -size);
@@ -49,6 +51,9 @@ float angle = 0;
     glPushMatrix();
     //angle += 0.02;
     //glRotatef(angle, 0, 0, 1);
+    //glRotatef(-angle, 0, 1, 0);
+    //glRotatef(-angle, 1, 0, 0);
+
     glEnable(GL_TEXTURE_2D);
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
@@ -214,6 +219,7 @@ float angle = 0;
         0, 0,
     };
     
+    glRotatef(270, 1, 0, 0);
     glNormal3f(1, 0, 0);
     
     glVertexPointer(3, GL_FLOAT, 0, botVertices);
@@ -258,7 +264,6 @@ float angle = 0;
         1,1,
         0,1
     };
-    
     glNormal3f(0, 1, 0);
     
     glVertexPointer(3, GL_FLOAT, 0, botVertices);
@@ -300,7 +305,6 @@ float angle = 0;
         1,1,
         0,1
     };
-    
     glNormal3f(1, 0, 0);
     //glCullFace(GL_FRONT);
     glVertexPointer(3, GL_FLOAT, 0, botVertices);

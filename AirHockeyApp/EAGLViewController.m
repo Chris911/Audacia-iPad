@@ -79,7 +79,7 @@ enum {
     // Elastic Rectangle
     ElasticRect *elasticRect;
     
-    Skybox* skybox;
+    Skybox* skybox1;
     
     Node *selectedNode;
     
@@ -131,7 +131,7 @@ enum {
         elasticRect = [[ElasticRect alloc]init];
         
         // Create the skybox
-        skybox = [[Skybox alloc]initWithSize:450.0f];
+        skybox1 = [[Skybox alloc]initWithSize:2000.0f:NO];
         
         // Icon images
         self.PortalView.backgroundColor     = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-portal.png"]];
@@ -172,7 +172,8 @@ enum {
     [context release];
     
     [elasticRect release];
-    [skybox release];
+    [skybox1 release];
+
     //[self.camera release];
     [particles release];
     
@@ -717,7 +718,7 @@ enum {
     float fogColor[] = {0.1, 0.1, 0.1, 0.5};
     glEnable(GL_FOG);
     glFogfv(GL_FOG_COLOR, fogColor);
-    glFogf(GL_FOG_DENSITY, 0.0025f);
+    glFogf(GL_FOG_DENSITY, 0.0008f);
     glFogf(GL_FOG_MODE, GL_EXP2);
     glHint(GL_FOG_HINT, GL_NICEST);
     
@@ -727,7 +728,8 @@ enum {
     [self.camera setCamera];
 
     //Render the skybox
-    [skybox render];
+    [skybox1 render];
+
     
     glEnable(GL_CULL_FACE);
     // Renders the whole rendring tree

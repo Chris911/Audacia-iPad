@@ -78,7 +78,7 @@
                  self.orthoCenter.x + self.orthoWidth/2,
                  self.orthoCenter.y - self.orthoHeight/2,
                  self.orthoCenter.y + self.orthoHeight/2,
-                 -1000, 1000);
+                 -5000, 5000);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         
@@ -86,7 +86,7 @@
     
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(60, self.windowWidth/ self.windowHeight, 0.1f, 1000);
+        gluPerspective(60, self.windowWidth/ self.windowHeight, 0.1f, 5000);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         

@@ -14,6 +14,8 @@
 #import "BetaViewController.h"
 #import "ProfileViewController.h"
 
+typedef void (^JSONResponseBlock)(NSDictionary* json);
+
 @interface WebClient : NSObject
 
 @property (retain,nonatomic) AFHTTPClient* AFClient;
@@ -34,5 +36,6 @@
 - (void) fetchMapXML:(NSString *)mapName;
 - (void) getConfigPaths;
 - (void) fetchMapImageWithName:(Map*)map;
-- (BOOL) validateLogin:(NSString*)username :(NSString*)password ;
+- (BOOL) validateLogin:(NSString*)username :(NSString*)password;
+- (void) fetchStatsByUser:(NSString*)username onCompletion:(JSONResponseBlock)completionBlock;
 @end

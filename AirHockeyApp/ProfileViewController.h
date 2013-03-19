@@ -31,4 +31,11 @@
 - (void) assignUsersMaps:(NSArray*)maps;
 - (void) assignProfileImage:(UIImage*)image;
 
+@property (retain, nonatomic) IBOutlet UILabel *gamesPlayedLabel;
+@property (retain, nonatomic) IBOutlet UILabel *victoriesLabel;
+@property (retain, nonatomic) IBOutlet UILabel *defeatsLabel;
+@property (retain, nonatomic) IBOutlet UILabel *goalsForLabel;
+@property (retain, nonatomic) IBOutlet UILabel *goalsAgainsLabel;
+
+
 @end

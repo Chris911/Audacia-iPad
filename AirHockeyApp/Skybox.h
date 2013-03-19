@@ -20,7 +20,7 @@
 @property  Vector3D v7;
 @property  Vector3D v8;
 
-- (id) initWithSize:(float) size;
+- (id) initWithSize:(float)size :(BOOL)rotating;
 - (void) render;
 
 @end

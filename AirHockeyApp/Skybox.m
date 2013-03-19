@@ -12,14 +12,17 @@
 @interface Skybox ()
 {
     GLuint      texture[1];
+    BOOL isRotating;
 }
 @end
 
 @implementation Skybox
 
-- (id) initWithSize:(float) size
+- (id) initWithSize:(float)size :(BOOL)rotating
 {
     if((self = [super init])) {
+        isRotating = rotating;
+        
         glGenTextures(1, &texture[0]);
         glBindTexture(GL_TEXTURE_2D, texture[0]);
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
@@ -49,10 +52,10 @@ float angle = 0;
 - (void) render
 {
     glPushMatrix();
-    //angle += 0.02;
-    //glRotatef(angle, 0, 0, 1);
-    //glRotatef(-angle, 0, 1, 0);
-    //glRotatef(-angle, 1, 0, 0);
+    if(isRotating){
+        //angle += 0.08;
+        glRotatef(90, 0, 0, 1);
+    }
 
     glEnable(GL_TEXTURE_2D);
     glCullFace(GL_BACK);

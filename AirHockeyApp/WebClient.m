@@ -116,10 +116,10 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation  setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success [Profile Image]: %@", operation.responseString);
-    }
-                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                          NSLog(@"Error [Map Image]: %@",  operation.responseString);
-                                      }
+    }   
+      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          NSLog(@"Error [Map Image]: %@",  operation.responseString);
+      }
      ];
     
     [operation start];
@@ -251,6 +251,30 @@
     
     [operation start];
 }
+
+- (void) fetchStatsByUser:(NSString*)username onCompletion:(JSONResponseBlock)completionBlock
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"getUserStats", @"action",
+                            username, @"username",
+                            nil];
+    
+    NSMutableURLRequest *request = [self.AFClient requestWithMethod:@"POST"
+                                                               path:self.profileAPIScript
+                                                         parameters:params];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        // Handle success
+        completionBlock(JSON);
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"Error: %@", error);
+        NSLog(@"Response %@", JSON);
+    }];
+    
+    [operation start];
+}
+
 
 - (void) fetchMapImageWithName:(Map*) map
 {

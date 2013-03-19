@@ -76,7 +76,7 @@
     
     [self setupLongPressGesture];
     
-    //[self drawLine];
+    [self drawLine];
     
     deleteState = NO;
     [self toggleDoneEditingButton];
@@ -84,6 +84,23 @@
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     [delegate.webClient fetchMapsByUser:[Session getInstance].username :self];
     [delegate.webClient fetchProfilePicture:[Session getInstance].username :self];
+    
+    [delegate.webClient fetchStatsByUser:[Session getInstance].username
+                            onCompletion:^(NSDictionary *JSON)
+        {
+            NSNumber* gamesPlayed  = [JSON valueForKeyPath:@"GamePlayed"];
+            NSNumber* victories   = [JSON valueForKeyPath:@"Victories"];
+            NSNumber* defeats = [JSON valueForKeyPath:@"Defeats"];
+            NSNumber* goalsFor = [JSON valueForKeyPath:@"GoalsFor"];
+            NSNumber* goalsAgainst = [JSON valueForKeyPath:@"GoalsAgainst"];
+            
+            self.gamesPlayedLabel.text = [NSString stringWithFormat:@"%d",[gamesPlayed intValue]];
+            self.victoriesLabel.text = [NSString stringWithFormat:@"%d",[victories intValue]];
+            self.defeatsLabel.text = [NSString stringWithFormat:@"%d",[defeats intValue]];
+            self.goalsForLabel.text = [NSString stringWithFormat:@"%d",[goalsFor intValue]];
+            self.goalsAgainsLabel.text = [NSString stringWithFormat:@"%d",[goalsAgainst intValue]];
+                                    
+        }];
     
     [self.backgroundView.layer setCornerRadius:20.0f];
     [self.backgroundView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
@@ -129,6 +146,11 @@
     [_spinner release];
     [mapsTableData release];
     [_doneDeletingButton release];
+    [_gamesPlayedLabel release];
+    [_victoriesLabel release];
+    [_defeatsLabel release];
+    [_goalsForLabel release];
+    [_goalsAgainsLabel release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -141,6 +163,11 @@
     [self setHiddenView:nil];
     [self setSpinner:nil];
     [self setDoneDeletingButton:nil];
+    [self setGamesPlayedLabel:nil];
+    [self setVictoriesLabel:nil];
+    [self setDefeatsLabel:nil];
+    [self setGoalsForLabel:nil];
+    [self setGoalsAgainsLabel:nil];
     [super viewDidUnload];
 }
 
@@ -174,7 +201,7 @@
 
 - (void)drawLine
 {
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(40, 475, 264, 2)];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(30, 485, 264, 1)];
     lineView.backgroundColor = [UIColor blackColor];
     [self.backgroundView addSubview:lineView];
     [lineView release];

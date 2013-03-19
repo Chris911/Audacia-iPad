@@ -78,7 +78,7 @@
                  self.orthoCenter.x + self.orthoWidth/2,
                  self.orthoCenter.y - self.orthoHeight/2,
                  self.orthoCenter.y + self.orthoHeight/2,
-                 -5000, 5000);
+                 -1000, 1000);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         

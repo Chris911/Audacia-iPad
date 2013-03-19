@@ -715,10 +715,10 @@ enum {
 - (void)drawFrame
 {
     // FOG!
-    float fogColor[] = {0.1, 0.1, 0.1, 0.5};
+    float fogColor[] = {0.1, 0.1, 0.1, 1};
     glEnable(GL_FOG);
     glFogfv(GL_FOG_COLOR, fogColor);
-    glFogf(GL_FOG_DENSITY, 0.0008f);
+    glFogf(GL_FOG_DENSITY, 0.0006f);
     glFogf(GL_FOG_MODE, GL_EXP2);
     glHint(GL_FOG_HINT, GL_NICEST);
     

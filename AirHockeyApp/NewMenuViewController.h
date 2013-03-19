@@ -19,6 +19,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *loginButton;
 @property (retain, nonatomic) IBOutlet UIImageView *controllerViewBackgroundImage;
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (retain, nonatomic) IBOutlet UIButton *soundButton;
 
 - (IBAction)editionModePressed:(id)sender;
 - (IBAction)profileModePressed:(id)sender;

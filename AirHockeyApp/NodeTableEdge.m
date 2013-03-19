@@ -25,7 +25,7 @@ GLfloat nodeHeight = 5.2;
 {
     if((self = [super init])) {
         self.type = @"EDGE";
-        self.xmlType = @"PointControle";
+        self.xmlType = @"pointControle";
         self.isRemovable = NO;
         
         self.isCopyable = NO;

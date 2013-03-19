@@ -58,6 +58,7 @@
     
     // Sound is disabled on load
     isSoundEnabled = NO;
+    self.soundButton.selected = YES;
     
     //Add observer for Connected to game server event
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -185,8 +186,10 @@
     isSoundEnabled = !isSoundEnabled;
     if(isSoundEnabled){
         [AudioInterface startBackgroundMusic];
+        self.soundButton.selected = NO;
     } else {
         [AudioInterface stopBackgroundMusic];
+        self.soundButton.selected = YES;
     }
 }
 
@@ -403,6 +406,7 @@
     [_joystickButton release];
     [_controllerViewBackgroundImage release];
     [_spinner release];
+    [_soundButton release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -416,6 +420,7 @@
     [self setJoystickButton:nil];
     [self setControllerViewBackgroundImage:nil];
     [self setSpinner:nil];
+    [self setSoundButton:nil];
     [super viewDidUnload];
 }
 

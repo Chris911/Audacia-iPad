@@ -23,7 +23,7 @@ float matDiffuse1[] = { 0.6f, 0.6f, 0.6f, 1.0f };
     if((self = [super init])) {
         self.isWaveFrontObject = YES;
         self.type = @"POMMEAU";
-        self.xmlType = @"Pommeau";
+        self.xmlType = @"pommeau";
         self.Camp = @"Aucun";
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"pommeau" ofType:@"obj"];

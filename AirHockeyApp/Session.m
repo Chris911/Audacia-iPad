@@ -16,8 +16,8 @@
 @synthesize isAuthenticated;
 @synthesize profileImage;
 
-NSString* DEFAULT_USERNAME = @"Chris";
-NSString* DEFAULT_PASSWORD = @"11";
+NSString* DEFAULT_USERNAME = @"Sam";
+NSString* DEFAULT_PASSWORD = @"123456789";
 
 static Session *session = NULL;
 

@@ -131,7 +131,7 @@ enum {
         elasticRect = [[ElasticRect alloc]init];
         
         // Create the skybox
-        skybox = [[Skybox alloc]initWithSize:150.0f];
+        skybox = [[Skybox alloc]initWithSize:450.0f];
         
         // Icon images
         self.PortalView.backgroundColor     = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-portal.png"]];
@@ -686,7 +686,17 @@ enum {
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     GLfloat lightpos[] = {0, 0, 500.0, 0.0};
+    float blueAmbientDiffuse[] = {0.0f, 0.0f, 1.0f, 1.0f};
     glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+    glLightfv(GL_LIGHT1, GL_AMBIENT, blueAmbientDiffuse);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, blueAmbientDiffuse);
+    
+    // Prepare the lights
+    glEnable(GL_LIGHT1);
+    float position1[] = {-2.0f, 2.0f, -5.0f, 1.0f};
+    glLightfv(GL_LIGHT1, GL_AMBIENT, blueAmbientDiffuse);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, blueAmbientDiffuse);
+    glLightfv(GL_LIGHT1, GL_POSITION, position1);
     
     // Prepare the view and colors
     glEnable(GL_DEPTH_TEST);
@@ -703,6 +713,14 @@ enum {
 
 - (void)drawFrame
 {
+    // FOG!
+    float fogColor[] = {0.1, 0.1, 0.1, 0.5};
+    glEnable(GL_FOG);
+    glFogfv(GL_FOG_COLOR, fogColor);
+    glFogf(GL_FOG_DENSITY, 0.0025f);
+    glFogf(GL_FOG_MODE, GL_EXP2);
+    glHint(GL_FOG_HINT, GL_NICEST);
+    
     [(EAGLView *)self.view setFramebuffer];
     
     // Set the camera either in ortho or perspective mode  

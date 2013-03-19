@@ -18,7 +18,7 @@
     if((self = [super init])) {
         self.isWaveFrontObject = YES;
         self.type = @"MURRET";
-        self.xmlType = @"Murret";
+        self.xmlType = @"murret";
 
         NSString *path = [[NSBundle mainBundle] pathForResource:@"cube" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];

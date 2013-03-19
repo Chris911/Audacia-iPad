@@ -1454,6 +1454,7 @@
 					<string>56.IBPluginDependency</string>
 					<string>56.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>57.IBPluginDependency</string>
+					<string>57.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>60.IBPluginDependency</string>
 					<string>61.IBPluginDependency</string>
 					<string>62.IBPluginDependency</string>
@@ -1503,6 +1504,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="2"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="2"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

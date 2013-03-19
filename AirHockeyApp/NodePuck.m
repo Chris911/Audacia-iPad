@@ -22,7 +22,7 @@ const float DEFAULT_COEFF_FRICTION = 1.0;
     if((self = [super init])) {
         self.isWaveFrontObject = YES;
         self.type = @"PUCK";
-        self.xmlType = @"Puck";
+        self.xmlType = @"puck";
 
         NSString *path = [[NSBundle mainBundle] pathForResource:@"puck" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];

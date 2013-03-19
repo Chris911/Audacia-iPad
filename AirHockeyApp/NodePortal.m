@@ -18,7 +18,7 @@
     if((self = [super init])) {
         self.isWaveFrontObject = YES;
         self.type = @"PORTAL";
-        self.xmlType = @"Portal";
+        self.xmlType = @"portal";
 
         NSString *path = [[NSBundle mainBundle] pathForResource:@"portal" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];

@@ -61,11 +61,11 @@ static Scene *scene = NULL;
     NodePortal* portal = [[[NodePortal alloc]init]autorelease];
     [scene.renderingTree addNodeToTreeWithInitialPosition:portal :Vector3DMake(-20, -30, portal.position.z)];
     
-//    NodePommeau* pommeau1 = [[[NodePommeau alloc]init]autorelease];
-//    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau1 :Vector3DMake(-40, 0, pommeau1.position.z)];
-//    
-//    NodePommeau* pommeau2 = [[[NodePommeau alloc]init]autorelease];
-//    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau2 :Vector3DMake(40, 0, pommeau2.position.z)];
+    NodePommeau* pommeau1 = [[[NodePommeau alloc]init]autorelease];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau1 :Vector3DMake(-40, 0, pommeau1.position.z)];
+    
+    NodePommeau* pommeau2 = [[[NodePommeau alloc]init]autorelease];
+    [scene.renderingTree addNodeToTreeWithInitialPosition:pommeau2 :Vector3DMake(40, 0, pommeau2.position.z)];
     
     NodeBooster* booster = [[[NodeBooster alloc]init]autorelease];
     [scene.renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(20, 30, booster.position.z)];

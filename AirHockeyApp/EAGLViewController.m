@@ -454,7 +454,6 @@ enum {
             
         } else if (currentTouchesMode == TOUCH_ELASTIC_MODE) { // Elastic Rectangle mode
             elasticRect.endPosition = [self.camera convertToWorldPosition:positionCourante];
-            
         }
     }
 }
@@ -733,7 +732,6 @@ enum {
     
     glEnable(GL_CULL_FACE);
     // Renders the whole rendring tree
-    //RenderingTree* tree = [Scene getInstance].renderingTree;
     [[Scene getInstance].renderingTree render];
     glDisable(GL_CULL_FACE);
     
@@ -1003,6 +1001,7 @@ enum {
     // Initialize Scene and rendring tree
     if([Scene getInstance].loadingCustomTree == YES) {
         [Scene loadTreeFromXMLDoc];
+        
         [Scene getInstance].loadingCustomTree = NO;
     }
     else {
@@ -1094,7 +1093,7 @@ enum {
     [self.specialSlider setHidden:YES];
     
     [self.PuckView setHidden:YES]; //FIXME: This assumes we always have a puck in an initial map (True from loading a valid xml, maybe false for an empty starting table)
-    //[self.PommeauView setHidden:YES]; // This assumes we always have 2 sticks in an initial map (True from loading a valid xml, maybe false for an empty starting table)
+    [self.PommeauView setHidden:YES]; // This assumes we always have 2 sticks in an initial map (True from loading a valid xml, maybe false for an empty starting table)
 
 }
 

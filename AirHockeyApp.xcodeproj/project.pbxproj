@@ -32,7 +32,6 @@
 		048C9D3616A4AFB9006A7082 /* RenderingTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3516A4AFB9006A7082 /* RenderingTree.m */; };
 		048C9D3A16A4BD8F006A7082 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3916A4BD8F006A7082 /* Scene.m */; };
 		04A04E4316AEEF4C006D1FEB /* NodeBooster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E4216AEEF4C006D1FEB /* NodeBooster.m */; };
-		04A04E6416AEF7B6006D1FEB /* NodeFilet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6316AEF7B6006D1FEB /* NodeFilet.m */; };
 		04A04E6716AEF7BD006D1FEB /* NodeMurret.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6616AEF7BD006D1FEB /* NodeMurret.m */; };
 		04A04E6D16AEF7CF006D1FEB /* NodePortal.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6C16AEF7CF006D1FEB /* NodePortal.m */; };
 		04A04E7016AEF7DB006D1FEB /* NodePommeau.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6F16AEF7DB006D1FEB /* NodePommeau.m */; };
@@ -177,6 +176,9 @@
 		A8F13CA916AF190E00CB5885 /* SideBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CA816AF190E00CB5885 /* SideBar2.png */; };
 		A8F13CB916B027F300CB5885 /* SettingsButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CB716B027F300CB5885 /* SettingsButton1.png */; };
 		A8F7980016F8B3FE0091E399 /* skybox1.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F797FF16F8B3FE0091E399 /* skybox1.png */; };
+		A8F7980316FA09350091E399 /* mur.mtl in Resources */ = {isa = PBXBuildFile; fileRef = A8F7980116FA09350091E399 /* mur.mtl */; };
+		A8F7980416FA09350091E399 /* mur.obj in Resources */ = {isa = PBXBuildFile; fileRef = A8F7980216FA09350091E399 /* mur.obj */; };
+		A8F7980616FA09450091E399 /* box.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8F7980516FA09450091E399 /* box.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -212,8 +214,6 @@
 		048C9D3916A4BD8F006A7082 /* Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
 		04A04E4116AEEF4C006D1FEB /* NodeBooster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBooster.h; sourceTree = "<group>"; };
 		04A04E4216AEEF4C006D1FEB /* NodeBooster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeBooster.m; sourceTree = "<group>"; };
-		04A04E6216AEF7B5006D1FEB /* NodeFilet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeFilet.h; sourceTree = "<group>"; };
-		04A04E6316AEF7B6006D1FEB /* NodeFilet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeFilet.m; sourceTree = "<group>"; };
 		04A04E6516AEF7BD006D1FEB /* NodeMurret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeMurret.h; sourceTree = "<group>"; };
 		04A04E6616AEF7BD006D1FEB /* NodeMurret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeMurret.m; sourceTree = "<group>"; };
 		04A04E6816AEF7C5006D1FEB /* NodePuck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodePuck.h; sourceTree = "<group>"; };
@@ -419,6 +419,9 @@
 		A8F13CA816AF190E00CB5885 /* SideBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar2.png; path = Assets/UI/Images/SideBar2.png; sourceTree = "<group>"; };
 		A8F13CB716B027F300CB5885 /* SettingsButton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsButton1.png; path = Assets/UI/Images/SettingsButton1.png; sourceTree = "<group>"; };
 		A8F797FF16F8B3FE0091E399 /* skybox1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skybox1.png; sourceTree = "<group>"; };
+		A8F7980116FA09350091E399 /* mur.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mur.mtl; path = Assets/Models/mur.mtl; sourceTree = SOURCE_ROOT; };
+		A8F7980216FA09350091E399 /* mur.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mur.obj; path = Assets/Models/mur.obj; sourceTree = SOURCE_ROOT; };
+		A8F7980516FA09450091E399 /* box.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = box.jpg; path = Assets/Models/box.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -507,6 +510,8 @@
 				04F43C5E16B038D00017756F /* Texture */,
 				04F43C5716B038D00017756F /* PSD */,
 				04F43C4C16B038D00017756F /* Blend */,
+				A8F7980116FA09350091E399 /* mur.mtl */,
+				A8F7980216FA09350091E399 /* mur.obj */,
 				A8EB15F416F1225000E83855 /* cube.mtl */,
 				A8EB15F516F1225000E83855 /* cube.obj */,
 				04385DBE16E67E590067DB06 /* murret.mtl */,
@@ -590,6 +595,7 @@
 		04F43C5E16B038D00017756F /* Texture */ = {
 			isa = PBXGroup;
 			children = (
+				A8F7980516FA09450091E399 /* box.jpg */,
 				04385DC316E67E780067DB06 /* murret_texture.png */,
 				A889F22316B067E10008E534 /* booster_texture.png */,
 				A889F22416B067E10008E534 /* pommeau_texture.png */,
@@ -944,8 +950,6 @@
 				A8EBDE8C16A8849D002B2DD6 /* NodeTableEdge.m */,
 				04A04E4116AEEF4C006D1FEB /* NodeBooster.h */,
 				04A04E4216AEEF4C006D1FEB /* NodeBooster.m */,
-				04A04E6216AEF7B5006D1FEB /* NodeFilet.h */,
-				04A04E6316AEF7B6006D1FEB /* NodeFilet.m */,
 				04A04E6516AEF7BD006D1FEB /* NodeMurret.h */,
 				04A04E6616AEF7BD006D1FEB /* NodeMurret.m */,
 				04A04E6816AEF7C5006D1FEB /* NodePuck.h */,
@@ -1147,6 +1151,9 @@
 				04F6AF3616F9033A00445745 /* Button-style.png in Resources */,
 				04F6AF3916F9059700445745 /* icon-copy.png in Resources */,
 				04F6AF3A16F9059700445745 /* icon-garbage.png in Resources */,
+				A8F7980316FA09350091E399 /* mur.mtl in Resources */,
+				A8F7980416FA09350091E399 /* mur.obj in Resources */,
+				A8F7980616FA09450091E399 /* box.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1189,7 +1196,6 @@
 				A8EBDE9D16A9EE9B002B2DD6 /* Constants.m in Sources */,
 				04DF183116ACAC6400339EDB /* WebClient.m in Sources */,
 				04A04E4316AEEF4C006D1FEB /* NodeBooster.m in Sources */,
-				04A04E6416AEF7B6006D1FEB /* NodeFilet.m in Sources */,
 				04A04E6716AEF7BD006D1FEB /* NodeMurret.m in Sources */,
 				04A04E6D16AEF7CF006D1FEB /* NodePortal.m in Sources */,
 				04A04E7016AEF7DB006D1FEB /* NodePommeau.m in Sources */,

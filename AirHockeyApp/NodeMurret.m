@@ -20,7 +20,7 @@
         self.type = @"MURRET";
         self.xmlType = @"murret";
 
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"cube" ofType:@"obj"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"mur" ofType:@"obj"];
         OpenGLWaveFrontObject *theObject = [[OpenGLWaveFrontObject alloc] initWithPath:path];
         Vertex3D position = Vertex3DMake(0, 0, 20.0);
         self.model = theObject;
@@ -55,34 +55,28 @@
         glDrawArrays(GL_LINE_LOOP, 0, 4);
         glDisableClientState(GL_VERTEX_ARRAY);
     }
-    glDisable(GL_LIGHTING);
-    glDisable(GL_CULL_FACE);
-    
+
     // Update the 3D Model Position
     self.model.currentPosition = self.position;
     
     // Save the current transformation by pushing it on the stack
 	glPushMatrix();
-    
+    glDisable(GL_BLEND);
+    //glBlendFunc(GL_ONE, GL_SRC_ALPHA);    
 	// Translate to the current position
 	glTranslatef(self.model.currentPosition.x, self.model.currentPosition.y, self.model.currentPosition.z);
     
-    // Rotate to the current rotation in X
-	glRotatef(180.0, 1.0, 0.0, 0.0);
-    
 	// Rotate to the current rotation in Z
-	glRotatef(self.angle, 0.0, 0.0, 1.0);
+    glRotatef(90, 1.0, 0, 0);
+	glRotatef(self.angle, 0.0, 1.0, 0.0);
     
     // Scale the model
-    glScalef(0.5, 0.1, 0.1);
-    glScalef(self.scaleFactor, 1.0f, 1.0f);
+    glScalef(3.0f, 3.0f, 3.0f);
+    glScalef(self.scaleFactor, self.scaleFactor, self.scaleFactor);
     
     // Draw the .obj Model
     [model drawSelf];
-    
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_LIGHTING);
-
+    glEnable(GL_BLEND);
     glPopMatrix();
     
 }

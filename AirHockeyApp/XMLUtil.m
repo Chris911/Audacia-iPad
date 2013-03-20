@@ -19,6 +19,8 @@
 
 @implementation XMLUtil
 
+const float xmlScale = 1.4f;
+
 // Returns the complete path of the desired XML File
 + (NSString *)dataFilePath:(NSString*)fileName :(BOOL)forSave {
 
@@ -55,8 +57,8 @@
         int i=0;
         for(GDataXMLElement *nodeControle in pointsConrole)
         {
-            float posX = [[[nodeControle attributeForName:@"PositionX"] stringValue] floatValue];
-            float posY = [[[nodeControle attributeForName:@"PositionY"] stringValue] floatValue];
+            float posX = [[[nodeControle attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
+            float posY = [[[nodeControle attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             NodeTableEdge* nodeT = [[NodeTableEdge alloc]initWithCoordsAndIndex:posX :posY :i++];
             [newEdges addObject:nodeT];
             [renderingTree addNodeToTree:nodeT];
@@ -70,8 +72,8 @@
         NSArray* boosters = [node elementsForName:@"booster"];
         for(GDataXMLElement *realNode in boosters)
         {
-            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
-            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 2.0;
             float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
             float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
@@ -88,8 +90,8 @@
         NSArray* portals = [node elementsForName:@"portal"];
         for(GDataXMLElement *realNode in portals)
         {
-            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
-            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 1.0;
             float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
             float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
@@ -109,8 +111,8 @@
         for(GDataXMLElement *realNode in pommeaux)
         {
             //We don't really care about the other values on load
-            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
-            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 1.0;
             NodePommeau* pommeau = [[[NodePommeau alloc]init]autorelease];
             [renderingTree addNodeToTreeWithInitialPosition:pommeau :Vector3DMake(posX, posY, posZ)];
@@ -124,11 +126,11 @@
         for(GDataXMLElement *realNode in murrets)
         {
             //We don't really care about the other values on load
-            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
-            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 1.0;
-            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
-            float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
+            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue]/xmlScale;
+            float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue]/xmlScale;
             NodeMurret* murret = [[[NodeMurret alloc]init]autorelease];
             murret.scaleFactor = scaleFactor;
             murret.angle = angleFactor;
@@ -142,8 +144,8 @@
         NSArray* pucks = [node elementsForName:@"puck"];
         for(GDataXMLElement *realNode in pucks)
         {
-            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue];
-            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue];
+            float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
+            float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 2.0;
             float coeffFriction = [[[realNode attributeForName:@"CoeffFriction"] stringValue] floatValue];
             float coeffRebond = [[[realNode attributeForName:@"CoeffRebond"] stringValue] floatValue];
@@ -179,8 +181,8 @@
         //Object node
         GDataXMLElement *nodeElement = [GDataXMLNode elementWithName:node.xmlType];
         //Common Properties (all objects have a position)
-        GDataXMLElement *posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x]];
-        GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y]];
+        GDataXMLElement *posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x*xmlScale]];
+        GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y*xmlScale]];
         GDataXMLElement *posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",0.0]];
         
         if(!([node.xmlType isEqualToString:@"but"] || [node.xmlType isEqualToString:@"pointControle"]))
@@ -235,7 +237,7 @@
             else
             {
                 // Fixme: The XML should be fixed in the game engine
-                GDataXMLElement *controlProperty = [GDataXMLNode attributeWithName:@"Control" stringValue:@"sourie"];
+                GDataXMLElement *controlProperty = [GDataXMLNode attributeWithName:@"Control" stringValue:@"souris"];
                 [nodeElement addAttribute:controlProperty];
                 
                 GDataXMLElement *campProperty = [GDataXMLNode attributeWithName:@"Camp" stringValue:@"droite"];
@@ -284,8 +286,8 @@
             {
                 GDataXMLElement *nodeElement = [GDataXMLNode elementWithName:@"but"];
                 GDataXMLElement *facteurButProperty = [GDataXMLNode attributeWithName:@"FacteurBut" stringValue:@"1"];
-                GDataXMLElement *posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x]];
-                GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y]];
+                GDataXMLElement *posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x/xmlScale]];
+                GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y/xmlScale]];
                 GDataXMLElement *posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",0.0]];
                 [nodeElement addAttribute:posXProperty];
                 [nodeElement addAttribute:posYProperty];

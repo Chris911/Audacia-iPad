@@ -685,18 +685,14 @@ enum {
     // Prepare the lights
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    GLfloat lightpos[] = {0, 0, 500.0, 0.0};
-    float blueAmbientDiffuse[] = {0.0f, 0.0f, 1.0f, 1.0f};
+    GLfloat lightpos[] = {0, 0, -500.0, 0.0};
+    float whiteAmbientDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+    float redSpecular[] = {1.0f, 0.0f, 0.0f, 1.0f};
+
     glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
-    glLightfv(GL_LIGHT1, GL_AMBIENT, blueAmbientDiffuse);
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, blueAmbientDiffuse);
-    
-    // Prepare the lights
-    glEnable(GL_LIGHT1);
-    float position1[] = {-2.0f, 2.0f, -5.0f, 1.0f};
-    glLightfv(GL_LIGHT1, GL_AMBIENT, blueAmbientDiffuse);
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, blueAmbientDiffuse);
-    glLightfv(GL_LIGHT1, GL_POSITION, position1);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, whiteAmbientDiffuse);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteAmbientDiffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, redSpecular);
     
     // Prepare the view and colors
     glEnable(GL_DEPTH_TEST);

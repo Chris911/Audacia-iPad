@@ -72,8 +72,10 @@
     glScalef(3.0f, 3.0f, 3.0f);
     glScalef(self.scaleFactor, self.scaleFactor, self.scaleFactor);
     
+    glDisable(GL_LIGHTING);
     // Draw the .obj Model
     [model drawSelf];
+    glEnable(GL_LIGHTING);
     
     glPopMatrix();
     

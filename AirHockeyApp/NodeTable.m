@@ -64,6 +64,10 @@
 // Render the table, edges, and borders (close to a composite pattern)
 - (void) render
 {
+    float ambient[] = { 1, 1, 1, 1 };
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+
+    
     // Update Edges positions to correct the table's symetry
     [self updateEdgesPositions];
     
@@ -300,7 +304,7 @@
         0,0.25,          //3
         0,0.5             //0
     };
-    glNormal3f(0.0f, 0.0f, 1.0f);
+    glNormal3f(0.0f, 0.0f, -1.0f);
     
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);

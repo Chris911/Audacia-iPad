@@ -27,10 +27,10 @@ float const HAUTEUR_FENETRE              = 150;
 int const LARGEUR_ECRAN                  = 1024;
 int const HAUTEUR_ECRAN                  = 768;
 
-float lightAmbient[] = { 0.2f, 0.3f, 0.6f, 1.0f };
+float lightAmbient[] = { 1, 1, 1, 1.0f };
 float lightDiffuse[] = { 0.2f, 0.3f, 0.6f, 1.0f };
-float matAmbient[] = { 0.6f, 0.6f, 0.6f, 1.0f };
-float matDiffuse[] = { 0.6f, 0.6f, 0.6f, 1.0f };
+float matAmbient[] = { 1, 1, 1, 1.0f };
+float matDiffuse[] = { 1, 0, 0.4f, 1.0f };
 float orangeColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
 
 

@@ -84,9 +84,13 @@ float matDiffuse1[] = { 0.6f, 0.6f, 0.6f, 1.0f };
     
     //Prepare the light
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient1);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse1);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient1);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse1);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matDiffuse1);
+    float ambient[] = { 0.2, 0.5, 0.5, 1 };
+    float specular[] = { 1, 1, 1, 1 };
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+
     
     // Draw the .obj Model
     [model drawSelf];

@@ -46,7 +46,14 @@ GLfloat nodeHeight = 5.2;
     // Test if node out of its bounds
     [self checkIfOutOfBounds];
     
-    glDisable(GL_LIGHTING);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matDiffuse);
+    float ambient[] = { 1.0, 1, 1, 1 };
+    float specular[] = { 1, 0, 1, 1 };
+    
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+    
     if(self.index != 3 && self.index != 4){
         [self renderCorner];
     } else if(self.index == 3){ // Left Goal
@@ -54,7 +61,6 @@ GLfloat nodeHeight = 5.2;
     } else if(self.index == 4){ // Right Goal
         [self renderRightGoal];
     }
-    glEnable(GL_LIGHTING);
 
     self.lastPosition = self.position;
 }

@@ -685,7 +685,7 @@ enum {
     // Prepare the lights
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    GLfloat lightpos[] = {0, 0, -500.0, 0.0};
+    GLfloat lightpos[] = {0, -5, -500.0, 0.0};
     float whiteAmbientDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
     float redSpecular[] = {1.0f, 0.0f, 0.0f, 1.0f};
 

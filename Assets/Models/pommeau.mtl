@@ -3,9 +3,9 @@
 
 newmtl None
 Ns 0
-Ka 0.900000 0.900000 0.900000
-Kd 0.64 0.64 0.64
-Ks 0.7 0.7 0.7
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
 d 1
 illum 2
 map_Kd pommeau_texture.png

@@ -83,7 +83,7 @@
     
     AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     [delegate.webClient fetchMapsByUser:[Session getInstance].username :self];
-    [delegate.webClient fetchProfilePicture:[Session getInstance].username :self];
+    [delegate.webClient fetchProfilePicture:[[Session getInstance].username lowercaseString] :self];
     
     [delegate.webClient fetchStatsByUser:[Session getInstance].username
                             onCompletion:^(NSDictionary *JSON)

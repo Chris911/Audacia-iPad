@@ -50,9 +50,9 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
+						<object class="NSCustomResource" key="IBUIImage" id="832028938">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">menu-background.png</string>
+							<string key="NSResourceName">carousel-background.jpg</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="217416478">
@@ -290,7 +290,6 @@
 						<string key="NSFrame">{{852, 678}, {57, 51}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -351,10 +350,7 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">carousel-background.jpg</string>
-								</object>
+								<reference key="IBUIImage" ref="832028938"/>
 							</object>
 							<object class="IBUILabel" id="1066373486">
 								<reference key="NSNextResponder" ref="753007932"/>
@@ -399,6 +395,10 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="217416478"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<object class="NSColor" key="IBUIBackgroundColor" id="50004665">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC40MDAwMDAwMDYgMC40MDAwMDAwMDYgMC40MDAwMDAwMDYAA</bytes>
+								</object>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -406,10 +406,7 @@
 								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">Join</string>
 								<reference key="IBUIHighlightedTitleColor" ref="716753521"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-								</object>
+								<reference key="IBUINormalTitleColor" ref="50004665"/>
 								<reference key="IBUINormalTitleShadowColor" ref="935930279"/>
 								<reference key="IBUIFontDescription" ref="168498637"/>
 								<reference key="IBUIFont" ref="828495560"/>
@@ -422,6 +419,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="283234991"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<reference key="IBUIBackgroundColor" ref="50004665"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -429,10 +427,7 @@
 								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">Cancel</string>
 								<reference key="IBUIHighlightedTitleColor" ref="716753521"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-								</object>
+								<reference key="IBUINormalTitleColor" ref="50004665"/>
 								<reference key="IBUINormalTitleShadowColor" ref="935930279"/>
 								<reference key="IBUIFontDescription" ref="168498637"/>
 								<reference key="IBUIFont" ref="828495560"/>
@@ -996,7 +991,6 @@
 			<string key="carousel-background.jpg">{1024, 768}</string>
 			<string key="icon-audio-off.png">{50, 50}</string>
 			<string key="icon-audio-on.png">{50, 50}</string>
-			<string key="menu-background.png">{1024, 768}</string>
 			<string key="twitterbg.png">{620, 50}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

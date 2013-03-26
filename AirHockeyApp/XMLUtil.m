@@ -77,9 +77,11 @@ const float xmlScale = 1.4f;
             float posZ = 2.0;
             float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
             float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
+            float accelFactor = [[[realNode attributeForName:@"Acceleration"] stringValue] floatValue];
             NodeBooster* booster = [[[NodeBooster alloc]init]autorelease];
             booster.scaleFactor = scaleFactor;
             booster.angle = angleFactor;
+            booster.Acceleration = accelFactor;
             [renderingTree addNodeToTreeWithInitialPosition:booster :Vector3DMake(posX, posY, posZ)];
         }
     }
@@ -129,11 +131,13 @@ const float xmlScale = 1.4f;
             float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
             float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 1.0;
-            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue]/xmlScale;
-            float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue]/xmlScale;
+            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
+            float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
+            float coeffRebond = [[[realNode attributeForName:@"CoeffRebond"] stringValue] floatValue];
             NodeMurret* murret = [[[NodeMurret alloc]init]autorelease];
             murret.scaleFactor = scaleFactor;
             murret.angle = angleFactor;
+            murret.CoeffRebond = coeffRebond;
             [renderingTree addNodeToTreeWithInitialPosition:murret :Vector3DMake(posX, posY, posZ)];
         }
     }
@@ -201,6 +205,8 @@ const float xmlScale = 1.4f;
         
         if([node.xmlType isEqualToString:@"booster"])
         {
+            GDataXMLElement *accelProperty = [GDataXMLNode attributeWithName:@"Acceleration" stringValue:[NSString stringWithFormat:@"%f",((NodeBooster *)node).Acceleration]];
+            [nodeElement addAttribute:accelProperty];
             [boosterRoot addChild:nodeElement];
         }
         else if([node.xmlType isEqualToString:@"portal"])
@@ -259,6 +265,8 @@ const float xmlScale = 1.4f;
         }
         else if([node.xmlType isEqualToString:@"murret"])
         {
+            GDataXMLElement *coeffRebond = [GDataXMLNode attributeWithName:@"CoeffRebond" stringValue:[NSString stringWithFormat:@"%f",((NodeMurret *)node).CoeffRebond]];
+            [nodeElement addAttribute:coeffRebond];
             [murretRoot addChild:nodeElement];
         }
         else if([node.xmlType isEqualToString:@"puck"])

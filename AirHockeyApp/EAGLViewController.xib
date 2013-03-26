@@ -65,7 +65,7 @@
 							<object class="IBUIButton" id="768808206">
 								<reference key="NSNextResponder" ref="39156743"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{25, 105}, {44, 40}}</string>
+								<string key="NSFrame">{{14, 80}, {68, 68}}</string>
 								<reference key="NSSuperview" ref="39156743"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="54416756"/>
@@ -74,7 +74,6 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">Exit</string>
 								<object class="NSColor" key="IBUIHighlightedTitleColor" id="555243496">
 									<int key="NSColorSpace">3</int>
@@ -87,6 +86,10 @@
 								<object class="NSColor" key="IBUINormalTitleShadowColor" id="292132802">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
+								</object>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">icon-exit.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="703058837">
 									<int key="type">2</int>
@@ -101,7 +104,7 @@
 							<object class="IBUIButton" id="181947498">
 								<reference key="NSNextResponder" ref="39156743"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{89, 27}, {56, 44}}</string>
+								<string key="NSFrame">{{69, 11}, {68, 68}}</string>
 								<reference key="NSSuperview" ref="39156743"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="768808206"/>
@@ -110,7 +113,6 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">XML</string>
 								<reference key="IBUIHighlightedTitleColor" ref="555243496"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -118,6 +120,10 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="292132802"/>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">icon-save.png</string>
+								</object>
 								<reference key="IBUIFontDescription" ref="703058837"/>
 								<reference key="IBUIFont" ref="74513827"/>
 							</object>
@@ -160,7 +166,7 @@
 							<object class="IBUIButton" id="88289242">
 								<reference key="NSNextResponder" ref="909410144"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 20}, {54, 44}}</string>
+								<string key="NSFrame">{{20, 15}, {68, 68}}</string>
 								<reference key="NSSuperview" ref="909410144"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="167721937"/>
@@ -169,7 +175,6 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">Reset</string>
 								<reference key="IBUIHighlightedTitleColor" ref="555243496"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -177,13 +182,17 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="292132802"/>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">icon-reset-camera.png</string>
+								</object>
 								<reference key="IBUIFontDescription" ref="703058837"/>
 								<reference key="IBUIFont" ref="74513827"/>
 							</object>
 							<object class="IBUIButton" id="167721937">
 								<reference key="NSNextResponder" ref="909410144"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{95, 97}, {51, 44}}</string>
+								<string key="NSFrame">{{78, 85}, {68, 68}}</string>
 								<reference key="NSSuperview" ref="909410144"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="585471049"/>
@@ -192,7 +201,6 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">Pers</string>
 								<reference key="IBUIHighlightedTitleColor" ref="555243496"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -200,6 +208,10 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="292132802"/>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">icon-perspective.png</string>
+								</object>
 								<reference key="IBUIFontDescription" ref="703058837"/>
 								<reference key="IBUIFont" ref="74513827"/>
 							</object>
@@ -1218,9 +1230,9 @@
 						<reference key="object" ref="909410144"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="88289242"/>
-							<reference ref="167721937"/>
 							<reference ref="173839497"/>
+							<reference ref="167721937"/>
+							<reference ref="88289242"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">CameraView</string>
@@ -1304,9 +1316,9 @@
 						<reference key="object" ref="39156743"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="47810377"/>
 							<reference ref="181947498"/>
 							<reference ref="768808206"/>
-							<reference ref="47810377"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">SettingsView</string>
@@ -1950,9 +1962,13 @@
 				<string>SideBar3.jpg</string>
 				<string>cameraView.png</string>
 				<string>icon-copy.png</string>
+				<string>icon-exit.png</string>
 				<string>icon-garbage.png</string>
+				<string>icon-perspective.png</string>
+				<string>icon-reset-camera.png</string>
 				<string>icon-resize.png</string>
 				<string>icon-rotate.png</string>
+				<string>icon-save.png</string>
 				<string>icon-selection-elastique.png</string>
 				<string>settingsView.png</string>
 			</object>
@@ -1965,9 +1981,13 @@
 				<string>{670, 90}</string>
 				<string>{160, 160}</string>
 				<string>{88, 88}</string>
+				<string>{60, 60}</string>
+				<string>{88, 88}</string>
+				<string>{60, 60}</string>
+				<string>{60, 60}</string>
 				<string>{88, 88}</string>
 				<string>{88, 88}</string>
-				<string>{88, 88}</string>
+				<string>{60, 60}</string>
 				<string>{88, 88}</string>
 				<string>{160, 160}</string>
 			</object>

@@ -264,11 +264,10 @@ const float xmlScale = 1.4f;
         else if([node.xmlType isEqualToString:@"puck"])
         {
             // Fixme: Again this should be fixed in the game engine
-            Node* table = [renderingTree getTable];
-            GDataXMLElement *frictionProperty = [GDataXMLNode attributeWithName:@"CoeffFriction" stringValue:[NSString stringWithFormat:@"%f",((NodeTable *)table).CoeffFriction]];
+            GDataXMLElement *frictionProperty = [GDataXMLNode attributeWithName:@"CoeffFriction" stringValue:[NSString stringWithFormat:@"%f",0.1f]];
             [nodeElement addAttribute:frictionProperty];
             
-            GDataXMLElement *rebondProperty = [GDataXMLNode attributeWithName:@"CoeffRebond" stringValue:[NSString stringWithFormat:@"%f",((NodeTable *)table).CoeffRebond]];
+            GDataXMLElement *rebondProperty = [GDataXMLNode attributeWithName:@"CoeffRebond" stringValue:[NSString stringWithFormat:@"%f",0.87f]];
             [nodeElement addAttribute:rebondProperty];
             
             GDataXMLElement *zoneHProperty = [GDataXMLNode attributeWithName:@"HauteurZone" stringValue:@"140"];

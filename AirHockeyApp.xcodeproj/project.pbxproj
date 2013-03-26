@@ -51,6 +51,10 @@
 		04D9C3E916BCB042005C6197 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9C3E816BCB042005C6197 /* iCarousel.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		04D9C3EB16BCB0A3005C6197 /* CarouselTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */; };
 		04D9C3F616BCB217005C6197 /* CarouselTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9C3F516BCB217005C6197 /* CarouselTestView.m */; };
+		04DA5CF116FA03ED00D29031 /* icon-perspective.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DA5CF016FA03ED00D29031 /* icon-perspective.png */; };
+		04DA5CF316FA08CC00D29031 /* icon-reset-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DA5CF216FA08CC00D29031 /* icon-reset-camera.png */; };
+		04DA5CF616FA0E3B00D29031 /* icon-exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DA5CF416FA0E3B00D29031 /* icon-exit.png */; };
+		04DA5CF716FA0E3B00D29031 /* icon-save.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DA5CF516FA0E3B00D29031 /* icon-save.png */; };
 		04DF183116ACAC6400339EDB /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DF183016ACAC6400339EDB /* WebClient.m */; };
 		04F43C6316B038D00017756F /* booster.blend in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C4D16B038D00017756F /* booster.blend */; };
 		04F43C6416B038D00017756F /* pommeau.blend in Resources */ = {isa = PBXBuildFile; fileRef = 04F43C4E16B038D00017756F /* pommeau.blend */; };
@@ -241,6 +245,10 @@
 		04D9C3EA16BCB0A3005C6197 /* CarouselTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarouselTestView.xib; sourceTree = "<group>"; };
 		04D9C3F416BCB217005C6197 /* CarouselTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarouselTestView.h; sourceTree = "<group>"; };
 		04D9C3F516BCB217005C6197 /* CarouselTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarouselTestView.m; sourceTree = "<group>"; };
+		04DA5CF016FA03ED00D29031 /* icon-perspective.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-perspective.png"; path = "Assets/UI/Images/icon-perspective.png"; sourceTree = "<group>"; };
+		04DA5CF216FA08CC00D29031 /* icon-reset-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-reset-camera.png"; path = "Assets/UI/Images/icon-reset-camera.png"; sourceTree = "<group>"; };
+		04DA5CF416FA0E3B00D29031 /* icon-exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-exit.png"; path = "Assets/UI/Images/icon-exit.png"; sourceTree = "<group>"; };
+		04DA5CF516FA0E3B00D29031 /* icon-save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-save.png"; path = "Assets/UI/Images/icon-save.png"; sourceTree = "<group>"; };
 		04DF182F16ACAC6400339EDB /* WebClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebClient.h; sourceTree = "<group>"; };
 		04DF183016ACAC6400339EDB /* WebClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebClient.m; sourceTree = "<group>"; };
 		04F43C4D16B038D00017756F /* booster.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = booster.blend; sourceTree = "<group>"; };
@@ -849,6 +857,10 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				04DA5CF416FA0E3B00D29031 /* icon-exit.png */,
+				04DA5CF516FA0E3B00D29031 /* icon-save.png */,
+				04DA5CF216FA08CC00D29031 /* icon-reset-camera.png */,
+				04DA5CF016FA03ED00D29031 /* icon-perspective.png */,
 				04F6AF3716F9059700445745 /* icon-copy.png */,
 				04F6AF3816F9059700445745 /* icon-garbage.png */,
 				04F6AF3516F9033A00445745 /* Button-style.png */,
@@ -1154,6 +1166,10 @@
 				A8F7980316FA09350091E399 /* mur.mtl in Resources */,
 				A8F7980416FA09350091E399 /* mur.obj in Resources */,
 				A8F7980616FA09450091E399 /* box.jpg in Resources */,
+				04DA5CF116FA03ED00D29031 /* icon-perspective.png in Resources */,
+				04DA5CF316FA08CC00D29031 /* icon-reset-camera.png in Resources */,
+				04DA5CF616FA0E3B00D29031 /* icon-exit.png in Resources */,
+				04DA5CF716FA0E3B00D29031 /* icon-save.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

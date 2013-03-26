@@ -142,8 +142,8 @@
         // switch to menu
         [self transitionToMenu];
     } else {
-        //[NetworkUtils showNetworkUnavailableAlert];
-        [self transitionToMenu];
+        [NetworkUtils showNetworkUnavailableAlert];
+        //[self transitionToMenu];
     }
 }
 

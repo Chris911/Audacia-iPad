@@ -23,6 +23,7 @@
 
 #define AlertNameMapTag     1
 #define AlertNameWarningTag 2
+#define AlertInvalidNameTag 3
 
 // Global constants
 
@@ -1287,25 +1288,58 @@ enum {
     [message release];
 }
 
+- (void)showInvalidMapNameAlert
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invalid Name"
+                                                      message:@"The table mane may only contain alphanumerical [A-a,0-9] characters"
+                                                     delegate:self
+                                            cancelButtonTitle:@"Dismiss"
+                                            otherButtonTitles:nil];
+    [message setAlertViewStyle:UIAlertViewStyleDefault];
+    message.tag = AlertInvalidNameTag;
+    [message show];
+    [message release];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == AlertNameMapTag){
+    if (alertView.tag == AlertNameMapTag)
+    {
         if(buttonIndex == 0){
             NSString *inputText = [[alertView textFieldAtIndex:0] text];
+            NSData *data = [inputText dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+            NSString *mapName = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             //TODO: Do some validation here
+            if([self validateMapName:mapName])
+            {
+                NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
+                AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+                
+                // Sound time
+                [self flashAnimation];
             
-            NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
-            AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-            // Sound time
-            [self flashAnimation];
-        
-            // Upload data to server
-            [delegate.webClient uploadMapData:inputText :xmlData :[self getGLScreenshot]];
-            //[delegate.webClient release];
+                // Upload data to server
+                [delegate.webClient uploadMapData:mapName :xmlData :[self getGLScreenshot]];
+            }
+            else
+            {
+                [self showInvalidMapNameAlert];
+            }
         } else if(buttonIndex == 1) {
             NSLog(@"Action Canceled");
         }
     }
+    else if(alertView.tag == AlertInvalidNameTag)
+    {
+        [self showNameMapAlert];
+    }
+}
+
+- (BOOL)validateMapName:(NSString*)mapName
+{
+    NSCharacterSet *alphaNums = [NSCharacterSet alphanumericCharacterSet];
+    NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:mapName];
+    return [alphaNums isSupersetOfSet:inStringSet];
 }
 
 #pragma mark - Eye Candy Animations

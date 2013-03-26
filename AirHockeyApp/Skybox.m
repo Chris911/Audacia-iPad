@@ -60,12 +60,22 @@ float angle = 0;
     glEnable(GL_TEXTURE_2D);
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
+    
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
+    
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+    glLightfv(GL_LIGHT1, GL_AMBIENT, lightAmbient);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiffuse);
 
     //glDisable(GL_LIGHTING);
     [self renderBottom];
     [self renderSideA];
     [self renderSideB];
-    [self renderSideC];
+    //[self renderSideC];
     [self renderSideD];
     //glEnable(GL_LIGHTING);
     glDisable(GL_CULL_FACE);
@@ -77,10 +87,7 @@ float angle = 0;
 
 - (void) renderBottom
 {
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
+
     
     GLfloat botVertices[] = {
         self.v1.x,self.v1.y,self.v1.z,
@@ -112,7 +119,7 @@ float angle = 0;
         0, 0,
     };
     
-    glNormal3f(0, 0, 1);
+    glNormal3f(0, 0,-1);
     
     glVertexPointer(3, GL_FLOAT, 0, botVertices);
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -167,7 +174,7 @@ float angle = 0;
         0, 0,
     };
     
-    glNormal3f(0, -1, 0);
+    glNormal3f(0, -1, -1);
     
     glVertexPointer(3, GL_FLOAT, 0, sideAVertices);
     glEnableClientState(GL_VERTEX_ARRAY);

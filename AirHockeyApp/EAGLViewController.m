@@ -80,7 +80,7 @@ enum {
     // Elastic Rectangle
     ElasticRect *elasticRect;
     
-    Skybox* skybox1;
+    Skybox* skybox;
     
     Node *selectedNode;
     
@@ -132,7 +132,7 @@ enum {
         elasticRect = [[ElasticRect alloc]init];
         
         // Create the skybox
-        skybox1 = [[Skybox alloc]initWithSize:2000.0f:NO];
+        skybox = [[Skybox alloc]initWithSize:750:NO];
         
         // Icon images
         self.PortalView.backgroundColor     = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon-portal.png"]];
@@ -173,7 +173,7 @@ enum {
     [context release];
     
     [elasticRect release];
-    [skybox1 release];
+    [skybox release];
 
     //[self.camera release];
     [particles release];
@@ -582,9 +582,13 @@ enum {
     if(self.camera.isPerspective){
         [self.rectSelectionButton setEnabled:NO];
         [self.blockingViewSelect setHidden:NO];
+        GLfloat lightpos[] = {0, -5, -100, 0.0};
+        glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
     } else {
         [self.rectSelectionButton setEnabled:YES];
         [self.blockingViewSelect setHidden:YES];
+        GLfloat lightpos[] = {0, 0, 0, 0.0};
+        glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
     }
 }
 
@@ -690,11 +694,13 @@ enum {
     // Prepare the lights
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    GLfloat lightpos[] = {0, -5, -500.0, 0.0};
+
+    GLfloat lightpos0[] = {0, -5, -500, 0.0};
+
     float whiteAmbientDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
     float redSpecular[] = {1.0f, 0.0f, 0.0f, 1.0f};
 
-    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+    glLightfv(GL_LIGHT0, GL_POSITION, lightpos0);
     glLightfv(GL_LIGHT0, GL_AMBIENT, whiteAmbientDiffuse);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteAmbientDiffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, redSpecular);
@@ -718,7 +724,7 @@ enum {
     float fogColor[] = {0.1, 0.1, 0.1, 1};
     glEnable(GL_FOG);
     glFogfv(GL_FOG_COLOR, fogColor);
-    glFogf(GL_FOG_DENSITY, 0.0006f);
+    glFogf(GL_FOG_DENSITY, 0.0012f);
     glFogf(GL_FOG_MODE, GL_EXP2);
     glHint(GL_FOG_HINT, GL_NICEST);
     
@@ -728,7 +734,7 @@ enum {
     [self.camera setCamera];
 
     //Render the skybox
-    [skybox1 render];
+    [skybox render];
 
     
     glEnable(GL_CULL_FACE);

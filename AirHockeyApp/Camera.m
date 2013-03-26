@@ -46,7 +46,7 @@
     self.centerPosition = Vector3DMake(0, 0, 0);
     self.eyePosition = Vector3DMake(0, 0, 0);
     self.up = Vector3DMake(0, 1, 0); // Camera orientend on Y axis
-    eyeToCenterDistance = 160;
+    eyeToCenterDistance = 180;
     self.phi = 40;
     self.theta = 90;
     
@@ -86,7 +86,7 @@
     
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(60, self.windowWidth/ self.windowHeight, 0.1f, 5000);
+        gluPerspective(60, self.windowWidth/ self.windowHeight, 0.1f, 3000);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         

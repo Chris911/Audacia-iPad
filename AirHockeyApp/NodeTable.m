@@ -95,8 +95,10 @@
     // Draw the borders
     [self drawBorders];
     
+    glDisable(GL_LIGHTING);
     // Draw the limits
     [self drawLimits];
+    glEnable(GL_LIGHTING);
     
     glPopMatrix();
     glEnable(GL_TEXTURE_2D);

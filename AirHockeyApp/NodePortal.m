@@ -34,6 +34,7 @@
 
 - (void) render
 {
+    glDisable(GL_LIGHTING);
     // Bounding box visible if selected
     if(self.isSelected){
         int offset = GLOBAL_SIZE_OFFSET * self.scaleFactor;
@@ -42,16 +43,16 @@
             self.position.x - offset, self.position.y - offset, self.position.z,
             self.position.x + offset, self.position.y - offset, self.position.z,
             self.position.x + offset, self.position.y + offset, self.position.z,
-            
         };
         
-        glVertexPointer(3, GL_FLOAT, 0, Vertices);
         glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
         
-        if(glGetError() != 0)
-            NSLog(@"%u",glGetError());
+        glVertexPointer(3, GL_FLOAT, 0, Vertices);
+        glColorPointer(4, GL_FLOAT, 0, selectionColor);
 
         glDrawArrays(GL_LINE_LOOP, 0, 4);
+        glDisableClientState(GL_COLOR_ARRAY);
         glDisableClientState(GL_VERTEX_ARRAY);
     }
     
@@ -60,9 +61,6 @@
     
     // Save the current transformation by pushing it on the stack
 	glPushMatrix();
-    
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glColor4f(1, 1, 1, 0.5f);
     
 	// Translate to the current position
 	glTranslatef(self.model.currentPosition.x, self.model.currentPosition.y, self.model.currentPosition.z);
@@ -77,6 +75,7 @@
     
     // Draw the .obj Model
     [model drawSelf];
+    glEnable(GL_LIGHTING);
     
     glPopMatrix();
     

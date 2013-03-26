@@ -43,6 +43,8 @@ float matDiffuse1[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 {
     // Bounding box visible if selected
     if(self.isSelected){
+        glDisable(GL_LIGHTING);
+
         int offset = GLOBAL_SIZE_OFFSET * self.scaleFactor;
         
         GLfloat Vertices[] = {
@@ -53,14 +55,18 @@ float matDiffuse1[] = { 0.6f, 0.6f, 0.6f, 1.0f };
             
         };
         
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
+        
         glVertexPointer(3, GL_FLOAT, 0, Vertices);
         glEnableClientState(GL_VERTEX_ARRAY);
-        
-        if(glGetError() != 0)
-            NSLog(@"%u",glGetError());
+        glColorPointer(4, GL_FLOAT, 0, selectionColor);
         
         glDrawArrays(GL_LINE_LOOP, 0, 4);
         glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_COLOR_ARRAY);
+        glEnable(GL_LIGHTING);
+
     }
     
     // Update the 3D Model Position

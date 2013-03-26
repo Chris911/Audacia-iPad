@@ -34,6 +34,7 @@
 
 - (void) render
 {
+    glDisable(GL_LIGHTING);
     // Bounding box visible if selected
     if(self.isSelected){
         int offset = GLOBAL_SIZE_OFFSET * self.scaleFactor;
@@ -46,6 +47,9 @@
         };
         
         glVertexPointer(3, GL_FLOAT, 0, Vertices);
+        glColorPointer(4, GL_FLOAT, 0, selectionColor);
+
+        glEnableClientState(GL_COLOR_ARRAY);
         glEnableClientState(GL_VERTEX_ARRAY);
         
         if(glGetError() != 0)
@@ -53,6 +57,7 @@
         
         glDrawArrays(GL_LINE_LOOP, 0, 4);
         glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_COLOR_ARRAY);
     }
     
     // Update the 3D Model Position
@@ -72,7 +77,6 @@
     glScalef(3.0f, 3.0f, 3.0f);
     glScalef(self.scaleFactor, self.scaleFactor, self.scaleFactor);
     
-    glDisable(GL_LIGHTING);
     // Draw the .obj Model
     [model drawSelf];
     glEnable(GL_LIGHTING);

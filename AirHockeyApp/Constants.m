@@ -31,7 +31,9 @@ float lightAmbient[] = { 1, 1, 1, 1.0f };
 float lightDiffuse[] = { 0.2f, 0.3f, 0.6f, 1.0f };
 float matAmbient[] = { 1, 1, 1, 1.0f };
 float matDiffuse[] = { 1, 0, 0.4f, 1.0f };
-float orangeColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+float selectionColor[] = { 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+                        0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+                        0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f};
 
 
 int GLOBAL_SIZE_OFFSET = 6;

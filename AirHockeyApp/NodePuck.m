@@ -41,6 +41,7 @@ const float DEFAULT_COEFF_FRICTION = 1.0;
 
 - (void) render
 {
+    glDisable(GL_LIGHTING);
     // Bounding box visible if selected
     if(self.isSelected){
         int offset = GLOBAL_SIZE_OFFSET * self.scaleFactor;
@@ -52,16 +53,29 @@ const float DEFAULT_COEFF_FRICTION = 1.0;
             self.position.x + offset, self.position.y + offset, self.position.z,
         };
         
-        glVertexPointer(3, GL_FLOAT, 0, Vertices);
         glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
+        
+        glVertexPointer(3, GL_FLOAT, 0, Vertices);
+        glColorPointer(4, GL_FLOAT, 0, selectionColor);
         
         if(glGetError() != 0)
             NSLog(@"%u",glGetError());
         
         glDrawArrays(GL_LINE_LOOP, 0, 4);
         glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_COLOR_ARRAY);
     }
     
+    // Lights
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matDiffuse);
+    float ambient[] = { 1.0, 1, 1, 1 };
+    float specular[] = { 1, 0, 1, 1 };
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+        
     // Update the 3D Model Position
     self.model.currentPosition = self.position;
     
@@ -81,6 +95,7 @@ const float DEFAULT_COEFF_FRICTION = 1.0;
     
     // Draw the .obj Model
     [model drawSelf];
+    glEnable(GL_LIGHTING);
     
     glPopMatrix();
     

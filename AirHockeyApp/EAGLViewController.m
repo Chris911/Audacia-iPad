@@ -672,6 +672,10 @@ enum {
         value -= 2 + 0.1;
         ((NodeTable*)[[Scene getInstance].renderingTree getTable]).CoeffFriction = value;
 
+    } else if([selectedNode.type isEqualToString:@"MURRET"]){
+        message = [@"Rebound Factor : " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
+        ((NodeMurret*)selectedNode).CoeffRebond = value;
+        value -= 2 + 0.1;        
     }
     self.specialLabel.text = message;
 }
@@ -696,7 +700,7 @@ enum {
     
     // Prepare the view and colors
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_COLOR_MATERIAL);
+    //glEnable(GL_COLOR_MATERIAL);
 	glMatrixMode(GL_PROJECTION);
 	CGRect rect = self.view.bounds;    
     glViewport(0, 0, rect.size.width, rect.size.height);    
@@ -1169,6 +1173,12 @@ enum {
         value = ((NodeTable*)[[Scene getInstance].renderingTree getTable]).CoeffFriction;
         message = [@"Friction Factor " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
         self.specialSlider.value = value/5; // echelle de 5
+        
+    } else if([node.type isEqualToString:@"MURRET"]){
+        value = ((NodeMurret*)node).CoeffRebond;
+        message = [@"Rebound Factor " stringByAppendingString:[NSString stringWithFormat:@"%.01f",value]];
+        self.specialSlider.value = value/5; // echelle de 5
+        
     }
     
     self.specialLabel.text = message;

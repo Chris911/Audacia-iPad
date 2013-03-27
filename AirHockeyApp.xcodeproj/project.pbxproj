@@ -114,6 +114,7 @@
 		A842463916CE80AD00A9F3B9 /* table.png in Resources */ = {isa = PBXBuildFile; fileRef = A842463816CE80AD00A9F3B9 /* table.png */; };
 		A8664A5D16CC197800CC99EC /* skybox.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8664A5C16CC197800CC99EC /* skybox.pvrtc */; };
 		A8664A5F16CC1AE700CC99EC /* border.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8664A5E16CC1AE700CC99EC /* border.pvrtc */; };
+		A86B719F170399110047F08E /* AudioSampler.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86B719E170399110047F08E /* AudioSampler.mm */; };
 		A86C08B416C2A68200839C4B /* NodePuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6916AEF7C5006D1FEB /* NodePuck.m */; };
 		A8758D3A16EBF8EA00AB3A3E /* cameraView.png in Resources */ = {isa = PBXBuildFile; fileRef = A8758D3816EBF8EA00AB3A3E /* cameraView.png */; };
 		A8758D3B16EBF8EA00AB3A3E /* settingsView.png in Resources */ = {isa = PBXBuildFile; fileRef = A8758D3916EBF8EA00AB3A3E /* settingsView.png */; };
@@ -177,7 +178,6 @@
 		A8EEE40A16BF3CA900EA3FB0 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40616BF3CA900EA3FB0 /* CocosDenshion.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
 		A8EEE40B16BF3CA900EA3FB0 /* SimpleAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40816BF3CA900EA3FB0 /* SimpleAudioEngine.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
 		A8EEE40E16BF3EDD00EA3FB0 /* AudioInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */; };
-		A8EEE41716BF43D700EA3FB0 /* technoloop.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */; };
 		A8EEE41916BF442800EA3FB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */; };
 		A8F0987816CD96F400280C71 /* table.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8F0987716CD96F400280C71 /* table.pvrtc */; };
 		A8F13CA916AF190E00CB5885 /* SideBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F13CA816AF190E00CB5885 /* SideBar2.png */; };
@@ -332,6 +332,8 @@
 		A842463816CE80AD00A9F3B9 /* table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table.png; sourceTree = "<group>"; };
 		A8664A5C16CC197800CC99EC /* skybox.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = skybox.pvrtc; sourceTree = "<group>"; };
 		A8664A5E16CC1AE700CC99EC /* border.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = border.pvrtc; sourceTree = "<group>"; };
+		A86B719D170399110047F08E /* AudioSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSampler.h; sourceTree = "<group>"; };
+		A86B719E170399110047F08E /* AudioSampler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioSampler.mm; sourceTree = "<group>"; };
 		A8758D3816EBF8EA00AB3A3E /* cameraView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cameraView.png; path = Assets/UI/Images/cameraView.png; sourceTree = "<group>"; };
 		A8758D3916EBF8EA00AB3A3E /* settingsView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsView.png; path = Assets/UI/Images/settingsView.png; sourceTree = "<group>"; };
 		A881432C16D04B5300291E1A /* skybox2.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = skybox2.pvrtc; sourceTree = "<group>"; };
@@ -427,7 +429,6 @@
 		A8EEE40816BF3CA900EA3FB0 /* SimpleAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAudioEngine.m; sourceTree = "<group>"; };
 		A8EEE40C16BF3EDD00EA3FB0 /* AudioInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInterface.h; sourceTree = "<group>"; };
 		A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInterface.m; sourceTree = "<group>"; };
-		A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = technoloop.m4a; sourceTree = "<group>"; };
 		A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A8F0987716CD96F400280C71 /* table.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = table.pvrtc; sourceTree = "<group>"; };
 		A8F13CA816AF190E00CB5885 /* SideBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SideBar2.png; path = Assets/UI/Images/SideBar2.png; sourceTree = "<group>"; };
@@ -1000,6 +1001,8 @@
 				A8EEE40016BF3CA900EA3FB0 /* CocosDenshion */,
 				A8EEE40C16BF3EDD00EA3FB0 /* AudioInterface.h */,
 				A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */,
+				A86B719D170399110047F08E /* AudioSampler.h */,
+				A86B719E170399110047F08E /* AudioSampler.mm */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -1025,7 +1028,6 @@
 			children = (
 				A8E19F691702658B0072E2BC /* flex_dubstep.mp3 */,
 				A8081D1216D2952600B39E8B /* camera1.wav */,
-				A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */,
 			);
 			name = Sounds;
 			path = Assets/Sounds;
@@ -1109,7 +1111,6 @@
 				A889F22916B067E10008E534 /* portal_texture.png in Resources */,
 				A889F22A16B067E10008E534 /* pucktexture.png in Resources */,
 				04D9C3EB16BCB0A3005C6197 /* CarouselTestView.xib in Resources */,
-				A8EEE41716BF43D700EA3FB0 /* technoloop.m4a in Resources */,
 				04BDB84616C41A1300648B51 /* Stars-1.png in Resources */,
 				04BDB84716C41A1300648B51 /* Stars-2.png in Resources */,
 				04BDB84816C41A1300648B51 /* Stars-3.png in Resources */,
@@ -1253,6 +1254,7 @@
 				A8C118EA16DE45E2003FF8C5 /* TwitterInterface.m in Sources */,
 				A8A22AEC16EB94000082BD95 /* SocketUtil.m in Sources */,
 				046514F416EC47EA00CBED0F /* ProfileMapsTableCell.m in Sources */,
+				A86B719F170399110047F08E /* AudioSampler.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

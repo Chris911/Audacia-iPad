@@ -18,6 +18,7 @@
 #import "TwitterInterface.h"
 #import "NetworkUtils.h"
 #import "SocketUtil.h"
+#import "AudioSampler.h"
 
 #define notLoggedInErrorTag 0
 
@@ -78,6 +79,8 @@
     [super viewWillAppear:animated];
     
     [self prepareAdditionalView];
+    
+    //[AudioSampler extract];
     
     // Start twitter fetching  that will occur every 15 seconds
     if([NetworkUtils isNetworkAvailable]){

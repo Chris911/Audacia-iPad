@@ -162,6 +162,7 @@
 		A8CE921316C9BDF0001CCEBB /* login-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920B16C9BDF0001CCEBB /* login-icon.png */; };
 		A8CE921416C9BDF0001CCEBB /* login-top-view.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920C16C9BDF0001CCEBB /* login-top-view.png */; };
 		A8D9888016E8F6D60072E6CF /* SideBar3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */; };
+		A8E19F6A1702658B0072E2BC /* flex_dubstep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E19F691702658B0072E2BC /* flex_dubstep.mp3 */; };
 		A8EB15F616F1225000E83855 /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = A8EB15F416F1225000E83855 /* cube.mtl */; };
 		A8EB15F716F1225000E83855 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = A8EB15F516F1225000E83855 /* cube.obj */; };
 		A8EBDE3916A70CF8002B2DD6 /* GluLookAt.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */; };
@@ -397,6 +398,7 @@
 		A8CE920B16C9BDF0001CCEBB /* login-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-icon.png"; path = "Assets/UI/Images/login-icon.png"; sourceTree = "<group>"; };
 		A8CE920C16C9BDF0001CCEBB /* login-top-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-top-view.png"; path = "Assets/UI/Images/login-top-view.png"; sourceTree = "<group>"; };
 		A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SideBar3.jpg; path = Assets/UI/Images/SideBar3.jpg; sourceTree = "<group>"; };
+		A8E19F691702658B0072E2BC /* flex_dubstep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = flex_dubstep.mp3; sourceTree = "<group>"; };
 		A8EB15F416F1225000E83855 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.mtl; path = AirHockeyApp/cube.mtl; sourceTree = SOURCE_ROOT; };
 		A8EB15F516F1225000E83855 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = AirHockeyApp/cube.obj; sourceTree = SOURCE_ROOT; };
 		A8EBDE3716A70CF8002B2DD6 /* GluLookAt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluLookAt.h; sourceTree = "<group>"; };
@@ -1013,6 +1015,7 @@
 		A8EEE41516BF43D700EA3FB0 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				A8E19F691702658B0072E2BC /* flex_dubstep.mp3 */,
 				A8081D1216D2952600B39E8B /* camera1.wav */,
 				A8EEE41616BF43D700EA3FB0 /* technoloop.m4a */,
 			);
@@ -1170,6 +1173,7 @@
 				04DA5CF316FA08CC00D29031 /* icon-reset-camera.png in Resources */,
 				04DA5CF616FA0E3B00D29031 /* icon-exit.png in Resources */,
 				04DA5CF716FA0E3B00D29031 /* icon-save.png in Resources */,
+				A8E19F6A1702658B0072E2BC /* flex_dubstep.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -85,5 +85,6 @@ extern float const HAUTEUR_FENETRE;
 - (IBAction)angleSliderChanged:(id)sender;
 - (IBAction)sizeSliderChanged:(id)sender;
 - (IBAction)specialSliderChanged:(id)sender;
+- (IBAction)pressedResetTableButton:(id)sender;
 
 @end

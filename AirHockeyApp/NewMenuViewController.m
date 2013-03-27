@@ -112,10 +112,12 @@
     }
     
     // Set login button text according to session state
-    NSString* loginState = [NSString stringWithFormat:@"%@",
-                            [Session getInstance].isAuthenticated ? @"Logout" : @" Login"];
-    
-    [loginButton setTitle:loginState forState:UIControlStateNormal];
+    if([Session getInstance].isAuthenticated)
+    {
+        [loginButton setImage:[UIImage imageNamed:@"icon-logout"] forState:UIControlStateNormal];
+    } else {
+        [loginButton setImage:[UIImage imageNamed:@"icon-login.png"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)didReceiveMemoryWarning

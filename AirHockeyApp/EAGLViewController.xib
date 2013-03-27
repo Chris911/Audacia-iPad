@@ -66,7 +66,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{14, 87}, {68, 68}}</string>
 								<reference key="NSSuperview" ref="39156743"/>
-								<reference key="NSNextKeyView" ref="812431320"/>
+								<reference key="NSNextKeyView" ref="520163697"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -124,7 +124,7 @@
 								<reference key="IBUIFontDescription" ref="703058837"/>
 								<reference key="IBUIFont" ref="74513827"/>
 							</object>
-							<object class="IBUIButton" id="812431320">
+							<object class="IBUIButton" id="520163697">
 								<reference key="NSNextResponder" ref="39156743"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{35, 24}, {68, 68}}</string>
@@ -1156,7 +1156,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">pressedResetTableButton:</string>
-						<reference key="source" ref="812431320"/>
+						<reference key="source" ref="520163697"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -1313,7 +1313,7 @@
 							<reference ref="47810377"/>
 							<reference ref="181947498"/>
 							<reference ref="768808206"/>
-							<reference ref="812431320"/>
+							<reference ref="520163697"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">SettingsView</string>
@@ -1475,7 +1475,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">167</int>
-						<reference key="object" ref="812431320"/>
+						<reference key="object" ref="520163697"/>
 						<reference key="parent" ref="39156743"/>
 						<string key="objectName">Button - Reset</string>
 					</object>

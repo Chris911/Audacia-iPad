@@ -22,7 +22,7 @@
 
 + (void) startBackgroundMusic
 {
-    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"technoloop.m4a"];
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"flex_dubstep.mp3"];
 }
 
 + (void) stopBackgroundMusic

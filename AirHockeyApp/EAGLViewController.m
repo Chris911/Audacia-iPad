@@ -24,6 +24,8 @@
 #define AlertNameMapTag     1
 #define AlertNameWarningTag 2
 #define AlertInvalidNameTag 3
+#define AlertWillExit 4
+
 
 // Global constants
 
@@ -594,13 +596,7 @@ enum {
 
 - (IBAction)ExitProgram:(id)sender
 {
-    //self.camera = nil;
-    [self stopAnimation];
-    [self.camera resetCamera];
-    [self resetTable];
-    [self resetUI];
-    self.camera = nil;
-    [self dismissModalViewControllerAnimated:YES];
+    [self showWillExitAlert];
 }
 
 - (IBAction)deleteItem:(id)sender
@@ -717,16 +713,37 @@ enum {
     
 	glGetError(); // Clear error codes
 }
-
+float fogSineValue = 50;
+BOOL switchSin = NO;
 - (void)drawFrame
 {
     // FOG!
-    float fogColor[] = {0.1, 0.1, 0.1, 1};
+    
+    float val = (fogSineValue)/102;
+    float sinval = sinf(val);
+    float fogValue = 0.0009f + (0.0007*sinval);
+    float fogColor[] = {fogValue, 0.1, 0.1 + fogValue, 1};
+    
+    if(fogSineValue > 99){
+        switchSin = YES;
+    } else if(fogSineValue < 2) {
+        switchSin = NO;
+    }
+    
+    if(!switchSin){
+        fogSineValue = (int)(fogSineValue + 2)%102;
+    } else {
+        fogSineValue = (int)(fogSineValue - 2)%102;
+    }
+
+    
     glEnable(GL_FOG);
     glFogfv(GL_FOG_COLOR, fogColor);
-    glFogf(GL_FOG_DENSITY, 0.0012f);
+    glFogf(GL_FOG_DENSITY, fogValue);
     glFogf(GL_FOG_MODE, GL_EXP2);
     glHint(GL_FOG_HINT, GL_NICEST);
+    
+
     
     [(EAGLView *)self.view setFramebuffer];
     
@@ -1119,6 +1136,17 @@ enum {
     //[[Scene getInstance] release];
 }
 
+- (void) exit
+{
+    //self.camera = nil;
+    [self stopAnimation];
+    [self.camera resetCamera];
+    [self resetTable];
+    [self resetUI];
+    self.camera = nil;
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 #pragma mark - Modify UI Elements
 - (void) modifyUIParametersValues:(Node*)node 
 {
@@ -1307,6 +1335,19 @@ enum {
     [message release];
 }
 
+- (void)showWillExitAlert
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Exiting"
+                                                      message:@"All unsaved progress will be lost."
+                                                     delegate:self
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@"Exit", nil];
+    [message setAlertViewStyle:UIAlertViewStyleDefault];
+    message.tag = AlertWillExit;
+    [message show];
+    [message release];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == AlertNameMapTag)
@@ -1338,6 +1379,13 @@ enum {
     else if(alertView.tag == AlertInvalidNameTag)
     {
         [self showNameMapAlert];
+        
+    } else if (alertView.tag == AlertWillExit) {
+        if(buttonIndex == 1){
+            [self exit];
+        } else if(buttonIndex == 0) {
+            NSLog(@"Action Canceled");
+        }
     }
 }
 

@@ -75,7 +75,7 @@ const float xmlScale = 1.4f;
             float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
             float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 2.0;
-            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
+            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue] + 3;
             float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
             float accelFactor = [[[realNode attributeForName:@"Acceleration"] stringValue] floatValue];
             NodeBooster* booster = [[[NodeBooster alloc]init]autorelease];
@@ -95,7 +95,7 @@ const float xmlScale = 1.4f;
             float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
             float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 1.0;
-            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
+            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue] + 3;
             float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
             float gravite = [[[realNode attributeForName:@"Gravite"] stringValue] floatValue];
             NodePortal* portal = [[[NodePortal alloc]init]autorelease];
@@ -131,7 +131,7 @@ const float xmlScale = 1.4f;
             float posX = [[[realNode attributeForName:@"PositionX"] stringValue] floatValue]/xmlScale;
             float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 1.0;
-            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue];
+            float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue] + 3;
             float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
             float coeffRebond = [[[realNode attributeForName:@"CoeffRebond"] stringValue] floatValue];
             NodeMurret* murret = [[[NodeMurret alloc]init]autorelease];
@@ -187,12 +187,17 @@ const float xmlScale = 1.4f;
         //Common Properties (all objects have a position)
         GDataXMLElement *posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x*xmlScale]];
         GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y*xmlScale]];
-        GDataXMLElement *posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",0.0]];
+        GDataXMLElement *posZProperty;
+        if([node.xmlType isEqualToString:@"pommeau"]){
+            posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",-15.0f]];
+        } else {
+            posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",0.0]];
+        }
         
         if(!([node.xmlType isEqualToString:@"but"] || [node.xmlType isEqualToString:@"pointControle"]))
         {
             GDataXMLElement *angleProperty = [GDataXMLNode attributeWithName:@"AngleFactor" stringValue:[NSString stringWithFormat:@"%f",node.angle]];
-            GDataXMLElement *scaleProperty = [GDataXMLNode attributeWithName:@"ScaleFactor" stringValue:[NSString stringWithFormat:@"%f",node.scaleFactor]];
+            GDataXMLElement *scaleProperty = [GDataXMLNode attributeWithName:@"ScaleFactor" stringValue:[NSString stringWithFormat:@"%.0f",node.scaleFactor+3]];
             
             [nodeElement addAttribute:angleProperty];
             [nodeElement addAttribute:scaleProperty];
@@ -221,27 +226,7 @@ const float xmlScale = 1.4f;
             if(firstPommeau)
             {
                 firstPommeau = NO;
-                // Fixme: The XML should be fixed in the game engine
-                GDataXMLElement *controlProperty = [GDataXMLNode attributeWithName:@"Control" stringValue:@"clavier"];
-                [nodeElement addAttribute:controlProperty];
                 
-                GDataXMLElement *campProperty = [GDataXMLNode attributeWithName:@"Camp" stringValue:@"gauche"];
-                [nodeElement addAttribute:campProperty];
-                
-                GDataXMLElement *toucheHautProperty = [GDataXMLNode attributeWithName:@"ToucheHaut" stringValue:@"haut"];
-                [nodeElement addAttribute:toucheHautProperty];
-                
-                GDataXMLElement *toucheBasProperty = [GDataXMLNode attributeWithName:@"ToucheBas" stringValue:@"bas"];
-                [nodeElement addAttribute:toucheBasProperty];
-                
-                GDataXMLElement *toucheDroiteProperty = [GDataXMLNode attributeWithName:@"ToucheDroite" stringValue:@"droite"];
-                [nodeElement addAttribute:toucheDroiteProperty];
-                
-                GDataXMLElement *toucheGaucheProperty = [GDataXMLNode attributeWithName:@"ToucheGauche" stringValue:@"gauche"];
-                [nodeElement addAttribute:toucheGaucheProperty];
-            }
-            else
-            {
                 // Fixme: The XML should be fixed in the game engine
                 GDataXMLElement *controlProperty = [GDataXMLNode attributeWithName:@"Control" stringValue:@"souris"];
                 [nodeElement addAttribute:controlProperty];
@@ -259,6 +244,27 @@ const float xmlScale = 1.4f;
                 [nodeElement addAttribute:toucheDroiteProperty];
                 
                 GDataXMLElement *toucheGaucheProperty = [GDataXMLNode attributeWithName:@"ToucheGauche" stringValue:@""];
+                [nodeElement addAttribute:toucheGaucheProperty];
+            }
+            else
+            {
+                // Fixme: The XML should be fixed in the game engine
+                GDataXMLElement *controlProperty = [GDataXMLNode attributeWithName:@"Control" stringValue:@"clavier"];
+                [nodeElement addAttribute:controlProperty];
+                
+                GDataXMLElement *campProperty = [GDataXMLNode attributeWithName:@"Camp" stringValue:@"gauche"];
+                [nodeElement addAttribute:campProperty];
+                
+                GDataXMLElement *toucheHautProperty = [GDataXMLNode attributeWithName:@"ToucheHaut" stringValue:@"haut"];
+                [nodeElement addAttribute:toucheHautProperty];
+                
+                GDataXMLElement *toucheBasProperty = [GDataXMLNode attributeWithName:@"ToucheBas" stringValue:@"bas"];
+                [nodeElement addAttribute:toucheBasProperty];
+                
+                GDataXMLElement *toucheDroiteProperty = [GDataXMLNode attributeWithName:@"ToucheDroite" stringValue:@"droite"];
+                [nodeElement addAttribute:toucheDroiteProperty];
+                
+                GDataXMLElement *toucheGaucheProperty = [GDataXMLNode attributeWithName:@"ToucheGauche" stringValue:@"gauche"];
                 [nodeElement addAttribute:toucheGaucheProperty];
             }
             [pommeauRoot addChild:nodeElement];
@@ -293,8 +299,8 @@ const float xmlScale = 1.4f;
             {
                 GDataXMLElement *nodeElement = [GDataXMLNode elementWithName:@"but"];
                 GDataXMLElement *facteurButProperty = [GDataXMLNode attributeWithName:@"FacteurBut" stringValue:@"1"];
-                GDataXMLElement *posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x/xmlScale]];
-                GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y/xmlScale]];
+                GDataXMLElement *posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x*xmlScale]];
+                GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y*xmlScale]];
                 GDataXMLElement *posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",0.0]];
                 [nodeElement addAttribute:posXProperty];
                 [nodeElement addAttribute:posYProperty];

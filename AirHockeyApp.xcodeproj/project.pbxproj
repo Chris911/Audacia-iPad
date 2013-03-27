@@ -163,6 +163,8 @@
 		A8CE921416C9BDF0001CCEBB /* login-top-view.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920C16C9BDF0001CCEBB /* login-top-view.png */; };
 		A8D9888016E8F6D60072E6CF /* SideBar3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */; };
 		A8E19F6A1702658B0072E2BC /* flex_dubstep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E19F691702658B0072E2BC /* flex_dubstep.mp3 */; };
+		A8EAE5F3170328E40052AB80 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EAE5F2170328E40052AB80 /* CoreMedia.framework */; };
+		A8EAE5F5170329640052AB80 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EAE5F4170329640052AB80 /* MediaPlayer.framework */; };
 		A8EB15F616F1225000E83855 /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = A8EB15F416F1225000E83855 /* cube.mtl */; };
 		A8EB15F716F1225000E83855 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = A8EB15F516F1225000E83855 /* cube.obj */; };
 		A8EBDE3916A70CF8002B2DD6 /* GluLookAt.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */; };
@@ -399,6 +401,8 @@
 		A8CE920C16C9BDF0001CCEBB /* login-top-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-top-view.png"; path = "Assets/UI/Images/login-top-view.png"; sourceTree = "<group>"; };
 		A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SideBar3.jpg; path = Assets/UI/Images/SideBar3.jpg; sourceTree = "<group>"; };
 		A8E19F691702658B0072E2BC /* flex_dubstep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = flex_dubstep.mp3; sourceTree = "<group>"; };
+		A8EAE5F2170328E40052AB80 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		A8EAE5F4170329640052AB80 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A8EB15F416F1225000E83855 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.mtl; path = AirHockeyApp/cube.mtl; sourceTree = SOURCE_ROOT; };
 		A8EB15F516F1225000E83855 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = AirHockeyApp/cube.obj; sourceTree = SOURCE_ROOT; };
 		A8EBDE3716A70CF8002B2DD6 /* GluLookAt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GluLookAt.h; sourceTree = "<group>"; };
@@ -439,12 +443,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A842303216BF3A1A007F97CB /* AudioToolbox.framework in Frameworks */,
+				A8EAE5F5170329640052AB80 /* MediaPlayer.framework in Frameworks */,
+				A8EAE5F3170328E40052AB80 /* CoreMedia.framework in Frameworks */,
 				A8C118E716DE425D003FF8C5 /* Twitter.framework in Frameworks */,
 				A8C118E516DD5BF6003FF8C5 /* Security.framework in Frameworks */,
 				A8081D4816D6C4EF00B39E8B /* CFNetwork.framework in Frameworks */,
 				044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */,
 				A8EEE41916BF442800EA3FB0 /* AVFoundation.framework in Frameworks */,
-				A842303216BF3A1A007F97CB /* AudioToolbox.framework in Frameworks */,
 				A842302F16BF3A04007F97CB /* OpenAL.framework in Frameworks */,
 				A8CC902416A6E88600CFD27D /* libxml2.dylib in Frameworks */,
 				A8CC906516A6FD9D00CFD27D /* MobileCoreServices.framework in Frameworks */,
@@ -636,6 +642,8 @@
 		96378D791472C71100F543EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A8EAE5F4170329640052AB80 /* MediaPlayer.framework */,
+				A8EAE5F2170328E40052AB80 /* CoreMedia.framework */,
 				A8C118E616DE425D003FF8C5 /* Twitter.framework */,
 				A8C118E416DD5BF6003FF8C5 /* Security.framework */,
 				A8081D4716D6C4EF00B39E8B /* CFNetwork.framework */,

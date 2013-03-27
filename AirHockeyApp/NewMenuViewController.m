@@ -18,6 +18,7 @@
 #import "TwitterInterface.h"
 #import "NetworkUtils.h"
 #import "SocketUtil.h"
+#import "SoundDecoder.h"
 
 #define notLoggedInErrorTag 0
 
@@ -55,7 +56,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+        
     // Sound is disabled on load
     isSoundEnabled = NO;
     self.soundButton.selected = YES;

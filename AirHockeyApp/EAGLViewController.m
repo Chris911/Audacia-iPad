@@ -21,13 +21,13 @@
 #import "ParticlesContainer.h"    
 #import "Skybox.h"
 
+// Global constants
 #define AlertNameMapTag     1
 #define AlertNameWarningTag 2
 #define AlertInvalidNameTag 3
-#define AlertWillExit 4
+#define AlertWillExit       4
+#define AlertWillReset      5
 
-
-// Global constants
 
 // Touches modes
 int const TOUCH_TRANSFORM_MODE  = 0;
@@ -641,8 +641,7 @@ enum {
 - (IBAction)pressedResetTableButton:(id)sender
 {
     //[self.camera resetCamera];
-    [self resetTable];
-    [Scene loadDefaultElements];
+    [self showWillResetTableAlert];
 }
 
 #pragma mark - Slider action methods
@@ -697,6 +696,7 @@ enum {
     // Prepare the lights
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glEnable(GL_FOG);
 
     GLfloat lightpos0[] = {0, -5, -500, 0.0};
 
@@ -720,37 +720,11 @@ enum {
     
 	glGetError(); // Clear error codes
 }
-float fogSineValue = 50;
-BOOL switchSin = NO;
+
 - (void)drawFrame
 {
     // FOG!
-    
-    float val = (fogSineValue)/102;
-    float sinval = sinf(val);
-    float fogValue = 0.0009f + (0.0007*sinval);
-    float fogColor[] = {fogValue, 0.1, 0.1 + fogValue, 1};
-    
-    if(fogSineValue > 99){
-        switchSin = YES;
-    } else if(fogSineValue < 2) {
-        switchSin = NO;
-    }
-    
-    if(!switchSin){
-        fogSineValue = (int)(fogSineValue + 2)%102;
-    } else {
-        fogSineValue = (int)(fogSineValue - 2)%102;
-    }
-
-    
-    glEnable(GL_FOG);
-    glFogfv(GL_FOG_COLOR, fogColor);
-    glFogf(GL_FOG_DENSITY, fogValue);
-    glFogf(GL_FOG_MODE, GL_EXP2);
-    glHint(GL_FOG_HINT, GL_NICEST);
-    
-
+    [self updateFog];
     
     [(EAGLView *)self.view setFramebuffer];
     
@@ -1355,6 +1329,19 @@ BOOL switchSin = NO;
     [message release];
 }
 
+- (void)showWillResetTableAlert
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Reseting table"
+                                                      message:@"Are you sure you want to reset the table to its initial state?"
+                                                     delegate:self
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@"Continue", nil];
+    [message setAlertViewStyle:UIAlertViewStyleDefault];
+    message.tag = AlertWillReset;
+    [message show];
+    [message release];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == AlertNameMapTag)
@@ -1393,7 +1380,17 @@ BOOL switchSin = NO;
         } else if(buttonIndex == 0) {
             NSLog(@"Action Canceled");
         }
+    } else if (alertView.tag == AlertWillReset) {
+        if(buttonIndex == 0){
+            NSLog(@"Action canceled");
+        } else if(buttonIndex == 1) {
+            [self performSelectorInBackground:@selector(replaceView) withObject:nil];
+            [self resetTable];
+            [Scene loadDefaultElements];
+        }
     }
+    
+
 }
 
 - (BOOL)validateMapName:(NSString*)mapName
@@ -1419,6 +1416,34 @@ BOOL switchSin = NO;
                      }
                      completion:nil];
     [flashView release];
+}
+
+float fogSineValue = 75;
+BOOL switchSin = NO;
+- (void) updateFog
+{
+    float val = (fogSineValue)/152;
+    float sinval = sinf(val);
+    float fogValue = 0.0009f + (0.0007*sinval);
+    float fogColor[] = {fogValue, 0.1, 0.1 + fogValue, 1};
+    
+    if(fogSineValue > 149){
+        switchSin = YES;
+    } else if(fogSineValue < 2) {
+        switchSin = NO;
+    }
+    
+    if(!switchSin){
+        fogSineValue = (int)(fogSineValue + 1)%152;
+    } else {
+        fogSineValue = (int)(fogSineValue - 1)%152;
+    }
+    
+    
+    glFogfv(GL_FOG_COLOR, fogColor);
+    glFogf(GL_FOG_DENSITY, fogValue);
+    glFogf(GL_FOG_MODE, GL_EXP2);
+    glHint(GL_FOG_HINT, GL_NICEST);
 }
 
 @end

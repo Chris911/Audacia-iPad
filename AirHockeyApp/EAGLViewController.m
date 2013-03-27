@@ -638,6 +638,13 @@ enum {
     }
 }
 
+- (IBAction)pressedResetTableButton:(id)sender
+{
+    //[self.camera resetCamera];
+    [self resetTable];
+    [Scene loadDefaultElements];
+}
+
 #pragma mark - Slider action methods
 - (IBAction)angleSliderChanged:(id)sender
 {

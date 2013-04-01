@@ -13,6 +13,7 @@
 #import "NetworkUtils.h"
 #import "Session.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AudioInterface.h"
 
 #define usernameTextBoxTag 0
 #define passwordTextBoxTag 1
@@ -95,7 +96,7 @@
                              self.loginButton.userInteractionEnabled = NO;
                              self.continueAnonButton.center = CGPointMake(512, 625);
         }];
-        [UIView animateWithDuration:0.8 delay: 0.4 options: UIViewAnimationCurveEaseOut
+        [UIView animateWithDuration:0.6 delay: 0.4 options: UIViewAnimationCurveEaseOut
                          animations:^{
                              self.bottomView.center = CGPointMake(512, 624);
                              self.topView.center = CGPointMake(512, 200);
@@ -103,7 +104,7 @@
                          }
                          completion:nil];
     } else {
-        [UIView animateWithDuration:0.8 delay: 0.0 options: UIViewAnimationCurveEaseIn
+        [UIView animateWithDuration:0.6 delay: 0.0 options: UIViewAnimationCurveEaseIn
                          animations:^{
                              self.bottomView.center = CGPointMake(512, 384);
                              self.topView.center = CGPointMake(512, 364);
@@ -139,6 +140,7 @@
         if(delegate.webClient == nil){
             delegate.webClient = [[[WebClient alloc] initWithDefaultServer]autorelease];
         }
+        [AudioInterface playSound:@"sfx1.wav"];
         // switch to menu
         [self transitionToMenu];
     } else {
@@ -149,6 +151,7 @@
 
 - (IBAction)pressedValidateButton:(id)sender
 {
+    [AudioInterface playSound:@"sfx1.wav"];
     [self initLoginEvent];
 }
 

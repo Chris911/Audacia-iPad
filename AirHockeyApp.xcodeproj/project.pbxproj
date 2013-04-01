@@ -165,6 +165,9 @@
 		A8CE921216C9BDF0001CCEBB /* login-ice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920A16C9BDF0001CCEBB /* login-ice.jpg */; };
 		A8CE921316C9BDF0001CCEBB /* login-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920B16C9BDF0001CCEBB /* login-icon.png */; };
 		A8CE921416C9BDF0001CCEBB /* login-top-view.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CE920C16C9BDF0001CCEBB /* login-top-view.png */; };
+		A8D0B32E1709C53400051412 /* sfx1.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8D0B32D1709C53400051412 /* sfx1.wav */; };
+		A8D0B3301709C5FE00051412 /* sound1.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8D0B32F1709C5FE00051412 /* sound1.wav */; };
+		A8D0B3321709C92E00051412 /* open1.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8D0B3311709C92E00051412 /* open1.wav */; };
 		A8D9888016E8F6D60072E6CF /* SideBar3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */; };
 		A8E19F6A1702658B0072E2BC /* flex_dubstep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E19F691702658B0072E2BC /* flex_dubstep.mp3 */; };
 		A8EAE5F3170328E40052AB80 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EAE5F2170328E40052AB80 /* CoreMedia.framework */; };
@@ -407,6 +410,9 @@
 		A8CE920A16C9BDF0001CCEBB /* login-ice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "login-ice.jpg"; path = "Assets/UI/Images/login-ice.jpg"; sourceTree = "<group>"; };
 		A8CE920B16C9BDF0001CCEBB /* login-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-icon.png"; path = "Assets/UI/Images/login-icon.png"; sourceTree = "<group>"; };
 		A8CE920C16C9BDF0001CCEBB /* login-top-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-top-view.png"; path = "Assets/UI/Images/login-top-view.png"; sourceTree = "<group>"; };
+		A8D0B32D1709C53400051412 /* sfx1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx1.wav; sourceTree = "<group>"; };
+		A8D0B32F1709C5FE00051412 /* sound1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound1.wav; sourceTree = "<group>"; };
+		A8D0B3311709C92E00051412 /* open1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = open1.wav; sourceTree = "<group>"; };
 		A8D9887F16E8F6D60072E6CF /* SideBar3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SideBar3.jpg; path = Assets/UI/Images/SideBar3.jpg; sourceTree = "<group>"; };
 		A8E19F691702658B0072E2BC /* flex_dubstep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = flex_dubstep.mp3; sourceTree = "<group>"; };
 		A8EAE5F2170328E40052AB80 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -1035,6 +1041,9 @@
 		A8EEE41516BF43D700EA3FB0 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				A8D0B3311709C92E00051412 /* open1.wav */,
+				A8D0B32F1709C5FE00051412 /* sound1.wav */,
+				A8D0B32D1709C53400051412 /* sfx1.wav */,
 				A8E19F691702658B0072E2BC /* flex_dubstep.mp3 */,
 				A8081D1216D2952600B39E8B /* camera1.wav */,
 			);
@@ -1195,6 +1204,9 @@
 				047F92F117039CB2004A97B3 /* icon-resetTable.png in Resources */,
 				047F92F41703A396004A97B3 /* icon-login.png in Resources */,
 				047F92F51703A396004A97B3 /* icon-logout.png in Resources */,
+				A8D0B32E1709C53400051412 /* sfx1.wav in Resources */,
+				A8D0B3301709C5FE00051412 /* sound1.wav in Resources */,
+				A8D0B3321709C92E00051412 /* open1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -234,8 +234,8 @@
 
 - (void) strafeXY:(CGPoint)delta
 {
-    self.eyePosition = Vector3DMake(self.eyePosition.x + delta.x/3, self.eyePosition.y - delta.y/3, self.eyePosition.z);
-    self.centerPosition = Vector3DMake(self.centerPosition.x + delta.x/3, self.centerPosition.y - delta.y/3, self.centerPosition.z);
+    self.eyePosition = Vector3DMake(self.eyePosition.x - delta.x/3, self.eyePosition.y + delta.y/3, self.eyePosition.z);
+    self.centerPosition = Vector3DMake(self.centerPosition.x - delta.x/3, self.centerPosition.y + delta.y/3, self.centerPosition.z);
     
     int limit = 200;
     if (self.eyePosition.x > limit/2) {

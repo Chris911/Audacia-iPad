@@ -137,6 +137,7 @@
 #pragma mark - Button pressed methods
 - (IBAction)editionModePressed:(id)sender
 {
+    [AudioInterface playSound:@"sfx1.wav"];
     [self flushTimers];
     eagl = [[EAGLViewController alloc]initWithNibName:@"EAGLViewController" bundle:nil];
     eagl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -147,6 +148,7 @@
 {
     if([Session getInstance].isAuthenticated)
     {
+        [AudioInterface playSound:@"sfx1.wav"];
         [self flushTimers];
         ProfileViewController* profile_vc = [[[ProfileViewController alloc]init]autorelease];
         profile_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -169,6 +171,7 @@
 
 - (IBAction)mapviewerModePressed:(id)sender
 {
+    [AudioInterface playSound:@"sfx1.wav"];
     [self flushTimers];
     CarouselTestView* carousel_vc = [[[CarouselTestView alloc]init]autorelease];
     carousel_vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -180,6 +183,7 @@
     if([[SocketUtil getInstance].tcpSocket isConnected]){
         [[SocketUtil getInstance].tcpSocket disconnect];
     }
+    [AudioInterface playSound:@"sound1.wav"];
     [Session resetSession];
     isFeedActive = NO;
     self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -189,6 +193,7 @@
 - (IBAction)soundPressed:(id)sender
 {
     isSoundEnabled = !isSoundEnabled;
+    [AudioInterface playSound:@"sound1.wav"];
     if(isSoundEnabled){
         [AudioInterface startBackgroundMusic];
         self.soundButton.selected = NO;

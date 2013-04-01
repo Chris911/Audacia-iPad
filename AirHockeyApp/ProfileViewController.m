@@ -14,6 +14,7 @@
 #import "Scene.h"
 #import "EAGLViewController.h"
 #import "ProfileMapsTableCell.h"
+#import "AudioInterface.h"
 
 #define EDIT_MAP_SHEET 0
 #define DELETE_MAP_SHEET 1
@@ -180,11 +181,13 @@
 
 - (IBAction)backPressed:(id)sender
 {
+    [AudioInterface playSound:@"sound1.wav"];
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)pressedCameraButton:(id)sender
 {
+    [AudioInterface playSound:@"sound1.wav"];
     [self startCameraControllerFromViewController: self
                                     usingDelegate: self];
 }
@@ -207,8 +210,7 @@
     [lineView release];
 }
 
-#pragma mark Fetching info and image
-#pragma mark -
+#pragma mark - Fetching info and image
 
 - (void) assignUsersMaps:(NSArray*)maps
 {
@@ -253,8 +255,7 @@
     self.spinner.hidden = YES;
 }
 
-#pragma mark Camera / UIImagePicker
-#pragma mark -
+#pragma mark - Camera / UIImagePicker
 
 - (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
                                    usingDelegate: (id <UIImagePickerControllerDelegate,
@@ -334,8 +335,7 @@
     [picker release];
 }
 
-#pragma mark TableView / Your Maps
-#pragma mark -
+#pragma mark - TableView / Your Maps
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -436,6 +436,7 @@
     {
         if (buttonIndex == 0) // Edit Map
         {
+            [AudioInterface playSound:@"sfx1.wav"];
             [self startAnimation];
             Map* map = [mapsTableData objectAtIndex:currentIndex];
             NSLog(@"[Profile] Editing map");
@@ -447,6 +448,7 @@
     {
         if(buttonIndex == 0) // Delete Map
         {
+            [AudioInterface playSound:@"sound1.wav"];
             Map* map = [mapsTableData objectAtIndex:currentIndex];
             NSLog(@"[Profile] Deleting map");
             // Remove from database
@@ -499,11 +501,11 @@
     return 105;
 }
 
-#pragma mark Edit Button
-#pragma mark -
+#pragma mark - Edit Button
 
 - (IBAction)pressedDoneEditingButton:(id)sender
 {
+    [AudioInterface playSound:@"sound1.wav"];
     deleteState = NO;
     [self reloadTableData];
     [self toggleDoneEditingButton];

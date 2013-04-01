@@ -14,6 +14,7 @@
 #import "WebClient.h"
 #import "EAGLViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AudioInterface.h"
 
 #define SWITCH_TYPE_SHEET 0
 #define EDIT_MAP_SHEET    1
@@ -370,6 +371,7 @@
 
 - (IBAction)pressedSwitchButton:(id)sender
 {
+    [AudioInterface playSound:@"sound1.wav"];
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Carousel Type"
                                                        delegate:self
                                               cancelButtonTitle:nil
@@ -381,7 +383,8 @@
 }
 
 - (IBAction)pressedBack:(id)sender
-{    
+{
+    [AudioInterface playSound:@"sound1.wav"];
     // remove previous SHIT
     for(int i = self.carousel.numberOfItems; i > 0; i--){
         [self.carousel removeItemAtIndex:i animated:NO];
@@ -394,6 +397,7 @@
 }
 
 - (IBAction)pressedRefresh:(id)sender {
+    [AudioInterface playSound:@"sound1.wav"];
     [self load];
 }
 

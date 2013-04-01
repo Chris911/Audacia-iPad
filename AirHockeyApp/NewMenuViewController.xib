@@ -58,10 +58,10 @@
 					<object class="IBUIImageView" id="217416478">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{333.5, 0}, {357, 128}}</string>
+						<string key="NSFrame">{{332.5, -14}, {359, 177}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="112487974"/>
+						<reference key="NSNextKeyView" ref="622421499"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="IBUIContentMode">2</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -173,7 +173,7 @@
 						<string key="NSFrame">{{108, 148}, {336, 216}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="622421499"/>
+						<reference key="NSNextKeyView" ref="217416478"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -315,7 +315,6 @@
 						<string key="NSFrame">{{853, 678}, {75, 50}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -396,7 +395,7 @@
 								<string key="NSFrame">{{271, 223}, {109, 60}}</string>
 								<reference key="NSSuperview" ref="753007932"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="217416478"/>
+								<reference key="NSNextKeyView" ref="112487974"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="50004665">
 									<int key="NSColorSpace">1</int>
@@ -710,8 +709,8 @@
 							<reference ref="1008581842"/>
 							<reference ref="202828962"/>
 							<reference ref="622421499"/>
-							<reference ref="753007932"/>
 							<reference ref="27197770"/>
+							<reference ref="753007932"/>
 							<reference ref="54599349"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -802,13 +801,23 @@
 						<string key="objectName">ControllerView</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">50</int>
-						<reference key="object" ref="1010366461"/>
+						<int key="objectID">56</int>
+						<reference key="object" ref="212566237"/>
+						<reference key="parent" ref="753007932"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">63</int>
+						<reference key="object" ref="283234991"/>
 						<reference key="parent" ref="753007932"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">52</int>
 						<reference key="object" ref="1066373486"/>
+						<reference key="parent" ref="753007932"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="1010366461"/>
 						<reference key="parent" ref="753007932"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -819,16 +828,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">54</int>
 						<reference key="object" ref="822251008"/>
-						<reference key="parent" ref="753007932"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">56</int>
-						<reference key="object" ref="212566237"/>
-						<reference key="parent" ref="753007932"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">63</int>
-						<reference key="object" ref="283234991"/>
 						<reference key="parent" ref="753007932"/>
 					</object>
 				</array>
@@ -987,7 +986,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="AudaciaLogo.png">{731, 222}</string>
+			<string key="AudaciaLogo.png">{800, 300}</string>
 			<string key="Button-menu-controller.png">{575, 365}</string>
 			<string key="Button-menu-maps.png">{575, 365}</string>
 			<string key="Button-menu-profile.png">{575, 365}</string>

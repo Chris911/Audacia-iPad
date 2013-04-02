@@ -499,6 +499,28 @@
 						<reference key="IBUIBackgroundColor" ref="422843725"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
+					<object class="IBUIButton" id="38133460">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{968, 693}, {18, 19}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">3</int>
+						<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
+						<reference key="IBUIHighlightedTitleColor" ref="716753521"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="935930279"/>
+						<reference key="IBUIFontDescription" ref="168498637"/>
+						<reference key="IBUIFont" ref="828495560"/>
+					</object>
 				</array>
 				<string key="NSFrameSize">{1024, 748}</string>
 				<reference key="NSSuperview"/>
@@ -678,6 +700,15 @@
 					</object>
 					<int key="connectionID">61</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">creditsPressed:</string>
+						<reference key="source" ref="38133460"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">67</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -704,7 +735,6 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="217416478"/>
 							<reference ref="899985714"/>
-							<reference ref="691442362"/>
 							<reference ref="112487974"/>
 							<reference ref="1008581842"/>
 							<reference ref="202828962"/>
@@ -712,6 +742,8 @@
 							<reference ref="27197770"/>
 							<reference ref="753007932"/>
 							<reference ref="54599349"/>
+							<reference ref="691442362"/>
+							<reference ref="38133460"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -830,6 +862,11 @@
 						<reference key="object" ref="822251008"/>
 						<reference key="parent" ref="753007932"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">66</int>
+						<reference key="object" ref="38133460"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -859,12 +896,14 @@
 				<string key="54.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="63.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="66.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="0.0" key="66.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">65</int>
+			<int key="maxID">67</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -874,6 +913,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="cancelButtonPressed:">id</string>
 						<string key="controlerModePressed:">id</string>
+						<string key="creditsPressed:">id</string>
 						<string key="editionModePressed:">id</string>
 						<string key="joystickButtonPressed:">id</string>
 						<string key="logoutPressed:">id</string>
@@ -888,6 +928,10 @@
 						</object>
 						<object class="IBActionInfo" key="controlerModePressed:">
 							<string key="name">controlerModePressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="creditsPressed:">
+							<string key="name">creditsPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="editionModePressed:">

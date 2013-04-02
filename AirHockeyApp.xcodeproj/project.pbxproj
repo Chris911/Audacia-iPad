@@ -115,6 +115,9 @@
 		A842302F16BF3A04007F97CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842302E16BF3A04007F97CB /* OpenAL.framework */; };
 		A842303216BF3A1A007F97CB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842303116BF3A1A007F97CB /* AudioToolbox.framework */; };
 		A842463916CE80AD00A9F3B9 /* table.png in Resources */ = {isa = PBXBuildFile; fileRef = A842463816CE80AD00A9F3B9 /* table.png */; };
+		A8554398170B589400FBABA8 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8554396170B589300FBABA8 /* CreditsViewController.m */; };
+		A8554399170B589400FBABA8 /* CreditsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8554397170B589300FBABA8 /* CreditsViewController.xib */; };
+		A855439D170B9EE600FBABA8 /* carbon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A855439C170B9EE600FBABA8 /* carbon.jpg */; };
 		A8664A5D16CC197800CC99EC /* skybox.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8664A5C16CC197800CC99EC /* skybox.pvrtc */; };
 		A8664A5F16CC1AE700CC99EC /* border.pvrtc in Resources */ = {isa = PBXBuildFile; fileRef = A8664A5E16CC1AE700CC99EC /* border.pvrtc */; };
 		A86B719F170399110047F08E /* AudioSampler.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86B719E170399110047F08E /* AudioSampler.mm */; };
@@ -339,6 +342,10 @@
 		A842302E16BF3A04007F97CB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		A842303116BF3A1A007F97CB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A842463816CE80AD00A9F3B9 /* table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table.png; sourceTree = "<group>"; };
+		A8554395170B589300FBABA8 /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsViewController.h; sourceTree = "<group>"; };
+		A8554396170B589300FBABA8 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsViewController.m; sourceTree = "<group>"; };
+		A8554397170B589300FBABA8 /* CreditsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreditsViewController.xib; sourceTree = "<group>"; };
+		A855439C170B9EE600FBABA8 /* carbon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = carbon.jpg; path = Assets/UI/Images/carbon.jpg; sourceTree = "<group>"; };
 		A8664A5C16CC197800CC99EC /* skybox.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = skybox.pvrtc; sourceTree = "<group>"; };
 		A8664A5E16CC1AE700CC99EC /* border.pvrtc */ = {isa = PBXFileReference; lastKnownFileType = file; path = border.pvrtc; sourceTree = "<group>"; };
 		A86B719D170399110047F08E /* AudioSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSampler.h; sourceTree = "<group>"; };
@@ -716,12 +723,14 @@
 				A8CE920016C9BDBB001CCEBB /* LoginViewController.h */,
 				A8081D2A16D5622400B39E8B /* ProfileViewController.h */,
 				A8081D3516D6B97400B39E8B /* JoystickViewController.h */,
+				A8554395170B589300FBABA8 /* CreditsViewController.h */,
 				041186ED16CCA07D0046B720 /* NewMenuViewController.m */,
 				969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */,
 				04D9C3F516BCB217005C6197 /* CarouselTestView.m */,
 				A8CE920116C9BDBB001CCEBB /* LoginViewController.m */,
 				A8081D2B16D5622400B39E8B /* ProfileViewController.m */,
 				A8081D3616D6B97400B39E8B /* JoystickViewController.m */,
+				A8554396170B589300FBABA8 /* CreditsViewController.m */,
 			);
 			name = Controleurs;
 			sourceTree = "<group>";
@@ -738,6 +747,7 @@
 				A8081D2C16D5622500B39E8B /* ProfileViewController.xib */,
 				A8081D3716D6B97400B39E8B /* JoystickViewController.xib */,
 				046514EF16EC440500CBED0F /* ProfileMapsTableCell.xib */,
+				A8554397170B589300FBABA8 /* CreditsViewController.xib */,
 			);
 			name = "Interface Builder";
 			sourceTree = "<group>";
@@ -880,6 +890,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A855439C170B9EE600FBABA8 /* carbon.jpg */,
 				047F92F21703A396004A97B3 /* icon-login.png */,
 				047F92F31703A396004A97B3 /* icon-logout.png */,
 				047F92F017039CB2004A97B3 /* icon-resetTable.png */,
@@ -1207,6 +1218,8 @@
 				A8D0B32E1709C53400051412 /* sfx1.wav in Resources */,
 				A8D0B3301709C5FE00051412 /* sound1.wav in Resources */,
 				A8D0B3321709C92E00051412 /* open1.wav in Resources */,
+				A8554399170B589400FBABA8 /* CreditsViewController.xib in Resources */,
+				A855439D170B9EE600FBABA8 /* carbon.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1279,6 +1292,7 @@
 				A8A22AEC16EB94000082BD95 /* SocketUtil.m in Sources */,
 				046514F416EC47EA00CBED0F /* ProfileMapsTableCell.m in Sources */,
 				A86B719F170399110047F08E /* AudioSampler.mm in Sources */,
+				A8554398170B589400FBABA8 /* CreditsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

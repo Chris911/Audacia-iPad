@@ -15,6 +15,7 @@
 #import "LoginViewController.h"
 #import "ProfileViewController.h"
 #import "JoystickViewController.h"
+#import "CreditsViewController.h"
 #import "TwitterInterface.h"
 #import "NetworkUtils.h"
 #import "SocketUtil.h"
@@ -221,6 +222,14 @@
 - (IBAction)cancelButtonPressed:(id)sender
 {
     [self slideControllerViewOut];
+}
+
+- (IBAction)creditsPressed:(id)sender
+{
+    [self flushTimers];
+    CreditsViewController* credits_vc = [[[CreditsViewController alloc]init]autorelease];
+    credits_vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentModalViewController:credits_vc animated:YES];
 }
 
 #pragma mark - Twitter actions

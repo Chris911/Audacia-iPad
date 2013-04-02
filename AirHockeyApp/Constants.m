@@ -13,8 +13,8 @@
 const int STATE_TRANSFORM_TRANSLATION    = 1;
 const int STATE_TRANSFORM_ROTATION       = 2;
 const int STATE_TRANSFORM_SCALE          = 3;
-const int OBJECTVIEW_INITIAL_POSITION    = -26;
-const int TRANSFORMVIEW_INITIAL_POSITION = 1050;
+const int OBJECTVIEW_INITIAL_POSITION    = -28;
+const int TRANSFORMVIEW_INITIAL_POSITION = 1055;
 
 const int TABLE_LIMIT_X                  = 90;
 const int TABLE_LIMIT_Y                  = 70;

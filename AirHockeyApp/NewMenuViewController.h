@@ -29,6 +29,7 @@
 - (IBAction)soundPressed:(id)sender;
 - (IBAction)joystickButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
+- (IBAction)creditsPressed:(id)sender;
 
 
 @end

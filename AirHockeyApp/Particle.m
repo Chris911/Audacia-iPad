@@ -74,22 +74,26 @@
         0,0,1,
     };
     
+    float r = arc4random() % 255;
+    float g = arc4random() % 255;
+    float b = arc4random() % 255;
+    
     GLfloat colorsBuffer[] = {
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
-        1,0,1,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
+        r/255,g/255,b/255,self.alpha,
     };
     glVertexPointer(3, GL_FLOAT, 0, verticesBuffer);
     glColorPointer(4, GL_FLOAT, 0, colorsBuffer);

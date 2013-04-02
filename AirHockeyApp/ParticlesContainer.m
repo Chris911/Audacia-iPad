@@ -4,7 +4,7 @@
 //
 //  Created by Sam DesRochers on 2013-02-20.
 //
-//
+//  Code similar to one of my previous JAVA project
 
 #import "ParticlesContainer.h"
 
@@ -26,7 +26,6 @@
             Particle *p = [particles objectAtIndex:i];
             float angle = 360 / (i+1);
             p.angle = angle;
-
         }
     }
     return self;

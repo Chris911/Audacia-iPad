@@ -97,7 +97,7 @@ const float xmlScale = 1.4f;
             float posZ = 1.0;
             float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue] - 3;
             float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
-            float gravite = [[[realNode attributeForName:@"Gravite"] stringValue] floatValue];
+            float gravite = [[[realNode attributeForName:@"Gravite"] stringValue] floatValue] - 9.0f;
             NodePortal* portal = [[[NodePortal alloc]init]autorelease];
             portal.scaleFactor = scaleFactor;
             portal.angle = angleFactor;
@@ -216,7 +216,7 @@ const float xmlScale = 1.4f;
         }
         else if([node.xmlType isEqualToString:@"portal"])
         {
-            GDataXMLElement *gravityProperty = [GDataXMLNode attributeWithName:@"Gravite" stringValue:[NSString stringWithFormat:@"%f",((NodePortal *)node).Gravite]];
+            GDataXMLElement *gravityProperty = [GDataXMLNode attributeWithName:@"Gravite" stringValue:[NSString stringWithFormat:@"%f",((NodePortal *)node).Gravite+9.0f]];
             [nodeElement addAttribute:gravityProperty];
             
             [portalRoot addChild:nodeElement];

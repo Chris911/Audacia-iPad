@@ -810,6 +810,8 @@ enum {
     } else if(view.tag == TRANSFORMVIEW_TAG){
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
                          animations:^{
+                             [self.copyPropButton setEnabled:NO];
+                             [self.deleteButton setEnabled:NO];
                              view.center = CGPointMake(1024 - view.frame.size.width/2, view.center.y);
                              
                          }

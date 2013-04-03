@@ -8,12 +8,19 @@
 
 #import "CreditsViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AppDemoAppDelegate.h"
+#import "WebClient.h"
+#import "NetworkUtils.h"
 
 @interface CreditsViewController ()
 
 @end
 
 @implementation CreditsViewController
+
+@synthesize totalGames;
+@synthesize totalGoals;
+@synthesize statsAreSet;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -65,6 +72,14 @@
 
 - (void) prepareViews
 {
+    if(!self.statsAreSet)
+    {
+        self.totalGames = @"Total Games Played:";
+        self.totalGoals = @"Total Goals Scored:";
+        if([NetworkUtils isNetworkAvailable])
+        [self getGlobalStats];
+    }
+    
     self.textView.backgroundColor = [UIColor clearColor];
 
     [self.creditView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
@@ -87,13 +102,20 @@
     
     text = [text stringByAppendingString:@"\n\n"];
     
-    text = [text stringByAppendingString:@"-- API used for AirHockey App -- \n\n"];
-    text = [text stringByAppendingString:@"Cocos Denshion : Audio API\n"];
-    text = [text stringByAppendingString:@"iCarousel : Maps Viewer\n"];
-    text = [text stringByAppendingString:@"AFNetworking : Network API\n"];
-    text = [text stringByAppendingString:@"GDataXMLNode : XML serializer\n"];
-    text = [text stringByAppendingString:@"OpenGLWaveFront : Graphics\n"];
+    text = [text stringByAppendingString:@"-- Librairies used for AirHockey App -- \n\n"];
+    text = [text stringByAppendingString:@"Cocos Denshion  : Audio API\n"];
+    text = [text stringByAppendingString:@"iCarousel       \t: Maps Viewer\n"];
+    text = [text stringByAppendingString:@"AFNetworking    \t: Network API\n"];
+    text = [text stringByAppendingString:@"GDataXMLNode    \t: XML serializer\n"];
+    text = [text stringByAppendingString:@"OpenGLWaveFront \t: Graphics\n"];
 
+    text = [text stringByAppendingString:@"\n\n"];
+    
+    text = [text stringByAppendingString:@"-- Global Stats -- \n\n"];
+    text = [text stringByAppendingString:self.totalGames];
+    text = [text stringByAppendingString:@"\n"];
+    text = [text stringByAppendingString:self.totalGoals];
+    
     text = [text stringByAppendingString:@"\n\n"];
     
     text = [text stringByAppendingString:@"Server provided by Polytechnique Montreal\n\n"];
@@ -109,5 +131,25 @@
                     }
                     completion:nil
      ];
+}
+
+- (void) getGlobalStats
+{
+    if(!self.statsAreSet)
+    {
+        AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+        [delegate.webClient fetchGlobalStats:@"stats"
+                                onCompletion:^(NSDictionary *JSON)
+            {
+                NSNumber* totalGamesJson  = [JSON valueForKeyPath:@"TOTAL_GAMES"];
+                NSNumber* totalGoalsJson  = [JSON valueForKeyPath:@"TOTAL_GOALS"];
+                
+                self.totalGames = [NSString stringWithFormat:@"Total Games Played: %d",[totalGamesJson intValue]];
+                self.totalGoals = [NSString stringWithFormat:@"Total Goals Scored: %d",[totalGoalsJson intValue]];
+                
+                self.statsAreSet = YES;
+                [self prepareViews];
+            }];
+    }
 }
 @end

@@ -38,4 +38,5 @@ typedef void (^JSONResponseBlock)(NSDictionary* json);
 - (void) fetchMapImageWithName:(Map*)map;
 - (BOOL) validateLogin:(NSString*)username :(NSString*)password;
 - (void) fetchStatsByUser:(NSString*)username onCompletion:(JSONResponseBlock)completionBlock;
+- (void) fetchGlobalStats:(NSString*)username onCompletion:(JSONResponseBlock)completionBlock;
 @end

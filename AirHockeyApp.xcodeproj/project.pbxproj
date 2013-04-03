@@ -28,6 +28,88 @@
 		046514F016EC440500CBED0F /* ProfileMapsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046514EF16EC440500CBED0F /* ProfileMapsTableCell.xib */; };
 		046514F416EC47EA00CBED0F /* ProfileMapsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046514F316EC47EA00CBED0F /* ProfileMapsTableCell.m */; };
 		046514F616ED1E7D00CBED0F /* icon-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 046514F516ED1E7D00CBED0F /* icon-delete.png */; };
+		047417C4170B24FC00D131B6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047417C3170B24FC00D131B6 /* SenTestingKit.framework */; };
+		047417C5170B24FC00D131B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7A1472C71100F543EA /* UIKit.framework */; };
+		047417C6170B24FC00D131B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7C1472C71100F543EA /* Foundation.framework */; };
+		047417CC170B24FC00D131B6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 047417CA170B24FC00D131B6 /* InfoPlist.strings */; };
+		047417D4170B2DF600D131B6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC906216A6FD8E00CFD27D /* SystemConfiguration.framework */; };
+		047417D5170B2DFD00D131B6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC906416A6FD9D00CFD27D /* MobileCoreServices.framework */; };
+		047418AF170B416300D131B6 /* AFGDataXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CB5C4A16A7028700EC4479 /* AFGDataXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		047418B1170B416300D131B6 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC904716A6FD2D00CFD27D /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418B3170B416300D131B6 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC904916A6FD2D00CFD27D /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418B5170B416300D131B6 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC904B16A6FD2D00CFD27D /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418B7170B416300D131B6 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC904D16A6FD2D00CFD27D /* AFJSONRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418B9170B416300D131B6 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC904F16A6FD2D00CFD27D /* AFNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418BC170B416300D131B6 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC905216A6FD2D00CFD27D /* AFPropertyListRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418BE170B416300D131B6 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC905416A6FD2D00CFD27D /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418C0170B416300D131B6 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC905616A6FD2D00CFD27D /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418C2170B416300D131B6 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC905816A6FD2D00CFD27D /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418C4170B416300D131B6 /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DF183016ACAC6400339EDB /* WebClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		047418C5170B416300D131B6 /* AirHockeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 047417CE170B24FC00D131B6 /* AirHockeyTests.m */; };
+		047418C6170B417F00D131B6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC902316A6E88600CFD27D /* libxml2.dylib */; };
+		047418C9170B435A00D131B6 /* MapContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE82AE16B887D300F8B796 /* MapContainer.m */; };
+		047418CA170B438A00D131B6 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = A89FD22D16B949FB005383E4 /* Map.m */; };
+		047418CB170B438A00D131B6 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = A831CEA616B7219800A30C39 /* Session.m */; };
+		047418CC170B43F600D131B6 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3916A4BD8F006A7082 /* Scene.m */; };
+		047418CD170B43FF00D131B6 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC902116A6E84100CFD27D /* GDataXMLNode.m */; };
+		047418CE170B441700D131B6 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3216A4A8D9006A7082 /* Node.m */; };
+		047418CF170B441700D131B6 /* NodeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7916A729CA002B2DD6 /* NodeTable.m */; };
+		047418D0170B441700D131B6 /* NodeTableEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE8C16A8849D002B2DD6 /* NodeTableEdge.m */; };
+		047418D1170B441700D131B6 /* NodeBooster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E4216AEEF4C006D1FEB /* NodeBooster.m */; };
+		047418D2170B441700D131B6 /* NodeMurret.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6616AEF7BD006D1FEB /* NodeMurret.m */; };
+		047418D3170B441700D131B6 /* NodePuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6916AEF7C5006D1FEB /* NodePuck.m */; };
+		047418D4170B441700D131B6 /* NodePortal.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6C16AEF7CF006D1FEB /* NodePortal.m */; };
+		047418D5170B441700D131B6 /* NodePommeau.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A04E6F16AEF7DB006D1FEB /* NodePommeau.m */; };
+		047418D6170B447D00D131B6 /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40216BF3CA900EA3FB0 /* CDAudioManager.m */; };
+		047418D7170B447D00D131B6 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40616BF3CA900EA3FB0 /* CocosDenshion.m */; };
+		047418D8170B447D00D131B6 /* SimpleAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40816BF3CA900EA3FB0 /* SimpleAudioEngine.m */; };
+		047418D9170B447D00D131B6 /* AudioInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EEE40D16BF3EDD00EA3FB0 /* AudioInterface.m */; };
+		047418DA170B447D00D131B6 /* AudioSampler.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86B719E170399110047F08E /* AudioSampler.mm */; };
+		047418DB170B447D00D131B6 /* Skybox.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4639716C88012008D173B /* Skybox.m */; };
+		047418DC170B447D00D131B6 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C227A16BEC38F007AA035 /* Particle.m */; };
+		047418DD170B447D00D131B6 /* ParticlesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A8081D2816D50D7500B39E8B /* ParticlesContainer.m */; };
+		047418DE170B447D00D131B6 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = A818E02416BAD7D900CA5823 /* Camera.m */; };
+		047418DF170B447D00D131B6 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9C3E816BCB042005C6197 /* iCarousel.m */; };
+		047418E0170B447D00D131B6 /* ElasticRect.m in Sources */ = {isa = PBXBuildFile; fileRef = A83C226016BD94E2007AA035 /* ElasticRect.m */; };
+		047418E1170B447D00D131B6 /* Border3D.m in Sources */ = {isa = PBXBuildFile; fileRef = A89FD23A16B96576005383E4 /* Border3D.m */; };
+		047418E2170B447D00D131B6 /* RenderingTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C9D3516A4AFB9006A7082 /* RenderingTree.m */; };
+		047418E3170B447D00D131B6 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A8081D4216D6C44000B39E8B /* AsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418E4170B447D00D131B6 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A8081D4416D6C44000B39E8B /* AsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		047418E6170B447D00D131B6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE9516A890D1002B2DD6 /* Reachability.m */; };
+		047418E7170B447D00D131B6 /* NetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0409924816B21087009DBE1D /* NetworkUtils.m */; };
+		047418E8170B447D00D131B6 /* TwitterInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C118E916DE45E2003FF8C5 /* TwitterInterface.m */; };
+		047418E9170B447D00D131B6 /* SocketUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A22AEB16EB94000082BD95 /* SocketUtil.m */; };
+		047418EA170B447D00D131B6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE9C16A9EE9B002B2DD6 /* Constants.m */; };
+		047418EB170B447D00D131B6 /* OpenGLTexture3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC41472EDA4007D15A3 /* OpenGLTexture3D.m */; };
+		047418EC170B447D00D131B6 /* OpenGLWaveFrontGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC71472EDA4007D15A3 /* OpenGLWaveFrontGroup.m */; };
+		047418ED170B447D00D131B6 /* OpenGLWaveFrontMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACC91472EDA4007D15A3 /* OpenGLWaveFrontMaterial.m */; };
+		047418EE170B447D00D131B6 /* OpenGLWaveFrontObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DACCB1472EDA4007D15A3 /* OpenGLWaveFrontObject.m */; };
+		047418EF170B447D00D131B6 /* GluLookAt.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE3816A70CF8002B2DD6 /* GluLookAt.m */; };
+		047418F0170B447D00D131B6 /* GluPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EBDE7516A711C1002B2DD6 /* GluPerspective.m */; };
+		047418F1170B447D00D131B6 /* Texture2DUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4638B16C7F990008D173B /* Texture2DUtil.m */; };
+		047418F3170B447D00D131B6 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDEDF1472CF8C00ED5DC8 /* EAGLView.m */; };
+		047418F4170B447D00D131B6 /* ProfileMapsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046514F316EC47EA00CBED0F /* ProfileMapsTableCell.m */; };
+		047418FC170B447D00D131B6 /* NewMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041186ED16CCA07D0046B720 /* NewMenuViewController.m */; };
+		047418FD170B447D00D131B6 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969DDF8E1472E15900ED5DC8 /* EAGLViewController.m */; };
+		047418FE170B447D00D131B6 /* CarouselTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9C3F516BCB217005C6197 /* CarouselTestView.m */; };
+		047418FF170B447D00D131B6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE920116C9BDBB001CCEBB /* LoginViewController.m */; };
+		04741900170B447D00D131B6 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8081D2B16D5622400B39E8B /* ProfileViewController.m */; };
+		04741901170B447D00D131B6 /* JoystickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8081D3616D6B97400B39E8B /* JoystickViewController.m */; };
+		04741902170B447D00D131B6 /* AppDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C459FC169DD985000B9586 /* AppDemoAppDelegate.m */; };
+		04741903170B447D00D131B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378D861472C71200F543EA /* main.m */; };
+		04741904170B447D00D131B6 /* XMLUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CC902616A6E95D00CFD27D /* XMLUtil.m */; };
+		04741905170B453A00D131B6 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF881472E03500ED5DC8 /* OpenGLES.framework */; };
+		04741906170B454A00D131B6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842303116BF3A1A007F97CB /* AudioToolbox.framework */; };
+		04741907170B455900D131B6 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EAE5F2170328E40052AB80 /* CoreMedia.framework */; };
+		04741908170B455900D131B6 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EAE5F4170329640052AB80 /* MediaPlayer.framework */; };
+		04741909170B456000D131B6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969DDF8A1472E05400ED5DC8 /* QuartzCore.framework */; };
+		0474190A170B457500D131B6 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
+		0474190B170B457900D131B6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C118E416DD5BF6003FF8C5 /* Security.framework */; };
+		0474190C170B458500D131B6 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A842302E16BF3A04007F97CB /* OpenAL.framework */; };
+		0474190F170B459500D131B6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EEE41816BF442800EA3FB0 /* AVFoundation.framework */; };
+		04741910170B45A200D131B6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8081D4716D6C4EF00B39E8B /* CFNetwork.framework */; };
+		04741911170B45AF00D131B6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96378D7E1472C71100F543EA /* CoreGraphics.framework */; };
+		04741914170B588000D131B6 /* ReachabilityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 04741913170B588000D131B6 /* ReachabilityTest.m */; };
 		047F92F117039CB2004A97B3 /* icon-resetTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F92F017039CB2004A97B3 /* icon-resetTable.png */; };
 		047F92F41703A396004A97B3 /* icon-login.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F92F21703A396004A97B3 /* icon-login.png */; };
 		047F92F51703A396004A97B3 /* icon-logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F92F31703A396004A97B3 /* icon-logout.png */; };
@@ -222,6 +304,15 @@
 		046514F216EC47EA00CBED0F /* ProfileMapsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileMapsTableCell.h; sourceTree = "<group>"; };
 		046514F316EC47EA00CBED0F /* ProfileMapsTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileMapsTableCell.m; sourceTree = "<group>"; };
 		046514F516ED1E7D00CBED0F /* icon-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-delete.png"; path = "Assets/UI/Images/icon-delete.png"; sourceTree = "<group>"; };
+		047417C2170B24FC00D131B6 /* AirHockeyTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirHockeyTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		047417C3170B24FC00D131B6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		047417C9170B24FC00D131B6 /* AirHockeyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AirHockeyTests-Info.plist"; sourceTree = "<group>"; };
+		047417CB170B24FC00D131B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		047417CD170B24FC00D131B6 /* AirHockeyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirHockeyTests.h; sourceTree = "<group>"; };
+		047417CE170B24FC00D131B6 /* AirHockeyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirHockeyTests.m; sourceTree = "<group>"; };
+		047417D0170B24FC00D131B6 /* AirHockeyTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirHockeyTests-Prefix.pch"; sourceTree = "<group>"; };
+		04741912170B588000D131B6 /* ReachabilityTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityTest.h; sourceTree = "<group>"; };
+		04741913170B588000D131B6 /* ReachabilityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityTest.m; sourceTree = "<group>"; };
 		047F92F017039CB2004A97B3 /* icon-resetTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-resetTable.png"; path = "Assets/UI/Images/icon-resetTable.png"; sourceTree = "<group>"; };
 		047F92F21703A396004A97B3 /* icon-login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-login.png"; path = "Assets/UI/Images/icon-login.png"; sourceTree = "<group>"; };
 		047F92F31703A396004A97B3 /* icon-logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-logout.png"; path = "Assets/UI/Images/icon-logout.png"; sourceTree = "<group>"; };
@@ -459,6 +550,30 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		047417BE170B24FC00D131B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04741911170B45AF00D131B6 /* CoreGraphics.framework in Frameworks */,
+				04741910170B45A200D131B6 /* CFNetwork.framework in Frameworks */,
+				0474190F170B459500D131B6 /* AVFoundation.framework in Frameworks */,
+				0474190C170B458500D131B6 /* OpenAL.framework in Frameworks */,
+				0474190B170B457900D131B6 /* Security.framework in Frameworks */,
+				0474190A170B457500D131B6 /* GLKit.framework in Frameworks */,
+				04741909170B456000D131B6 /* QuartzCore.framework in Frameworks */,
+				04741907170B455900D131B6 /* CoreMedia.framework in Frameworks */,
+				04741908170B455900D131B6 /* MediaPlayer.framework in Frameworks */,
+				04741906170B454A00D131B6 /* AudioToolbox.framework in Frameworks */,
+				04741905170B453A00D131B6 /* OpenGLES.framework in Frameworks */,
+				047417D5170B2DFD00D131B6 /* MobileCoreServices.framework in Frameworks */,
+				047417D4170B2DF600D131B6 /* SystemConfiguration.framework in Frameworks */,
+				047417C5170B24FC00D131B6 /* UIKit.framework in Frameworks */,
+				047417C6170B24FC00D131B6 /* Foundation.framework in Frameworks */,
+				047418C6170B417F00D131B6 /* libxml2.dylib in Frameworks */,
+				047417C4170B24FC00D131B6 /* SenTestingKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96378D731472C71100F543EA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -519,6 +634,28 @@
 				046514F316EC47EA00CBED0F /* ProfileMapsTableCell.m */,
 			);
 			name = "Custom Classes";
+			sourceTree = "<group>";
+		};
+		047417C7170B24FC00D131B6 /* AirHockeyTests */ = {
+			isa = PBXGroup;
+			children = (
+				047417C8170B24FC00D131B6 /* Supporting Files */,
+				047417CD170B24FC00D131B6 /* AirHockeyTests.h */,
+				047417CE170B24FC00D131B6 /* AirHockeyTests.m */,
+				04741912170B588000D131B6 /* ReachabilityTest.h */,
+				04741913170B588000D131B6 /* ReachabilityTest.m */,
+			);
+			path = AirHockeyTests;
+			sourceTree = "<group>";
+		};
+		047417C8170B24FC00D131B6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				047417C9170B24FC00D131B6 /* AirHockeyTests-Info.plist */,
+				047417CA170B24FC00D131B6 /* InfoPlist.strings */,
+				047417D0170B24FC00D131B6 /* AirHockeyTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		048C9D2F16A4A873006A7082 /* Tree */ = {
@@ -646,6 +783,7 @@
 			children = (
 				A8C5A8B0169DECD7008B29EF /* Assets */,
 				96378D801472C71100F543EA /* AirHockeyApp */,
+				047417C7170B24FC00D131B6 /* AirHockeyTests */,
 				96378D791472C71100F543EA /* Frameworks */,
 				96378D771472C71100F543EA /* Products */,
 			);
@@ -655,6 +793,7 @@
 			isa = PBXGroup;
 			children = (
 				96378D761472C71100F543EA /* AirHockeyApp.app */,
+				047417C2170B24FC00D131B6 /* AirHockeyTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -679,6 +818,7 @@
 				96378D7A1472C71100F543EA /* UIKit.framework */,
 				96378D7C1472C71100F543EA /* Foundation.framework */,
 				96378D7E1472C71100F543EA /* CoreGraphics.framework */,
+				047417C3170B24FC00D131B6 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1065,6 +1205,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		047417C1170B24FC00D131B6 /* AirHockeyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 047417D3170B24FC00D131B6 /* Build configuration list for PBXNativeTarget "AirHockeyTests" */;
+			buildPhases = (
+				047417BD170B24FC00D131B6 /* Sources */,
+				047417BE170B24FC00D131B6 /* Frameworks */,
+				047417BF170B24FC00D131B6 /* Resources */,
+				047417C0170B24FC00D131B6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirHockeyTests;
+			productName = AirHockeyTests;
+			productReference = 047417C2170B24FC00D131B6 /* AirHockeyTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		96378D751472C71100F543EA /* AirHockeyApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96378D911472C71200F543EA /* Build configuration list for PBXNativeTarget "AirHockeyApp" */;
@@ -1103,11 +1261,20 @@
 			projectRoot = "";
 			targets = (
 				96378D751472C71100F543EA /* AirHockeyApp */,
+				047417C1170B24FC00D131B6 /* AirHockeyTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		047417BF170B24FC00D131B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				047417CC170B24FC00D131B6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96378D741472C71100F543EA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1225,7 +1392,94 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		047417C0170B24FC00D131B6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		047417BD170B24FC00D131B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				047418D6170B447D00D131B6 /* CDAudioManager.m in Sources */,
+				047418D7170B447D00D131B6 /* CocosDenshion.m in Sources */,
+				047418D8170B447D00D131B6 /* SimpleAudioEngine.m in Sources */,
+				047418D9170B447D00D131B6 /* AudioInterface.m in Sources */,
+				047418DA170B447D00D131B6 /* AudioSampler.mm in Sources */,
+				047418DB170B447D00D131B6 /* Skybox.m in Sources */,
+				047418DC170B447D00D131B6 /* Particle.m in Sources */,
+				047418DD170B447D00D131B6 /* ParticlesContainer.m in Sources */,
+				047418DE170B447D00D131B6 /* Camera.m in Sources */,
+				047418DF170B447D00D131B6 /* iCarousel.m in Sources */,
+				047418E0170B447D00D131B6 /* ElasticRect.m in Sources */,
+				047418E1170B447D00D131B6 /* Border3D.m in Sources */,
+				047418E2170B447D00D131B6 /* RenderingTree.m in Sources */,
+				047418E3170B447D00D131B6 /* AsyncSocket.m in Sources */,
+				047418E4170B447D00D131B6 /* AsyncUdpSocket.m in Sources */,
+				047418E6170B447D00D131B6 /* Reachability.m in Sources */,
+				047418E7170B447D00D131B6 /* NetworkUtils.m in Sources */,
+				047418E8170B447D00D131B6 /* TwitterInterface.m in Sources */,
+				047418E9170B447D00D131B6 /* SocketUtil.m in Sources */,
+				047418EA170B447D00D131B6 /* Constants.m in Sources */,
+				047418EB170B447D00D131B6 /* OpenGLTexture3D.m in Sources */,
+				047418EC170B447D00D131B6 /* OpenGLWaveFrontGroup.m in Sources */,
+				047418ED170B447D00D131B6 /* OpenGLWaveFrontMaterial.m in Sources */,
+				047418EE170B447D00D131B6 /* OpenGLWaveFrontObject.m in Sources */,
+				047418EF170B447D00D131B6 /* GluLookAt.m in Sources */,
+				047418F0170B447D00D131B6 /* GluPerspective.m in Sources */,
+				047418F1170B447D00D131B6 /* Texture2DUtil.m in Sources */,
+				047418F3170B447D00D131B6 /* EAGLView.m in Sources */,
+				047418F4170B447D00D131B6 /* ProfileMapsTableCell.m in Sources */,
+				047418FC170B447D00D131B6 /* NewMenuViewController.m in Sources */,
+				047418FD170B447D00D131B6 /* EAGLViewController.m in Sources */,
+				047418FE170B447D00D131B6 /* CarouselTestView.m in Sources */,
+				047418FF170B447D00D131B6 /* LoginViewController.m in Sources */,
+				04741900170B447D00D131B6 /* ProfileViewController.m in Sources */,
+				04741901170B447D00D131B6 /* JoystickViewController.m in Sources */,
+				04741902170B447D00D131B6 /* AppDemoAppDelegate.m in Sources */,
+				04741903170B447D00D131B6 /* main.m in Sources */,
+				04741904170B447D00D131B6 /* XMLUtil.m in Sources */,
+				047418CE170B441700D131B6 /* Node.m in Sources */,
+				047418CF170B441700D131B6 /* NodeTable.m in Sources */,
+				047418D0170B441700D131B6 /* NodeTableEdge.m in Sources */,
+				047418D1170B441700D131B6 /* NodeBooster.m in Sources */,
+				047418D2170B441700D131B6 /* NodeMurret.m in Sources */,
+				047418D3170B441700D131B6 /* NodePuck.m in Sources */,
+				047418D4170B441700D131B6 /* NodePortal.m in Sources */,
+				047418D5170B441700D131B6 /* NodePommeau.m in Sources */,
+				047418CD170B43FF00D131B6 /* GDataXMLNode.m in Sources */,
+				047418CC170B43F600D131B6 /* Scene.m in Sources */,
+				047418CA170B438A00D131B6 /* Map.m in Sources */,
+				047418CB170B438A00D131B6 /* Session.m in Sources */,
+				047418C9170B435A00D131B6 /* MapContainer.m in Sources */,
+				047418AF170B416300D131B6 /* AFGDataXMLRequestOperation.m in Sources */,
+				047418B1170B416300D131B6 /* AFHTTPClient.m in Sources */,
+				047418B3170B416300D131B6 /* AFHTTPRequestOperation.m in Sources */,
+				047418B5170B416300D131B6 /* AFImageRequestOperation.m in Sources */,
+				047418B7170B416300D131B6 /* AFJSONRequestOperation.m in Sources */,
+				047418B9170B416300D131B6 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				047418BC170B416300D131B6 /* AFPropertyListRequestOperation.m in Sources */,
+				047418BE170B416300D131B6 /* AFURLConnectionOperation.m in Sources */,
+				047418C0170B416300D131B6 /* AFXMLRequestOperation.m in Sources */,
+				047418C2170B416300D131B6 /* UIImageView+AFNetworking.m in Sources */,
+				047418C4170B416300D131B6 /* WebClient.m in Sources */,
+				047418C5170B416300D131B6 /* AirHockeyTests.m in Sources */,
+				04741914170B588000D131B6 /* ReachabilityTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96378D721472C71100F543EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1299,6 +1553,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		047417CA170B24FC00D131B6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				047417CB170B24FC00D131B6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		96378D831472C71200F543EA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1318,6 +1580,63 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		047417D1170B24FC00D131B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = NO;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = NO;
+				CLANG_WARN_INT_CONVERSION = NO;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirHockeyTests/AirHockeyTests-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "AirHockeyTests/AirHockeyTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_TEST_FLAGS = "-lxml2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		047417D2170B24FC00D131B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = NO;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = NO;
+				CLANG_WARN_INT_CONVERSION = NO;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirHockeyTests/AirHockeyTests-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "AirHockeyTests/AirHockeyTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_TEST_FLAGS = "-lxml2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		96378D8F1472C71200F543EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1402,6 +1721,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		047417D3170B24FC00D131B6 /* Build configuration list for PBXNativeTarget "AirHockeyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				047417D1170B24FC00D131B6 /* Debug */,
+				047417D2170B24FC00D131B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		96378D701472C71100F543EA /* Build configuration list for PBXProject "AirHockeyApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -9,7 +9,7 @@
 #import "Node.h"
 #import "Reachability.h"
 
-@interface NetworkUtils : Node
+@interface NetworkUtils : NSObject
 
 + (BOOL)isNetworkAvailable;
 + (void)showNetworkUnavailableAlert;

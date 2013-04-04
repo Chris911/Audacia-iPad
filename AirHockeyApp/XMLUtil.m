@@ -167,7 +167,7 @@ const float xmlScale = 1.4f;
 // source : 
 // http://www.raywenderlich.com/725/how-to-read-and-write-xml-documents-with-gdataxml
 //
-+ (NSData *)getRenderingTreeXmlData:(RenderingTree *)renderingTree
++ (GDataXMLDocument *)getRenderingTreeXmlData:(RenderingTree *)renderingTree
 {
     GDataXMLElement *treeElement = [GDataXMLNode elementWithName:@"Objets"];
     
@@ -323,7 +323,7 @@ const float xmlScale = 1.4f;
     // Save the constructed tree to an xml file
     GDataXMLDocument *document = [[[GDataXMLDocument alloc]initWithRootElement:treeElement] autorelease];
     
-    return document.XMLData;
+    return document;
 }
 
 @end

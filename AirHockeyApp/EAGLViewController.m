@@ -1355,7 +1355,8 @@ enum {
             //TODO: Do some validation here
             if([self validateMapName:mapName])
             {
-                NSData *xmlData = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
+                GDataXMLDocument* xmlDoc = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
+                NSData* xmlData = xmlDoc.XMLData;
                 AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
                 
                 // Sound time

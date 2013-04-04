@@ -11,6 +11,8 @@
 
 @implementation AirHockeyTests
 
+BOOL static doneFetching = NO;
+
 @synthesize webclient;
 
 - (void)setUp
@@ -29,14 +31,13 @@
 
 - (void)testExample
 {
-//    BOOL static done = YES;
 //    [self.webclient fetchStatsByUser:@"iPadTest"
 //                        onCompletion:^(NSDictionary *JSON)
 //     {
 //         int gamesPlayed  = [[JSON valueForKeyPath:@"GamePlayed"]intValue];
-//         int victories   = [[JSON valueForKeyPath:@"Victories"]intValue];
-//         int defeats = [[JSON valueForKeyPath:@"Defeats"]intValue];
-//         int goalsFor = [[JSON valueForKeyPath:@"GoalsFor"]intValue];
+//         int victories    = [[JSON valueForKeyPath:@"Victories"]intValue];
+//         int defeats      = [[JSON valueForKeyPath:@"Defeats"]intValue];
+//         int goalsFor     = [[JSON valueForKeyPath:@"GoalsFor"]intValue];
 //         int goalsAgainst = [[JSON valueForKeyPath:@"GoalsAgainst"]intValue];
 //         
 //         STAssertEquals(5, gamesPlayed, @"Games Played");
@@ -45,12 +46,15 @@
 //         STAssertEquals(25, goalsFor, @"Goals For");
 //         STAssertEquals(0, goalsAgainst, @"Goals Against");
 //         
-//         done = NO;
+//         doneFetching = YES;
 //
 //     }];
-//    while(done);
-    
-    STAssertTrue(YES, @"Test test");
+//    [self performSelectorInBackground:@selector(waitForFetch) withObject:nil];
+}
+
+- (void)waitForFetch
+{
+    while(!doneFetching);
 }
 
 

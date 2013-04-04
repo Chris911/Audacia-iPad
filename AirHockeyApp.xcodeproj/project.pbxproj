@@ -14,6 +14,10 @@
 		04385DC016E67E590067DB06 /* murret.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 04385DBE16E67E590067DB06 /* murret.mtl */; };
 		04385DC116E67E590067DB06 /* murret.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04385DBF16E67E590067DB06 /* murret.obj */; };
 		04385DC416E67E780067DB06 /* murret_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 04385DC316E67E780067DB06 /* murret_texture.png */; };
+		044544B4170C727D00B4AF77 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8554396170B589300FBABA8 /* CreditsViewController.m */; };
+		044544B7170C76D100B4AF77 /* AuthTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 044544B6170C76D100B4AF77 /* AuthTest.m */; };
+		044544BA170C7A7900B4AF77 /* RenderTreeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 044544B9170C7A7900B4AF77 /* RenderTreeTest.m */; };
+		044544BD170C823D00B4AF77 /* XMLTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 044544BC170C823D00B4AF77 /* XMLTest.m */; };
 		044D7F9D16A5B71E00AE8E11 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D7F9C16A5B71E00AE8E11 /* GLKit.framework */; };
 		0451B1F516E2A3080079BFF1 /* icon-booster.png in Resources */ = {isa = PBXBuildFile; fileRef = 0451B1F016E2A3080079BFF1 /* icon-booster.png */; };
 		0451B1F616E2A3080079BFF1 /* icon-maillet.png in Resources */ = {isa = PBXBuildFile; fileRef = 0451B1F116E2A3080079BFF1 /* icon-maillet.png */; };
@@ -289,6 +293,12 @@
 		04385DBE16E67E590067DB06 /* murret.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = murret.mtl; sourceTree = "<group>"; };
 		04385DBF16E67E590067DB06 /* murret.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = murret.obj; sourceTree = "<group>"; };
 		04385DC316E67E780067DB06 /* murret_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = murret_texture.png; path = AirHockeyApp/murret_texture.png; sourceTree = SOURCE_ROOT; };
+		044544B5170C76D100B4AF77 /* AuthTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTest.h; sourceTree = "<group>"; };
+		044544B6170C76D100B4AF77 /* AuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTest.m; sourceTree = "<group>"; };
+		044544B8170C7A7900B4AF77 /* RenderTreeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderTreeTest.h; sourceTree = "<group>"; };
+		044544B9170C7A7900B4AF77 /* RenderTreeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderTreeTest.m; sourceTree = "<group>"; };
+		044544BB170C823D00B4AF77 /* XMLTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLTest.h; sourceTree = "<group>"; };
+		044544BC170C823D00B4AF77 /* XMLTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLTest.m; sourceTree = "<group>"; };
 		044D7F9C16A5B71E00AE8E11 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		0451B1F016E2A3080079BFF1 /* icon-booster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-booster.png"; path = "Assets/UI/Images/icon-booster.png"; sourceTree = "<group>"; };
 		0451B1F116E2A3080079BFF1 /* icon-maillet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-maillet.png"; path = "Assets/UI/Images/icon-maillet.png"; sourceTree = "<group>"; };
@@ -640,10 +650,16 @@
 			isa = PBXGroup;
 			children = (
 				047417C8170B24FC00D131B6 /* Supporting Files */,
+				044544BB170C823D00B4AF77 /* XMLTest.h */,
+				044544BC170C823D00B4AF77 /* XMLTest.m */,
+				044544B5170C76D100B4AF77 /* AuthTest.h */,
+				044544B6170C76D100B4AF77 /* AuthTest.m */,
 				047417CD170B24FC00D131B6 /* AirHockeyTests.h */,
 				047417CE170B24FC00D131B6 /* AirHockeyTests.m */,
 				04741912170B588000D131B6 /* ReachabilityTest.h */,
 				04741913170B588000D131B6 /* ReachabilityTest.m */,
+				044544B8170C7A7900B4AF77 /* RenderTreeTest.h */,
+				044544B9170C7A7900B4AF77 /* RenderTreeTest.m */,
 			);
 			path = AirHockeyTests;
 			sourceTree = "<group>";
@@ -1413,6 +1429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044544B4170C727D00B4AF77 /* CreditsViewController.m in Sources */,
 				047418D6170B447D00D131B6 /* CDAudioManager.m in Sources */,
 				047418D7170B447D00D131B6 /* CocosDenshion.m in Sources */,
 				047418D8170B447D00D131B6 /* SimpleAudioEngine.m in Sources */,
@@ -1477,6 +1494,9 @@
 				047418C4170B416300D131B6 /* WebClient.m in Sources */,
 				047418C5170B416300D131B6 /* AirHockeyTests.m in Sources */,
 				04741914170B588000D131B6 /* ReachabilityTest.m in Sources */,
+				044544B7170C76D100B4AF77 /* AuthTest.m in Sources */,
+				044544BA170C7A7900B4AF77 /* RenderTreeTest.m in Sources */,
+				044544BD170C823D00B4AF77 /* XMLTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1728,6 +1748,7 @@
 				047417D2170B24FC00D131B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		96378D701472C71100F543EA /* Build configuration list for PBXProject "AirHockeyApp" */ = {
 			isa = XCConfigurationList;

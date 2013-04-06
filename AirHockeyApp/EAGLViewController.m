@@ -757,7 +757,6 @@ enum {
 //Animation when user swipes a side view out (from left to right)
 -(void)slideOutAnimationView:(UIView*)view
 {
-    //FIXME: HardCoded slide in values, change that to const
     if(view.tag == CAMERAVIEW_TAG) { // bottom left view
         [UIView animateWithDuration:0.2 delay: 0.0 options: UIViewAnimationCurveEaseOut
              animations:^{
@@ -1100,8 +1099,8 @@ enum {
     self.specialLabel.text = @"";
     [self.specialSlider setHidden:YES];
     
-    [self.PuckView setHidden:YES]; //FIXME: This assumes we always have a puck in an initial map (True from loading a valid xml, maybe false for an empty starting table)
-    [self.PommeauView setHidden:YES]; // This assumes we always have 2 sticks in an initial map (True from loading a valid xml, maybe false for an empty starting table)
+    [self.PuckView setHidden:YES];    // This assumes we always have 2 sticks in an initial map
+    [self.PommeauView setHidden:YES]; // This assumes we always have 2 sticks in an initial map
 
 }
 
@@ -1393,8 +1392,6 @@ enum {
             [Scene loadDefaultElements];
         }
     }
-    
-
 }
 
 - (BOOL)validateMapName:(NSString*)mapName

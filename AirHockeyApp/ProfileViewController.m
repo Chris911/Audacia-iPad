@@ -94,8 +94,6 @@
 {
     [super viewDidAppear:animated];
     
-    [self startAnimation];
-    
     deleteState = NO;
     [self toggleDoneEditingButton];
     

@@ -235,6 +235,7 @@
     self.hiddenView.hidden = NO;
     [self.spinner startAnimating];
     self.spinner.hidden = NO;
+    [self performSelector:@selector(stopAnimation) withObject:nil afterDelay:5];
 }
 
 - (void) stopAnimation

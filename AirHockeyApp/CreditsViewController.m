@@ -67,6 +67,7 @@
 
 - (IBAction)backPressed:(id)sender
 {
+    self.textView.alpha = 0.0f;
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -96,41 +97,57 @@
     
     NSString *text = @"";
     
-    text = [text stringByAppendingString:@"-- iOS Developers -- \n\n"];
-    text = [text stringByAppendingString:@"Samuel Des Rochers\n"];
-    text = [text stringByAppendingString:@"Christophe Naud-Dulude\n"];
+    text = [text stringByAppendingString:@"- iOS Developers \n"];
+    text = [text stringByAppendingString:@"-------------------------------------\n"];
+    text = [text stringByAppendingString:@"\tSamuel Des Rochers\n"];
+    text = [text stringByAppendingString:@"\tChristophe Naud-Dulude\n\n"];
     
-    text = [text stringByAppendingString:@"\n\n"];
+    text = [text stringByAppendingString:@"- Lead Designer \n"];
+    text = [text stringByAppendingString:@"-------------------------------------\n"];
+    text = [text stringByAppendingString:@"\tChristophe Naud-Dulude\n\n"];
     
-    text = [text stringByAppendingString:@"-- Librairies used for AirHockey App -- \n\n"];
-    text = [text stringByAppendingString:@"Cocos Denshion  : Audio API\n"];
-    text = [text stringByAppendingString:@"iCarousel       \t: Maps Viewer\n"];
-    text = [text stringByAppendingString:@"AFNetworking    \t: Network API\n"];
-    text = [text stringByAppendingString:@"GDataXMLNode    \t: XML serializer\n"];
-    text = [text stringByAppendingString:@"OpenGLWaveFront \t: Graphics\n"];
-
-    text = [text stringByAppendingString:@"\n\n"];
+    text = [text stringByAppendingString:@"- Project Manager \n"];
+    text = [text stringByAppendingString:@"-------------------------------------\n"];
+    text = [text stringByAppendingString:@"\tSamuel Des Rochers\n\n"];
     
-    text = [text stringByAppendingString:@"-- Global Stats -- \n\n"];
-    text = [text stringByAppendingString:self.totalGames];
     text = [text stringByAppendingString:@"\n"];
+    
+    text = [text stringByAppendingString:@"- Librairies used for AirHockey App  \n"];
+    text = [text stringByAppendingString:@"-------------------------------------\n"];
+    text = [text stringByAppendingString:@"\tCocos Denshion  \t: Audio API\n"];
+    text = [text stringByAppendingString:@"\tiCarousel       \t\t\t: Maps Viewer\n"];
+    text = [text stringByAppendingString:@"\tAFNetworking    \t\t\t: Network API\n"];
+    text = [text stringByAppendingString:@"\tGDataXMLNode    \t: XML serializer\n"];
+    text = [text stringByAppendingString:@"\tOpenGLWaveFront \t: Graphics\n"];
+
+    text = [text stringByAppendingString:@"\n"];
+    
+    text = [text stringByAppendingString:@"- Global Stats \n"];
+    text = [text stringByAppendingString:@"-------------------------------------\n\t"];
+    text = [text stringByAppendingString:self.totalGames];
+    text = [text stringByAppendingString:@"\n\t"];
     text = [text stringByAppendingString:self.totalGoals];
     
     text = [text stringByAppendingString:@"\n\n"];
     
     text = [text stringByAppendingString:@"Server provided by Polytechnique Montreal\n\n"];
+    text = [text stringByAppendingString:@"Music by artist 'Flex Vector'\n\n"];
+    
+    text = [text stringByAppendingString:@"\n"];
 
     self.textView.text = text;
 }
 
 - (void) rollCredits
 {
-    [UIView animateWithDuration:90.0 delay: 0.0 options: UIViewAnimationCurveLinear
+    [UIView animateWithDuration:40 delay: 0.0 options: nil
                     animations:^{
-                        self.creditView.center = CGPointMake(self.creditView.center.x, -self.creditView.frame.size.height/2);
+                        self.creditView.center = CGPointMake(self.creditView.center.x, -50);
                     }
-                    completion:nil
-     ];
+                     completion:^(BOOL finished){
+                         self.textView.alpha = 0.0f;
+                         [self dismissModalViewControllerAnimated:YES];
+                    }];
 }
 
 - (void) getGlobalStats
@@ -144,8 +161,8 @@
                 NSNumber* totalGamesJson  = [JSON valueForKeyPath:@"TOTAL_GAMES"];
                 NSNumber* totalGoalsJson  = [JSON valueForKeyPath:@"TOTAL_GOALS"];
                 
-                self.totalGames = [NSString stringWithFormat:@"Total Games Played: %d",[totalGamesJson intValue]];
-                self.totalGoals = [NSString stringWithFormat:@"Total Goals Scored: %d",[totalGoalsJson intValue]];
+                self.totalGames = [NSString stringWithFormat:@"Total Games Played\t: %d",[totalGamesJson intValue]];
+                self.totalGoals = [NSString stringWithFormat:@"Total Goals Scored\t: %d",[totalGoalsJson intValue]];
                 
                 self.statsAreSet = YES;
                 [self prepareViews];

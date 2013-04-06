@@ -189,6 +189,7 @@ const float xmlScale = 1.4f;
         GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y*xmlScale]];
         GDataXMLElement *posZProperty;
         if([node.xmlType isEqualToString:@"pommeau"]){
+            posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x*-1]];
             posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",-15.0f]];
         } else {
             posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",0.0]];

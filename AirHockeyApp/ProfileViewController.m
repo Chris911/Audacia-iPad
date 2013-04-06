@@ -45,7 +45,7 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
     [super viewDidLoad];
     
@@ -79,30 +79,6 @@
     
     [self drawLine];
     
-    deleteState = NO;
-    [self toggleDoneEditingButton];
-    
-    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    [delegate.webClient fetchMapsByUser:[Session getInstance].username :self];
-    [delegate.webClient fetchProfilePicture:[[Session getInstance].username lowercaseString] :self];
-    
-    [delegate.webClient fetchStatsByUser:[Session getInstance].username
-                            onCompletion:^(NSDictionary *JSON)
-        {
-            NSNumber* gamesPlayed  = [JSON valueForKeyPath:@"GamePlayed"];
-            NSNumber* victories   = [JSON valueForKeyPath:@"Victories"];
-            NSNumber* defeats = [JSON valueForKeyPath:@"Defeats"];
-            NSNumber* goalsFor = [JSON valueForKeyPath:@"GoalsFor"];
-            NSNumber* goalsAgainst = [JSON valueForKeyPath:@"GoalsAgainst"];
-            
-            self.gamesPlayedLabel.text = [NSString stringWithFormat:@"%d",[gamesPlayed intValue]];
-            self.victoriesLabel.text = [NSString stringWithFormat:@"%d",[victories intValue]];
-            self.defeatsLabel.text = [NSString stringWithFormat:@"%d",[defeats intValue]];
-            self.goalsForLabel.text = [NSString stringWithFormat:@"%d",[goalsFor intValue]];
-            self.goalsAgainsLabel.text = [NSString stringWithFormat:@"%d",[goalsAgainst intValue]];
-                                    
-        }];
-    
     [self.backgroundView.layer setCornerRadius:20.0f];
     [self.backgroundView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
     [self.backgroundView.layer setBorderWidth:2.5f];
@@ -112,6 +88,37 @@
     [self.backgroundView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
     
     self.usernameLabel.text = [Session getInstance].username;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self startAnimation];
+    
+    deleteState = NO;
+    [self toggleDoneEditingButton];
+    
+    AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.webClient fetchProfilePicture:[[Session getInstance].username lowercaseString] :self];
+    [delegate.webClient fetchMapsByUser:[Session getInstance].username :self];
+    
+    [delegate.webClient fetchStatsByUser:[Session getInstance].username
+                            onCompletion:^(NSDictionary *JSON)
+     {
+         NSNumber* gamesPlayed  = [JSON valueForKeyPath:@"GamePlayed"];
+         NSNumber* victories   = [JSON valueForKeyPath:@"Victories"];
+         NSNumber* defeats = [JSON valueForKeyPath:@"Defeats"];
+         NSNumber* goalsFor = [JSON valueForKeyPath:@"GoalsFor"];
+         NSNumber* goalsAgainst = [JSON valueForKeyPath:@"GoalsAgainst"];
+         
+         self.gamesPlayedLabel.text = [NSString stringWithFormat:@"%d",[gamesPlayed intValue]];
+         self.victoriesLabel.text = [NSString stringWithFormat:@"%d",[victories intValue]];
+         self.defeatsLabel.text = [NSString stringWithFormat:@"%d",[defeats intValue]];
+         self.goalsForLabel.text = [NSString stringWithFormat:@"%d",[goalsFor intValue]];
+         self.goalsAgainsLabel.text = [NSString stringWithFormat:@"%d",[goalsAgainst intValue]];
+         
+     }];
 }
 
 - (void)didReceiveMemoryWarning

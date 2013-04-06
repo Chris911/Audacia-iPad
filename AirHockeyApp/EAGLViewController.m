@@ -628,6 +628,7 @@ enum {
     if([NetworkUtils isNetworkAvailable])
     {
         if([[Scene getInstance].renderingTree isTableValid]){
+            [[Scene getInstance].renderingTree deselectAllNodes];
             [self performSelectorInBackground:@selector(replaceView) withObject:nil];
             [self showNameMapAlert];
         } else {
@@ -1020,12 +1021,12 @@ enum {
 - (void) prepareRecognizers
 {
     // SwipeGesture recognizers
-//    UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc]
-//                                                       initWithTarget:self
-//                                                       action:@selector(rotationDetected:)];
-//    [rotationRecognizer setDelegate:self];
-//    [self.view addGestureRecognizer:rotationRecognizer];
-//    [rotationRecognizer release];
+    UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc]
+                                                       initWithTarget:self
+                                                       action:@selector(rotationDetected:)];
+    [rotationRecognizer setDelegate:self];
+    [self.view addGestureRecognizer:rotationRecognizer];
+    [rotationRecognizer release];
     
     // Placed on the LeftSideView
     UISwipeGestureRecognizer *SwipeLeftSideView = [[[UISwipeGestureRecognizer alloc]

@@ -167,7 +167,10 @@
         self.errorLabel.text = @"Missing Username";
     } else if (self.passwordTextBox.text.length == 0){
         self.errorLabel.text = @"Missing Password";
-    } else {
+    } else if (![self.serverTextBox.text isEqualToString:@"kepler.step.polymtl.ca"]){
+        self.errorLabel.text = @"Server not found";
+    }
+    else {
         //Call the real login event here. Return is handled in loginEventFinished below
         [self.hiddenView setHidden:NO];
         [self.spinner setHidden:NO];

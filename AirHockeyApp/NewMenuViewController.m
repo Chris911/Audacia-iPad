@@ -100,9 +100,6 @@
     
     // Setup and start sounds
     [AudioInterface loadSounds];
-//    if(isSoundEnabled){
-//        [AudioInterface startBackgroundMusic];
-//    }
     
     // Clear the map container if any and the EAGLView
     [MapContainer removeMapsInContainers];
@@ -194,6 +191,8 @@
 - (IBAction)soundPressed:(id)sender
 {
     isSoundEnabled = !isSoundEnabled;
+    [AudioInterface setSoundEnabled:isSoundEnabled];
+    
     [AudioInterface playSound:@"sound1.wav"];
     if(isSoundEnabled){
         [AudioInterface startBackgroundMusic];

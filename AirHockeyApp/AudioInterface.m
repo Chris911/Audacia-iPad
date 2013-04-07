@@ -11,6 +11,8 @@
 
 @implementation AudioInterface
 
+static BOOL soundEnabled = NO;
+
 + (void) loadSounds
 {   
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"camera1.wav"];
@@ -20,8 +22,9 @@
 
 + (void) playSound:(NSString*)name
 {
-    [[SimpleAudioEngine sharedEngine] playEffect:name];
-
+    if(soundEnabled){
+        [[SimpleAudioEngine sharedEngine] playEffect:name];
+    }
 }
 
 + (void) startBackgroundMusic
@@ -32,6 +35,11 @@
 + (void) stopBackgroundMusic
 {
     [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
+}
+
++ (void) setSoundEnabled:(BOOL) enabled
+{
+    soundEnabled = enabled;
 }
 
 @end

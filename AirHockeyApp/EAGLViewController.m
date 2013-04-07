@@ -628,6 +628,7 @@ enum {
     if([NetworkUtils isNetworkAvailable])
     {
         if([[Scene getInstance].renderingTree isTableValid]){
+            [[Scene getInstance].renderingTree placeSticksOnGoodX_Axis];
             [[Scene getInstance].renderingTree deselectAllNodes];
             [self performSelectorInBackground:@selector(replaceView) withObject:nil];
             [self showNameMapAlert];
@@ -1355,6 +1356,7 @@ enum {
             //TODO: Do some validation here
             if([self validateMapName:mapName])
             {
+                
                 GDataXMLDocument* xmlDoc = [XMLUtil getRenderingTreeXmlData:[Scene getInstance].renderingTree];
                 NSData* xmlData = xmlDoc.XMLData;
                 AppDemoAppDelegate* delegate = [[UIApplication sharedApplication] delegate];

@@ -460,6 +460,27 @@
     }
     return NO;
 }
+- (void) placeSticksOnGoodX_Axis
+{
+    int counter = 0;
+    for(Node* node in self.tree) {
+        if([node.type isEqualToString:@"POMMEAU"]) {
+            
+            // First in the list must be X positive
+            if(counter == 0){
+                if(node.position.x < 0){
+                    node.position = Vector3DMake(node.position.x * -1, 0, node.position.z);
+                }
+                counter ++;
+                
+            } else if (counter == 1){
+                if(node.position.x > 0){
+                    node.position = Vector3DMake(node.position.x * -1, 0, node.position.z);
+                }
+            }
+        }
+    }
+}
 
 #pragma mark - dealloc functions
 - (void) dealloc

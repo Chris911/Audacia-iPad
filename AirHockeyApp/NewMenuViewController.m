@@ -100,9 +100,9 @@
     
     // Setup and start sounds
     [AudioInterface loadSounds];
-    if(isSoundEnabled){
-        [AudioInterface startBackgroundMusic];
-    }
+//    if(isSoundEnabled){
+//        [AudioInterface startBackgroundMusic];
+//    }
     
     // Clear the map container if any and the EAGLView
     [MapContainer removeMapsInContainers];

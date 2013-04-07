@@ -57,6 +57,7 @@
 - (int) getPuckCount;
 - (int) getStickCount;
 - (BOOL) isTableValid;
+- (void) placeSticksOnGoodX_Axis;
 - (Node*) getTable;
 
 

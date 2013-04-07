@@ -56,14 +56,21 @@ static MapContainer *mapContainer = NULL;
 
 + (BOOL) allMapImagesLoaded
 {
-    for(Map* m in mapContainer.maps)
-    {
-        CGImageRef cgref = [m.image CGImage];
-        if(cgref == NULL){
-            return NO;
+    @try {
+        for(Map* m in mapContainer.maps)
+        {
+            CGImageRef cgref = [m.image CGImage];
+            if(cgref == NULL){
+                return NO;
+            }
         }
+        return YES;
     }
-    return YES;
+    @catch (NSException *exception) {
+        NSLog(@"[MapContainer] : error loading maps images from server");
+    }
+    
+    return NO;
 }
 
 - (void) dealloc

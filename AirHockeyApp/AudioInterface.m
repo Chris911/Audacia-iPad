@@ -12,7 +12,7 @@
 @implementation AudioInterface
 
 + (void) loadSounds
-{
+{   
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"camera1.wav"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"sfx1.wav"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"sound1.wav"];
@@ -21,6 +21,7 @@
 + (void) playSound:(NSString*)name
 {
     [[SimpleAudioEngine sharedEngine] playEffect:name];
+
 }
 
 + (void) startBackgroundMusic

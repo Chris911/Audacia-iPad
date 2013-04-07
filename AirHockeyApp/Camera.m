@@ -309,7 +309,7 @@
 
 // Converts a touch point according to the current
 // ModelView matrix and projection matrix via an UnProject call
-// reference from : http://casualdistractiongames.wordpress.com/
+// reference from : http://casualdistractiongames.wordpress.com/ modified for purposes of project
 - (void) convertScreenToWorldProj:(CGPoint)touch
 {    
     Vector3D final = [self unproject:touch];

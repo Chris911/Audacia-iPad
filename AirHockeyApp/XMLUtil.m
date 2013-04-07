@@ -132,7 +132,7 @@ const float xmlScale = 1.4f;
             float posY = [[[realNode attributeForName:@"PositionY"] stringValue] floatValue]/xmlScale;
             float posZ = 1.0;
             float scaleFactor = [[[realNode attributeForName:@"ScaleFactor"] stringValue] floatValue] - 3;
-            float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue];
+            float angleFactor = [[[realNode attributeForName:@"AngleFactor"] stringValue] floatValue] - 90;
             float coeffRebond = [[[realNode attributeForName:@"CoeffRebond"] stringValue] floatValue];
             NodeMurret* murret = [[[NodeMurret alloc]init]autorelease];
             murret.scaleFactor = scaleFactor;
@@ -189,7 +189,7 @@ const float xmlScale = 1.4f;
         GDataXMLElement *posYProperty = [GDataXMLNode attributeWithName:@"PositionY" stringValue:[NSString stringWithFormat:@"%f",node.position.y*xmlScale]];
         GDataXMLElement *posZProperty;
         if([node.xmlType isEqualToString:@"pommeau"]){
-            posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x*-1]];
+            posXProperty = [GDataXMLNode attributeWithName:@"PositionX" stringValue:[NSString stringWithFormat:@"%f",node.position.x]];
             posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",-15.0f]];
         } else {
             posZProperty = [GDataXMLNode attributeWithName:@"PositionZ" stringValue:[NSString stringWithFormat:@"%f",0.0]];
@@ -197,9 +197,13 @@ const float xmlScale = 1.4f;
         
         if(!([node.xmlType isEqualToString:@"but"] || [node.xmlType isEqualToString:@"pointControle"]))
         {
-            GDataXMLElement *angleProperty = [GDataXMLNode attributeWithName:@"AngleFactor" stringValue:[NSString stringWithFormat:@"%f",node.angle]];
+            GDataXMLElement *angleProperty;
+            if([node.xmlType isEqualToString:@"murret"]){
+                angleProperty = [GDataXMLNode attributeWithName:@"AngleFactor" stringValue:[NSString stringWithFormat:@"%f",node.angle + 90]];
+            } else {
+                angleProperty = [GDataXMLNode attributeWithName:@"AngleFactor" stringValue:[NSString stringWithFormat:@"%f",node.angle]];
+            }
             GDataXMLElement *scaleProperty = [GDataXMLNode attributeWithName:@"ScaleFactor" stringValue:[NSString stringWithFormat:@"%.0f",node.scaleFactor+3]];
-            
             [nodeElement addAttribute:angleProperty];
             [nodeElement addAttribute:scaleProperty];
         }

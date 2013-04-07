@@ -15,6 +15,7 @@
 + (void) playSound:(NSString*)name;
 + (void) startBackgroundMusic;
 + (void) stopBackgroundMusic;
++ (void) setSoundEnabled:(BOOL) enabled;
 
 @end
 

@@ -30,6 +30,8 @@ static BOOL soundEnabled = NO;
 + (void) startBackgroundMusic
 {
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"flex_dubstep.mp3"];
+    [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.5f];
+
 }
 
 + (void) stopBackgroundMusic

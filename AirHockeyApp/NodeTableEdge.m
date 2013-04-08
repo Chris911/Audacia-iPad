@@ -14,8 +14,8 @@
 const int NB_OF_TRIANGLE = 8;
 const int EDGE_SIZE = 2.1f;
 
-const int NODE_1_AND_6_LIMIT_Y = 25;
-const int NODE_3_AND_4_LIMIT_X = 50;
+const int NODE_1_AND_6_LIMIT_Y = 40;
+const int NODE_3_AND_4_LIMIT_X = 55;
 
 GLfloat edgeColor[NB_OF_TRIANGLE*3*4];
 GLfloat selectedEdgeColor[NB_OF_TRIANGLE*3*4];
@@ -123,8 +123,8 @@ GLfloat nodeHeight = 5.2;
         
     } else if(self.index == 4 && self.position.x <= NODE_3_AND_4_LIMIT_X) {
         self.position = Vector3DMake(NODE_3_AND_4_LIMIT_X,self.position.y,self.position.z);
-        
     }
+    
 }
 
 - (void)renderCorner

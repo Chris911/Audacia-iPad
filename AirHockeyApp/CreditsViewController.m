@@ -109,13 +109,14 @@
     text = [text stringByAppendingString:@"\tSamuel Des Rochers\n"];
     text = [text stringByAppendingString:@"\tChristophe Naud-Dulude\n\n"];
     
-    text = [text stringByAppendingString:@"- Lead Designer \n"];
+    text = [text stringByAppendingString:@"- Team Members \n"];
     text = [text stringByAppendingString:@"-------------------------------------\n"];
-    text = [text stringByAppendingString:@"\tChristophe Naud-Dulude\n\n"];
-    
-    text = [text stringByAppendingString:@"- Project Manager \n"];
-    text = [text stringByAppendingString:@"-------------------------------------\n"];
-    text = [text stringByAppendingString:@"\tSamuel Des Rochers\n\n"];
+    text = [text stringByAppendingString:@"\tChristophe Naud-Dulude\n"];
+    text = [text stringByAppendingString:@"\tSamuel Des Rochers\n"];
+    text = [text stringByAppendingString:@"\tPhilippe Gref-Viau\n"];
+    text = [text stringByAppendingString:@"\tDavid Albertson\n"];
+    text = [text stringByAppendingString:@"\tBenoit Forget\n"];
+    text = [text stringByAppendingString:@"\tSimon Pearson\n"];
     
     text = [text stringByAppendingString:@"\n"];
     

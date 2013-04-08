@@ -11,6 +11,7 @@
 		041186E816CC9E510046B720 /* NewMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041186E716CC9E510046B720 /* NewMenuViewController.xib */; };
 		041186EB16CC9FC50046B720 /* Button-test.png in Resources */ = {isa = PBXBuildFile; fileRef = 041186EA16CC9FC50046B720 /* Button-test.png */; };
 		041186EE16CCA07D0046B720 /* NewMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041186ED16CCA07D0046B720 /* NewMenuViewController.m */; };
+		043359F6171353D800674145 /* PhotoEquipe.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 043359F5171353D800674145 /* PhotoEquipe.jpg */; };
 		04385DC016E67E590067DB06 /* murret.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 04385DBE16E67E590067DB06 /* murret.mtl */; };
 		04385DC116E67E590067DB06 /* murret.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04385DBF16E67E590067DB06 /* murret.obj */; };
 		04385DC416E67E780067DB06 /* murret_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 04385DC316E67E780067DB06 /* murret_texture.png */; };
@@ -290,6 +291,7 @@
 		041186EA16CC9FC50046B720 /* Button-test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Button-test.png"; path = "Assets/UI/Images/Button-test.png"; sourceTree = "<group>"; };
 		041186EC16CCA07D0046B720 /* NewMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMenuViewController.h; sourceTree = "<group>"; };
 		041186ED16CCA07D0046B720 /* NewMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMenuViewController.m; sourceTree = "<group>"; };
+		043359F5171353D800674145 /* PhotoEquipe.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = PhotoEquipe.jpg; path = Assets/UI/Images/PhotoEquipe.jpg; sourceTree = "<group>"; };
 		04385DBE16E67E590067DB06 /* murret.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = murret.mtl; sourceTree = "<group>"; };
 		04385DBF16E67E590067DB06 /* murret.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = murret.obj; sourceTree = "<group>"; };
 		04385DC316E67E780067DB06 /* murret_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = murret_texture.png; path = AirHockeyApp/murret_texture.png; sourceTree = SOURCE_ROOT; };
@@ -1046,6 +1048,7 @@
 		A8C5A8B1169DECDF008B29EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				043359F5171353D800674145 /* PhotoEquipe.jpg */,
 				A855439C170B9EE600FBABA8 /* carbon.jpg */,
 				047F92F21703A396004A97B3 /* icon-login.png */,
 				047F92F31703A396004A97B3 /* icon-logout.png */,
@@ -1403,6 +1406,7 @@
 				A8D0B3321709C92E00051412 /* open1.wav in Resources */,
 				A8554399170B589400FBABA8 /* CreditsViewController.xib in Resources */,
 				A855439D170B9EE600FBABA8 /* carbon.jpg in Resources */,
+				043359F6171353D800674145 /* PhotoEquipe.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
